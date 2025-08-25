@@ -22,4 +22,4 @@ Centralizar o atendimento, reduzir tempo de resposta e melhorar a experiência d
 
 ## Integrantes
 
-Pedro Vieira, Samuel Conde, Brenno Henrique
+Pedro Vieira, Samuel Conde
