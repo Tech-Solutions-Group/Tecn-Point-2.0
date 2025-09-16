@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
+import com.techsolutions.tecnpoint.DTO.AtualizaUsuarioDTO;
 
 import java.util.List;
 
@@ -40,4 +41,9 @@ public class UsuarioController {
         return ResponseEntity.status(200).build();
     }
 
+    @PutMapping("/{id_usuario}")
+    public ResponseEntity<Usuarios> atualizarUsuario(@PathVariable Long id_usuario, @RequestBody AtualizaUsuarioDTO atualizaUsuarioDTO){
+        // Tirar o retorno do usuário futuramente
+        return ResponseEntity.status(201).body(usuarioService.editarUsuario(id_usuario, atualizaUsuarioDTO));
+    }
 }
