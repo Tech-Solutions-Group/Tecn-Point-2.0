@@ -30,12 +30,12 @@ public class UsuarioController {
     }
 
     @PostMapping("/adicionar")
-    public ResponseEntity<Usuarios> criaUsuario(@RequestBody Usuarios usuarios){
+    public ResponseEntity<Usuarios> postUsario(@RequestBody Usuarios usuarios){
         return ResponseEntity.status(201).body(usuarioService.postUsuarios(usuarios));
     }
 
     @DeleteMapping("/{id_usuario}")
-    public ResponseEntity<Void> deletaUsuario(@PathVariable Long id_usuario){
+    public ResponseEntity<Void> delUsuario(@PathVariable Long id_usuario){
         usuarioService.delUsuarios(id_usuario);
         return ResponseEntity.status(200).build();
     }
