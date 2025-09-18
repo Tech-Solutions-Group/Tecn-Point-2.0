@@ -38,25 +38,29 @@ public class UsuarioService {
         Utilizando expressão lambda por causa do Optional, caso o usuário não exista no banco
          lança uma exceção
          */
-        Usuarios usuarioEncontrado = usuarioRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("O usuário não foi encontrado."));
+        Usuarios usuarioEncontrado = getUsuarioById(id).orElseThrow(() -> new RuntimeException("O usuário não foi encontrado."));
 
-        // Adicionando verificação para verificar se os dados enviados pelo body estão todos preenchidos
         if(atualizaUsuarioDTO.getNome() != null && !atualizaUsuarioDTO.getNome().trim().isEmpty()){
             usuarioEncontrado.setNome(atualizaUsuarioDTO.getNome());
         }
 
-        if(!getListaEmailsUsuarios().contains(atualizaUsuarioDTO.getEmail())){ // Verifica se o e-mail enviado já existe no banco de dados
-                usuarioEncontrado.setEmail(atualizaUsuarioDTO.getEmail());
-        }else{
-                throw new RuntimeException("O e-mail informado já existe no sistema.");
-        }
-
-        if(atualizaUsuarioDTO.getSenha() != null){
+        if(atualizaUsuarioDTO.getSenha() != null && !atualizaUsuarioDTO.getSenha().trim().isEmpty()){
             usuarioEncontrado.setSenha(atualizaUsuarioDTO.getSenha());
         }
         if(atualizaUsuarioDTO.getTipoUsuario() != null){
             usuarioEncontrado.setTipoUsuario(atualizaUsuarioDTO.getTipoUsuario());
+        }
+
+        // Verifica se o e-mail informado é nulo e se NÃO é vazio
+        if(atualizaUsuarioDTO.getEmail() != null && !atualizaUsuarioDTO.getEmail().trim().isEmpty()){
+            // Verifica se o e-mail do usuário encontrado é diferente do e-mail informado
+            if(!usuarioEncontrado.getEmail().equals(atualizaUsuarioDTO.getEmail())){ // Entra no if se o e-mail informado não for o mesmo do usuário encontrado
+                // Verifica se o e-mail já existe no banco
+                if(getListaEmailsUsuarios().contains(atualizaUsuarioDTO.getEmail())){
+                    throw new RuntimeException("O e-mail informado já existe!");
+                }
+            }
+            usuarioEncontrado.setEmail(atualizaUsuarioDTO.getEmail());
         }
         return usuarioRepository.save(usuarioEncontrado); // Salvando o usuário com os dados enviados no body e o retornando
     }
