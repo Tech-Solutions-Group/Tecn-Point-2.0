@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Usuario, UsuarioService } from '../../../service/usuario.service';
+import { Usuario, UsuarioService } from '../../service/usuario.service';
 import { Router } from '@angular/router';
 import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 
@@ -14,6 +14,7 @@ import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 export class CadUsuarioComponent implements OnInit {
   usuario: Usuario[] = [];
   formInvalid = false;
+  isOpen = false;
 
   constructor(
     private usuarioService: UsuarioService,
@@ -29,17 +30,13 @@ export class CadUsuarioComponent implements OnInit {
   });
 
   ngOnInit(): void {
-    this.loadUsuarios;
+    this.loadUsuarios();
   }
 
   private loadUsuarios(): void {
     this.usuarioService.getUsuario().subscribe((dados) => {
       this.usuario = dados;
     });
-  }
-
-  back(): void {
-    this.router.navigate(['/usuarios']);
   }
 
   onSubmit(): void {
@@ -67,5 +64,13 @@ export class CadUsuarioComponent implements OnInit {
         },
         error: (erro) => console.error('Erro ao cadastrar usuario', erro),
       });
+  }
+
+  open() {
+    this.isOpen = true;
+  }
+
+  close() {
+    this.isOpen = false;
   }
 }
