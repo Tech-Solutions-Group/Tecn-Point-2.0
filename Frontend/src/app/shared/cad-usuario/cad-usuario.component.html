@@ -1,0 +1,78 @@
+<div class="modal-backdrop" *ngIf="isOpen" (click)="close()"></div>
+
+<div class="modal" *ngIf="isOpen">
+  <div class="modal-header">
+    <h2>Cadastro</h2>
+    <button (click)="close()">X</button>
+  </div>
+  <div class="modal-body">
+    <form
+      [formGroup]="cadUsuarioForm"
+      (ngSubmit)="onSubmit()"
+      class="cadastro-usuario"
+      novalidate
+    >
+      <!-- Nome -->
+      <div class="campo-cadastro">
+        <label for="nome">Nome:</label>
+        <input id="nome" type="text" formControlName="nome" />
+        <small
+          *ngIf="
+            cadUsuarioForm.get('nome')?.invalid &&
+            cadUsuarioForm.get('nome')?.touched
+          "
+        >
+          Nome é obrigatório.
+        </small>
+      </div>
+
+      <!-- Email -->
+      <div class="campo-cadastro">
+        <label for="email">Email:</label>
+        <input id="email" type="email" formControlName="email" />
+        <small
+          *ngIf="
+            cadUsuarioForm.get('email')?.invalid &&
+            cadUsuarioForm.get('email')?.touched
+          "
+        >
+          Digite um email válido.
+        </small>
+      </div>
+
+      <!-- Senha -->
+      <div class="campo-cadastro">
+        <label for="senha">Senha:</label>
+        <input id="senha" type="password" formControlName="senha" />
+        <small
+          *ngIf="
+            cadUsuarioForm.get('senha')?.invalid &&
+            cadUsuarioForm.get('senha')?.touched
+          "
+        >
+          Senha é obrigatória.
+        </small>
+      </div>
+
+      <!-- Tipo de Usuário -->
+      <div class="campo-cadastro">
+        <label for="tipoUsuario">Tipo Usuário:</label>
+        <input id="tipoUsuario" type="text" formControlName="tipoUsuario" />
+        <small
+          *ngIf="
+            cadUsuarioForm.get('tipoUsuario')?.invalid &&
+            cadUsuarioForm.get('tipoUsuario')?.touched
+          "
+        >
+          Tipo de usuário é obrigatório.
+        </small>
+      </div>
+
+      <!-- Botões -->
+      <div class="action">
+        <button type="button" (click)="close()">Cancelar</button>
+        <button type="submit">Cadastrar</button>
+      </div>
+    </form>
+  </div>
+</div>

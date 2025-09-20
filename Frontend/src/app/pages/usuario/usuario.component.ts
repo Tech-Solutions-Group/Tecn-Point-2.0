@@ -1,30 +1,64 @@
 import { Component, OnInit } from '@angular/core';
-import { Usuario, UsuarioService } from '../../service/usuario.service';
-import { Router } from '@angular/router';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { Router, RouterModule } from '@angular/router';
+import { CadUsuarioComponent } from '../../shared/cad-usuario/cad-usuario.component';
+import {
+  Usuario,
+  UsuarioFiltro,
+  UsuarioService,
+} from '../../service/usuario.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-usuario',
   standalone: true,
-  imports: [],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    RouterModule,
+    CadUsuarioComponent,
+  ],
   templateUrl: './usuario.component.html',
-  styleUrl: './usuario.component.css',
+  styleUrls: ['./usuario.component.css'],
 })
 export class UsuarioComponent implements OnInit {
-  usuario: Usuario[] = [];
+  usuarios: Usuario[] = [];
+  total = 0;
+  page = 1;
+  limit = 10;
 
-  constructor(private usuarioService: UsuarioService, private router: Router) {}
+  filtroForm = this.fb.group({
+    busca: [''],
+  });
+
+  constructor(
+    private fb: FormBuilder,
+    private usuarioService: UsuarioService
+  ) {}
 
   ngOnInit(): void {
-    this.loadUsuarios;
+    this.loadUsuarios();
   }
 
-  private loadUsuarios(): void {
-    this.usuarioService.getUsuario().subscribe((dados) => {
-      this.usuario = dados;
+  loadUsuarios() {
+    const filtros: UsuarioFiltro = {
+      page: this.page,
+      limit: this.limit,
+      busca: this.filtroForm.value.busca || undefined,
+    };
+
+    this.usuarioService.getUsuario(filtros).subscribe((res) => {
+      this.usuarios = res;
     });
   }
 
-  cadastro(): void {
-    this.router.navigate(['usuarios/adicionar']);
+  aplicarFiltro() {
+    this.page = 1;
+    this.loadUsuarios();
+  }
+
+  mudarPagina(novaPagina: number) {
+    this.page = novaPagina;
+    this.loadUsuarios();
   }
 }

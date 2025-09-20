@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -7,6 +7,20 @@ export interface Usuario {
   nome: string;
   email: string;
   senha: string;
+  tipoUsuario: string;
+}
+
+export interface UsuarioFiltro {
+  busca?: string;
+  page?: number;
+  limit?: number;
+}
+
+export interface UsuarioPaginado {
+  data: Usuario[];
+  total: number;
+  page: number;
+  limit: number;
 }
 
 @Injectable({
@@ -17,8 +31,16 @@ export class UsuarioService {
 
   constructor(private http: HttpClient) {}
 
-  getUsuario(): Observable<Usuario[]> {
-    return this.http.get<Usuario[]>(this.apiUrl);
+  getUsuario(filtro?: UsuarioFiltro): Observable<Usuario[]> {
+    let params = new HttpParams();
+
+    if (filtro) {
+      if (filtro.busca) params = params.set('busca', filtro.busca);
+      if (filtro.limit) params = params.set('limit', filtro.limit);
+      if (filtro.page) params = params.set('page', filtro.page);
+    }
+
+    return this.http.get<Usuario[]>(this.apiUrl, { params });
   }
 
   getUsuarioById(id: string): Observable<Usuario> {
