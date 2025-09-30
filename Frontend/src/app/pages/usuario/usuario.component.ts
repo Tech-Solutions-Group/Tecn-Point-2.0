@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
-import { Router, RouterModule } from '@angular/router';
-import { CadUsuarioComponent } from '../../shared/cad-usuario/cad-usuario.component';
+import { RouterModule } from '@angular/router';
 import {
   Usuario,
   UsuarioFiltro,
   UsuarioService,
 } from '../../service/usuario.service';
 import { CommonModule } from '@angular/common';
+import { CadUsuarioComponent } from '../../shared/cad-usuario/cad-usuario.component';
 
 @Component({
   selector: 'app-usuario',
