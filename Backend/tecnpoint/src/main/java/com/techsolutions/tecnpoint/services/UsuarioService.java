@@ -56,24 +56,12 @@ public class UsuarioService {
             // Verifica se o e-mail do usuário encontrado é diferente do e-mail informado
             if(!usuarioEncontrado.getEmail().equals(atualizaUsuarioDTO.getEmail())){ // Entra no if se o e-mail informado não for o mesmo do usuário encontrado
                 // Verifica se o e-mail já existe no banco
-                if(getListaEmailsUsuarios().contains(atualizaUsuarioDTO.getEmail())){
+                if(usuarioRepository.existsByEmail(atualizaUsuarioDTO.getEmail())){
                     throw new RuntimeException("O e-mail informado já existe!");
                 }
             }
             usuarioEncontrado.setEmail(atualizaUsuarioDTO.getEmail());
         }
         return usuarioRepository.save(usuarioEncontrado); // Salvando o usuário com os dados enviados no body e o retornando
-    }
-
-    private List<String> getListaEmailsUsuarios(){
-        if(getUsuarios() != null){
-            List<String> listaEmailsUsuarios = new ArrayList<>();
-            for(Usuarios usuario : getUsuarios()){ // Foreach que percorre os usuários no banco
-                listaEmailsUsuarios.add(usuario.getEmail()); // Pegando o email de todos os usuários
-            }
-            return listaEmailsUsuarios;
-        }else{
-            throw new RuntimeException("Não há nenhum usuário cadastrado para editar");
-        }
     }
 }
