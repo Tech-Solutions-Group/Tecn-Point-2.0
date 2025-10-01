@@ -4,6 +4,8 @@ import com.techsolutions.tecnpoint.enums.TipoUsuario;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Getter
 @Setter
 @Entity
@@ -26,4 +28,12 @@ public class Usuarios {
     @Column(name = "tipo_usuario", nullable = false)
     @Enumerated(EnumType.STRING)
     private TipoUsuario tipoUsuario;
+
+    // Chamados abertos pelo usuário
+    @OneToMany(mappedBy = "cliente")
+    private List<Chamados> chamadosAbertos;
+
+    // Chamados atendidos pelo usuário
+    @OneToMany(mappedBy = "funcionario")
+    private List<Chamados> chamadosAtendidos;
 }
