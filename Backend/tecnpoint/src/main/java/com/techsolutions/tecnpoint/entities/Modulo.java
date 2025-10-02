@@ -1,5 +1,6 @@
 package com.techsolutions.tecnpoint.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 
@@ -17,5 +18,6 @@ public class Modulo {
     private String modulo;
 
     @OneToMany(mappedBy = "modulo")
+    @JsonIgnore
     private List<Chamados> chamados;
 }

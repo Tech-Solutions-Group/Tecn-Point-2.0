@@ -3,7 +3,13 @@ package com.techsolutions.tecnpoint.entities;
 import com.techsolutions.tecnpoint.enums.PrioridadeChamado;
 import com.techsolutions.tecnpoint.enums.StatusChamado;
 import jakarta.persistence.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
+@Builder
 @Entity
 @Table(name = "chamados")
 public class Chamados {
@@ -43,4 +49,5 @@ public class Chamados {
     @ManyToOne
     @JoinColumn(name = "fk_idModulo", nullable = false)
     private Modulo modulo;
+
 }

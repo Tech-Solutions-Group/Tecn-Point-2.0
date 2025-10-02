@@ -1,5 +1,6 @@
 package com.techsolutions.tecnpoint.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import java.util.List;
@@ -16,5 +17,6 @@ public class Jornada {
     private String jornada;
 
     @OneToMany(mappedBy = "jornada")
+    @JsonIgnore
     private List<Chamados> chamados;
 }
