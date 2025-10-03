@@ -1,6 +1,8 @@
 package com.techsolutions.tecnpoint.services;
 
 import com.techsolutions.tecnpoint.DTO.AberturaChamadoDTO;
+import com.techsolutions.tecnpoint.DTO.VisualizacaoUsuarioDTO;
+import com.techsolutions.tecnpoint.DTO.VisualizacaoChamadoDTO;
 import com.techsolutions.tecnpoint.entities.Chamados;
 import com.techsolutions.tecnpoint.entities.Jornada;
 import com.techsolutions.tecnpoint.entities.Modulo;
@@ -11,6 +13,9 @@ import com.techsolutions.tecnpoint.repositories.ModuloRepository;
 import com.techsolutions.tecnpoint.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class ChamadoService {
@@ -27,7 +32,7 @@ public class ChamadoService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
-    public Chamados postChamado(AberturaChamadoDTO aberturaChamadoDTO){
+    public VisualizacaoChamadoDTO postChamado(AberturaChamadoDTO aberturaChamadoDTO){
 
         Jornada jornada = jornadaRepository.findById(aberturaChamadoDTO.getIdJornada())
                 .orElseThrow(() -> new RuntimeException("Jornada informada não encontrada"));
@@ -52,7 +57,65 @@ public class ChamadoService {
                 .funcionario(funcionario)
                 .build();
 
-        return chamadoRepository.save(chamado);
+        // Salvando o chamado no banco
+        chamadoRepository.save(chamado);
+
+        // Retornando somente os dados necessários para a visualização
+        return buildVisualizacaoChamadoDTO(chamado);
     }
 
+    // Ajustar: Retornar somente os dados necessário
+    public List<Chamados> getAllChamados(){
+        return chamadoRepository.findAll();
+    }
+
+    public List<VisualizacaoChamadoDTO> getChamadosCliente(Long id_cliente){
+
+        Usuarios cliente = usuarioRepository.findById(id_cliente)
+                .orElseThrow(() -> new RuntimeException("O cliente não foi encontrado"));
+
+        List<VisualizacaoChamadoDTO> chamadosVisualizacao = new ArrayList<>();
+        for(Chamados c : cliente.getChamadosCliente()){
+            chamadosVisualizacao.add(buildVisualizacaoChamadoDTO(c));
+        }
+
+        return chamadosVisualizacao;
+    }
+
+    public List<VisualizacaoChamadoDTO> getChamadosFuncionario(Long id_funcionario){
+        Usuarios funcionario = usuarioRepository.findById(id_funcionario)
+                .orElseThrow(() -> new RuntimeException("O funcionario não foi encontrado"));
+
+        List<VisualizacaoChamadoDTO> chamadosVisualizacao = new ArrayList<>();
+        for(Chamados c : funcionario.getChamadosFuncionario()){
+            chamadosVisualizacao.add(buildVisualizacaoChamadoDTO(c));
+        }
+
+        return chamadosVisualizacao;
+    }
+
+    private VisualizacaoChamadoDTO buildVisualizacaoChamadoDTO(Chamados chamado){
+
+        VisualizacaoUsuarioDTO visualizacaoCliente = VisualizacaoUsuarioDTO.builder()
+                .id_usuario(chamado.getCliente().getId_usuario())
+                .nome(chamado.getCliente().getNome())
+                .tipoUsuario(chamado.getCliente().getTipoUsuario())
+                .build();
+
+        VisualizacaoUsuarioDTO visualizacaoFuncionario = VisualizacaoUsuarioDTO.builder()
+                .id_usuario(chamado.getFuncionario().getId_usuario())
+                .nome(chamado.getFuncionario().getNome())
+                .tipoUsuario(chamado.getFuncionario().getTipoUsuario())
+                .build();
+
+        return VisualizacaoChamadoDTO.builder()
+                .id_chamado(chamado.getId_chamado())
+                .descricao(chamado.getDescricao())
+                .titulo(chamado.getTitulo())
+                .prioridade(chamado.getPrioridade())
+                .status(chamado.getStatus())
+                .cliente(visualizacaoCliente)
+                .funcionario(visualizacaoFuncionario)
+                .build();
+    }
 }
