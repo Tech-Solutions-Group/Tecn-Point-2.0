@@ -33,10 +33,10 @@ public class Usuarios {
     // Chamados abertos pelo usuário
     @OneToMany(mappedBy = "cliente")
     @JsonIgnore
-    private List<Chamados> chamadosAbertos;
+    private List<Chamados> chamadosCliente;
 
     // Chamados atendidos pelo usuário
     @OneToMany(mappedBy = "funcionario")
     @JsonIgnore
-    private List<Chamados> chamadosAtendidos;
+    private List<Chamados> chamadosFuncionario;
 }

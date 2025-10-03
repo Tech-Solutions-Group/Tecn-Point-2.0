@@ -4,10 +4,8 @@ import com.techsolutions.tecnpoint.entities.Usuarios;
 import com.techsolutions.tecnpoint.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 import com.techsolutions.tecnpoint.DTO.AtualizaUsuarioDTO;
-
 import java.util.List;
 
 @RestController
