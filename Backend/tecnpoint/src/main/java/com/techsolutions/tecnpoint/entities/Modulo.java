@@ -8,7 +8,7 @@ import java.util.List;
 
 @Getter
 @Entity
-@Table(name = "modulos")
+@Table(name = "modulo")
 public class Modulo {
 
     @Id
