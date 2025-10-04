@@ -24,11 +24,12 @@ public class Chamados {
     @Column(nullable = false, length = 100)
     private String titulo;
 
-    @Column(nullable = false)
+    // Constraints dos campos
+    @Column(nullable = false, length = 5)
     @Enumerated(EnumType.STRING)
     private PrioridadeChamado prioridade;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 15)
     @Enumerated(EnumType.STRING)
     private StatusChamado status;
 
