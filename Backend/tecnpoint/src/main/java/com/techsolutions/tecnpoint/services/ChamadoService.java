@@ -74,10 +74,17 @@ public class ChamadoService {
         return listaChamadosVisualizacao;
     }
 
+    public VisualizacaoChamadoDTO getChamadoPorId(Long id_chamado){
+        Chamados chamado = chamadoRepository.findById(id_chamado)
+                .orElseThrow(() -> new RuntimeException("O chamado não foi encontrado."));
+        return buildVisualizacaoChamadoDTO(chamado);
+    }
+
+
     public List<VisualizacaoChamadoDTO> getChamadosCliente(Long id_cliente){
 
         Usuarios cliente = usuarioRepository.findById(id_cliente)
-                .orElseThrow(() -> new RuntimeException("O cliente não foi encontrado"));
+                .orElseThrow(() -> new RuntimeException("O cliente não foi encontrado."));
 
         List<VisualizacaoChamadoDTO> chamadosVisualizacao = new ArrayList<>();
         for(Chamados c : cliente.getChamadosCliente()){
@@ -89,7 +96,7 @@ public class ChamadoService {
 
     public List<VisualizacaoChamadoDTO> getChamadosFuncionario(Long id_funcionario){
         Usuarios funcionario = usuarioRepository.findById(id_funcionario)
-                .orElseThrow(() -> new RuntimeException("O funcionario não foi encontrado"));
+                .orElseThrow(() -> new RuntimeException("O funcionario não foi encontrado."));
 
         List<VisualizacaoChamadoDTO> chamadosVisualizacao = new ArrayList<>();
         for(Chamados c : funcionario.getChamadosFuncionario()){

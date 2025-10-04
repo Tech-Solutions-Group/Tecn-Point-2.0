@@ -27,6 +27,11 @@ public class ChamadoController {
         return ResponseEntity.status(200).body(chamadoService.getAllChamados());
     }
 
+    @GetMapping("/{id_chamado}")
+    public ResponseEntity<VisualizacaoChamadoDTO> getChamadoPorId(@PathVariable Long id_chamado){
+        return ResponseEntity.status(200).body(chamadoService.getChamadoPorId(id_chamado));
+    }
+
     @GetMapping("/chamados-cliente/{id_cliente}")
     public ResponseEntity<List<VisualizacaoChamadoDTO>> getChamadosCliente(@PathVariable Long id_cliente){
         return ResponseEntity.status(200).body(chamadoService.getChamadosCliente(id_cliente));
