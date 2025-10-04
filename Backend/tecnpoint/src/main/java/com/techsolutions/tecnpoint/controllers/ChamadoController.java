@@ -23,7 +23,7 @@ public class ChamadoController {
     }
 
     @GetMapping("/exibir-todos-chamados")
-    public ResponseEntity<List<Chamados>> getAllChamados(){
+    public ResponseEntity<List<VisualizacaoChamadoDTO>> getAllChamados(){
         return ResponseEntity.status(200).body(chamadoService.getAllChamados());
     }
 

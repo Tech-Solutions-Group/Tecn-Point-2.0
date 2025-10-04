@@ -43,6 +43,7 @@ public class ChamadoService {
         Usuarios cliente = usuarioRepository.findById(aberturaChamadoDTO.getIdCliente())
                 .orElseThrow(() -> new RuntimeException("O cliente não foi encontrado"));
 
+        // Existe mesmo a necessidade de procurarmos um funcionario quando cria um chamado? Não vamos colocar para o Tech Solutions?
         Usuarios funcionario = usuarioRepository.findById(aberturaChamadoDTO.getIdFuncionario())
                 .orElseThrow(() -> new RuntimeException("O funcionário não foi encontrado"));
 
@@ -65,8 +66,12 @@ public class ChamadoService {
     }
 
     // Ajustar: Retornar somente os dados necessário
-    public List<Chamados> getAllChamados(){
-        return chamadoRepository.findAll();
+    public List<VisualizacaoChamadoDTO> getAllChamados(){
+        List<VisualizacaoChamadoDTO> listaChamadosVisualizacao = new ArrayList<>();
+        for(Chamados chamado : chamadoRepository.findAll()){
+            listaChamadosVisualizacao.add(buildVisualizacaoChamadoDTO(chamado));
+        }
+        return listaChamadosVisualizacao;
     }
 
     public List<VisualizacaoChamadoDTO> getChamadosCliente(Long id_cliente){
