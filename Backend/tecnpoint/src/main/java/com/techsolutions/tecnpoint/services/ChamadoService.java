@@ -62,12 +62,9 @@ public class ChamadoService {
 
         // Salvando o chamado no banco
         chamadoRepository.save(chamado);
-
-        // Retornando somente os dados necessários para a visualização
         return buildVisualizacaoChamadoDTO(chamado);
     }
 
-    // Ajustar: Retornar somente os dados necessário
     public List<VisualizacaoChamadoDTO> getAllChamados(){
         List<VisualizacaoChamadoDTO> listaChamadosVisualizacao = new ArrayList<>();
         for(Chamados chamado : chamadoRepository.findAll()){
@@ -113,7 +110,6 @@ public class ChamadoService {
         return buildVisualizacaoChamadoDTO(chamadoAtualizado);
     }
 
-    //  Criando funcão para pegar os dados novos do chamado enviados no body e atribui-los ao chamado
     private Chamados atualizaChamado(AtualizaChamadoDTO chamadoDTO){
         Chamados chamado = chamadoRepository.findById(chamadoDTO.getId_chamado())
                 .orElseThrow(() -> new RuntimeException("O chamado não foi encontrado."));
