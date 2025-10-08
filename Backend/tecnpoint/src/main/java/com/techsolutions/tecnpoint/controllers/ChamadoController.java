@@ -1,14 +1,14 @@
 package com.techsolutions.tecnpoint.controllers;
 
 import com.techsolutions.tecnpoint.DTO.AberturaChamadoDTO;
+import com.techsolutions.tecnpoint.DTO.AtualizaChamadoDTO;
 import com.techsolutions.tecnpoint.DTO.VisualizacaoChamadoDTO;
-import com.techsolutions.tecnpoint.entities.Chamados;
 import com.techsolutions.tecnpoint.services.ChamadoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/chamados")
@@ -40,5 +40,10 @@ public class ChamadoController {
     @GetMapping("/chamados-funcionario/{id_funcionario}")
     public ResponseEntity<List<VisualizacaoChamadoDTO>> getChamadosFuncionario(@PathVariable Long id_funcionario){
         return ResponseEntity.status(200).body(chamadoService.getChamadosFuncionario(id_funcionario));
+    }
+
+    @PatchMapping("/atualizacao-chamado")
+    public ResponseEntity<VisualizacaoChamadoDTO> updateChamado(@RequestBody AtualizaChamadoDTO atualizaChamadoDTO){
+        return ResponseEntity.status(200).body(chamadoService.updateChamado(atualizaChamadoDTO));
     }
 }

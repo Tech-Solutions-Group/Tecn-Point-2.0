@@ -1,19 +1,20 @@
 package com.techsolutions.tecnpoint.services;
 
 import com.techsolutions.tecnpoint.DTO.AberturaChamadoDTO;
+import com.techsolutions.tecnpoint.DTO.AtualizaChamadoDTO;
 import com.techsolutions.tecnpoint.DTO.VisualizacaoUsuarioDTO;
 import com.techsolutions.tecnpoint.DTO.VisualizacaoChamadoDTO;
 import com.techsolutions.tecnpoint.entities.Chamados;
 import com.techsolutions.tecnpoint.entities.Jornada;
 import com.techsolutions.tecnpoint.entities.Modulo;
 import com.techsolutions.tecnpoint.entities.Usuarios;
+import com.techsolutions.tecnpoint.enums.TipoUsuario;
 import com.techsolutions.tecnpoint.repositories.ChamadoRepository;
 import com.techsolutions.tecnpoint.repositories.JornadaRepository;
 import com.techsolutions.tecnpoint.repositories.ModuloRepository;
 import com.techsolutions.tecnpoint.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,6 +33,7 @@ public class ChamadoService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    // Adicionar verificação dos tipos dos usuários
     public VisualizacaoChamadoDTO postChamado(AberturaChamadoDTO aberturaChamadoDTO){
 
         Jornada jornada = jornadaRepository.findById(aberturaChamadoDTO.getIdJornada())
@@ -96,7 +98,7 @@ public class ChamadoService {
 
     public List<VisualizacaoChamadoDTO> getChamadosFuncionario(Long id_funcionario){
         Usuarios funcionario = usuarioRepository.findById(id_funcionario)
-                .orElseThrow(() -> new RuntimeException("O funcionario não foi encontrado."));
+                .orElseThrow(() -> new RuntimeException("O funcionário não foi encontrado."));
 
         List<VisualizacaoChamadoDTO> chamadosVisualizacao = new ArrayList<>();
         for(Chamados c : funcionario.getChamadosFuncionario()){
@@ -104,6 +106,37 @@ public class ChamadoService {
         }
 
         return chamadosVisualizacao;
+    }
+
+    public VisualizacaoChamadoDTO updateChamado(AtualizaChamadoDTO chamadoDTO){
+        Chamados chamadoAtualizado = chamadoRepository.save(atualizaChamado(chamadoDTO));
+        return buildVisualizacaoChamadoDTO(chamadoAtualizado);
+    }
+
+    //  Criando funcão para pegar os dados novos do chamado enviados no body e atribui-los ao chamado
+    private Chamados atualizaChamado(AtualizaChamadoDTO chamadoDTO){
+        Chamados chamado = chamadoRepository.findById(chamadoDTO.getId_chamado())
+                .orElseThrow(() -> new RuntimeException("O chamado não foi encontrado."));
+
+        if(!(chamado.getPrioridade() == chamadoDTO.getPrioridade())){
+            chamado.setPrioridade(chamadoDTO.getPrioridade());
+        }
+
+        if(!(chamado.getStatus() == chamadoDTO.getStatus())){
+            chamado.setStatus(chamadoDTO.getStatus());
+        }
+
+        if(!(chamado.getFuncionario().getId_usuario() == chamadoDTO.getId_usuario())){
+            // Verificar situação do retorno do optional do método get, usar o findBy ou o get da classe repository do usuário
+            Usuarios funcionarioAtribuido = usuarioRepository.getById(chamadoDTO.getId_usuario());
+
+            if(funcionarioAtribuido.getTipoUsuario() == TipoUsuario.FUNCIONARIO){
+                chamado.setFuncionario(funcionarioAtribuido);
+            }else{
+                throw new RuntimeException("O usuário informado deve ser um funcionário.");
+            }
+        }
+        return chamado;
     }
 
     private VisualizacaoChamadoDTO buildVisualizacaoChamadoDTO(Chamados chamado){
