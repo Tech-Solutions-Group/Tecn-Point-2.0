@@ -8,6 +8,7 @@ import com.techsolutions.tecnpoint.entities.Chamados;
 import com.techsolutions.tecnpoint.entities.Jornada;
 import com.techsolutions.tecnpoint.entities.Modulo;
 import com.techsolutions.tecnpoint.entities.Usuarios;
+import com.techsolutions.tecnpoint.enums.StatusChamado;
 import com.techsolutions.tecnpoint.enums.TipoUsuario;
 import com.techsolutions.tecnpoint.repositories.ChamadoRepository;
 import com.techsolutions.tecnpoint.repositories.JornadaRepository;
@@ -45,15 +46,14 @@ public class ChamadoService {
         Usuarios cliente = usuarioRepository.findById(aberturaChamadoDTO.getIdCliente())
                 .orElseThrow(() -> new RuntimeException("O cliente não foi encontrado"));
 
-        // Existe mesmo a necessidade de procurarmos um funcionario quando cria um chamado? Não vamos colocar para o Tech Solutions?
-        Usuarios funcionario = usuarioRepository.findById(aberturaChamadoDTO.getIdFuncionario())
-                .orElseThrow(() -> new RuntimeException("O funcionário não foi encontrado"));
+        Usuarios funcionario = usuarioRepository.findById(1L)
+                .orElseThrow(() -> new RuntimeException("O funcionário Tech Solutions não foi encontrado"));
 
         Chamados chamado = Chamados.builder()
                 .descricao(aberturaChamadoDTO.getDescricao())
                 .titulo(aberturaChamadoDTO.getTitulo())
                 .prioridade(aberturaChamadoDTO.getPrioridade())
-                .status(aberturaChamadoDTO.getStatus())
+                .status(StatusChamado.ABERTO)
                 .jornada(jornada)
                 .modulo(modulo)
                 .cliente(cliente)
@@ -123,8 +123,9 @@ public class ChamadoService {
         }
 
         if(!(chamado.getFuncionario().getId_usuario() == chamadoDTO.getId_usuario())){
-            // Verificar situação do retorno do optional do método get, usar o findBy ou o get da classe repository do usuário
-            Usuarios funcionarioAtribuido = usuarioRepository.getById(chamadoDTO.getId_usuario());
+            // Verificar situação do retorno do optional do método getById, usar o findById ou o getById da classe repository do usuário
+            Usuarios funcionarioAtribuido = usuarioRepository.findById(chamadoDTO.getId_usuario())
+                    .orElseThrow(() -> new RuntimeException("O funcionário informado não existe"));
 
             if(funcionarioAtribuido.getTipoUsuario() == TipoUsuario.FUNCIONARIO){
                 chamado.setFuncionario(funcionarioAtribuido);

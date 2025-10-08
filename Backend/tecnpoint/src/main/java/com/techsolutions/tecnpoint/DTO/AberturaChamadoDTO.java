@@ -12,7 +12,6 @@ public class AberturaChamadoDTO {
     PrioridadeChamado prioridade;
     StatusChamado status;
     Long idCliente;
-    Long idFuncionario;
     Long idJornada;
     Long idModulo;
 }
