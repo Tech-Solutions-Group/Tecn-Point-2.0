@@ -10,7 +10,6 @@ public class AberturaChamadoDTO {
     String descricao;
     String titulo;
     PrioridadeChamado prioridade;
-    StatusChamado status;
     Long idCliente;
     Long idJornada;
     Long idModulo;
