@@ -46,6 +46,8 @@ public class ChamadoService {
         Usuarios cliente = usuarioRepository.findById(aberturaChamadoDTO.getIdCliente())
                 .orElseThrow(() -> new RuntimeException("O cliente não foi encontrado"));
 
+        if(isFuncionario(cliente)) {throw new RuntimeException("O cliente informado deve ser do tipo cliente");}
+
         Usuarios funcionario = usuarioRepository.findById(1L)
                 .orElseThrow(() -> new RuntimeException("O funcionário Tech Solutions não foi encontrado"));
 
@@ -78,7 +80,6 @@ public class ChamadoService {
                 .orElseThrow(() -> new RuntimeException("O chamado não foi encontrado."));
         return buildVisualizacaoChamadoDTO(chamado);
     }
-
 
     public List<VisualizacaoChamadoDTO> getChamadosCliente(Long id_cliente){
 
@@ -159,5 +160,9 @@ public class ChamadoService {
                 .cliente(visualizacaoCliente)
                 .funcionario(visualizacaoFuncionario)
                 .build();
+    }
+
+    private boolean isFuncionario(Usuarios usuario){
+        return usuario.getTipoUsuario() == TipoUsuario.FUNCIONARIO;
     }
 }
