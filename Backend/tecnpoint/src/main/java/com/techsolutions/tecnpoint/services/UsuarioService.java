@@ -24,6 +24,7 @@ public class UsuarioService {
         return usuarioRepository.findById(id);
     }
 
+    // Adicionar verificação de existência do usuário
     public Usuarios postUsuarios(Usuarios usuarios){
         Usuarios usuarioSalvo = usuarioRepository.save(usuarios);
         return usuarioSalvo;

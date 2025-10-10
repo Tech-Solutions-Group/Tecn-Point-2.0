@@ -13,7 +13,6 @@ import com.techsolutions.tecnpoint.enums.TipoUsuario;
 import com.techsolutions.tecnpoint.repositories.ChamadoRepository;
 import com.techsolutions.tecnpoint.repositories.JornadaRepository;
 import com.techsolutions.tecnpoint.repositories.ModuloRepository;
-import com.techsolutions.tecnpoint.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
@@ -32,7 +31,7 @@ public class ChamadoService {
     private ModuloRepository moduloRepository;
 
     @Autowired
-    private UsuarioRepository usuarioRepository;
+    private UsuarioService usuarioService;
 
     // Adicionar verificação dos tipos dos usuários
     public VisualizacaoChamadoDTO postChamado(AberturaChamadoDTO aberturaChamadoDTO){
@@ -41,14 +40,14 @@ public class ChamadoService {
                 .orElseThrow(() -> new RuntimeException("Jornada informada não encontrada"));
 
         Modulo modulo = moduloRepository.findById(aberturaChamadoDTO.getIdModulo())
-                .orElseThrow(() -> new RuntimeException("Módulo informado não encontrado"));
+                .orElseThrow(() -> new RuntimeException("O módulo informado não foi encontrado"));;
 
-        Usuarios cliente = usuarioRepository.findById(aberturaChamadoDTO.getIdCliente())
-                .orElseThrow(() -> new RuntimeException("O cliente não foi encontrado"));
+        Usuarios cliente = usuarioService.getUsuarioById(aberturaChamadoDTO.getIdCliente())
+                .orElseThrow(() -> new RuntimeException("O cliente informado não foi encontrado"));
 
         if(isFuncionario(cliente)) {throw new RuntimeException("O cliente informado deve ser do tipo cliente");}
 
-        Usuarios funcionario = usuarioRepository.findById(1L)
+        Usuarios funcionario = usuarioService.getUsuarioById(1L)
                 .orElseThrow(() -> new RuntimeException("O funcionário Tech Solutions não foi encontrado"));
 
         Chamados chamado = Chamados.builder()
@@ -83,7 +82,7 @@ public class ChamadoService {
 
     public List<VisualizacaoChamadoDTO> getChamadosCliente(Long id_cliente){
 
-        Usuarios cliente = usuarioRepository.findById(id_cliente)
+        Usuarios cliente = usuarioService.getUsuarioById(id_cliente)
                 .orElseThrow(() -> new RuntimeException("O cliente não foi encontrado."));
 
         List<VisualizacaoChamadoDTO> chamadosVisualizacao = new ArrayList<>();
@@ -95,7 +94,7 @@ public class ChamadoService {
     }
 
     public List<VisualizacaoChamadoDTO> getChamadosFuncionario(Long id_funcionario){
-        Usuarios funcionario = usuarioRepository.findById(id_funcionario)
+        Usuarios funcionario = usuarioService.getUsuarioById(id_funcionario)
                 .orElseThrow(() -> new RuntimeException("O funcionário não foi encontrado."));
 
         List<VisualizacaoChamadoDTO> chamadosVisualizacao = new ArrayList<>();
@@ -124,11 +123,10 @@ public class ChamadoService {
         }
 
         if(!(chamado.getFuncionario().getId_usuario() == chamadoDTO.getId_usuario())){
-            // Verificar situação do retorno do optional do método getById, usar o findById ou o getById da classe repository do usuário
-            Usuarios funcionarioAtribuido = usuarioRepository.findById(chamadoDTO.getId_usuario())
-                    .orElseThrow(() -> new RuntimeException("O funcionário informado não existe"));
+            Usuarios funcionarioAtribuido = usuarioService.getUsuarioById(chamadoDTO.getId_usuario())
+                    .orElseThrow(() -> new RuntimeException("O funcionário informado não foi encontrado"));;
 
-            if(funcionarioAtribuido.getTipoUsuario() == TipoUsuario.FUNCIONARIO){
+            if(isFuncionario(funcionarioAtribuido)){
                 chamado.setFuncionario(funcionarioAtribuido);
             }else{
                 throw new RuntimeException("O usuário informado deve ser um funcionário.");
