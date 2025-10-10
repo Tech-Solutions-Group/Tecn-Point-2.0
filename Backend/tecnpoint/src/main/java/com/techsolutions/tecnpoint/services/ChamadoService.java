@@ -157,6 +157,8 @@ public class ChamadoService {
                 .status(chamado.getStatus())
                 .cliente(visualizacaoCliente)
                 .funcionario(visualizacaoFuncionario)
+                .jornada(chamado.getJornada())
+                .modulo(chamado.getModulo())
                 .build();
     }
 
