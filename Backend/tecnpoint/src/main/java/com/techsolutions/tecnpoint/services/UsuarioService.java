@@ -26,7 +26,6 @@ public class UsuarioService {
         return usuarioRepository.findById(id);
     }
 
-    // Adicionar verificação de existência do usuário
     public Usuarios postUsuarios(Usuarios usuarios){
         Usuarios usuarioSalvo = usuarioRepository.save(usuarios);
         return usuarioSalvo;
@@ -37,10 +36,7 @@ public class UsuarioService {
     }
 
     public Usuarios editarUsuario(Long id, AtualizaUsuarioDTO atualizaUsuarioDTO){
-        /*
-        Utilizando expressão lambda por causa do Optional, caso o usuário não exista no banco
-         lança uma exceção
-         */
+
         Usuarios usuarioEncontrado = getUsuarioById(id).orElseThrow(() -> new RuntimeException("O usuário não foi encontrado."));
 
         if(atualizaUsuarioDTO.getNome() != null && !atualizaUsuarioDTO.getNome().trim().isEmpty()){
@@ -56,7 +52,6 @@ public class UsuarioService {
                 atribuiChamadosFuncionario(usuarioEncontrado);
             }
 
-            // Testa se o usuário é cliente e vai se tornar funcionário
             if(usuarioEncontrado.getTipoUsuario() == TipoUsuario.CLIENTE && atualizaUsuarioDTO.getTipoUsuario() == TipoUsuario.FUNCIONARIO){
                 if(!usuarioEncontrado.getChamadosCliente().isEmpty()){ // Verificando se o cliente possui chamados abertos
                     throw new RuntimeException("Não é possível alterar o tipo de usuário - O usuário possui chamados em aberto!");
@@ -77,12 +72,12 @@ public class UsuarioService {
             usuarioEncontrado.setEmail(atualizaUsuarioDTO.getEmail());
         }
 
-        return usuarioRepository.save(usuarioEncontrado); // Salvando o usuário com os dados enviados no body e o retornando
+        return usuarioRepository.save(usuarioEncontrado);
     }
 
     /*
-        função utilizada para quando o usuário era um funcionário e agora passou a ser uma cliente
-        então tiramos todos os chamados que para ele havia sido atribuido
+        Mét. utilizado para reatribuir os chamados de um funcionário
+        que teve seu tipo de usuário alterado para cliente
      */
     private void atribuiChamadosFuncionario(Usuarios funcionario){
 
