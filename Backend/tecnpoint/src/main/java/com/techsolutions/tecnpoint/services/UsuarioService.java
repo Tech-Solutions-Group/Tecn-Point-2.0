@@ -51,9 +51,16 @@ public class UsuarioService {
             usuarioEncontrado.setSenha(atualizaUsuarioDTO.getSenha());
         }
 
-        if(atualizaUsuarioDTO.getTipoUsuario() != null){
+        if(atualizaUsuarioDTO.getTipoUsuario() != null && !(atualizaUsuarioDTO.getTipoUsuario() == usuarioEncontrado.getTipoUsuario())){
             if(usuarioEncontrado.getTipoUsuario() == TipoUsuario.FUNCIONARIO && atualizaUsuarioDTO.getTipoUsuario() == TipoUsuario.CLIENTE){
                 atribuiChamadosFuncionario(usuarioEncontrado);
+            }
+
+            // Testa se o usuário é cliente e vai se tornar funcionário
+            if(usuarioEncontrado.getTipoUsuario() == TipoUsuario.CLIENTE && atualizaUsuarioDTO.getTipoUsuario() == TipoUsuario.FUNCIONARIO){
+                if(!usuarioEncontrado.getChamadosCliente().isEmpty()){ // Verificando se o cliente possui chamados abertos
+                    throw new RuntimeException("Não é possível alterar o tipo de usuário - O usuário possui chamados em aberto!");
+                }
             }
             usuarioEncontrado.setTipoUsuario(atualizaUsuarioDTO.getTipoUsuario());
         }
