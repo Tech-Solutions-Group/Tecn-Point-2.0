@@ -84,24 +84,31 @@ public class ChamadoService {
         Usuarios cliente = usuarioService.getUsuarioById(id_cliente)
                 .orElseThrow(() -> new RuntimeException("O cliente não foi encontrado."));
 
-        List<VisualizacaoChamadoDTO> chamadosVisualizacao = new ArrayList<>();
-        for(Chamados c : cliente.getChamadosCliente()){
-            chamadosVisualizacao.add(buildVisualizacaoChamadoDTO(c));
+        if(!isFuncionario(cliente)){
+            List<VisualizacaoChamadoDTO> chamadosVisualizacao = new ArrayList<>();
+            for(Chamados c : cliente.getChamadosCliente()){
+                chamadosVisualizacao.add(buildVisualizacaoChamadoDTO(c));
+            }
+            return chamadosVisualizacao;
+        }else{
+            throw new RuntimeException("O usuário informado deve ser um cliente");
         }
-
-        return chamadosVisualizacao;
     }
 
     public List<VisualizacaoChamadoDTO> getChamadosFuncionario(Long id_funcionario){
         Usuarios funcionario = usuarioService.getUsuarioById(id_funcionario)
                 .orElseThrow(() -> new RuntimeException("O funcionário não foi encontrado."));
 
-        List<VisualizacaoChamadoDTO> chamadosVisualizacao = new ArrayList<>();
-        for(Chamados c : funcionario.getChamadosFuncionario()){
-            chamadosVisualizacao.add(buildVisualizacaoChamadoDTO(c));
+        if(isFuncionario(funcionario)){
+            List<VisualizacaoChamadoDTO> chamadosVisualizacao = new ArrayList<>();
+            for(Chamados c : funcionario.getChamadosFuncionario()){
+                chamadosVisualizacao.add(buildVisualizacaoChamadoDTO(c));
+            }
+            return chamadosVisualizacao;
+        }else{
+            throw new RuntimeException("O usuário informado deve ser um funcionário");
         }
 
-        return chamadosVisualizacao;
     }
 
     public VisualizacaoChamadoDTO updateChamado(AtualizaChamadoDTO chamadoDTO){
