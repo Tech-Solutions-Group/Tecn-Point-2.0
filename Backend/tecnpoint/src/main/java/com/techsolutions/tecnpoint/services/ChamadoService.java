@@ -60,7 +60,6 @@ public class ChamadoService {
                 .funcionario(funcionario)
                 .build();
 
-        // Salvando o chamado no banco
         chamadoRepository.save(chamado);
         return buildVisualizacaoChamadoDTO(chamado);
     }
