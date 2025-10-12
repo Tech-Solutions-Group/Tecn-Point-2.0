@@ -33,7 +33,6 @@ public class ChamadoService {
     @Autowired
     private UsuarioService usuarioService;
 
-    // Adicionar verificação dos tipos dos usuários
     public VisualizacaoChamadoDTO postChamado(AberturaChamadoDTO aberturaChamadoDTO){
 
         Jornada jornada = jornadaRepository.findById(aberturaChamadoDTO.getIdJornada())
