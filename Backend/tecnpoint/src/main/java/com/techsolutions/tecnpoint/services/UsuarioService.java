@@ -1,6 +1,8 @@
 package com.techsolutions.tecnpoint.services;
 
+import com.techsolutions.tecnpoint.entities.Chamados;
 import com.techsolutions.tecnpoint.entities.Usuarios;
+import com.techsolutions.tecnpoint.enums.TipoUsuario;
 import com.techsolutions.tecnpoint.repositories.UsuarioRepository;
 import com.techsolutions.tecnpoint.DTO.AtualizaUsuarioDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +50,11 @@ public class UsuarioService {
         if(atualizaUsuarioDTO.getSenha() != null && !atualizaUsuarioDTO.getSenha().trim().isEmpty()){
             usuarioEncontrado.setSenha(atualizaUsuarioDTO.getSenha());
         }
+
         if(atualizaUsuarioDTO.getTipoUsuario() != null){
+            if(usuarioEncontrado.getTipoUsuario() == TipoUsuario.FUNCIONARIO && atualizaUsuarioDTO.getTipoUsuario() == TipoUsuario.CLIENTE){
+                atribuiChamadosFuncionario(usuarioEncontrado);
+            }
             usuarioEncontrado.setTipoUsuario(atualizaUsuarioDTO.getTipoUsuario());
         }
 
@@ -63,6 +69,29 @@ public class UsuarioService {
             }
             usuarioEncontrado.setEmail(atualizaUsuarioDTO.getEmail());
         }
+
         return usuarioRepository.save(usuarioEncontrado); // Salvando o usuário com os dados enviados no body e o retornando
+    }
+
+    /*
+        função utilizada para quando o usuário era um funcionário e agora passou a ser uma cliente
+        então tiramos todos os chamados que para ele havia sido atribuido
+     */
+    private void atribuiChamadosFuncionario(Usuarios funcionario){
+
+        // Recuperando todos os chamados atribuidos para o usuário que passará a ser CLIENTE
+        List<Chamados> chamadosAtribuidos = funcionario.getChamadosFuncionario();
+
+        if(!chamadosAtribuidos.isEmpty()){
+
+            // Recuperando o usuário padrão TechSolution
+            Usuarios funcionarioPadrao = getUsuarioById(1L).orElseThrow(() -> new RuntimeException("O usuário Tech Solutions não foi encontrado"));
+
+            // Atribuindo os chamados do ex-funcionário para o TechSolution
+            for(Chamados chamado : chamadosAtribuidos){
+                chamado.setFuncionario(funcionarioPadrao);
+            }
+
+        }
     }
 }
