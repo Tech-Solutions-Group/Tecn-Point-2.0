@@ -5,8 +5,6 @@ import com.techsolutions.tecnpoint.repositories.UsuarioRepository;
 import com.techsolutions.tecnpoint.DTO.AtualizaUsuarioDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,7 +22,6 @@ public class UsuarioService {
         return usuarioRepository.findById(id);
     }
 
-    // Adicionar verificação de existência do usuário
     public Usuarios postUsuarios(Usuarios usuarios){
         Usuarios usuarioSalvo = usuarioRepository.save(usuarios);
         return usuarioSalvo;
@@ -35,10 +32,7 @@ public class UsuarioService {
     }
 
     public Usuarios editarUsuario(Long id, AtualizaUsuarioDTO atualizaUsuarioDTO){
-        /*
-        Utilizando expressão lambda por causa do Optional, caso o usuário não exista no banco
-         lança uma exceção
-         */
+
         Usuarios usuarioEncontrado = getUsuarioById(id).orElseThrow(() -> new RuntimeException("O usuário não foi encontrado."));
 
         if(atualizaUsuarioDTO.getNome() != null && !atualizaUsuarioDTO.getNome().trim().isEmpty()){
@@ -47,9 +41,6 @@ public class UsuarioService {
 
         if(atualizaUsuarioDTO.getSenha() != null && !atualizaUsuarioDTO.getSenha().trim().isEmpty()){
             usuarioEncontrado.setSenha(atualizaUsuarioDTO.getSenha());
-        }
-        if(atualizaUsuarioDTO.getTipoUsuario() != null){
-            usuarioEncontrado.setTipoUsuario(atualizaUsuarioDTO.getTipoUsuario());
         }
 
         // Verifica se o e-mail informado é nulo e se NÃO é vazio
@@ -63,6 +54,7 @@ public class UsuarioService {
             }
             usuarioEncontrado.setEmail(atualizaUsuarioDTO.getEmail());
         }
-        return usuarioRepository.save(usuarioEncontrado); // Salvando o usuário com os dados enviados no body e o retornando
+
+        return usuarioRepository.save(usuarioEncontrado);
     }
 }
