@@ -1,14 +1,10 @@
 package com.techsolutions.tecnpoint.services;
 
-import com.techsolutions.tecnpoint.entities.Chamados;
 import com.techsolutions.tecnpoint.entities.Usuarios;
-import com.techsolutions.tecnpoint.enums.TipoUsuario;
 import com.techsolutions.tecnpoint.repositories.UsuarioRepository;
 import com.techsolutions.tecnpoint.DTO.AtualizaUsuarioDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -47,19 +43,6 @@ public class UsuarioService {
             usuarioEncontrado.setSenha(atualizaUsuarioDTO.getSenha());
         }
 
-        if(atualizaUsuarioDTO.getTipoUsuario() != null && !(atualizaUsuarioDTO.getTipoUsuario() == usuarioEncontrado.getTipoUsuario())){
-            if(usuarioEncontrado.getTipoUsuario() == TipoUsuario.FUNCIONARIO && atualizaUsuarioDTO.getTipoUsuario() == TipoUsuario.CLIENTE){
-                atribuiChamadosFuncionario(usuarioEncontrado);
-            }
-
-            if(usuarioEncontrado.getTipoUsuario() == TipoUsuario.CLIENTE && atualizaUsuarioDTO.getTipoUsuario() == TipoUsuario.FUNCIONARIO){
-                if(!usuarioEncontrado.getChamadosCliente().isEmpty()){ // Verificando se o cliente possui chamados abertos
-                    throw new RuntimeException("Não é possível alterar o tipo de usuário - O usuário possui chamados em aberto!");
-                }
-            }
-            usuarioEncontrado.setTipoUsuario(atualizaUsuarioDTO.getTipoUsuario());
-        }
-
         // Verifica se o e-mail informado é nulo e se NÃO é vazio
         if(atualizaUsuarioDTO.getEmail() != null && !atualizaUsuarioDTO.getEmail().trim().isEmpty()){
             // Verifica se o e-mail do usuário encontrado é diferente do e-mail informado
@@ -73,27 +56,5 @@ public class UsuarioService {
         }
 
         return usuarioRepository.save(usuarioEncontrado);
-    }
-
-    /*
-        Mét. utilizado para reatribuir os chamados de um funcionário
-        que teve seu tipo de usuário alterado para cliente
-     */
-    private void atribuiChamadosFuncionario(Usuarios funcionario){
-
-        // Recuperando todos os chamados atribuidos para o usuário que passará a ser CLIENTE
-        List<Chamados> chamadosAtribuidos = funcionario.getChamadosFuncionario();
-
-        if(!chamadosAtribuidos.isEmpty()){
-
-            // Recuperando o usuário padrão TechSolution
-            Usuarios funcionarioPadrao = getUsuarioById(1L).orElseThrow(() -> new RuntimeException("O usuário Tech Solutions não foi encontrado"));
-
-            // Atribuindo os chamados do ex-funcionário para o TechSolution
-            for(Chamados chamado : chamadosAtribuidos){
-                chamado.setFuncionario(funcionarioPadrao);
-            }
-
-        }
     }
 }

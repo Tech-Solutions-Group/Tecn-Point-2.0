@@ -13,6 +13,4 @@ public class AtualizaUsuarioDTO {
     String email;
 
     String senha;
-
-    TipoUsuario tipoUsuario;
 }
