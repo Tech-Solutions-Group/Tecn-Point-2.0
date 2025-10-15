@@ -119,23 +119,24 @@ public class ChamadoService {
         Chamados chamado = chamadoRepository.findById(chamadoDTO.getId_chamado())
                 .orElseThrow(() -> new RuntimeException("O chamado não foi encontrado."));
 
-        if(!(chamado.getPrioridade() == chamadoDTO.getPrioridade())){
-            chamado.setPrioridade(chamadoDTO.getPrioridade());
+        if(!(chamadoDTO.getPrioridade() == null)){
+            if(chamadoDTO.getPrioridade() != chamado.getPrioridade()){ chamado.setPrioridade(chamadoDTO.getPrioridade()); }
         }
 
-        if(!(chamado.getStatus() == chamadoDTO.getStatus())){
-            chamado.setStatus(chamadoDTO.getStatus());
+        if(!(chamadoDTO.getStatus() == null)){
+            if(chamado.getStatus() != chamadoDTO.getStatus()) { chamado.setStatus(chamadoDTO.getStatus()); }
         }
 
-        if(!(chamado.getFuncionario().getId_usuario() == chamadoDTO.getId_usuario())){
+        if(!(chamadoDTO.getId_usuario() == null) &&
+          !(chamado.getFuncionario().getId_usuario().equals(chamadoDTO.getId_usuario()))){
             Usuarios funcionarioAtribuido = usuarioService.getUsuarioById(chamadoDTO.getId_usuario())
                     .orElseThrow(() -> new RuntimeException("O funcionário informado não foi encontrado"));;
 
-            if(isFuncionario(funcionarioAtribuido)){
-                chamado.setFuncionario(funcionarioAtribuido);
-            }else{
-                throw new RuntimeException("O usuário informado deve ser um funcionário.");
+            if(!isFuncionario(funcionarioAtribuido)){
+                throw new RuntimeException("O usuário informado deve ser um funcionário");
             }
+
+            chamado.setFuncionario(funcionarioAtribuido);
         }
         return chamado;
     }
