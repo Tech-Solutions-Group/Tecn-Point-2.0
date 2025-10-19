@@ -10,19 +10,6 @@ export interface Usuario {
   tipoUsuario: string;
 }
 
-export interface UsuarioFiltro {
-  busca?: string;
-  page?: number;
-  limit?: number;
-}
-
-export interface UsuarioPaginado {
-  data: Usuario[];
-  total: number;
-  page: number;
-  limit: number;
-}
-
 @Injectable({
   providedIn: 'root',
 })
@@ -31,16 +18,8 @@ export class UsuarioService {
 
   constructor(private http: HttpClient) {}
 
-  getUsuario(filtro?: UsuarioFiltro): Observable<Usuario[]> {
-    let params = new HttpParams();
-
-    if (filtro) {
-      if (filtro.busca) params = params.set('busca', filtro.busca);
-      if (filtro.limit) params = params.set('limit', filtro.limit);
-      if (filtro.page) params = params.set('page', filtro.page);
-    }
-
-    return this.http.get<Usuario[]>(this.apiUrl, { params });
+  getUsuario(): Observable<Usuario[]> {
+    return this.http.get<Usuario[]>(this.apiUrl);
   }
 
   getUsuarioById(id: string): Observable<Usuario> {
@@ -49,6 +28,10 @@ export class UsuarioService {
 
   postUsuario(data: Partial<Usuario>): Observable<Usuario> {
     return this.http.post<Usuario>(`${this.apiUrl}/adicionar`, data);
+  }
+
+  putUsuario(id: string, data: Partial<Usuario>): Observable<Usuario> {
+    return this.http.put<Usuario>(`${this.apiUrl}/${id}`, data);
   }
 
   delUsuario(id: string): Observable<void> {

@@ -1,20 +1,8 @@
-<button (click)="modal.open()">Cadastro</button>
+<button (click)="modalCad.open()">Cadastro</button>
 
-<app-cad-usuario #modal title="Modal cadastro">
-  <button (click)="modal.close()">Fechar</button>
+<app-cad-usuario #modalCad title="Modal cadastro">
+  <button (click)="modalCad.close()">Fechar</button>
 </app-cad-usuario>
-
-<form
-  [formGroup]="filtroForm"
-  (ngSubmit)="aplicarFiltro()"
-  class="filtro"
-  novalidate
->
-  <label>Buscar por nome</label>
-  <input placeholder="Buscar por nome" formControlName="busca" />
-
-  <button type="submit" class="btn-filtrar">Filtrar</button>
-</form>
 
 <table class="list-usuarios">
   <thead>
@@ -22,6 +10,7 @@
       <th>Nome</th>
       <th>Email</th>
       <th>Tipo Usuario</th>
+      <th>Ações</th>
     </tr>
   </thead>
   <tbody>
@@ -29,18 +18,14 @@
       <td>{{ usuario.nome }}</td>
       <td>{{ usuario.email }}</td>
       <td>{{ usuario.tipoUsuario }}</td>
+      <td>
+        <button (click)="modalAtt.open()">Editar</button>
+        <app-att-usuario #modalAtt title="Modal atualização">
+          <button (click)="modalAtt.close()">Fechar</button>
+        </app-att-usuario>
+
+        <button>Excluir</button>
+      </td>
     </tr>
   </tbody>
 </table>
-
-<div class="paginacao" *ngIf="total > limit">
-  <button [disabled]="page === 1" (click)="mudarPagina(page - 1)">
-    ◀ Anterior
-  </button>
-
-  <span>Página {{ page }}</span>
-
-  <button [disabled]="page * limit >= total" (click)="mudarPagina(page + 1)">
-    Próxima ▶
-  </button>
-</div>

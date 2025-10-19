@@ -1,0 +1,64 @@
+<div class="modal-backdrop" *ngIf="isOpen" (click)="close()"></div>
+
+<div class="modal" *ngIf="isOpen">
+  <div class="modal-header">
+    <h2>Cadastro</h2>
+    <button (click)="close()">X</button>
+  </div>
+  <div class="modal-body">
+    <form
+      [formGroup]="attUsuarioForm"
+      (ngSubmit)="onSubmit()"
+      class="cadastro-usuario"
+      novalidate
+    >
+      <!-- Nome -->
+      <div class="campo-cadastro">
+        <label for="nome">Nome:</label>
+        <input id="nome" type="text" formControlName="nome" />
+        <small
+          *ngIf="
+            attUsuarioForm.get('nome')?.invalid &&
+            attUsuarioForm.get('nome')?.touched
+          "
+        >
+          Nome é obrigatório.
+        </small>
+      </div>
+
+      <!-- Email -->
+      <div class="campo-cadastro">
+        <label for="email">Email:</label>
+        <input id="email" type="email" formControlName="email" />
+        <small
+          *ngIf="
+            attUsuarioForm.get('email')?.invalid &&
+            attUsuarioForm.get('email')?.touched
+          "
+        >
+          Digite um email válido.
+        </small>
+      </div>
+
+      <!-- Senha -->
+      <div class="campo-cadastro">
+        <label for="senha">Senha:</label>
+        <input id="senha" type="password" formControlName="senha" />
+        <small
+          *ngIf="
+            attUsuarioForm.get('senha')?.invalid &&
+            attUsuarioForm.get('senha')?.touched
+          "
+        >
+          Senha é obrigatória.
+        </small>
+      </div>
+
+      <!-- Botões -->
+      <div class="action">
+        <button type="button" (click)="close()">Cancelar</button>
+        <button type="submit">Cadastrar</button>
+      </div>
+    </form>
+  </div>
+</div>

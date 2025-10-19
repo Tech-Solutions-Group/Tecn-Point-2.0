@@ -1,13 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import {
-  Usuario,
-  UsuarioFiltro,
-  UsuarioService,
-} from '../../service/usuario.service';
+import { Usuario, UsuarioService } from '../../service/usuario.service';
 import { CommonModule } from '@angular/common';
-import { CadUsuarioComponent } from '../../shared/cad-usuario/cad-usuario.component';
+import { CadUsuarioComponent } from '../../shared/modal/cad-usuario/cad-usuario.component';
+import { AttUsuarioComponent } from '../../shared/modal/att-usuario/att-usuario.component';
 
 @Component({
   selector: 'app-usuario',
@@ -17,19 +14,13 @@ import { CadUsuarioComponent } from '../../shared/cad-usuario/cad-usuario.compon
     ReactiveFormsModule,
     RouterModule,
     CadUsuarioComponent,
+    AttUsuarioComponent,
   ],
   templateUrl: './usuario.component.html',
   styleUrls: ['./usuario.component.css'],
 })
 export class UsuarioComponent implements OnInit {
   usuarios: Usuario[] = [];
-  total = 0;
-  page = 1;
-  limit = 10;
-
-  filtroForm = this.fb.group({
-    busca: [''],
-  });
 
   constructor(
     private fb: FormBuilder,
@@ -40,25 +31,9 @@ export class UsuarioComponent implements OnInit {
     this.loadUsuarios();
   }
 
-  loadUsuarios() {
-    const filtros: UsuarioFiltro = {
-      page: this.page,
-      limit: this.limit,
-      busca: this.filtroForm.value.busca || undefined,
-    };
-
-    this.usuarioService.getUsuario(filtros).subscribe((res) => {
-      this.usuarios = res;
+  loadUsuarios(): void {
+    this.usuarioService.getUsuario().subscribe((data) => {
+      this.usuarios = data;
     });
-  }
-
-  aplicarFiltro() {
-    this.page = 1;
-    this.loadUsuarios();
-  }
-
-  mudarPagina(novaPagina: number) {
-    this.page = novaPagina;
-    this.loadUsuarios();
   }
 }

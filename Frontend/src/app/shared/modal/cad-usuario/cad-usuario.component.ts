@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Usuario, UsuarioService } from '../../service/usuario.service';
-import { Router } from '@angular/router';
+import { Usuario, UsuarioService } from '../../../service/usuario.service';
 import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
@@ -18,7 +17,6 @@ export class CadUsuarioComponent implements OnInit {
 
   constructor(
     private usuarioService: UsuarioService,
-    private router: Router,
     private fb: FormBuilder
   ) {}
 
