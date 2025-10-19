@@ -57,7 +57,10 @@
       <!-- Tipo de Usuário -->
       <div class="campo-cadastro">
         <label for="tipoUsuario">Tipo Usuário:</label>
-        <input id="tipoUsuario" type="text" formControlName="tipoUsuario" />
+        <select id="tipoUsuario" formControlName="tipoUsuario">
+          <option value="CLIENTE">CLIENTE</option>
+          <option value="FUNCIONARIO">FUNCIONARIO</option>
+        </select>
         <small
           *ngIf="
             cadUsuarioForm.get('tipoUsuario')?.invalid &&

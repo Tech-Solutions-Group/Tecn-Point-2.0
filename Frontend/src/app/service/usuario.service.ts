@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 export interface Usuario {
-  id: number;
+  id_usuario: number;
   nome: string;
   email: string;
   senha: string;
@@ -18,23 +18,23 @@ export class UsuarioService {
 
   constructor(private http: HttpClient) {}
 
-  getUsuario(): Observable<Usuario[]> {
+  getAllUsuario(): Observable<Usuario[]> {
     return this.http.get<Usuario[]>(this.apiUrl);
   }
 
-  getUsuarioById(id: string): Observable<Usuario> {
+  getUsuarioById(id: number): Observable<Usuario> {
     return this.http.get<Usuario>(`${this.apiUrl}/${id}`);
   }
 
-  postUsuario(data: Partial<Usuario>): Observable<Usuario> {
+  postUsuario(data: Usuario): Observable<Usuario> {
     return this.http.post<Usuario>(`${this.apiUrl}/adicionar`, data);
   }
 
-  putUsuario(id: string, data: Partial<Usuario>): Observable<Usuario> {
+  putUsuario(id: number, data: Usuario): Observable<Usuario> {
     return this.http.put<Usuario>(`${this.apiUrl}/${id}`, data);
   }
 
-  delUsuario(id: string): Observable<void> {
+  delUsuario(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }

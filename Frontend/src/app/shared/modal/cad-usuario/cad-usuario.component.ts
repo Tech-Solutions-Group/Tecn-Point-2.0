@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Usuario, UsuarioService } from '../../../service/usuario.service';
 import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
@@ -8,12 +8,14 @@ import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './cad-usuario.component.html',
-  styleUrl: './cad-usuario.component.css',
+  styleUrls: ['./cad-usuario.component.css'],
 })
-export class CadUsuarioComponent implements OnInit {
-  usuario: Usuario[] = [];
+export class CadUsuarioComponent {
   formInvalid = false;
   isOpen = false;
+
+  @Input() refresh!: () => void;
+  @Output() usuarioCadastrado = new EventEmitter<Usuario>();
 
   constructor(
     private usuarioService: UsuarioService,
@@ -27,16 +29,6 @@ export class CadUsuarioComponent implements OnInit {
     tipoUsuario: ['', Validators.required],
   });
 
-  ngOnInit(): void {
-    this.loadUsuarios();
-  }
-
-  private loadUsuarios(): void {
-    this.usuarioService.getUsuario().subscribe((dados) => {
-      this.usuario = dados;
-    });
-  }
-
   onSubmit(): void {
     if (this.cadUsuarioForm.invalid) {
       this.formInvalid = true;
@@ -46,22 +38,19 @@ export class CadUsuarioComponent implements OnInit {
 
     this.formInvalid = false;
 
-    const dados: any = this.cadUsuarioForm.value;
+    const dados = this.cadUsuarioForm.value as Usuario;
 
-    Object.keys(dados).forEach((key) => {
-      if (dados[key] === null) dados[key] = '';
+    this.usuarioService.postUsuario(dados).subscribe({
+      next: (res) => {
+        console.log('Usuário cadastrado com sucesso:', res);
+        this.usuarioCadastrado.emit(res);
+        this.cadUsuarioForm.reset();
+        this.close();
+      },
+      error: (erro) => {
+        console.error('Erro ao cadastrar usuário:', erro);
+      },
     });
-
-    this.usuarioService
-      .postUsuario(this.cadUsuarioForm.value as Usuario)
-      .subscribe({
-        next: (res) => {
-          console.log('Usuário cadastrado com sucesso:', res);
-          this.loadUsuarios();
-          this.cadUsuarioForm.reset();
-        },
-        error: (erro) => console.error('Erro ao cadastrar usuario', erro),
-      });
   }
 
   open() {

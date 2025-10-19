@@ -24,7 +24,8 @@
 
 .campo-cadastro input[type="text"],
 input[type="email"],
-input[type="password"] {
+input[type="password"],
+select {
   font-size: 25px;
 }
 

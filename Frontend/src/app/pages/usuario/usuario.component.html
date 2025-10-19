@@ -1,6 +1,10 @@
 <button (click)="modalCad.open()">Cadastro</button>
 
-<app-cad-usuario #modalCad title="Modal cadastro">
+<app-cad-usuario
+  (usuarioCadastrado)="atualizarLista($event)"
+  #modalCad
+  title="Modal cadastro"
+>
   <button (click)="modalCad.close()">Fechar</button>
 </app-cad-usuario>
 
@@ -19,12 +23,16 @@
       <td>{{ usuario.email }}</td>
       <td>{{ usuario.tipoUsuario }}</td>
       <td>
-        <button (click)="modalAtt.open()">Editar</button>
-        <app-att-usuario #modalAtt title="Modal atualização">
+        <button (click)="modalAtt.open(usuario)">Editar</button>
+        <app-edt-usuario
+          (usuarioAtualizado)="atualizarLista($event)"
+          #modalAtt
+          title="Modal atualização"
+        >
           <button (click)="modalAtt.close()">Fechar</button>
-        </app-att-usuario>
+        </app-edt-usuario>
 
-        <button>Excluir</button>
+        <button (click)="deleteUsuario(usuario.id_usuario)">Excluir</button>
       </td>
     </tr>
   </tbody>

@@ -1,25 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Usuario, UsuarioService } from '../../../service/usuario.service';
 import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-att-usuario',
+  selector: 'app-edt-usuario',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
-  templateUrl: './att-usuario.component.html',
-  styleUrl: './att-usuario.component.css',
+  templateUrl: './edt-usuario.component.html',
+  styleUrls: ['./edt-usuario.component.css'],
 })
-export class AttUsuarioComponent implements OnInit {
-  id!: string;
+export class EdtUsuarioComponent {
   formInvalid = false;
   isOpen = false;
+  usuarioId!: number;
+
+  @Input() refresh!: () => void;
+  @Output() usuarioAtualizado = new EventEmitter<Usuario>();
 
   constructor(
     private usuarioService: UsuarioService,
-    private fb: FormBuilder,
-    private route: ActivatedRoute
+    private fb: FormBuilder
   ) {}
 
   attUsuarioForm = this.fb.group({
@@ -27,18 +28,6 @@ export class AttUsuarioComponent implements OnInit {
     email: ['', [Validators.required, Validators.email]],
     senha: ['', Validators.required],
   });
-
-  ngOnInit(): void {
-    this.loadUsuario();
-  }
-
-  private loadUsuario(): void {
-    this.id = this.route.snapshot.paramMap.get('id')!;
-
-    this.usuarioService.getUsuarioById(this.id).subscribe((user: any) => {
-      user.
-    })
-  }
 
   onSubmit(): void {
     if (this.attUsuarioForm.invalid) {
@@ -50,10 +39,12 @@ export class AttUsuarioComponent implements OnInit {
     this.formInvalid = false;
 
     this.usuarioService
-      .putUsuario(this.id, this.attUsuarioForm.value as Usuario)
+      .putUsuario(this.usuarioId, this.attUsuarioForm.value as Usuario)
       .subscribe({
         next: (res) => {
           console.log('Usuário atualizado com sucesso:', res);
+          this.usuarioAtualizado.emit(res);
+          this.close();
         },
         error: (err) => {
           console.error('Erro ao atualizar usuário:', err);
@@ -61,8 +52,22 @@ export class AttUsuarioComponent implements OnInit {
       });
   }
 
-  open() {
-    this.isOpen = true;
+  open(usuario: Usuario) {
+    this.usuarioId = usuario.id_usuario;
+
+    this.usuarioService.getUsuarioById(usuario.id_usuario).subscribe({
+      next: (user) => {
+        this.attUsuarioForm.patchValue({
+          nome: user.nome,
+          email: user.email,
+          senha: user.senha,
+        });
+        this.isOpen = true;
+      },
+      error: (err) => {
+        console.error('Erro ao carregar usuário:', err);
+      },
+    });
   }
 
   close() {

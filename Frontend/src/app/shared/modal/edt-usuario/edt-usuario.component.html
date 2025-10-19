@@ -2,18 +2,18 @@
 
 <div class="modal" *ngIf="isOpen">
   <div class="modal-header">
-    <h2>Cadastro</h2>
+    <h2>Editar</h2>
     <button (click)="close()">X</button>
   </div>
   <div class="modal-body">
     <form
       [formGroup]="attUsuarioForm"
       (ngSubmit)="onSubmit()"
-      class="cadastro-usuario"
+      class="editar-usuario"
       novalidate
     >
       <!-- Nome -->
-      <div class="campo-cadastro">
+      <div class="campo-editar">
         <label for="nome">Nome:</label>
         <input id="nome" type="text" formControlName="nome" />
         <small
@@ -27,7 +27,7 @@
       </div>
 
       <!-- Email -->
-      <div class="campo-cadastro">
+      <div class="campo-editar">
         <label for="email">Email:</label>
         <input id="email" type="email" formControlName="email" />
         <small
@@ -41,7 +41,7 @@
       </div>
 
       <!-- Senha -->
-      <div class="campo-cadastro">
+      <div class="campo-editar">
         <label for="senha">Senha:</label>
         <input id="senha" type="password" formControlName="senha" />
         <small
@@ -57,7 +57,7 @@
       <!-- Botões -->
       <div class="action">
         <button type="button" (click)="close()">Cancelar</button>
-        <button type="submit">Cadastrar</button>
+        <button type="submit">Salvar</button>
       </div>
     </form>
   </div>
