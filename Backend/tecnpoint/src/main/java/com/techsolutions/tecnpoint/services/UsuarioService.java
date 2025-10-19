@@ -1,10 +1,13 @@
 package com.techsolutions.tecnpoint.services;
 
+import com.techsolutions.tecnpoint.DTO.FuncionarioListagemDTO;
 import com.techsolutions.tecnpoint.entities.Usuarios;
+import com.techsolutions.tecnpoint.enums.TipoUsuario;
 import com.techsolutions.tecnpoint.repositories.UsuarioRepository;
 import com.techsolutions.tecnpoint.DTO.AtualizaUsuarioDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -56,5 +59,20 @@ public class UsuarioService {
         }
 
         return usuarioRepository.save(usuarioEncontrado);
+    }
+
+    public List<FuncionarioListagemDTO> listarFuncionarios(){
+        return buildFuncionarioListagemDTO(usuarioRepository.findByTipoUsuario(TipoUsuario.FUNCIONARIO));
+    }
+
+    private List<FuncionarioListagemDTO> buildFuncionarioListagemDTO(List<Usuarios> listaFuncionarios){
+        List<FuncionarioListagemDTO> listaFuncionariosDTO = new ArrayList<>();
+        for(Usuarios funcionario : listaFuncionarios){
+            listaFuncionariosDTO.add(FuncionarioListagemDTO.builder()
+                                    .id(funcionario.getId_usuario())
+                                    .nome(funcionario.getNome())
+                                    .build());
+        }
+        return listaFuncionariosDTO;
     }
 }
