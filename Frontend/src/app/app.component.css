@@ -1,5 +1,109 @@
 .nav-bar {
+  height: 99.6vh;
+    width: 40%;
+  border: 2px solid rgb(0,0,0);
+  background-color:  #8B5CF6
+}
+
+.sidebar {
+  width: 260px;
   height: 100vh;
-  width: 35%;
-  border: 2px solid red;
+  background: linear-gradient(180deg, #7f00ff, #a54aff);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 24px 16px;
+  box-sizing: border-box;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.avatar {
+  width: 48px;
+  height: 48px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+}
+
+.profile h3 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.profile span {
+  font-size: 13px;
+  opacity: 0.8;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.menu-btn {
+  background: white;
+  color: #6b21a8;
+  border: none;
+  border-radius: 10px;
+  padding: 12px;
+  text-align: left;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.menu-btn:hover:not(:disabled) {
+  background: #f3e8ff;
+  transform: scale(1.02);
+}
+
+.menu-btn.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+
+.logout {
+  text-align: left;
+}
+
+.logout-btn {
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  opacity: 0.8;
+  transition: 0.2s;
+}
+.logout-btn:hover {
+  opacity: 1;
+}
+.logout {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 85vh;
+}
+
+.logout-btn {
+  background: none;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: 0.25s;
+  margin: 15px;
 }
