@@ -34,32 +34,7 @@ public class ChamadoService {
     private UsuarioService usuarioService;
 
     public VisualizacaoChamadoDTO postChamado(AberturaChamadoDTO aberturaChamadoDTO){
-
-        Jornada jornada = jornadaRepository.findById(aberturaChamadoDTO.getIdJornada())
-                .orElseThrow(() -> new RuntimeException("Jornada informada não encontrada"));
-
-        Modulo modulo = moduloRepository.findById(aberturaChamadoDTO.getIdModulo())
-                .orElseThrow(() -> new RuntimeException("O módulo informado não foi encontrado"));;
-
-        Usuarios cliente = usuarioService.getUsuarioById(aberturaChamadoDTO.getIdCliente())
-                .orElseThrow(() -> new RuntimeException("O cliente informado não foi encontrado"));
-
-        if(isFuncionario(cliente)) {throw new RuntimeException("O cliente informado deve ser do tipo cliente");}
-
-        Usuarios funcionario = usuarioService.getUsuarioById(1L)
-                .orElseThrow(() -> new RuntimeException("O funcionário Tech Solutions não foi encontrado"));
-
-        Chamados chamado = Chamados.builder()
-                .descricao(aberturaChamadoDTO.getDescricao())
-                .titulo(aberturaChamadoDTO.getTitulo())
-                .prioridade(aberturaChamadoDTO.getPrioridade())
-                .status(StatusChamado.ABERTO)
-                .jornada(jornada)
-                .modulo(modulo)
-                .cliente(cliente)
-                .funcionario(funcionario)
-                .build();
-
+        Chamados chamado = buildChamado(aberturaChamadoDTO);
         chamadoRepository.save(chamado);
         return buildVisualizacaoChamadoDTO(chamado);
     }
@@ -139,6 +114,65 @@ public class ChamadoService {
             chamado.setFuncionario(funcionarioAtribuido);
         }
         return chamado;
+    }
+
+    private Chamados buildChamado(AberturaChamadoDTO chamadoDTO){
+
+        validaAberturaChamado(chamadoDTO);
+
+        Jornada jornada = jornadaRepository.findById(chamadoDTO.getIdJornada())
+                .orElseThrow(() -> new RuntimeException("Jornada informada não encontrada"));
+
+        Modulo modulo = moduloRepository.findById(chamadoDTO.getIdModulo())
+                .orElseThrow(() -> new RuntimeException("O módulo informado não foi encontrado"));;
+
+        Usuarios cliente = usuarioService.getUsuarioById(chamadoDTO.getIdCliente())
+                .orElseThrow(() -> new RuntimeException("O cliente informado não foi encontrado"));
+
+        if(isFuncionario(cliente)) {throw new RuntimeException("O cliente informado deve ser do tipo cliente");}
+
+        Usuarios funcionario = usuarioService.getUsuarioById(1L)
+                .orElseThrow(() -> new RuntimeException("O funcionário Tech Solutions não foi encontrado"));
+
+        Chamados chamado = Chamados.builder()
+                .descricao(chamadoDTO.getDescricao())
+                .titulo(chamadoDTO.getTitulo())
+                .prioridade(chamadoDTO.getPrioridade())
+                .status(StatusChamado.ABERTO)
+                .jornada(jornada)
+                .modulo(modulo)
+                .cliente(cliente)
+                .funcionario(funcionario)
+                .build();
+
+        return chamado;
+    }
+
+    private void validaAberturaChamado(AberturaChamadoDTO chamadoDTO){
+
+        if(chamadoDTO.getDescricao() == null){
+            throw new RuntimeException("A descrição do chamado deve ser informada");
+        }
+
+        if(chamadoDTO.getTitulo() == null){
+            throw new RuntimeException("O título do chamado deve ser informado");
+        }
+
+        if(chamadoDTO.getPrioridade() == null){
+            throw new RuntimeException("A prioridade do chamado deve ser informada");
+        }
+
+        if(chamadoDTO.getIdCliente() == null){
+            throw new RuntimeException("O cliente que abriu o chamado deve ser informado");
+        }
+
+        if(chamadoDTO.getIdJornada() == null){
+            throw new RuntimeException("A jornada do chamado deve ser informada");
+        }
+
+        if(chamadoDTO.getIdModulo() == null){
+            throw new RuntimeException("O módulo do chamado deve ser informado");
+        }
     }
 
     private VisualizacaoChamadoDTO buildVisualizacaoChamadoDTO(Chamados chamado){
