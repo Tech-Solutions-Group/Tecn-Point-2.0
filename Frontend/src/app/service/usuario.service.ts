@@ -3,24 +3,11 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 export interface Usuario {
-  id: number;
+  id_usuario: number;
   nome: string;
   email: string;
   senha: string;
   tipoUsuario: string;
-}
-
-export interface UsuarioFiltro {
-  busca?: string;
-  page?: number;
-  limit?: number;
-}
-
-export interface UsuarioPaginado {
-  data: Usuario[];
-  total: number;
-  page: number;
-  limit: number;
 }
 
 @Injectable({
@@ -31,27 +18,23 @@ export class UsuarioService {
 
   constructor(private http: HttpClient) {}
 
-  getUsuario(filtro?: UsuarioFiltro): Observable<Usuario[]> {
-    let params = new HttpParams();
-
-    if (filtro) {
-      if (filtro.busca) params = params.set('busca', filtro.busca);
-      if (filtro.limit) params = params.set('limit', filtro.limit);
-      if (filtro.page) params = params.set('page', filtro.page);
-    }
-
-    return this.http.get<Usuario[]>(this.apiUrl, { params });
+  getAllUsuario(): Observable<Usuario[]> {
+    return this.http.get<Usuario[]>(this.apiUrl);
   }
 
-  getUsuarioById(id: string): Observable<Usuario> {
+  getUsuarioById(id: number): Observable<Usuario> {
     return this.http.get<Usuario>(`${this.apiUrl}/${id}`);
   }
 
-  postUsuario(data: Partial<Usuario>): Observable<Usuario> {
+  postUsuario(data: Usuario): Observable<Usuario> {
     return this.http.post<Usuario>(`${this.apiUrl}/adicionar`, data);
   }
 
-  delUsuario(id: string): Observable<void> {
+  putUsuario(id: number, data: Usuario): Observable<Usuario> {
+    return this.http.put<Usuario>(`${this.apiUrl}/${id}`, data);
+  }
+
+  delUsuario(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
