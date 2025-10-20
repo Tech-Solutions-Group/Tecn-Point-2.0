@@ -116,6 +116,33 @@ public class ChamadoService {
         return chamado;
     }
 
+    private void validaAberturaChamado(AberturaChamadoDTO chamadoDTO){
+
+        if(chamadoDTO.getDescricao() == null){
+            throw new RuntimeException("A descrição do chamado deve ser informada");
+        }
+
+        if(chamadoDTO.getTitulo() == null){
+            throw new RuntimeException("O título do chamado deve ser informado");
+        }
+
+        if(chamadoDTO.getPrioridade() == null){
+            throw new RuntimeException("A prioridade do chamado deve ser informada");
+        }
+
+        if(chamadoDTO.getIdCliente() == null){
+            throw new RuntimeException("O cliente que abriu o chamado deve ser informado");
+        }
+
+        if(chamadoDTO.getIdJornada() == null){
+            throw new RuntimeException("A jornada do chamado deve ser informada");
+        }
+
+        if(chamadoDTO.getIdModulo() == null){
+            throw new RuntimeException("O módulo do chamado deve ser informado");
+        }
+    }
+
     private Chamados buildChamado(AberturaChamadoDTO chamadoDTO){
 
         validaAberturaChamado(chamadoDTO);
@@ -146,33 +173,6 @@ public class ChamadoService {
                 .build();
 
         return chamado;
-    }
-
-    private void validaAberturaChamado(AberturaChamadoDTO chamadoDTO){
-
-        if(chamadoDTO.getDescricao() == null){
-            throw new RuntimeException("A descrição do chamado deve ser informada");
-        }
-
-        if(chamadoDTO.getTitulo() == null){
-            throw new RuntimeException("O título do chamado deve ser informado");
-        }
-
-        if(chamadoDTO.getPrioridade() == null){
-            throw new RuntimeException("A prioridade do chamado deve ser informada");
-        }
-
-        if(chamadoDTO.getIdCliente() == null){
-            throw new RuntimeException("O cliente que abriu o chamado deve ser informado");
-        }
-
-        if(chamadoDTO.getIdJornada() == null){
-            throw new RuntimeException("A jornada do chamado deve ser informada");
-        }
-
-        if(chamadoDTO.getIdModulo() == null){
-            throw new RuntimeException("O módulo do chamado deve ser informado");
-        }
     }
 
     private VisualizacaoChamadoDTO buildVisualizacaoChamadoDTO(Chamados chamado){
