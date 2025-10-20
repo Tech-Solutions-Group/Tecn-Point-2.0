@@ -19,7 +19,6 @@
   border-bottom-right-radius: 20px;
 }
 
-/* Perfil */
 .profile {
   display: flex;
   align-items: center;
@@ -43,7 +42,6 @@
   opacity: 0.8;
 }
 
-/* Menu */
 .menu {
   display: flex;
   flex-direction: column;
@@ -79,10 +77,8 @@
 }
 
 .logout-btn {
-  background: none;
   color: white;
-  border: none;
-  font-size: 14px;
+  font-size: 20px;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -90,7 +86,24 @@
   opacity: 0.8;
   transition: 0.2s;
 }
-
 .logout-btn:hover {
   opacity: 1;
+}
+.logout {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 85vh;
+}
+
+.logout-btn {
+  background: none;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: 0.25s;
+  margin: 15px;
 }
