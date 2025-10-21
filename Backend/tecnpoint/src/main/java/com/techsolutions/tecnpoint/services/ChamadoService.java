@@ -8,6 +8,7 @@ import com.techsolutions.tecnpoint.entities.Chamados;
 import com.techsolutions.tecnpoint.entities.Jornada;
 import com.techsolutions.tecnpoint.entities.Modulo;
 import com.techsolutions.tecnpoint.entities.Usuarios;
+import com.techsolutions.tecnpoint.enums.PrioridadeChamado;
 import com.techsolutions.tecnpoint.enums.StatusChamado;
 import com.techsolutions.tecnpoint.enums.TipoUsuario;
 import com.techsolutions.tecnpoint.repositories.ChamadoRepository;
@@ -118,15 +119,15 @@ public class ChamadoService {
 
     private void validaAberturaChamado(AberturaChamadoDTO chamadoDTO){
 
-        if(chamadoDTO.getDescricao() == null){
+        if(chamadoDTO.getDescricao() == null || chamadoDTO.getDescricao().trim().isEmpty()){
             throw new RuntimeException("A descrição do chamado deve ser informada");
         }
 
-        if(chamadoDTO.getTitulo() == null){
+        if(chamadoDTO.getTitulo() == null || chamadoDTO.getTitulo().trim().isEmpty()){
             throw new RuntimeException("O título do chamado deve ser informado");
         }
 
-        if(chamadoDTO.getPrioridade() == null){
+        if(chamadoDTO.getPrioridade() == null) {
             throw new RuntimeException("A prioridade do chamado deve ser informada");
         }
 
