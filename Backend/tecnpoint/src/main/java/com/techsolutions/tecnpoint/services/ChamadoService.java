@@ -36,8 +36,7 @@ public class ChamadoService {
 
     public VisualizacaoChamadoDTO postChamado(AberturaChamadoDTO aberturaChamadoDTO){
         Chamados chamado = buildChamado(aberturaChamadoDTO);
-        chamadoRepository.save(chamado);
-        return buildVisualizacaoChamadoDTO(chamado);
+        return buildVisualizacaoChamadoDTO(chamadoRepository.save(chamado));
     }
 
     public List<VisualizacaoChamadoDTO> getAllChamados(){
