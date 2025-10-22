@@ -39,4 +39,8 @@ public class Usuarios {
     @OneToMany(mappedBy = "funcionario")
     @JsonIgnore
     private List<Chamados> chamadosFuncionario;
+
+    @OneToMany(mappedBy = "remetente")
+    @JsonIgnore
+    private List<Conversa> conversas;
 }
