@@ -126,7 +126,7 @@ public class ChamadoService {
             throw new RuntimeException("O título do chamado deve ser informado");
         }
 
-        if(chamadoDTO.getPrioridade() == null || chamadoDTO.getPrioridade() == 0){
+        if(chamadoDTO.getPrioridade() == null){
             throw new RuntimeException("A prioridade do chamado deve ser informada");
         }
 
@@ -134,11 +134,11 @@ public class ChamadoService {
             throw new RuntimeException("O cliente que abriu o chamado deve ser informado");
         }
 
-        if(chamadoDTO.getIdJornada() == null || chamadoDTO.getJornada() == 0){
+        if(chamadoDTO.getIdJornada() == null || chamadoDTO.getIdJornada() == 0){
             throw new RuntimeException("A jornada do chamado deve ser informada");
         }
 
-        if(chamadoDTO.getIdModulo() == null || chamadoDTO.getModulo() == 0){
+        if(chamadoDTO.getIdModulo() == null || chamadoDTO.getIdModulo() == 0){
             throw new RuntimeException("O módulo do chamado deve ser informado");
         }
     }
