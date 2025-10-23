@@ -29,6 +29,6 @@ public class Conversa {
     @JoinColumn(name = "fk_idRemetente", nullable = false)
     private Usuarios remetente;
 
-    @Column(name = "Data_Hora", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    @Column(name = "Data_Hora")
     private LocalDateTime dataHoraEnvio;
 }
