@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class ConversaService {
@@ -28,6 +30,10 @@ public class ConversaService {
     public VisualizacaoConversaDTO enviarMensagem(EnviarMensagemDTO mensagemDTO){
         Conversa conversa = buildConversa(mensagemDTO);
         return buildVisualizacaoConversaDTO(conversaRepository.save(conversa));
+    }
+
+    public List<VisualizacaoConversaDTO> buscarMensagens(Long idChamado){
+        return buildListaVisualizacaoConversaDTO(conversaRepository.findByChamadoIdChamadoOrderByDataHoraEnvioAsc(idChamado));
     }
 
     private Conversa buildConversa(EnviarMensagemDTO mensagemDTO){
@@ -83,6 +89,7 @@ public class ConversaService {
 
     private VisualizacaoConversaDTO buildVisualizacaoConversaDTO(Conversa conversa){
         return VisualizacaoConversaDTO.builder()
+                .idConversa(conversa.getIdConversa())
                 .remetente(VisualizacaoUsuarioDTO.builder()
                         .id_usuario(conversa.getRemetente().getId_usuario())
                         .nome(conversa.getRemetente().getNome())
@@ -91,5 +98,13 @@ public class ConversaService {
                 .mensagem(conversa.getMensagem())
                 .dataHoraEnvio(conversa.getDataHoraEnvio())
                 .build();
+    }
+
+    private List<VisualizacaoConversaDTO> buildListaVisualizacaoConversaDTO(List<Conversa> conversas){
+        List<VisualizacaoConversaDTO> listaConversas = new ArrayList<>();
+        for(Conversa conversa : conversas){
+            listaConversas.add(buildVisualizacaoConversaDTO(conversa));
+        }
+        return listaConversas;
     }
 }
