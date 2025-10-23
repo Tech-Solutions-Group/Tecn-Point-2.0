@@ -190,7 +190,7 @@ public class ChamadoService {
                 .build();
 
         return VisualizacaoChamadoDTO.builder()
-                .id_chamado(chamado.getId_chamado())
+                .id_chamado(chamado.getIdChamado())
                 .descricao(chamado.getDescricao())
                 .titulo(chamado.getTitulo())
                 .prioridade(chamado.getPrioridade())
