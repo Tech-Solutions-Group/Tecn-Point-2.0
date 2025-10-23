@@ -1,6 +1,8 @@
 package com.techsolutions.tecnpoint.services;
 
 import com.techsolutions.tecnpoint.DTO.EnviarMensagemDTO;
+import com.techsolutions.tecnpoint.DTO.VisualizacaoConversaDTO;
+import com.techsolutions.tecnpoint.DTO.VisualizacaoUsuarioDTO;
 import com.techsolutions.tecnpoint.entities.Chamados;
 import com.techsolutions.tecnpoint.entities.Conversa;
 import com.techsolutions.tecnpoint.entities.Usuarios;
@@ -23,47 +25,71 @@ public class ConversaService {
     @Autowired
     private UsuarioService usuarioService;
 
-    public Conversa enviarMensagem(EnviarMensagemDTO mensagemDTO){
-        return conversaRepository.save(buildConversa(mensagemDTO));
+    public VisualizacaoConversaDTO enviarMensagem(EnviarMensagemDTO mensagemDTO){
+        Conversa conversa = buildConversa(mensagemDTO);
+        return buildVisualizacaoConversaDTO(conversaRepository.save(conversa));
     }
 
     private Conversa buildConversa(EnviarMensagemDTO mensagemDTO){
-        if(!validaMensagemDTO(mensagemDTO)) { throw new RuntimeException("Os dados da mensagem estão incorretos"); }
+        validaMensagemDTO(mensagemDTO);
 
-        Chamados chamadoConversa = chamadoRepository.findById(mensagemDTO.getIdChamado())
-                .orElseThrow(() -> new RuntimeException("O chamado da conversa não foi encontrado"));
+        Chamados chamadoConversa = buscaChamado(mensagemDTO.getIdChamado());
+        Usuarios remetente = buscaRemetente(mensagemDTO.getIdRemetente());
 
-        Usuarios remetente = usuarioService.getUsuarioById(mensagemDTO.getIdRemetente())
-                .orElseThrow(() -> new RuntimeException("O rementente informado não foi encontrado"));
+        validaPermissaoEnvio(chamadoConversa, remetente);
 
-        boolean podeEnviar = remetente.getId_usuario() == chamadoConversa.getCliente().getId_usuario() ||
-                                remetente.getId_usuario() == chamadoConversa.getFuncionario().getId_usuario();
-
-        if(podeEnviar){
-            return Conversa.builder()
-                    .mensagem(mensagemDTO.getMensagem())
-                    .chamado(chamadoConversa)
-                    .remetente(remetente)
-                    .dataHoraEnvio(LocalDateTime.now())
-                    .build();
-        }else{
-            throw new RuntimeException("Não foi possível enviar a mensagem");
-        }
+        return Conversa.builder()
+                .mensagem(mensagemDTO.getMensagem())
+                .chamado(chamadoConversa)
+                .remetente(remetente)
+                .dataHoraEnvio(LocalDateTime.now())
+                .build();
     }
 
-    private boolean validaMensagemDTO(EnviarMensagemDTO mensagemDTO){
+    private Chamados buscaChamado(Long idChamado){
+        Chamados chamado = chamadoRepository.findById(idChamado)
+                .orElseThrow(() -> new RuntimeException("O chamado da conversa não foi encontrado"));
+        return chamado;
+    }
+
+    private Usuarios buscaRemetente(Long idRemetente){
+        Usuarios usuario = usuarioService.getUsuarioById(idRemetente)
+                .orElseThrow(() -> new RuntimeException("O rementente informado não foi encontrado"));
+        return usuario;
+    }
+
+    private void validaMensagemDTO(EnviarMensagemDTO mensagemDTO){
         if(mensagemDTO.getIdChamado() == null || mensagemDTO.getIdChamado() == 0){
-            return false;
+            throw new RuntimeException("O id do chamado foi informado incorretamente");
         }
 
         if(mensagemDTO.getIdRemetente() == null || mensagemDTO.getIdRemetente() == 0){
-            return false;
+            throw new RuntimeException("O id do remetente foi informado incorretamente");
         }
 
         if(mensagemDTO.getMensagem() == null || mensagemDTO.getMensagem().trim().isEmpty()){
-            return false;
+            throw new RuntimeException("Uma mensagem deve existir");
         }
+    }
 
-        return true;
+    private void validaPermissaoEnvio(Chamados chamado, Usuarios remetente){
+        boolean clientePertenceAoChamado = remetente.getId_usuario().equals(chamado.getCliente().getId_usuario());
+        boolean funcionarioPertenceAoChamado = remetente.getId_usuario().equals(chamado.getFuncionario().getId_usuario());
+
+        if(!clientePertenceAoChamado && !funcionarioPertenceAoChamado ){
+            throw new RuntimeException("O usuário não tem permissão para enviar mensagens nesse chamado");
+        }
+    }
+
+    private VisualizacaoConversaDTO buildVisualizacaoConversaDTO(Conversa conversa){
+        return VisualizacaoConversaDTO.builder()
+                .remetente(VisualizacaoUsuarioDTO.builder()
+                        .id_usuario(conversa.getRemetente().getId_usuario())
+                        .nome(conversa.getRemetente().getNome())
+                        .tipoUsuario(conversa.getRemetente().getTipoUsuario())
+                        .build())
+                .mensagem(conversa.getMensagem())
+                .dataHoraEnvio(conversa.getDataHoraEnvio())
+                .build();
     }
 }

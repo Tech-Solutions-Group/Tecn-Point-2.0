@@ -1,6 +1,7 @@
 package com.techsolutions.tecnpoint.controllers;
 
 import com.techsolutions.tecnpoint.DTO.EnviarMensagemDTO;
+import com.techsolutions.tecnpoint.DTO.VisualizacaoConversaDTO;
 import com.techsolutions.tecnpoint.entities.Conversa;
 import com.techsolutions.tecnpoint.services.ConversaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ public class ConversaController {
     private ConversaService conversaService;
 
     @PostMapping("/enviar-mensagem")
-    public ResponseEntity<Conversa> enviarMensagem(@RequestBody EnviarMensagemDTO mensagemDTO){
+    public ResponseEntity<VisualizacaoConversaDTO> enviarMensagem(@RequestBody EnviarMensagemDTO mensagemDTO){
         return ResponseEntity.status(201).body(conversaService.enviarMensagem(mensagemDTO));
     }
 }
