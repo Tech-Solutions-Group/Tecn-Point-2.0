@@ -1,14 +1,14 @@
 package com.techsolutions.tecnpoint.entities;
 
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Builder
 @Table(name = "conversa")
@@ -16,7 +16,7 @@ public class Conversa {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_conversa;
+    private Long idConversa;
 
     @Column(columnDefinition = "TEXT")
     private String mensagem;

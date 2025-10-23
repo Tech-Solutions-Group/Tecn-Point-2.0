@@ -19,7 +19,7 @@ public class Chamados {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_chamado;
+    private Long idChamado;
 
     @Column(nullable = false, columnDefinition = "TEXT")
     private String descricao;
