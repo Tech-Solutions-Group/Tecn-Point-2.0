@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 
 @Getter
 @Setter
@@ -29,6 +30,11 @@ public class Conversa {
     @JoinColumn(name = "fk_idRemetente", nullable = false)
     private Usuarios remetente;
 
-    @Column(name = "Data_Hora")
+    @Column(name = "Data_Hora", columnDefinition="TIMESTAMP(0) DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime dataHoraEnvio;
+
+    @PrePersist
+    protected void OnCreate(){
+        dataHoraEnvio = LocalDateTime.now().truncatedTo(ChronoUnit.NANOS);
+    }
 }

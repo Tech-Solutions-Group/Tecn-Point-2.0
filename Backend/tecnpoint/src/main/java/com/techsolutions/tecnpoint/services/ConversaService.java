@@ -1,5 +1,6 @@
 package com.techsolutions.tecnpoint.services;
 
+import com.techsolutions.tecnpoint.DTO.BuscarMensagensDTO;
 import com.techsolutions.tecnpoint.DTO.EnviarMensagemDTO;
 import com.techsolutions.tecnpoint.DTO.VisualizacaoConversaDTO;
 import com.techsolutions.tecnpoint.DTO.VisualizacaoUsuarioDTO;
@@ -32,8 +33,8 @@ public class ConversaService {
         return buildVisualizacaoConversaDTO(conversaRepository.save(conversa));
     }
 
-    public List<VisualizacaoConversaDTO> buscarMensagens(Long idChamado){
-        return buildListaVisualizacaoConversaDTO(conversaRepository.findByChamadoIdChamadoOrderByDataHoraEnvioAsc(idChamado));
+    public List<VisualizacaoConversaDTO> buscarMensagens(BuscarMensagensDTO buscarMensagensDTO){
+        return buildListaVisualizacaoConversaDTO(conversaRepository.findByChamadoIdChamadoAndIdConversaGreaterThanOrderByDataHoraEnvioAsc(buscarMensagensDTO.getIdChamado(), buscarMensagensDTO.getIdUltimaConversa()));
     }
 
     private Conversa buildConversa(EnviarMensagemDTO mensagemDTO){
@@ -48,7 +49,6 @@ public class ConversaService {
                 .mensagem(mensagemDTO.getMensagem())
                 .chamado(chamadoConversa)
                 .remetente(remetente)
-                .dataHoraEnvio(LocalDateTime.now())
                 .build();
     }
 

@@ -9,5 +9,5 @@ import java.util.List;
 @Repository
 public interface ConversaRepository extends JpaRepository<Conversa, Long> {
 
-    public List<Conversa> findByChamadoIdChamadoOrderByDataHoraEnvioAsc(Long idChamado);
+    public List<Conversa> findByChamadoIdChamadoAndIdConversaGreaterThanOrderByDataHoraEnvioAsc(Long idChamado, Long idUltimaConversa);
 }

@@ -1,5 +1,6 @@
 package com.techsolutions.tecnpoint.controllers;
 
+import com.techsolutions.tecnpoint.DTO.BuscarMensagensDTO;
 import com.techsolutions.tecnpoint.DTO.EnviarMensagemDTO;
 import com.techsolutions.tecnpoint.DTO.VisualizacaoConversaDTO;
 import com.techsolutions.tecnpoint.entities.Conversa;
@@ -22,8 +23,8 @@ public class ConversaController {
         return ResponseEntity.status(201).body(conversaService.enviarMensagem(mensagemDTO));
     }
 
-    @GetMapping("buscar-mensagens/{idChamado}")
-    public ResponseEntity<List<VisualizacaoConversaDTO>> buscarMensagensPorChamado(@PathVariable Long idChamado){
-        return ResponseEntity.status(200).body(conversaService.buscarMensagens(idChamado));
+    @PostMapping("buscar-mensagens")
+    public ResponseEntity<List<VisualizacaoConversaDTO>> buscarMensagensPorChamado(@RequestBody BuscarMensagensDTO buscarMensagensDTO){
+        return ResponseEntity.status(200).body(conversaService.buscarMensagens(buscarMensagensDTO));
     }
 }
