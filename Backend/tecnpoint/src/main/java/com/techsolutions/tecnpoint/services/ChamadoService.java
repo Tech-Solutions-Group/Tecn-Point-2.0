@@ -12,6 +12,7 @@ import com.techsolutions.tecnpoint.enums.PrioridadeChamado;
 import com.techsolutions.tecnpoint.enums.StatusChamado;
 import com.techsolutions.tecnpoint.enums.TipoUsuario;
 import com.techsolutions.tecnpoint.exceptions.ChamadoNaoEncontradoException;
+import com.techsolutions.tecnpoint.exceptions.TipoUsuarioInvalidoException;
 import com.techsolutions.tecnpoint.exceptions.UsuarioNaoEncontradoException;
 import com.techsolutions.tecnpoint.repositories.ChamadoRepository;
 import com.techsolutions.tecnpoint.repositories.JornadaRepository;
@@ -67,7 +68,7 @@ public class ChamadoService {
             }
             return chamadosVisualizacao;
         }else{
-            throw new RuntimeException("O usuário informado deve ser um cliente");
+            throw new TipoUsuarioInvalidoException("O usuário informado deve ser um cliente");
         }
     }
 
@@ -82,7 +83,7 @@ public class ChamadoService {
             }
             return chamadosVisualizacao;
         }else{
-            throw new RuntimeException("O usuário informado deve ser um funcionário");
+            throw new TipoUsuarioInvalidoException("O usuário informado deve ser um funcionário");
         }
 
     }
@@ -110,7 +111,7 @@ public class ChamadoService {
                     .orElseThrow(() -> new UsuarioNaoEncontradoException("O funcionário não foi encontrado."));
 
             if(!isFuncionario(funcionarioAtribuido)){
-                throw new RuntimeException("O usuário informado deve ser um funcionário");
+                throw new TipoUsuarioInvalidoException("O usuário informado deve ser um funcionário");
             }
 
             chamado.setFuncionario(funcionarioAtribuido);
@@ -158,7 +159,7 @@ public class ChamadoService {
         Usuarios cliente = usuarioService.getUsuarioById(chamadoDTO.getIdCliente())
                 .orElseThrow(() -> new UsuarioNaoEncontradoException("O cliente não foi encontrado."));
 
-        if(isFuncionario(cliente)) { throw new RuntimeException("O cliente informado deve ser do tipo cliente"); }
+        if(isFuncionario(cliente)) { throw new TipoUsuarioInvalidoException("O cliente informado deve ser do tipo cliente"); }
 
         Usuarios funcionario = usuarioService.getUsuarioById(1L)
                 .orElseThrow(() -> new UsuarioNaoEncontradoException("O funcionário Tech Solutions não foi encontrado"));

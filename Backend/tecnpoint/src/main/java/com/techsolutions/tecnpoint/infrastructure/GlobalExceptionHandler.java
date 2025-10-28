@@ -1,5 +1,6 @@
 package com.techsolutions.tecnpoint.infrastructure;
 
+import org.springframework.data.repository.config.RepositoryNameSpaceHandler;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -26,5 +27,11 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     private ResponseEntity<MensagemErro> ChamadoNaoEncontradoHandler(ChamadoNaoEncontradoException ex){
         MensagemErro mensagemErro = new MensagemErro(ex.getMessage(), HttpStatus.NOT_FOUND);
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(mensagemErro);
+    }
+
+    @ExceptionHandler(TipoUsuarioInvalidoException.class)
+    private ResponseEntity<MensagemErro> TipoUsuarioInvalidoException(TipoUsuarioInvalidoException ex){
+        MensagemErro mensagemErro = new MensagemErro(ex.getMessage(), HttpStatus.FORBIDDEN);
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(mensagemErro);
     }
 }
