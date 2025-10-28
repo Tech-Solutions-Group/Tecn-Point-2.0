@@ -11,6 +11,7 @@ import com.techsolutions.tecnpoint.entities.Usuarios;
 import com.techsolutions.tecnpoint.enums.PrioridadeChamado;
 import com.techsolutions.tecnpoint.enums.StatusChamado;
 import com.techsolutions.tecnpoint.enums.TipoUsuario;
+import com.techsolutions.tecnpoint.exceptions.ChamadoNaoEncontradoException;
 import com.techsolutions.tecnpoint.exceptions.UsuarioNaoEncontradoException;
 import com.techsolutions.tecnpoint.repositories.ChamadoRepository;
 import com.techsolutions.tecnpoint.repositories.JornadaRepository;
@@ -50,7 +51,7 @@ public class ChamadoService {
 
     public VisualizacaoChamadoDTO getChamadoPorId(Long id_chamado){
         Chamados chamado = chamadoRepository.findById(id_chamado)
-                .orElseThrow(() -> new RuntimeException("O chamado não foi encontrado."));
+                .orElseThrow(() -> new ChamadoNaoEncontradoException("O chamado não foi encontrado."));
         return buildVisualizacaoChamadoDTO(chamado);
     }
 
@@ -93,7 +94,7 @@ public class ChamadoService {
 
     private Chamados atualizaChamado(AtualizaChamadoDTO chamadoDTO){
         Chamados chamado = chamadoRepository.findById(chamadoDTO.getId_chamado())
-                .orElseThrow(() -> new RuntimeException("O chamado não foi encontrado."));
+                .orElseThrow(() -> new ChamadoNaoEncontradoException("O chamado não foi encontrado."));
 
         if(!(chamadoDTO.getPrioridade() == null)){
             if(chamadoDTO.getPrioridade() != chamado.getPrioridade()){ chamado.setPrioridade(chamadoDTO.getPrioridade()); }

@@ -21,4 +21,10 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         MensagemErro mensagemErro = new MensagemErro(ex.getMessage(), HttpStatus.CONFLICT);
         return ResponseEntity.status(HttpStatus.CONFLICT).body(mensagemErro);
     }
+
+    @ExceptionHandler(ChamadoNaoEncontradoException.class)
+    private ResponseEntity<MensagemErro> ChamadoNaoEncontradoHandler(ChamadoNaoEncontradoException ex){
+        MensagemErro mensagemErro = new MensagemErro(ex.getMessage(), HttpStatus.NOT_FOUND);
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(mensagemErro);
+    }
 }
