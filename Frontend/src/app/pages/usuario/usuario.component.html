@@ -1,10 +1,4 @@
-<app-cad-usuario
-  (usuarioCadastrado)="atualizarLista($event)"
-  #modalCad
-  title="Modal cadastro"
->
-  <button (click)="modalCad.close()">Fechar</button>
-</app-cad-usuario>
+<button (click)="modalCad.open()">Cadastrar</button>
 
 <table class="list-usuarios">
   <thead>
@@ -35,3 +29,11 @@
     </tr>
   </tbody>
 </table>
+
+<app-cad-usuario
+  (usuarioCadastrado)="atualizarLista($event)"
+  #modalCad
+  title="Modal cadastro"
+>
+  <button (click)="modalCad.close()">Fechar</button>
+</app-cad-usuario>

@@ -1,25 +1,26 @@
-<div class="nav-bar">
-        <div class="profile">
-        <div class="avatar">
-
-        </div>
+<div class="layout">
+  <div class="nav-bar">
+    <div class="profile" *ngIf="usuarios">
+      <div class="avatar"></div>
+      <div class="info">
+        <h3>{{ usuarios.nome }}</h3>
+        <span>{{ usuarios.email }}</span>
+      </div>
     </div>
-<nav class="menu">
-    <button class="menu-btn">
-      <span>+</span> Criar um chamado
-    </button>
-    <button class="menu-btn">
-      <span></span> Acompanhar um chamado
-    </button>
-    <button class="menu-btn">
-     Cadastro de usuário
-    </button>
-  </nav>
+    <nav class="menu">
+      <button class="menu-btn" (click)="cadChamado()">
+        Cadastrar um chamado
+      </button>
+      <button class="menu-btn" (click)="listChamado()">
+        Acompanhar um chamado
+      </button>
+      <button class="menu-btn" (click)="listUsuarios()">
+        Lista de usuários
+      </button>
+    </nav>
+  </div>
 
-  <div class="logout">
-    <button class="logout-btn">
-      Sair
-    </button>
+  <div class="content">
+    <router-outlet></router-outlet>
   </div>
 </div>
-<router-outlet />

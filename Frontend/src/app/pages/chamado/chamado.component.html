@@ -1,0 +1,16 @@
+<table class="list-chamados">
+  <thead>
+    <tr>
+      <th>Titulo</th>
+      <th>Descrição</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let chamado of chamados">
+      <td>{{ chamado.titulo }}</td>
+      <td>{{ chamado.descricao }}</td>
+      <td>{{ chamado.status }}</td>
+    </tr>
+  </tbody>
+</table>
