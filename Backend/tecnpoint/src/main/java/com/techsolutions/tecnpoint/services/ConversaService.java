@@ -7,6 +7,9 @@ import com.techsolutions.tecnpoint.DTO.VisualizacaoUsuarioDTO;
 import com.techsolutions.tecnpoint.entities.Chamados;
 import com.techsolutions.tecnpoint.entities.Conversa;
 import com.techsolutions.tecnpoint.entities.Usuarios;
+import com.techsolutions.tecnpoint.exceptions.ChamadoNaoEncontradoException;
+import com.techsolutions.tecnpoint.exceptions.DadosConversaInvalidosException;
+import com.techsolutions.tecnpoint.exceptions.UsuarioNaoEncontradoException;
 import com.techsolutions.tecnpoint.repositories.ChamadoRepository;
 import com.techsolutions.tecnpoint.repositories.ConversaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,27 +57,27 @@ public class ConversaService {
 
     private Chamados buscaChamado(Long idChamado){
         Chamados chamado = chamadoRepository.findById(idChamado)
-                .orElseThrow(() -> new RuntimeException("O chamado da conversa não foi encontrado"));
+                .orElseThrow(() -> new ChamadoNaoEncontradoException("O chamado da conversa não foi encontrado"));
         return chamado;
     }
 
     private Usuarios buscaRemetente(Long idRemetente){
         Usuarios usuario = usuarioService.getUsuarioById(idRemetente)
-                .orElseThrow(() -> new RuntimeException("O rementente informado não foi encontrado"));
+                .orElseThrow(() -> new UsuarioNaoEncontradoException("O rementente informado não foi encontrado"));
         return usuario;
     }
 
     private void validaMensagemDTO(EnviarMensagemDTO mensagemDTO){
         if(mensagemDTO.getIdChamado() == null || mensagemDTO.getIdChamado() == 0){
-            throw new RuntimeException("O id do chamado foi informado incorretamente");
+            throw new DadosConversaInvalidosException("O id do chamado foi informado incorretamente");
         }
 
         if(mensagemDTO.getIdRemetente() == null || mensagemDTO.getIdRemetente() == 0){
-            throw new RuntimeException("O id do remetente foi informado incorretamente");
+            throw new DadosConversaInvalidosException("O id do remetente foi informado incorretamente");
         }
 
         if(mensagemDTO.getMensagem() == null || mensagemDTO.getMensagem().trim().isEmpty()){
-            throw new RuntimeException("Uma mensagem deve existir");
+            throw new DadosConversaInvalidosException("Uma mensagem deve existir");
         }
     }
 
@@ -83,7 +86,7 @@ public class ConversaService {
         boolean funcionarioPertenceAoChamado = remetente.getId_usuario().equals(chamado.getFuncionario().getId_usuario());
 
         if(!clientePertenceAoChamado && !funcionarioPertenceAoChamado ){
-            throw new RuntimeException("O usuário não tem permissão para enviar mensagens nesse chamado");
+            throw new DadosConversaInvalidosException("O usuário não tem permissão para enviar mensagens nesse chamado");
         }
     }
 

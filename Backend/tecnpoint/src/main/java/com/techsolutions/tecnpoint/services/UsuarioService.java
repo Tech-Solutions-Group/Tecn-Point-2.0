@@ -3,6 +3,8 @@ package com.techsolutions.tecnpoint.services;
 import com.techsolutions.tecnpoint.DTO.FuncionarioListagemDTO;
 import com.techsolutions.tecnpoint.entities.Usuarios;
 import com.techsolutions.tecnpoint.enums.TipoUsuario;
+import com.techsolutions.tecnpoint.exceptions.EmailExistenteException;
+import com.techsolutions.tecnpoint.exceptions.UsuarioNaoEncontradoException;
 import com.techsolutions.tecnpoint.repositories.UsuarioRepository;
 import com.techsolutions.tecnpoint.DTO.AtualizaUsuarioDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +38,7 @@ public class UsuarioService {
 
     public Usuarios editarUsuario(Long id, AtualizaUsuarioDTO atualizaUsuarioDTO){
 
-        Usuarios usuarioEncontrado = getUsuarioById(id).orElseThrow(() -> new RuntimeException("O usuário não foi encontrado."));
+        Usuarios usuarioEncontrado = getUsuarioById(id).orElseThrow(() -> new UsuarioNaoEncontradoException("O usuário não foi encontrado."));
 
         if(atualizaUsuarioDTO.getNome() != null && !atualizaUsuarioDTO.getNome().trim().isEmpty()){
             usuarioEncontrado.setNome(atualizaUsuarioDTO.getNome());
@@ -46,13 +48,12 @@ public class UsuarioService {
             usuarioEncontrado.setSenha(atualizaUsuarioDTO.getSenha());
         }
 
-        // Verifica se o e-mail informado é nulo e se NÃO é vazio
         if(atualizaUsuarioDTO.getEmail() != null && !atualizaUsuarioDTO.getEmail().trim().isEmpty()){
-            // Verifica se o e-mail do usuário encontrado é diferente do e-mail informado
-            if(!usuarioEncontrado.getEmail().equals(atualizaUsuarioDTO.getEmail())){ // Entra no if se o e-mail informado não for o mesmo do usuário encontrado
-                // Verifica se o e-mail já existe no banco
+
+            if(!usuarioEncontrado.getEmail().equals(atualizaUsuarioDTO.getEmail())){
+
                 if(usuarioRepository.existsByEmail(atualizaUsuarioDTO.getEmail())){
-                    throw new RuntimeException("O e-mail informado já existe!");
+                    throw new EmailExistenteException("O e-mail informado já existe!");
                 }
             }
             usuarioEncontrado.setEmail(atualizaUsuarioDTO.getEmail());

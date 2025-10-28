@@ -11,6 +11,7 @@ import com.techsolutions.tecnpoint.entities.Usuarios;
 import com.techsolutions.tecnpoint.enums.PrioridadeChamado;
 import com.techsolutions.tecnpoint.enums.StatusChamado;
 import com.techsolutions.tecnpoint.enums.TipoUsuario;
+import com.techsolutions.tecnpoint.exceptions.*;
 import com.techsolutions.tecnpoint.repositories.ChamadoRepository;
 import com.techsolutions.tecnpoint.repositories.JornadaRepository;
 import com.techsolutions.tecnpoint.repositories.ModuloRepository;
@@ -49,14 +50,14 @@ public class ChamadoService {
 
     public VisualizacaoChamadoDTO getChamadoPorId(Long id_chamado){
         Chamados chamado = chamadoRepository.findById(id_chamado)
-                .orElseThrow(() -> new RuntimeException("O chamado não foi encontrado."));
+                .orElseThrow(() -> new ChamadoNaoEncontradoException("O chamado não foi encontrado."));
         return buildVisualizacaoChamadoDTO(chamado);
     }
 
     public List<VisualizacaoChamadoDTO> getChamadosCliente(Long id_cliente){
 
         Usuarios cliente = usuarioService.getUsuarioById(id_cliente)
-                .orElseThrow(() -> new RuntimeException("O cliente não foi encontrado."));
+                .orElseThrow(() -> new UsuarioNaoEncontradoException("O cliente não foi encontrado."));
 
         if(!isFuncionario(cliente)){
             List<VisualizacaoChamadoDTO> chamadosVisualizacao = new ArrayList<>();
@@ -65,13 +66,13 @@ public class ChamadoService {
             }
             return chamadosVisualizacao;
         }else{
-            throw new RuntimeException("O usuário informado deve ser um cliente");
+            throw new TipoUsuarioInvalidoException("O usuário informado deve ser um cliente");
         }
     }
 
     public List<VisualizacaoChamadoDTO> getChamadosFuncionario(Long id_funcionario){
         Usuarios funcionario = usuarioService.getUsuarioById(id_funcionario)
-                .orElseThrow(() -> new RuntimeException("O funcionário não foi encontrado."));
+                .orElseThrow(() -> new UsuarioNaoEncontradoException("O funcionário não foi encontrado."));
 
         if(isFuncionario(funcionario)){
             List<VisualizacaoChamadoDTO> chamadosVisualizacao = new ArrayList<>();
@@ -80,7 +81,7 @@ public class ChamadoService {
             }
             return chamadosVisualizacao;
         }else{
-            throw new RuntimeException("O usuário informado deve ser um funcionário");
+            throw new TipoUsuarioInvalidoException("O usuário informado deve ser um funcionário");
         }
 
     }
@@ -92,7 +93,7 @@ public class ChamadoService {
 
     private Chamados atualizaChamado(AtualizaChamadoDTO chamadoDTO){
         Chamados chamado = chamadoRepository.findById(chamadoDTO.getId_chamado())
-                .orElseThrow(() -> new RuntimeException("O chamado não foi encontrado."));
+                .orElseThrow(() -> new ChamadoNaoEncontradoException("O chamado não foi encontrado."));
 
         if(!(chamadoDTO.getPrioridade() == null)){
             if(chamadoDTO.getPrioridade() != chamado.getPrioridade()){ chamado.setPrioridade(chamadoDTO.getPrioridade()); }
@@ -105,10 +106,10 @@ public class ChamadoService {
         if(!(chamadoDTO.getId_usuario() == null) &&
           !(chamado.getFuncionario().getId_usuario().equals(chamadoDTO.getId_usuario()))){
             Usuarios funcionarioAtribuido = usuarioService.getUsuarioById(chamadoDTO.getId_usuario())
-                    .orElseThrow(() -> new RuntimeException("O funcionário informado não foi encontrado"));;
+                    .orElseThrow(() -> new UsuarioNaoEncontradoException("O funcionário não foi encontrado."));
 
             if(!isFuncionario(funcionarioAtribuido)){
-                throw new RuntimeException("O usuário informado deve ser um funcionário");
+                throw new TipoUsuarioInvalidoException("O usuário informado deve ser um funcionário");
             }
 
             chamado.setFuncionario(funcionarioAtribuido);
@@ -119,27 +120,27 @@ public class ChamadoService {
     private void validaAberturaChamado(AberturaChamadoDTO chamadoDTO){
 
         if(chamadoDTO.getDescricao() == null || chamadoDTO.getDescricao().trim().isEmpty()){
-            throw new RuntimeException("A descrição do chamado deve ser informada");
+            throw new DadosChamadoInvalidosException("A descrição do chamado deve ser informada");
         }
 
         if(chamadoDTO.getTitulo() == null || chamadoDTO.getTitulo().trim().isEmpty()){
-            throw new RuntimeException("O título do chamado deve ser informado");
+            throw new DadosChamadoInvalidosException("O título do chamado deve ser informado");
         }
 
         if(chamadoDTO.getPrioridade() == null){
-            throw new RuntimeException("A prioridade do chamado deve ser informada");
+            throw new DadosChamadoInvalidosException("A prioridade do chamado deve ser informada");
         }
 
         if(chamadoDTO.getIdCliente() == null || chamadoDTO.getIdCliente() == 0){
-            throw new RuntimeException("O cliente que abriu o chamado deve ser informado");
+            throw new DadosChamadoInvalidosException("O cliente que abriu o chamado deve ser informado");
         }
 
         if(chamadoDTO.getIdJornada() == null || chamadoDTO.getIdJornada() == 0){
-            throw new RuntimeException("A jornada do chamado deve ser informada");
+            throw new DadosChamadoInvalidosException("A jornada do chamado deve ser informada");
         }
 
         if(chamadoDTO.getIdModulo() == null || chamadoDTO.getIdModulo() == 0){
-            throw new RuntimeException("O módulo do chamado deve ser informado");
+            throw new DadosChamadoInvalidosException("O módulo do chamado deve ser informado");
         }
     }
 
@@ -148,18 +149,18 @@ public class ChamadoService {
         validaAberturaChamado(chamadoDTO);
 
         Jornada jornada = jornadaRepository.findById(chamadoDTO.getIdJornada())
-                .orElseThrow(() -> new RuntimeException("Jornada informada não encontrada"));
+                .orElseThrow(() -> new JornadaNaoEncontradaException("Jornada informada não encontrada"));
 
         Modulo modulo = moduloRepository.findById(chamadoDTO.getIdModulo())
-                .orElseThrow(() -> new RuntimeException("O módulo informado não foi encontrado"));;
+                .orElseThrow(() -> new ModuloNaoEncontradoException("O módulo informado não foi encontrado"));;
 
         Usuarios cliente = usuarioService.getUsuarioById(chamadoDTO.getIdCliente())
-                .orElseThrow(() -> new RuntimeException("O cliente informado não foi encontrado"));
+                .orElseThrow(() -> new UsuarioNaoEncontradoException("O cliente não foi encontrado."));
 
-        if(isFuncionario(cliente)) {throw new RuntimeException("O cliente informado deve ser do tipo cliente");}
+        if(isFuncionario(cliente)) { throw new TipoUsuarioInvalidoException("O cliente informado deve ser do tipo cliente"); }
 
         Usuarios funcionario = usuarioService.getUsuarioById(1L)
-                .orElseThrow(() -> new RuntimeException("O funcionário Tech Solutions não foi encontrado"));
+                .orElseThrow(() -> new UsuarioNaoEncontradoException("O funcionário Tech Solutions não foi encontrado"));
 
         Chamados chamado = Chamados.builder()
                 .descricao(chamadoDTO.getDescricao())
