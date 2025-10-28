@@ -16,6 +16,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(mensagemErro);
     }
 
+    @ExceptionHandler(EmailExistenteException.class)
     private ResponseEntity<MensagemErro> EmailExistenteHandler(EmailExistenteException ex){
         MensagemErro mensagemErro = new MensagemErro(ex.getMessage(), HttpStatus.CONFLICT);
         return ResponseEntity.status(HttpStatus.CONFLICT).body(mensagemErro);
