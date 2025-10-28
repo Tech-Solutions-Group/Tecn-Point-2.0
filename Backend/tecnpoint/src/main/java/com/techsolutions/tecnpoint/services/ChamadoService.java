@@ -11,6 +11,7 @@ import com.techsolutions.tecnpoint.entities.Usuarios;
 import com.techsolutions.tecnpoint.enums.PrioridadeChamado;
 import com.techsolutions.tecnpoint.enums.StatusChamado;
 import com.techsolutions.tecnpoint.enums.TipoUsuario;
+import com.techsolutions.tecnpoint.exceptions.UsuarioNaoEncontradoException;
 import com.techsolutions.tecnpoint.repositories.ChamadoRepository;
 import com.techsolutions.tecnpoint.repositories.JornadaRepository;
 import com.techsolutions.tecnpoint.repositories.ModuloRepository;
@@ -56,7 +57,7 @@ public class ChamadoService {
     public List<VisualizacaoChamadoDTO> getChamadosCliente(Long id_cliente){
 
         Usuarios cliente = usuarioService.getUsuarioById(id_cliente)
-                .orElseThrow(() -> new RuntimeException("O cliente não foi encontrado."));
+                .orElseThrow(() -> new UsuarioNaoEncontradoException("O cliente não foi encontrado."));
 
         if(!isFuncionario(cliente)){
             List<VisualizacaoChamadoDTO> chamadosVisualizacao = new ArrayList<>();
@@ -71,7 +72,7 @@ public class ChamadoService {
 
     public List<VisualizacaoChamadoDTO> getChamadosFuncionario(Long id_funcionario){
         Usuarios funcionario = usuarioService.getUsuarioById(id_funcionario)
-                .orElseThrow(() -> new RuntimeException("O funcionário não foi encontrado."));
+                .orElseThrow(() -> new UsuarioNaoEncontradoException("O funcionário não foi encontrado."));
 
         if(isFuncionario(funcionario)){
             List<VisualizacaoChamadoDTO> chamadosVisualizacao = new ArrayList<>();
@@ -105,7 +106,7 @@ public class ChamadoService {
         if(!(chamadoDTO.getId_usuario() == null) &&
           !(chamado.getFuncionario().getId_usuario().equals(chamadoDTO.getId_usuario()))){
             Usuarios funcionarioAtribuido = usuarioService.getUsuarioById(chamadoDTO.getId_usuario())
-                    .orElseThrow(() -> new RuntimeException("O funcionário informado não foi encontrado"));;
+                    .orElseThrow(() -> new UsuarioNaoEncontradoException("O funcionário não foi encontrado."));
 
             if(!isFuncionario(funcionarioAtribuido)){
                 throw new RuntimeException("O usuário informado deve ser um funcionário");
@@ -154,12 +155,12 @@ public class ChamadoService {
                 .orElseThrow(() -> new RuntimeException("O módulo informado não foi encontrado"));;
 
         Usuarios cliente = usuarioService.getUsuarioById(chamadoDTO.getIdCliente())
-                .orElseThrow(() -> new RuntimeException("O cliente informado não foi encontrado"));
+                .orElseThrow(() -> new UsuarioNaoEncontradoException("O cliente não foi encontrado."));
 
-        if(isFuncionario(cliente)) {throw new RuntimeException("O cliente informado deve ser do tipo cliente");}
+        if(isFuncionario(cliente)) { throw new RuntimeException("O cliente informado deve ser do tipo cliente"); }
 
         Usuarios funcionario = usuarioService.getUsuarioById(1L)
-                .orElseThrow(() -> new RuntimeException("O funcionário Tech Solutions não foi encontrado"));
+                .orElseThrow(() -> new UsuarioNaoEncontradoException("O funcionário Tech Solutions não foi encontrado"));
 
         Chamados chamado = Chamados.builder()
                 .descricao(chamadoDTO.getDescricao())

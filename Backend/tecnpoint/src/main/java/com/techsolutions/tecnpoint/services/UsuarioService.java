@@ -3,6 +3,7 @@ package com.techsolutions.tecnpoint.services;
 import com.techsolutions.tecnpoint.DTO.FuncionarioListagemDTO;
 import com.techsolutions.tecnpoint.entities.Usuarios;
 import com.techsolutions.tecnpoint.enums.TipoUsuario;
+import com.techsolutions.tecnpoint.exceptions.UsuarioNaoEncontradoException;
 import com.techsolutions.tecnpoint.repositories.UsuarioRepository;
 import com.techsolutions.tecnpoint.DTO.AtualizaUsuarioDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +37,7 @@ public class UsuarioService {
 
     public Usuarios editarUsuario(Long id, AtualizaUsuarioDTO atualizaUsuarioDTO){
 
-        Usuarios usuarioEncontrado = getUsuarioById(id).orElseThrow(() -> new RuntimeException("O usuário não foi encontrado."));
+        Usuarios usuarioEncontrado = getUsuarioById(id).orElseThrow(() -> new UsuarioNaoEncontradoException("O usuário não foi encontrado."));
 
         if(atualizaUsuarioDTO.getNome() != null && !atualizaUsuarioDTO.getNome().trim().isEmpty()){
             usuarioEncontrado.setNome(atualizaUsuarioDTO.getNome());
