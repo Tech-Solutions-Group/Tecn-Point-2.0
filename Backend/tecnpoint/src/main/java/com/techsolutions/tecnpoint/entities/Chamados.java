@@ -1,9 +1,12 @@
 package com.techsolutions.tecnpoint.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.techsolutions.tecnpoint.enums.PrioridadeChamado;
 import com.techsolutions.tecnpoint.enums.StatusChamado;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -16,7 +19,7 @@ public class Chamados {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_chamado;
+    private Long idChamado;
 
     @Column(nullable = false, columnDefinition = "TEXT")
     private String descricao;
@@ -51,4 +54,7 @@ public class Chamados {
     @JoinColumn(name = "fk_idModulo", nullable = false)
     private Modulo modulo;
 
+    @OneToMany(mappedBy = "chamado")
+    @JsonIgnore
+    private List<Conversa> conversas;
 }
