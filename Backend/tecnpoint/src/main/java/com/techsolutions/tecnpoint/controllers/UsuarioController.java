@@ -1,6 +1,7 @@
 package com.techsolutions.tecnpoint.controllers;
 
 import com.techsolutions.tecnpoint.DTO.FuncionarioDTO;
+import com.techsolutions.tecnpoint.DTO.LoginUsuarioDTO;
 import com.techsolutions.tecnpoint.entities.Usuarios;
 import com.techsolutions.tecnpoint.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,11 @@ public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
 
+    @PostMapping("/login")
+    public ResponseEntity<Usuarios> loginUsuario(@RequestBody LoginUsuarioDTO loginUsuarioDTO){
+        return ResponseEntity.status(200).body(usuarioService.efetuarLogin(loginUsuarioDTO));
+    }
+
     @GetMapping
     public ResponseEntity<List<Usuarios>> getUsuarios(){
         return ResponseEntity.status(200).body(usuarioService.getUsuarios());
@@ -30,7 +36,7 @@ public class UsuarioController {
     }
 
     @PostMapping("/adicionar")
-    public ResponseEntity<Usuarios> postUsario(@RequestBody Usuarios usuarios){
+    public ResponseEntity<Usuarios> postUsuario(@RequestBody Usuarios usuarios){
         return ResponseEntity.status(201).body(usuarioService.postUsuarios(usuarios));
     }
 

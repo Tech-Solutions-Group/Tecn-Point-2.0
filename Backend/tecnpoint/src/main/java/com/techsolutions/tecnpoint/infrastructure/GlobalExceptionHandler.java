@@ -62,4 +62,16 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         MensagemErro mensagemErro = new MensagemErro(ex.getMessage(), HttpStatus.BAD_REQUEST);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(mensagemErro);
     }
+
+    @ExceptionHandler(DadosLoginInvalidosException.class)
+    private ResponseEntity<MensagemErro> DadosLoginInvalidosHandler(DadosLoginInvalidosException ex){
+        MensagemErro mensagemErro = new MensagemErro(ex.getMessage(), HttpStatus.BAD_REQUEST);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(mensagemErro);
+    }
+
+    @ExceptionHandler(LoginInvalidoException.class)
+    private ResponseEntity<MensagemErro> LoginInvalidoHandler(LoginInvalidoException ex) {
+        MensagemErro mensagemErro = new MensagemErro(ex.getMessage(), HttpStatus.UNAUTHORIZED);
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(mensagemErro);
+    }
 }
