@@ -43,7 +43,7 @@ public class ChamadoController {
         return ResponseEntity.status(200).body(chamadoService.getChamadosFuncionario(id_funcionario));
     }
 
-    @PostMapping("/atualizacao-chamado")
+    @PatchMapping("/atualizacao-chamado")
     public ResponseEntity<VisualizacaoChamadoDTO> updateChamado(@RequestBody AtualizaChamadoDTO atualizaChamadoDTO){
         return ResponseEntity.status(200).body(chamadoService.updateChamado(atualizaChamadoDTO));
     }
