@@ -11,10 +11,7 @@ import com.techsolutions.tecnpoint.entities.Usuarios;
 import com.techsolutions.tecnpoint.enums.PrioridadeChamado;
 import com.techsolutions.tecnpoint.enums.StatusChamado;
 import com.techsolutions.tecnpoint.enums.TipoUsuario;
-import com.techsolutions.tecnpoint.exceptions.ChamadoNaoEncontradoException;
-import com.techsolutions.tecnpoint.exceptions.DadosChamadoInvalidosException;
-import com.techsolutions.tecnpoint.exceptions.TipoUsuarioInvalidoException;
-import com.techsolutions.tecnpoint.exceptions.UsuarioNaoEncontradoException;
+import com.techsolutions.tecnpoint.exceptions.*;
 import com.techsolutions.tecnpoint.repositories.ChamadoRepository;
 import com.techsolutions.tecnpoint.repositories.JornadaRepository;
 import com.techsolutions.tecnpoint.repositories.ModuloRepository;
@@ -152,10 +149,10 @@ public class ChamadoService {
         validaAberturaChamado(chamadoDTO);
 
         Jornada jornada = jornadaRepository.findById(chamadoDTO.getIdJornada())
-                .orElseThrow(() -> new RuntimeException("Jornada informada não encontrada"));
+                .orElseThrow(() -> new JornadaNaoEncontradaException("Jornada informada não encontrada"));
 
         Modulo modulo = moduloRepository.findById(chamadoDTO.getIdModulo())
-                .orElseThrow(() -> new RuntimeException("O módulo informado não foi encontrado"));;
+                .orElseThrow(() -> new ModuloNaoEncontradoException("O módulo informado não foi encontrado"));;
 
         Usuarios cliente = usuarioService.getUsuarioById(chamadoDTO.getIdCliente())
                 .orElseThrow(() -> new UsuarioNaoEncontradoException("O cliente não foi encontrado."));
