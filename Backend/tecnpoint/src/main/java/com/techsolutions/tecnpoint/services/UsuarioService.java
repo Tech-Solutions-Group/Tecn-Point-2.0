@@ -23,11 +23,11 @@ public class UsuarioService {
     private UsuarioRepository usuarioRepository;
 
     public Usuarios efetuarLogin(LoginUsuarioDTO loginUsuarioDTO){
-        if(loginUsuarioDTO.getEmail().trim().isEmpty()){
+        if(loginUsuarioDTO.getEmail() == null || loginUsuarioDTO.getEmail().trim().isEmpty()){
             throw new DadosLoginInvalidosException("O e-mail deve ser informado");
         }
 
-        if(loginUsuarioDTO.getSenha().trim().isEmpty()){
+        if(loginUsuarioDTO.getSenha() == null || loginUsuarioDTO.getSenha().trim().isEmpty()){
             throw new DadosLoginInvalidosException("A senha deve ser informada");
         }
 
