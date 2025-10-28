@@ -3,6 +3,7 @@ package com.techsolutions.tecnpoint.services;
 import com.techsolutions.tecnpoint.DTO.FuncionarioListagemDTO;
 import com.techsolutions.tecnpoint.entities.Usuarios;
 import com.techsolutions.tecnpoint.enums.TipoUsuario;
+import com.techsolutions.tecnpoint.exceptions.EmailExistenteException;
 import com.techsolutions.tecnpoint.exceptions.UsuarioNaoEncontradoException;
 import com.techsolutions.tecnpoint.repositories.UsuarioRepository;
 import com.techsolutions.tecnpoint.DTO.AtualizaUsuarioDTO;
@@ -53,7 +54,7 @@ public class UsuarioService {
             if(!usuarioEncontrado.getEmail().equals(atualizaUsuarioDTO.getEmail())){ // Entra no if se o e-mail informado não for o mesmo do usuário encontrado
                 // Verifica se o e-mail já existe no banco
                 if(usuarioRepository.existsByEmail(atualizaUsuarioDTO.getEmail())){
-                    throw new RuntimeException("O e-mail informado já existe!");
+                    throw new EmailExistenteException("O e-mail informado já existe!");
                 }
             }
             usuarioEncontrado.setEmail(atualizaUsuarioDTO.getEmail());
