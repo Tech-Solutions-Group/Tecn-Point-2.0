@@ -1,6 +1,5 @@
 package com.techsolutions.tecnpoint.DTO;
 
-import com.techsolutions.tecnpoint.entities.Usuarios;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -12,9 +11,9 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class VisualizacaoConversaDTO {
+public class ConversaDTO {
     Long idConversa;
-    VisualizacaoUsuarioDTO remetente;
+    UsuarioDTO remetente;
     String mensagem;
     LocalDateTime dataHoraEnvio;
 }

@@ -1,6 +1,6 @@
 package com.techsolutions.tecnpoint.controllers;
 
-import com.techsolutions.tecnpoint.DTO.FuncionarioListagemDTO;
+import com.techsolutions.tecnpoint.DTO.FuncionarioDTO;
 import com.techsolutions.tecnpoint.entities.Usuarios;
 import com.techsolutions.tecnpoint.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +47,7 @@ public class UsuarioController {
     }
 
     @GetMapping("/listar-funcionarios")
-    public ResponseEntity<List<FuncionarioListagemDTO>> listarFuncionarios(){
+    public ResponseEntity<List<FuncionarioDTO>> listarFuncionarios(){
         return ResponseEntity.status(200).body(usuarioService.listarFuncionarios());
     }
 }

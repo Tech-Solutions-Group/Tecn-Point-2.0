@@ -1,9 +1,9 @@
 package com.techsolutions.tecnpoint.services;
 
 import com.techsolutions.tecnpoint.DTO.BuscarMensagensDTO;
-import com.techsolutions.tecnpoint.DTO.EnviarMensagemDTO;
-import com.techsolutions.tecnpoint.DTO.VisualizacaoConversaDTO;
-import com.techsolutions.tecnpoint.DTO.VisualizacaoUsuarioDTO;
+import com.techsolutions.tecnpoint.DTO.MensagemDTO;
+import com.techsolutions.tecnpoint.DTO.ConversaDTO;
+import com.techsolutions.tecnpoint.DTO.UsuarioDTO;
 import com.techsolutions.tecnpoint.entities.Chamados;
 import com.techsolutions.tecnpoint.entities.Conversa;
 import com.techsolutions.tecnpoint.entities.Usuarios;
@@ -15,7 +15,6 @@ import com.techsolutions.tecnpoint.repositories.ConversaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,16 +30,16 @@ public class ConversaService {
     @Autowired
     private UsuarioService usuarioService;
 
-    public VisualizacaoConversaDTO enviarMensagem(EnviarMensagemDTO mensagemDTO){
+    public ConversaDTO enviarMensagem(MensagemDTO mensagemDTO){
         Conversa conversa = buildConversa(mensagemDTO);
         return buildVisualizacaoConversaDTO(conversaRepository.save(conversa));
     }
 
-    public List<VisualizacaoConversaDTO> buscarMensagens(BuscarMensagensDTO buscarMensagensDTO){
+    public List<ConversaDTO> buscarMensagens(BuscarMensagensDTO buscarMensagensDTO){
         return buildListaVisualizacaoConversaDTO(conversaRepository.findByChamadoIdChamadoAndIdConversaGreaterThanOrderByDataHoraEnvioAsc(buscarMensagensDTO.getIdChamado(), buscarMensagensDTO.getIdUltimaConversa()));
     }
 
-    private Conversa buildConversa(EnviarMensagemDTO mensagemDTO){
+    private Conversa buildConversa(MensagemDTO mensagemDTO){
         validaMensagemDTO(mensagemDTO);
 
         Chamados chamadoConversa = buscaChamado(mensagemDTO.getIdChamado());
@@ -67,7 +66,7 @@ public class ConversaService {
         return usuario;
     }
 
-    private void validaMensagemDTO(EnviarMensagemDTO mensagemDTO){
+    private void validaMensagemDTO(MensagemDTO mensagemDTO){
         if(mensagemDTO.getIdChamado() == null || mensagemDTO.getIdChamado() == 0){
             throw new DadosConversaInvalidosException("O id do chamado foi informado incorretamente");
         }
@@ -90,10 +89,10 @@ public class ConversaService {
         }
     }
 
-    private VisualizacaoConversaDTO buildVisualizacaoConversaDTO(Conversa conversa){
-        return VisualizacaoConversaDTO.builder()
+    private ConversaDTO buildVisualizacaoConversaDTO(Conversa conversa){
+        return ConversaDTO.builder()
                 .idConversa(conversa.getIdConversa())
-                .remetente(VisualizacaoUsuarioDTO.builder()
+                .remetente(UsuarioDTO.builder()
                         .id_usuario(conversa.getRemetente().getId_usuario())
                         .nome(conversa.getRemetente().getNome())
                         .tipoUsuario(conversa.getRemetente().getTipoUsuario())
@@ -103,8 +102,8 @@ public class ConversaService {
                 .build();
     }
 
-    private List<VisualizacaoConversaDTO> buildListaVisualizacaoConversaDTO(List<Conversa> conversas){
-        List<VisualizacaoConversaDTO> listaConversas = new ArrayList<>();
+    private List<ConversaDTO> buildListaVisualizacaoConversaDTO(List<Conversa> conversas){
+        List<ConversaDTO> listaConversas = new ArrayList<>();
         for(Conversa conversa : conversas){
             listaConversas.add(buildVisualizacaoConversaDTO(conversa));
         }

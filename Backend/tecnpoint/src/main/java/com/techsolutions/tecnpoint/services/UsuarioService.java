@@ -1,6 +1,6 @@
 package com.techsolutions.tecnpoint.services;
 
-import com.techsolutions.tecnpoint.DTO.FuncionarioListagemDTO;
+import com.techsolutions.tecnpoint.DTO.FuncionarioDTO;
 import com.techsolutions.tecnpoint.entities.Usuarios;
 import com.techsolutions.tecnpoint.enums.TipoUsuario;
 import com.techsolutions.tecnpoint.exceptions.EmailExistenteException;
@@ -62,14 +62,14 @@ public class UsuarioService {
         return usuarioRepository.save(usuarioEncontrado);
     }
 
-    public List<FuncionarioListagemDTO> listarFuncionarios(){
+    public List<FuncionarioDTO> listarFuncionarios(){
         return buildFuncionarioListagemDTO(usuarioRepository.findByTipoUsuario(TipoUsuario.FUNCIONARIO));
     }
 
-    private List<FuncionarioListagemDTO> buildFuncionarioListagemDTO(List<Usuarios> listaFuncionarios){
-        List<FuncionarioListagemDTO> listaFuncionariosDTO = new ArrayList<>();
+    private List<FuncionarioDTO> buildFuncionarioListagemDTO(List<Usuarios> listaFuncionarios){
+        List<FuncionarioDTO> listaFuncionariosDTO = new ArrayList<>();
         for(Usuarios funcionario : listaFuncionarios){
-            listaFuncionariosDTO.add(FuncionarioListagemDTO.builder()
+            listaFuncionariosDTO.add(FuncionarioDTO.builder()
                                     .id(funcionario.getId_usuario())
                                     .nome(funcionario.getNome())
                                     .build());

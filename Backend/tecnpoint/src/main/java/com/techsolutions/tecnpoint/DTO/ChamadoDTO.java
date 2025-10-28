@@ -9,15 +9,15 @@ import lombok.Getter;
 
 @Getter
 @Builder
-public class VisualizacaoChamadoDTO {
+public class ChamadoDTO {
 
     Long id_chamado;
     String descricao;
     String titulo;
     PrioridadeChamado prioridade;
     StatusChamado status;
-    VisualizacaoUsuarioDTO cliente;
-    VisualizacaoUsuarioDTO funcionario;
+    UsuarioDTO cliente;
+    UsuarioDTO funcionario;
     Jornada jornada;
     Modulo modulo;
 }
