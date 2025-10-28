@@ -56,4 +56,10 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         MensagemErro mensagemErro = new MensagemErro(ex.getMessage(), HttpStatus.NOT_FOUND);
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(mensagemErro);
     }
+
+    @ExceptionHandler(DadosConversaInvalidosException.class)
+    private ResponseEntity<MensagemErro> DadosConversaInvalidosHandler(DadosConversaInvalidosException ex){
+        MensagemErro mensagemErro = new MensagemErro(ex.getMessage(), HttpStatus.BAD_REQUEST);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(mensagemErro);
+    }
 }
