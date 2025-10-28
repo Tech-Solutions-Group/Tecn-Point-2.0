@@ -48,11 +48,10 @@ public class UsuarioService {
             usuarioEncontrado.setSenha(atualizaUsuarioDTO.getSenha());
         }
 
-        // Verifica se o e-mail informado é nulo e se NÃO é vazio
         if(atualizaUsuarioDTO.getEmail() != null && !atualizaUsuarioDTO.getEmail().trim().isEmpty()){
-            // Verifica se o e-mail do usuário encontrado é diferente do e-mail informado
-            if(!usuarioEncontrado.getEmail().equals(atualizaUsuarioDTO.getEmail())){ // Entra no if se o e-mail informado não for o mesmo do usuário encontrado
-                // Verifica se o e-mail já existe no banco
+
+            if(!usuarioEncontrado.getEmail().equals(atualizaUsuarioDTO.getEmail())){
+
                 if(usuarioRepository.existsByEmail(atualizaUsuarioDTO.getEmail())){
                     throw new EmailExistenteException("O e-mail informado já existe!");
                 }
