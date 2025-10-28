@@ -12,6 +12,7 @@ import com.techsolutions.tecnpoint.enums.PrioridadeChamado;
 import com.techsolutions.tecnpoint.enums.StatusChamado;
 import com.techsolutions.tecnpoint.enums.TipoUsuario;
 import com.techsolutions.tecnpoint.exceptions.ChamadoNaoEncontradoException;
+import com.techsolutions.tecnpoint.exceptions.DadosChamadoInvalidosException;
 import com.techsolutions.tecnpoint.exceptions.TipoUsuarioInvalidoException;
 import com.techsolutions.tecnpoint.exceptions.UsuarioNaoEncontradoException;
 import com.techsolutions.tecnpoint.repositories.ChamadoRepository;
@@ -122,27 +123,27 @@ public class ChamadoService {
     private void validaAberturaChamado(AberturaChamadoDTO chamadoDTO){
 
         if(chamadoDTO.getDescricao() == null || chamadoDTO.getDescricao().trim().isEmpty()){
-            throw new RuntimeException("A descrição do chamado deve ser informada");
+            throw new DadosChamadoInvalidosException("A descrição do chamado deve ser informada");
         }
 
         if(chamadoDTO.getTitulo() == null || chamadoDTO.getTitulo().trim().isEmpty()){
-            throw new RuntimeException("O título do chamado deve ser informado");
+            throw new DadosChamadoInvalidosException("O título do chamado deve ser informado");
         }
 
         if(chamadoDTO.getPrioridade() == null){
-            throw new RuntimeException("A prioridade do chamado deve ser informada");
+            throw new DadosChamadoInvalidosException("A prioridade do chamado deve ser informada");
         }
 
         if(chamadoDTO.getIdCliente() == null || chamadoDTO.getIdCliente() == 0){
-            throw new RuntimeException("O cliente que abriu o chamado deve ser informado");
+            throw new DadosChamadoInvalidosException("O cliente que abriu o chamado deve ser informado");
         }
 
         if(chamadoDTO.getIdJornada() == null || chamadoDTO.getIdJornada() == 0){
-            throw new RuntimeException("A jornada do chamado deve ser informada");
+            throw new DadosChamadoInvalidosException("A jornada do chamado deve ser informada");
         }
 
         if(chamadoDTO.getIdModulo() == null || chamadoDTO.getIdModulo() == 0){
-            throw new RuntimeException("O módulo do chamado deve ser informado");
+            throw new DadosChamadoInvalidosException("O módulo do chamado deve ser informado");
         }
     }
 

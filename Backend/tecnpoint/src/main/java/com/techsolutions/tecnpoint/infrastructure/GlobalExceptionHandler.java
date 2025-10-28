@@ -30,8 +30,15 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(TipoUsuarioInvalidoException.class)
-    private ResponseEntity<MensagemErro> TipoUsuarioInvalidoException(TipoUsuarioInvalidoException ex){
+    private ResponseEntity<MensagemErro> TipoUsuarioInvalidoHandler(TipoUsuarioInvalidoException ex){
         MensagemErro mensagemErro = new MensagemErro(ex.getMessage(), HttpStatus.FORBIDDEN);
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body(mensagemErro);
     }
+
+    @ExceptionHandler(DadosChamadoInvalidosException.class)
+    private ResponseEntity<MensagemErro> DadosChamadoInvalidosHandler(DadosChamadoInvalidosException ex){
+        MensagemErro mensagemErro = new MensagemErro(ex.getMessage(), HttpStatus.BAD_REQUEST);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(mensagemErro);
+    }
+
 }
