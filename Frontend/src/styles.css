@@ -15,7 +15,7 @@ app-chamado {
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  margin-top: 3rem;
+  margin-top: 7rem;
 }
 
 app-usuario {

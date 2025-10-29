@@ -5,3 +5,55 @@ table {
 th {
   text-align: initial;
 }
+
+.trBody:hover {
+  cursor: pointer;
+}
+
+.status-aberto {
+  background-color: #43b480;
+  color: #fff;
+}
+
+.trBody:hover .status-aberto {
+  background-color: #fff;
+  color: #43b480;
+  font-weight: bold;
+  box-shadow: inset 0 0 0 2px #43b480;
+}
+
+.status-pendente {
+  background-color: #4c8fc5;
+  color: #fff;
+}
+
+.trBody:hover .status-pendente {
+  background-color: #fff;
+  color: #4c8fc5;
+  font-weight: bold;
+  box-shadow: inset 0 0 0 2px #4c8fc5;
+}
+
+.status-resolvido {
+  background-color: #e9616c;
+  color: #fff;
+}
+
+.trBody:hover .status-resolvido {
+  background-color: #fff;
+  color: #e9616c;
+  font-weight: bold;
+  box-shadow: inset 0 0 0 2px #e9616c;
+}
+
+.status-em-andamento {
+  background-color: #eca92c;
+  color: #fff;
+}
+
+.trBody:hover .status-em-andamento {
+  background-color: #fff;
+  color: #eca92c;
+  font-weight: bold;
+  box-shadow: inset 0 0 0 2px #eca92c;
+}

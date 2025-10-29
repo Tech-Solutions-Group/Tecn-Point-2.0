@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Chamado, ChamadoService } from '../../service/chamado.service';
 
 @Component({
@@ -13,7 +14,10 @@ import { Chamado, ChamadoService } from '../../service/chamado.service';
 export class ChamadoComponent implements OnInit {
   chamados: Chamado[] = [];
 
-  constructor(readonly chamadoService: ChamadoService) {}
+  constructor(
+    readonly chamadoService: ChamadoService,
+    readonly router: Router
+  ) {}
 
   ngOnInit(): void {
     this.loadChamados();
@@ -24,5 +28,9 @@ export class ChamadoComponent implements OnInit {
       next: (data) => (this.chamados = data),
       error: (err) => console.error('Erro ao carregar chamados', err),
     });
+  }
+
+  goToHome() {
+    this.router.navigate(['/home']);
   }
 }

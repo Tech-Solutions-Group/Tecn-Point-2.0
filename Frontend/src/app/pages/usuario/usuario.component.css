@@ -5,11 +5,11 @@ table {
 
 th {
   text-align: initial;
+  padding-left: 10px;
 }
 
-td .teste button {
-  color: red;
-  width: 100%;
+td {
+  padding-left: 10px;
 }
 
 .cad_btn {
@@ -17,5 +17,9 @@ td .teste button {
   align-self: flex-end;
   margin-right: 5rem;
   font-size: 1.5rem;
-  border-radius: 10px;
+  border-radius: 8px;
+}
+
+.action_user {
+  padding: 8px;
 }
