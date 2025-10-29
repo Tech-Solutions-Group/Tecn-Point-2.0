@@ -1,0 +1,157 @@
+{
+  "version": 3,
+  "targets": {
+    "net8.0-windows7.0": {
+      "TecnPoint.Enums/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/TecnPoint.Enums.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/TecnPoint.Enums.dll": {}
+        }
+      },
+      "TecnPoint.Exceptions/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/TecnPoint.Exceptions.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/TecnPoint.Exceptions.dll": {}
+        }
+      },
+      "TecnPoint.Modelos/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "TecnPoint.Enums": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/TecnPoint.Modelos.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/TecnPoint.Modelos.dll": {}
+        }
+      },
+      "TecnPoint.Services/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "TecnPoint.Exceptions": "1.0.0",
+          "TecnPoint.Modelos": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/TecnPoint.Services.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/TecnPoint.Services.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "TecnPoint.Enums/1.0.0": {
+      "type": "project",
+      "path": "../TecnPoint.Enums/TecnPoint.Enums.csproj",
+      "msbuildProject": "../TecnPoint.Enums/TecnPoint.Enums.csproj"
+    },
+    "TecnPoint.Exceptions/1.0.0": {
+      "type": "project",
+      "path": "../TecnPoint.Exceptions/TecnPoint.Exceptions.csproj",
+      "msbuildProject": "../TecnPoint.Exceptions/TecnPoint.Exceptions.csproj"
+    },
+    "TecnPoint.Modelos/1.0.0": {
+      "type": "project",
+      "path": "../TecnPoint.Modelos/TecnPoint.Modelos.csproj",
+      "msbuildProject": "../TecnPoint.Modelos/TecnPoint.Modelos.csproj"
+    },
+    "TecnPoint.Services/1.0.0": {
+      "type": "project",
+      "path": "../TecnPoint.Services/TecnPoint.Services.csproj",
+      "msbuildProject": "../TecnPoint.Services/TecnPoint.Services.csproj"
+    }
+  },
+  "projectFileDependencyGroups": {
+    "net8.0-windows7.0": [
+      "TecnPoint.Services >= 1.0.0"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\samuel\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "C:\\Users\\samuel\\OneDrive\\Desktop\\PIM4\\Tecn-Point-2.0\\Desktop\\TecnPoint\\TecnPoint.Interfaces\\TecnPoint.Interfaces.csproj",
+      "projectName": "TecnPoint.Interfaces",
+      "projectPath": "C:\\Users\\samuel\\OneDrive\\Desktop\\PIM4\\Tecn-Point-2.0\\Desktop\\TecnPoint\\TecnPoint.Interfaces\\TecnPoint.Interfaces.csproj",
+      "packagesPath": "C:\\Users\\samuel\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\samuel\\OneDrive\\Desktop\\PIM4\\Tecn-Point-2.0\\Desktop\\TecnPoint\\TecnPoint.Interfaces\\obj\\",
+      "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
+      "configFilePaths": [
+        "C:\\Users\\samuel\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "net8.0-windows"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net8.0-windows7.0": {
+          "targetAlias": "net8.0-windows",
+          "projectReferences": {
+            "C:\\Users\\samuel\\OneDrive\\Desktop\\PIM4\\Tecn-Point-2.0\\Desktop\\TecnPoint\\TecnPoint.Services\\TecnPoint.Services.csproj": {
+              "projectPath": "C:\\Users\\samuel\\OneDrive\\Desktop\\PIM4\\Tecn-Point-2.0\\Desktop\\TecnPoint\\TecnPoint.Services\\TecnPoint.Services.csproj"
+            }
+          }
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
+      },
+      "SdkAnalysisLevel": "9.0.200"
+    },
+    "frameworks": {
+      "net8.0-windows7.0": {
+        "targetAlias": "net8.0-windows",
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48",
+          "net481"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          },
+          "Microsoft.WindowsDesktop.App.WindowsForms": {
+            "privateAssets": "none"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.203/PortableRuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}

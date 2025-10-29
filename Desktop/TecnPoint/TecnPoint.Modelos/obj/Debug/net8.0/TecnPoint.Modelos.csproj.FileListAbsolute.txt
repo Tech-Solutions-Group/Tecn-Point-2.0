@@ -1,0 +1,16 @@
+C:\Users\samuel\OneDrive\Desktop\PIM4\Tecn-Point-2.0\Desktop\TecnPoint\TecnPoint.Modelos\bin\Debug\net8.0\TecnPoint.Modelos.deps.json
+C:\Users\samuel\OneDrive\Desktop\PIM4\Tecn-Point-2.0\Desktop\TecnPoint\TecnPoint.Modelos\bin\Debug\net8.0\TecnPoint.Modelos.dll
+C:\Users\samuel\OneDrive\Desktop\PIM4\Tecn-Point-2.0\Desktop\TecnPoint\TecnPoint.Modelos\bin\Debug\net8.0\TecnPoint.Modelos.pdb
+C:\Users\samuel\OneDrive\Desktop\PIM4\Tecn-Point-2.0\Desktop\TecnPoint\TecnPoint.Modelos\bin\Debug\net8.0\TecnPoint.Enums.dll
+C:\Users\samuel\OneDrive\Desktop\PIM4\Tecn-Point-2.0\Desktop\TecnPoint\TecnPoint.Modelos\bin\Debug\net8.0\TecnPoint.Enums.pdb
+C:\Users\samuel\OneDrive\Desktop\PIM4\Tecn-Point-2.0\Desktop\TecnPoint\TecnPoint.Modelos\obj\Debug\net8.0\TecnPoint.Modelos.csproj.AssemblyReference.cache
+C:\Users\samuel\OneDrive\Desktop\PIM4\Tecn-Point-2.0\Desktop\TecnPoint\TecnPoint.Modelos\obj\Debug\net8.0\TecnPoint.Modelos.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\samuel\OneDrive\Desktop\PIM4\Tecn-Point-2.0\Desktop\TecnPoint\TecnPoint.Modelos\obj\Debug\net8.0\TecnPoint.Modelos.AssemblyInfoInputs.cache
+C:\Users\samuel\OneDrive\Desktop\PIM4\Tecn-Point-2.0\Desktop\TecnPoint\TecnPoint.Modelos\obj\Debug\net8.0\TecnPoint.Modelos.AssemblyInfo.cs
+C:\Users\samuel\OneDrive\Desktop\PIM4\Tecn-Point-2.0\Desktop\TecnPoint\TecnPoint.Modelos\obj\Debug\net8.0\TecnPoint.Modelos.csproj.CoreCompileInputs.cache
+C:\Users\samuel\OneDrive\Desktop\PIM4\Tecn-Point-2.0\Desktop\TecnPoint\TecnPoint.Modelos\obj\Debug\net8.0\TecnPoint.Modelos.sourcelink.json
+C:\Users\samuel\OneDrive\Desktop\PIM4\Tecn-Point-2.0\Desktop\TecnPoint\TecnPoint.Modelos\obj\Debug\net8.0\TecnPoin.9A879A59.Up2Date
+C:\Users\samuel\OneDrive\Desktop\PIM4\Tecn-Point-2.0\Desktop\TecnPoint\TecnPoint.Modelos\obj\Debug\net8.0\TecnPoint.Modelos.dll
+C:\Users\samuel\OneDrive\Desktop\PIM4\Tecn-Point-2.0\Desktop\TecnPoint\TecnPoint.Modelos\obj\Debug\net8.0\refint\TecnPoint.Modelos.dll
+C:\Users\samuel\OneDrive\Desktop\PIM4\Tecn-Point-2.0\Desktop\TecnPoint\TecnPoint.Modelos\obj\Debug\net8.0\TecnPoint.Modelos.pdb
+C:\Users\samuel\OneDrive\Desktop\PIM4\Tecn-Point-2.0\Desktop\TecnPoint\TecnPoint.Modelos\obj\Debug\net8.0\ref\TecnPoint.Modelos.dll
