@@ -1,7 +1,25 @@
 table {
   width: 85%;
+  border-radius: 5px;
 }
 
 th {
   text-align: initial;
+  padding-left: 10px;
+}
+
+td {
+  padding-left: 10px;
+}
+
+.cad_btn {
+  margin-bottom: 1rem;
+  align-self: flex-end;
+  margin-right: 5rem;
+  font-size: 1.5rem;
+  border-radius: 8px;
+}
+
+.action_user {
+  padding: 8px;
 }
