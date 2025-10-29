@@ -40,7 +40,7 @@ select {
   color: red;
 }
 
-.modal-backdrop {
+.comum_modal-backdrop {
   position: fixed;
   top: 0;
   left: 0;
@@ -50,7 +50,7 @@ select {
   z-index: 1000;
 }
 
-.modal {
+.comum_modal {
   position: fixed;
   top: 50%;
   left: 50%;
@@ -63,7 +63,7 @@ select {
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
-.modal-header {
+.comum_modal-header {
   display: flex;
   justify-content: space-between;
   padding: 10px;
@@ -71,6 +71,6 @@ select {
   height: 45px;
 }
 
-.modal-body {
+.comum_modal-body {
   padding: 15px;
 }

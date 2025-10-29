@@ -1,7 +1,21 @@
 table {
   width: 85%;
+  border-radius: 5px;
 }
 
 th {
   text-align: initial;
+}
+
+td .teste button {
+  color: red;
+  width: 100%;
+}
+
+.cad_btn {
+  margin-bottom: 1rem;
+  align-self: flex-end;
+  margin-right: 5rem;
+  font-size: 1.5rem;
+  border-radius: 10px;
 }
