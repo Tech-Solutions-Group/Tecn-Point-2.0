@@ -56,7 +56,7 @@ namespace TecnPoint.Interfaces
                 MessageBox.Show(ex.Message,
                                 "TechSolutions",
                                 MessageBoxButtons.OK,
-                                MessageBoxIcon.Error);
+                                MessageBoxIcon.Information);
             }
 
 
