@@ -52,6 +52,11 @@ namespace TecnPoint.Interfaces
 
         private void tspAbrirChamado_Click(object sender, EventArgs e)
         {
+            if(this.ActiveMdiChild != null)
+            {
+                this.ActiveMdiChild.Close();
+            }
+
             FormAberturaChamado formAberturaChamado = new FormAberturaChamado(usuarioLogado);
 
             formAberturaChamado.MdiParent = this;

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormAberturaChamado));
             lblModulo = new Label();
             lblJornada = new Label();
@@ -43,8 +44,10 @@
             btnCancelar = new Button();
             pictureBox1 = new PictureBox();
             pictureBox2 = new PictureBox();
+            errorProvider1 = new ErrorProvider(components);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
             SuspendLayout();
             // 
             // lblModulo
@@ -105,6 +108,7 @@
             txtTitulo.PlaceholderText = "Descreva brevemente o problema";
             txtTitulo.Size = new Size(332, 29);
             txtTitulo.TabIndex = 6;
+            txtTitulo.Leave += txtTitulo_Leave;
             // 
             // txtDescricao
             // 
@@ -116,6 +120,7 @@
             txtDescricao.ScrollBars = ScrollBars.Vertical;
             txtDescricao.Size = new Size(332, 81);
             txtDescricao.TabIndex = 7;
+            txtDescricao.Leave += txtDescricao_Leave;
             // 
             // cbxPrioridade
             // 
@@ -127,6 +132,7 @@
             cbxPrioridade.Name = "cbxPrioridade";
             cbxPrioridade.Size = new Size(330, 29);
             cbxPrioridade.TabIndex = 8;
+            cbxPrioridade.Leave += cbxPrioridade_Leave;
             // 
             // cbxJornada
             // 
@@ -138,6 +144,7 @@
             cbxJornada.Name = "cbxJornada";
             cbxJornada.Size = new Size(330, 29);
             cbxJornada.TabIndex = 9;
+            cbxJornada.Leave += cbxJornada_Leave;
             // 
             // cbxModulo
             // 
@@ -149,6 +156,7 @@
             cbxModulo.Name = "cbxModulo";
             cbxModulo.Size = new Size(332, 29);
             cbxModulo.TabIndex = 10;
+            cbxModulo.Leave += cbxModulo_Leave;
             // 
             // btnConfirmar
             // 
@@ -197,6 +205,10 @@
             pictureBox2.TabIndex = 14;
             pictureBox2.TabStop = false;
             // 
+            // errorProvider1
+            // 
+            errorProvider1.ContainerControl = this;
+            // 
             // FormAberturaChamado
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -222,6 +234,7 @@
             Text = "FormAberturaChamado";
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -241,5 +254,6 @@
         private Button btnCancelar;
         private PictureBox pictureBox1;
         private PictureBox pictureBox2;
+        private ErrorProvider errorProvider1;
     }
 }

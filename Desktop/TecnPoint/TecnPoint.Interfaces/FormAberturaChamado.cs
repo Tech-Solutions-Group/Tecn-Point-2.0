@@ -11,17 +11,20 @@ using TecnPoint.Modelos;
 using TecnPoint.Modelos.DTO;
 using TecnPoint.Modelos.Enum;
 using TecnPoint.Services;
+using TecnPoint.Services.Validacoes;
 
 namespace TecnPoint.Interfaces
 {
     public partial class FormAberturaChamado : Form
     {
         private ChamadoService chamadoService;
+        private ValidacaoAberturaChamado validacaoAberturaChamado;
         private Usuario usuarioLogado;
 
         public FormAberturaChamado(Usuario usuarioLogado)
         {
             this.chamadoService = new ChamadoService();
+            this.validacaoAberturaChamado = new ValidacaoAberturaChamado();
             this.usuarioLogado = usuarioLogado;
             InitializeComponent();
             cbxPrioridade.SelectedIndex = 0;
@@ -31,16 +34,16 @@ namespace TecnPoint.Interfaces
 
         private void btnConfirmar_Click(object sender, EventArgs e)
         {
-            if (ValidaDadosChamado(txtTitulo, txtDescricao, cbxPrioridade, cbxJornada, cbxModulo)){
+            if (1 == 1)
+            {
 
                 PrioridadeChamado prioridadeChamado = ConverterPrioridadeParaEnum(cbxPrioridade.SelectedIndex);
 
-                // método para abrir o chamado
-                AberturaChamadoDTO aberturaChamadoDTO = new AberturaChamadoDTO(txtTitulo.Text, 
-                                                                                txtDescricao.Text, 
-                                                                                prioridadeChamado, 
-                                                                                usuarioLogado.id_usuario, 
-                                                                                cbxModulo.SelectedIndex, 
+                AberturaChamadoDTO aberturaChamadoDTO = new AberturaChamadoDTO(txtTitulo.Text,
+                                                                                txtDescricao.Text,
+                                                                                prioridadeChamado,
+                                                                                usuarioLogado.id_usuario,
+                                                                                cbxModulo.SelectedIndex,
                                                                                 cbxJornada.SelectedIndex);
                 var chamado = chamadoService.AbrirChamado(aberturaChamadoDTO);
                 if (chamado != null)
@@ -60,22 +63,52 @@ namespace TecnPoint.Interfaces
             }
         }
 
-        private bool ValidaDadosChamado(TextBox Titulo, TextBox Descricao, ComboBox Prioridade, ComboBox Jornada, ComboBox Modulo)
-        {
-            if(string.IsNullOrWhiteSpace(Titulo.Text)) return false;
-            if(string.IsNullOrWhiteSpace(Descricao.Text)) return false;
-            if(Prioridade.SelectedIndex < 1) return false;
-            if (Jornada.SelectedIndex < 1) return false;
-            if (Modulo.SelectedIndex < 1) return false;
-            return true;
-        }
-
         private PrioridadeChamado ConverterPrioridadeParaEnum(int selectedIndex)
         {
             if (selectedIndex == 1) return PrioridadeChamado.BAIXA;
             if (selectedIndex == 2) return PrioridadeChamado.MEDIA;
             if (selectedIndex == 3) return PrioridadeChamado.ALTA;
             return PrioridadeChamado.BAIXA;
+        }
+
+        private void txtTitulo_Leave(object sender, EventArgs e)
+        {
+            if (!validacaoAberturaChamado.ValidaTitulo(txtTitulo.Text))
+            {
+                errorProvider1.SetError(txtTitulo, "O título do chamado deve ser informado");
+            }
+        }
+
+        private void txtDescricao_Leave(object sender, EventArgs e)
+        {
+            if (!validacaoAberturaChamado.ValidaDescricao(txtDescricao.Text))
+            {
+                errorProvider1.SetError(txtDescricao, "A descrição do chamado deve ser informada");
+            }
+        }
+
+        private void cbxPrioridade_Leave(object sender, EventArgs e)
+        {
+            if (!validacaoAberturaChamado.ValidaPrioridade(cbxPrioridade.SelectedIndex))
+            {
+                errorProvider1.SetError(cbxPrioridade, "A prioridade do chamado deve ser informada");
+            }
+        }
+
+        private void cbxJornada_Leave(object sender, EventArgs e)
+        {
+            if (!validacaoAberturaChamado.ValidaJornada(cbxJornada.SelectedIndex))
+            {
+                errorProvider1.SetError(cbxJornada, "A jornada deve ser informada");
+            }
+        }
+
+        private void cbxModulo_Leave(object sender, EventArgs e)
+        {
+            if (!validacaoAberturaChamado.ValidaModulo(cbxModulo.SelectedIndex))
+            {
+                errorProvider1.SetError(cbxModulo, "O módulo deve ser informado");
+            }
         }
     }
 }
