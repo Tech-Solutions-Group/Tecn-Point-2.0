@@ -69,6 +69,11 @@ namespace TecnPoint.Interfaces
 
         public void CarregaFormLogo()
         {
+            if (this.ActiveMdiChild != null)
+            {
+                this.ActiveMdiChild.Close();
+            }
+
             FormLogo formLogo = new FormLogo(usuarioLogado.nome, usuarioLogado.email, usuarioLogado.tipoUsuario);
 
             formLogo.MdiParent = this;

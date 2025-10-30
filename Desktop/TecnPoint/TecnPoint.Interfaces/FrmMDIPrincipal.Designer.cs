@@ -74,7 +74,7 @@
             tspAbrirChamado.Font = new Font("Consolas", 14.25F, FontStyle.Bold);
             tspAbrirChamado.ForeColor = SystemColors.ControlLightLight;
             tspAbrirChamado.ImageAlign = ContentAlignment.MiddleLeft;
-            tspAbrirChamado.Margin = new Padding(10, 115, 10, 10);
+            tspAbrirChamado.Margin = new Padding(10);
             tspAbrirChamado.Name = "tspAbrirChamado";
             tspAbrirChamado.Padding = new Padding(5);
             tspAbrirChamado.Size = new Size(191, 36);
