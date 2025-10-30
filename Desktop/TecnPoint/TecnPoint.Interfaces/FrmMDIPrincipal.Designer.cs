@@ -64,34 +64,34 @@
             menuStrip.Location = new Point(0, 0);
             menuStrip.Name = "menuStrip";
             menuStrip.Padding = new Padding(7, 2, 0, 2);
-            menuStrip.Size = new Size(219, 523);
+            menuStrip.Size = new Size(219, 542);
             menuStrip.TabIndex = 0;
             menuStrip.Text = "MenuStrip";
             // 
             // tspAbrirChamado
             // 
             tspAbrirChamado.BackColor = Color.Transparent;
-            tspAbrirChamado.Font = new Font("Consolas", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            tspAbrirChamado.ForeColor = SystemColors.ControlText;
-            tspAbrirChamado.Image = (Image)resources.GetObject("tspAbrirChamado.Image");
+            tspAbrirChamado.Font = new Font("Consolas", 14.25F, FontStyle.Bold);
+            tspAbrirChamado.ForeColor = SystemColors.ControlLightLight;
             tspAbrirChamado.ImageAlign = ContentAlignment.MiddleLeft;
-            tspAbrirChamado.Margin = new Padding(10, 115, 10, 10);
+            tspAbrirChamado.Margin = new Padding(10);
             tspAbrirChamado.Name = "tspAbrirChamado";
             tspAbrirChamado.Padding = new Padding(5);
-            tspAbrirChamado.Size = new Size(191, 32);
+            tspAbrirChamado.Size = new Size(191, 36);
             tspAbrirChamado.Text = "Abrir Chamado";
             tspAbrirChamado.TextImageRelation = TextImageRelation.Overlay;
+            tspAbrirChamado.Click += tspAbrirChamado_Click;
             // 
             // tspAcompanharChamado
             // 
             tspAcompanharChamado.BackColor = Color.Transparent;
-            tspAcompanharChamado.Font = new Font("Consolas", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            tspAcompanharChamado.Image = (Image)resources.GetObject("tspAcompanharChamado.Image");
+            tspAcompanharChamado.Font = new Font("Consolas", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            tspAcompanharChamado.ForeColor = SystemColors.ControlLightLight;
             tspAcompanharChamado.ImageAlign = ContentAlignment.MiddleLeft;
             tspAcompanharChamado.Margin = new Padding(10);
             tspAcompanharChamado.Name = "tspAcompanharChamado";
             tspAcompanharChamado.Padding = new Padding(5);
-            tspAcompanharChamado.Size = new Size(191, 32);
+            tspAcompanharChamado.Size = new Size(191, 36);
             tspAcompanharChamado.Text = "Acompanhar Chamado";
             tspAcompanharChamado.TextImageRelation = TextImageRelation.Overlay;
             // 
@@ -99,25 +99,27 @@
             // 
             tspGerenciarUsuarios.BackColor = Color.Transparent;
             tspGerenciarUsuarios.DropDownItems.AddRange(new ToolStripItem[] { tspCadastrarUsuario, tspDeletarUsuario });
-            tspGerenciarUsuarios.Font = new Font("Consolas", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            tspGerenciarUsuarios.Font = new Font("Consolas", 14.25F, FontStyle.Bold);
+            tspGerenciarUsuarios.ForeColor = SystemColors.ControlLightLight;
+            tspGerenciarUsuarios.ImageAlign = ContentAlignment.MiddleLeft;
             tspGerenciarUsuarios.Margin = new Padding(10);
             tspGerenciarUsuarios.Name = "tspGerenciarUsuarios";
             tspGerenciarUsuarios.Padding = new Padding(5);
-            tspGerenciarUsuarios.Size = new Size(191, 32);
+            tspGerenciarUsuarios.Size = new Size(191, 36);
             tspGerenciarUsuarios.Text = "Gerenciar Usuários";
             // 
             // tspCadastrarUsuario
             // 
             tspCadastrarUsuario.BackColor = Color.Thistle;
             tspCadastrarUsuario.Name = "tspCadastrarUsuario";
-            tspCadastrarUsuario.Size = new Size(212, 22);
+            tspCadastrarUsuario.Size = new Size(250, 26);
             tspCadastrarUsuario.Text = "Cadastrar Usuário";
             // 
             // tspDeletarUsuario
             // 
             tspDeletarUsuario.BackColor = Color.Thistle;
             tspDeletarUsuario.Name = "tspDeletarUsuario";
-            tspDeletarUsuario.Size = new Size(212, 22);
+            tspDeletarUsuario.Size = new Size(250, 26);
             tspDeletarUsuario.Text = "Deletar Usuário";
             // 
             // toolStrip
@@ -126,7 +128,7 @@
             toolStrip.Items.AddRange(new ToolStripItem[] { newToolStripButton, openToolStripButton, saveToolStripButton, toolStripSeparator1, printToolStripButton, printPreviewToolStripButton, toolStripSeparator2, helpToolStripButton, toolStripButton1 });
             toolStrip.Location = new Point(219, 0);
             toolStrip.Name = "toolStrip";
-            toolStrip.Size = new Size(24, 523);
+            toolStrip.Size = new Size(24, 542);
             toolStrip.TabIndex = 1;
             toolStrip.Text = "ToolStrip";
             // 
@@ -208,10 +210,10 @@
             // statusStrip
             // 
             statusStrip.Items.AddRange(new ToolStripItem[] { toolStripStatusLabel });
-            statusStrip.Location = new Point(243, 501);
+            statusStrip.Location = new Point(243, 520);
             statusStrip.Name = "statusStrip";
             statusStrip.Padding = new Padding(1, 0, 16, 0);
-            statusStrip.Size = new Size(577, 22);
+            statusStrip.Size = new Size(661, 22);
             statusStrip.TabIndex = 2;
             statusStrip.Text = "StatusStrip";
             // 
@@ -226,7 +228,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Control;
-            ClientSize = new Size(820, 523);
+            ClientSize = new Size(904, 542);
             Controls.Add(statusStrip);
             Controls.Add(toolStrip);
             Controls.Add(menuStrip);

@@ -3,6 +3,8 @@ using TecnPoint.Modelos.DTO;
 using System.Text.Json;
 using TecnPoint.Exceptions;
 using System.Net.Http.Json;
+using System.Text;
+using System.Text.Json.Serialization;
 
 namespace TecnPoint.Services
 {
@@ -15,24 +17,33 @@ namespace TecnPoint.Services
             _httpClient = new HttpClient();
         }
 
-        public async Task<Usuario> RealizarLogin(string email, string senha)
+        public async Task<Usuario> RealizarLogin(LoginUsuarioDTO loginUsuarioDTO)
         {
-            var loginUsuarioDTO = new LoginUsuarioDTO
-            {
-                email = email,
-                senha = senha
-            };
+            var request = new HttpRequestMessage(HttpMethod.Post, "http://localhost:8080/usuarios/login");
 
-            HttpResponseMessage response = await _httpClient.PostAsJsonAsync("http://localhost:8080/usuarios/login", loginUsuarioDTO);
+            StringContent content = new StringContent($@"{{
+                                            ""email"": ""{loginUsuarioDTO.email}"",
+                                            ""senha"": ""{loginUsuarioDTO.senha}""
+                                            }}", null, "application/json");
+
+            request.Content = content;
+            var response = await _httpClient.SendAsync(request);
+
+            var jsonResposta = await response.Content.ReadAsStringAsync();
 
             if (response.IsSuccessStatusCode)
             {
-                var usuarioCadastrado = await response.Content.ReadFromJsonAsync<Usuario>();
-                return usuarioCadastrado;
+                JsonSerializerOptions options = new JsonSerializerOptions
+                {
+                    Converters = { new JsonStringEnumConverter() }
+                }; 
+
+                Usuario usuarioLogado = JsonSerializer.Deserialize<Usuario>(jsonResposta, options);
+                return usuarioLogado;
             }
 
-            var erro = await response.Content.ReadFromJsonAsync<MensagemErro>();
-            throw new Exception(erro?.Mensagem ?? "Erro ao realizar login");
+            var erroLogin = JsonSerializer.Deserialize<MensagemErro>(jsonResposta);
+            throw new Exception(erroLogin.mensagem);
         }
     }
 }

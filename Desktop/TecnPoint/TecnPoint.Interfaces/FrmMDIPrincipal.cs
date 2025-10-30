@@ -20,6 +20,7 @@ namespace TecnPoint.Interfaces
         {
             InitializeComponent();
             this.usuarioLogado = usuarioLogado;
+            CarregaFormLogo();
             AlterarVisualizacao();
         }
 
@@ -44,10 +45,42 @@ namespace TecnPoint.Interfaces
 
         private void AlterarVisualizacao()
         {
-            if(usuarioLogado.TipoUsuario == "CLIENTE")
+            if (usuarioLogado.tipoUsuario == Modelos.Enum.TipoUsuario.CLIENTE)
             {
                 tspGerenciarUsuarios.Visible = false;
             }
+        }
+
+        private void tspAbrirChamado_Click(object sender, EventArgs e)
+        {
+            if(this.ActiveMdiChild != null)
+            {
+                this.ActiveMdiChild.Close();
+            }
+
+            FormAberturaChamado formAberturaChamado = new FormAberturaChamado(usuarioLogado, this);
+
+            formAberturaChamado.MdiParent = this;
+
+            formAberturaChamado.Dock = DockStyle.Fill;
+
+            formAberturaChamado.Show();
+        }
+
+        public void CarregaFormLogo()
+        {
+            if (this.ActiveMdiChild != null)
+            {
+                this.ActiveMdiChild.Close();
+            }
+
+            FormLogo formLogo = new FormLogo(usuarioLogado.nome, usuarioLogado.email, usuarioLogado.tipoUsuario);
+
+            formLogo.MdiParent = this;
+
+            formLogo.Dock = DockStyle.Fill;
+
+            formLogo.Show();
         }
     }
 }

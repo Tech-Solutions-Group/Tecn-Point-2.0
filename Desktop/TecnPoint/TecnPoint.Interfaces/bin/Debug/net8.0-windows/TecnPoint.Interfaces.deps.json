@@ -14,14 +14,6 @@
           "TecnPoint.Interfaces.dll": {}
         }
       },
-      "TecnPoint.Enums/1.0.0": {
-        "runtime": {
-          "TecnPoint.Enums.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
-          }
-        }
-      },
       "TecnPoint.Exceptions/1.0.0": {
         "runtime": {
           "TecnPoint.Exceptions.dll": {
@@ -31,9 +23,6 @@
         }
       },
       "TecnPoint.Modelos/1.0.0": {
-        "dependencies": {
-          "TecnPoint.Enums": "1.0.0"
-        },
         "runtime": {
           "TecnPoint.Modelos.dll": {
             "assemblyVersion": "1.0.0.0",
@@ -57,11 +46,6 @@
   },
   "libraries": {
     "TecnPoint.Interfaces/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "TecnPoint.Enums/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
