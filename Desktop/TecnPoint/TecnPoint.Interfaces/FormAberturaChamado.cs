@@ -54,6 +54,12 @@ namespace TecnPoint.Interfaces
                                     "TechSolutions",
                                     MessageBoxButtons.OK,
                                     MessageBoxIcon.Information);
+
+                    txtTitulo.Text = "";
+                    txtDescricao.Text = "";
+                    cbxPrioridade.SelectedIndex = 0;
+                    cbxModulo.SelectedIndex = 0;
+                    cbxJornada.SelectedIndex = 0;
                 }
                 else
                 {
