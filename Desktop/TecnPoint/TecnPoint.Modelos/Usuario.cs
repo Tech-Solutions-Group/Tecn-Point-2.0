@@ -1,18 +1,19 @@
-﻿using TecnPoint.Enums;
+﻿using System.Text.Json.Serialization;
+using TecnPoint.Modelos.Enum;
 
 namespace TecnPoint.Modelos
 {
     public class Usuario
     {
-        public int Id_usuario { get; set; }
-        public string Nome { get; set; }
-        public string Email { get; set; }
-        public string Senha { get; set; }
-        public string TipoUsuario { get; set; }
+        public long id_usuario { get; set; }
+        public string nome { get; set; }
+        public string email { get; set; }
+        public string senha { get; set; }
+        public TipoUsuario tipoUsuario { get; set; }
 
         public override string ToString()
         {
-            return $"Id: {Id_usuario} \nNome: {Nome} \nEmail: {Email} \nSenha: {Senha} Tipo Usuário: {TipoUsuario}";
+            return $"Id: {id_usuario} \nNome: {nome} \nEmail: {email} \nSenha: {senha} Tipo Usuário: {tipoUsuario}";
         }
     }
 }

@@ -2,16 +2,6 @@
   "version": 3,
   "targets": {
     "net8.0": {
-      "TecnPoint.Enums/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v8.0",
-        "compile": {
-          "bin/placeholder/TecnPoint.Enums.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/TecnPoint.Enums.dll": {}
-        }
-      },
       "TecnPoint.Exceptions/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
@@ -25,9 +15,6 @@
       "TecnPoint.Modelos/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
-        "dependencies": {
-          "TecnPoint.Enums": "1.0.0"
-        },
         "compile": {
           "bin/placeholder/TecnPoint.Modelos.dll": {}
         },
@@ -38,11 +25,6 @@
     }
   },
   "libraries": {
-    "TecnPoint.Enums/1.0.0": {
-      "type": "project",
-      "path": "../TecnPoint.Enums/TecnPoint.Enums.csproj",
-      "msbuildProject": "../TecnPoint.Enums/TecnPoint.Enums.csproj"
-    },
     "TecnPoint.Exceptions/1.0.0": {
       "type": "project",
       "path": "../TecnPoint.Exceptions/TecnPoint.Exceptions.csproj",

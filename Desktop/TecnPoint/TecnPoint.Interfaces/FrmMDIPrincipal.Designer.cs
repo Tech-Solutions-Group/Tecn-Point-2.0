@@ -64,7 +64,7 @@
             menuStrip.Location = new Point(0, 0);
             menuStrip.Name = "menuStrip";
             menuStrip.Padding = new Padding(7, 2, 0, 2);
-            menuStrip.Size = new Size(219, 523);
+            menuStrip.Size = new Size(219, 542);
             menuStrip.TabIndex = 0;
             menuStrip.Text = "MenuStrip";
             // 
@@ -81,6 +81,7 @@
             tspAbrirChamado.Size = new Size(191, 32);
             tspAbrirChamado.Text = "Abrir Chamado";
             tspAbrirChamado.TextImageRelation = TextImageRelation.Overlay;
+            tspAbrirChamado.Click += tspAbrirChamado_Click;
             // 
             // tspAcompanharChamado
             // 
@@ -126,7 +127,7 @@
             toolStrip.Items.AddRange(new ToolStripItem[] { newToolStripButton, openToolStripButton, saveToolStripButton, toolStripSeparator1, printToolStripButton, printPreviewToolStripButton, toolStripSeparator2, helpToolStripButton, toolStripButton1 });
             toolStrip.Location = new Point(219, 0);
             toolStrip.Name = "toolStrip";
-            toolStrip.Size = new Size(24, 523);
+            toolStrip.Size = new Size(24, 542);
             toolStrip.TabIndex = 1;
             toolStrip.Text = "ToolStrip";
             // 
@@ -208,10 +209,10 @@
             // statusStrip
             // 
             statusStrip.Items.AddRange(new ToolStripItem[] { toolStripStatusLabel });
-            statusStrip.Location = new Point(243, 501);
+            statusStrip.Location = new Point(243, 520);
             statusStrip.Name = "statusStrip";
             statusStrip.Padding = new Padding(1, 0, 16, 0);
-            statusStrip.Size = new Size(577, 22);
+            statusStrip.Size = new Size(661, 22);
             statusStrip.TabIndex = 2;
             statusStrip.Text = "StatusStrip";
             // 
@@ -226,7 +227,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Control;
-            ClientSize = new Size(820, 523);
+            ClientSize = new Size(904, 542);
             Controls.Add(statusStrip);
             Controls.Add(toolStrip);
             Controls.Add(menuStrip);

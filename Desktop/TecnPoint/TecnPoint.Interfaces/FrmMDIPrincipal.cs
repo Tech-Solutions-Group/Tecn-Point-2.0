@@ -44,10 +44,21 @@ namespace TecnPoint.Interfaces
 
         private void AlterarVisualizacao()
         {
-            if(usuarioLogado.TipoUsuario == "CLIENTE")
+            if (usuarioLogado.tipoUsuario == Modelos.Enum.TipoUsuario.CLIENTE)
             {
                 tspGerenciarUsuarios.Visible = false;
             }
+        }
+
+        private void tspAbrirChamado_Click(object sender, EventArgs e)
+        {
+            FormAberturaChamado formAberturaChamado = new FormAberturaChamado(usuarioLogado);
+
+            formAberturaChamado.MdiParent = this;
+
+            formAberturaChamado.Dock = DockStyle.Fill;
+
+            formAberturaChamado.Show();
         }
     }
 }

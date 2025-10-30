@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TecnPoint.Modelos;
+using TecnPoint.Modelos.DTO;
 using TecnPoint.Services;
 
 namespace TecnPoint.Interfaces
@@ -26,7 +27,11 @@ namespace TecnPoint.Interfaces
         {
             try
             {
-                Usuario usuarioLogado = await _usuarioService.RealizarLogin(tbxEmail.Text, tbxSenha.Text);
+                ValidaLogin(tbxEmail.Text, tbxSenha.Text);
+
+                LoginUsuarioDTO loginUsuarioDTO = new LoginUsuarioDTO(tbxEmail.Text.ToLower(), tbxSenha.Text);
+
+                Usuario usuarioLogado = await _usuarioService.RealizarLogin(loginUsuarioDTO);
 
                 MessageBox.Show($"Login efetuado com sucesso!\n{usuarioLogado}",
                                 "TechSolutions",
@@ -40,13 +45,27 @@ namespace TecnPoint.Interfaces
                     this.Hide();
                 }
 
-            }catch(Exception ex)
+            }catch(ArgumentException ex)
             {
                 MessageBox.Show(ex.Message,     
                                 "TechSolutions",
                                 MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
+            }catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message,
+                                "TechSolutions",
+                                MessageBoxButtons.OK,
                                 MessageBoxIcon.Error);
             }
+
+
+        }
+
+        private void ValidaLogin(string email, string senha)
+        {
+            if (string.IsNullOrWhiteSpace(email)) throw new ArgumentException("O e-mail deve ser informado!");
+            if (string.IsNullOrWhiteSpace(senha)) throw new ArgumentException("A senha deve ser informada!");
         }
     }
 }

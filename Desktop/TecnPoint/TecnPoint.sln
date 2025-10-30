@@ -1,13 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35931.197 d17.13
+VisualStudioVersion = 17.13.35931.197
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TecnPoint.Interfaces", "TecnPoint.Interfaces\TecnPoint.Interfaces.csproj", "{D46F6179-22C2-422C-8766-E675964AD34C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TecnPoint.Modelos", "TecnPoint.Modelos\TecnPoint.Modelos.csproj", "{42D92595-F112-4A63-B0AF-3C610F96528C}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TecnPoint.Enums", "TecnPoint.Enums\TecnPoint.Enums.csproj", "{BCA4BFE5-6960-495D-818A-C6A37EBA9544}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TecnPoint.Services", "TecnPoint.Services\TecnPoint.Services.csproj", "{28EB846F-610B-4DE4-A19E-2BEBFA4603B8}"
 EndProject
@@ -27,10 +25,6 @@ Global
 		{42D92595-F112-4A63-B0AF-3C610F96528C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{42D92595-F112-4A63-B0AF-3C610F96528C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{42D92595-F112-4A63-B0AF-3C610F96528C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BCA4BFE5-6960-495D-818A-C6A37EBA9544}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BCA4BFE5-6960-495D-818A-C6A37EBA9544}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BCA4BFE5-6960-495D-818A-C6A37EBA9544}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BCA4BFE5-6960-495D-818A-C6A37EBA9544}.Release|Any CPU.Build.0 = Release|Any CPU
 		{28EB846F-610B-4DE4-A19E-2BEBFA4603B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{28EB846F-610B-4DE4-A19E-2BEBFA4603B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{28EB846F-610B-4DE4-A19E-2BEBFA4603B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
