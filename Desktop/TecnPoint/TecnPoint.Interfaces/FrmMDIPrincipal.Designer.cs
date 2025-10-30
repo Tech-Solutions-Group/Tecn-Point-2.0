@@ -64,7 +64,7 @@
             menuStrip.Location = new Point(0, 0);
             menuStrip.Name = "menuStrip";
             menuStrip.Padding = new Padding(7, 2, 0, 2);
-            menuStrip.Size = new Size(219, 542);
+            menuStrip.Size = new Size(219, 645);
             menuStrip.TabIndex = 0;
             menuStrip.Text = "MenuStrip";
             // 
@@ -128,7 +128,7 @@
             toolStrip.Items.AddRange(new ToolStripItem[] { newToolStripButton, openToolStripButton, saveToolStripButton, toolStripSeparator1, printToolStripButton, printPreviewToolStripButton, toolStripSeparator2, helpToolStripButton, toolStripButton1 });
             toolStrip.Location = new Point(219, 0);
             toolStrip.Name = "toolStrip";
-            toolStrip.Size = new Size(24, 542);
+            toolStrip.Size = new Size(24, 645);
             toolStrip.TabIndex = 1;
             toolStrip.Text = "ToolStrip";
             // 
@@ -210,10 +210,10 @@
             // statusStrip
             // 
             statusStrip.Items.AddRange(new ToolStripItem[] { toolStripStatusLabel });
-            statusStrip.Location = new Point(243, 520);
+            statusStrip.Location = new Point(243, 623);
             statusStrip.Name = "statusStrip";
             statusStrip.Padding = new Padding(1, 0, 16, 0);
-            statusStrip.Size = new Size(661, 22);
+            statusStrip.Size = new Size(876, 22);
             statusStrip.TabIndex = 2;
             statusStrip.Text = "StatusStrip";
             // 
@@ -228,7 +228,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Control;
-            ClientSize = new Size(904, 542);
+            ClientSize = new Size(1119, 645);
             Controls.Add(statusStrip);
             Controls.Add(toolStrip);
             Controls.Add(menuStrip);

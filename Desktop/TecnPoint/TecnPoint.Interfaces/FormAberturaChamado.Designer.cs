@@ -54,7 +54,7 @@
             // 
             lblModulo.AutoSize = true;
             lblModulo.Font = new Font("Consolas", 13F);
-            lblModulo.Location = new Point(162, 366);
+            lblModulo.Location = new Point(274, 412);
             lblModulo.Name = "lblModulo";
             lblModulo.Size = new Size(70, 22);
             lblModulo.TabIndex = 1;
@@ -64,7 +64,7 @@
             // 
             lblJornada.AutoSize = true;
             lblJornada.Font = new Font("Consolas", 13F);
-            lblJornada.Location = new Point(162, 295);
+            lblJornada.Location = new Point(266, 320);
             lblJornada.Name = "lblJornada";
             lblJornada.Size = new Size(80, 22);
             lblJornada.TabIndex = 2;
@@ -74,7 +74,7 @@
             // 
             lblPrioridade.AutoSize = true;
             lblPrioridade.Font = new Font("Consolas", 13F);
-            lblPrioridade.Location = new Point(162, 221);
+            lblPrioridade.Location = new Point(268, 243);
             lblPrioridade.Name = "lblPrioridade";
             lblPrioridade.Size = new Size(110, 22);
             lblPrioridade.TabIndex = 3;
@@ -84,7 +84,7 @@
             // 
             lblTitulo.AutoSize = true;
             lblTitulo.Font = new Font("Consolas", 13F);
-            lblTitulo.Location = new Point(162, 22);
+            lblTitulo.Location = new Point(274, 46);
             lblTitulo.Name = "lblTitulo";
             lblTitulo.Size = new Size(70, 22);
             lblTitulo.TabIndex = 4;
@@ -94,7 +94,7 @@
             // 
             lblDescricao.AutoSize = true;
             lblDescricao.Font = new Font("Consolas", 13F);
-            lblDescricao.Location = new Point(162, 98);
+            lblDescricao.Location = new Point(268, 120);
             lblDescricao.Name = "lblDescricao";
             lblDescricao.Size = new Size(100, 22);
             lblDescricao.TabIndex = 5;
@@ -103,7 +103,7 @@
             // txtTitulo
             // 
             txtTitulo.Font = new Font("Segoe UI", 12F);
-            txtTitulo.Location = new Point(168, 51);
+            txtTitulo.Location = new Point(274, 81);
             txtTitulo.Name = "txtTitulo";
             txtTitulo.PlaceholderText = "Descreva brevemente o problema";
             txtTitulo.Size = new Size(332, 29);
@@ -113,7 +113,7 @@
             // txtDescricao
             // 
             txtDescricao.Font = new Font("Segoe UI", 12F);
-            txtDescricao.Location = new Point(168, 126);
+            txtDescricao.Location = new Point(274, 152);
             txtDescricao.Multiline = true;
             txtDescricao.Name = "txtDescricao";
             txtDescricao.PlaceholderText = "Detalhe o problema encontrado";
@@ -128,7 +128,7 @@
             cbxPrioridade.Font = new Font("Segoe UI", 12F);
             cbxPrioridade.FormattingEnabled = true;
             cbxPrioridade.Items.AddRange(new object[] { "Selecione a prioridade...", "Baixa", "Média", "Alta" });
-            cbxPrioridade.Location = new Point(170, 252);
+            cbxPrioridade.Location = new Point(276, 275);
             cbxPrioridade.Name = "cbxPrioridade";
             cbxPrioridade.Size = new Size(330, 29);
             cbxPrioridade.TabIndex = 8;
@@ -140,7 +140,7 @@
             cbxJornada.Font = new Font("Segoe UI", 12F);
             cbxJornada.FormattingEnabled = true;
             cbxJornada.Items.AddRange(new object[] { "Selecione a jornada...", "Financeiro", "Marketing", "Recursos Humanos" });
-            cbxJornada.Location = new Point(170, 324);
+            cbxJornada.Location = new Point(274, 353);
             cbxJornada.Name = "cbxJornada";
             cbxJornada.Size = new Size(330, 29);
             cbxJornada.TabIndex = 9;
@@ -152,7 +152,7 @@
             cbxModulo.Font = new Font("Segoe UI", 12F);
             cbxModulo.FormattingEnabled = true;
             cbxModulo.Items.AddRange(new object[] { "Selecione o módulo...", "Hardware", "Software", "Rede" });
-            cbxModulo.Location = new Point(168, 396);
+            cbxModulo.Location = new Point(274, 451);
             cbxModulo.Name = "cbxModulo";
             cbxModulo.Size = new Size(332, 29);
             cbxModulo.TabIndex = 10;
@@ -164,7 +164,7 @@
             btnConfirmar.FlatStyle = FlatStyle.Flat;
             btnConfirmar.Font = new Font("Consolas", 11F);
             btnConfirmar.ForeColor = SystemColors.ControlLightLight;
-            btnConfirmar.Location = new Point(393, 440);
+            btnConfirmar.Location = new Point(497, 499);
             btnConfirmar.Name = "btnConfirmar";
             btnConfirmar.Size = new Size(107, 38);
             btnConfirmar.TabIndex = 11;
@@ -178,7 +178,7 @@
             btnCancelar.FlatStyle = FlatStyle.Flat;
             btnCancelar.Font = new Font("Consolas", 11F);
             btnCancelar.ForeColor = SystemColors.ControlDarkDark;
-            btnCancelar.Location = new Point(168, 440);
+            btnCancelar.Location = new Point(274, 499);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(107, 38);
             btnCancelar.TabIndex = 12;
@@ -189,7 +189,7 @@
             // pictureBox1
             // 
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(229, 369);
+            pictureBox1.Location = new Point(346, 413);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(22, 21);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
@@ -199,7 +199,7 @@
             // pictureBox2
             // 
             pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(240, 297);
+            pictureBox2.Location = new Point(352, 321);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new Size(22, 21);
             pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
@@ -215,7 +215,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlLightLight;
-            ClientSize = new Size(659, 517);
+            ClientSize = new Size(875, 618);
             Controls.Add(pictureBox2);
             Controls.Add(pictureBox1);
             Controls.Add(btnCancelar);
