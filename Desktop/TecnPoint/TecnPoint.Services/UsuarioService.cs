@@ -19,8 +19,6 @@ namespace TecnPoint.Services
 
         public async Task<Usuario> RealizarLogin(LoginUsuarioDTO loginUsuarioDTO)
         {
-            var jsonLogin = JsonSerializer.Serialize(loginUsuarioDTO);
-
             var request = new HttpRequestMessage(HttpMethod.Post, "http://localhost:8080/usuarios/login");
 
             StringContent content = new StringContent($@"{{

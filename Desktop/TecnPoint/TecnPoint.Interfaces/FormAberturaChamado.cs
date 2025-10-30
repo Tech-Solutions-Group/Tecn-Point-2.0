@@ -34,9 +34,8 @@ namespace TecnPoint.Interfaces
 
         private void btnConfirmar_Click(object sender, EventArgs e)
         {
-            if (1 == 1)
+            if (ValidaCamposAberturaChamado())
             {
-
                 PrioridadeChamado prioridadeChamado = ConverterPrioridadeParaEnum(cbxPrioridade.SelectedIndex);
 
                 AberturaChamadoDTO aberturaChamadoDTO = new AberturaChamadoDTO(txtTitulo.Text,
@@ -46,6 +45,7 @@ namespace TecnPoint.Interfaces
                                                                                 cbxModulo.SelectedIndex,
                                                                                 cbxJornada.SelectedIndex);
                 var chamado = chamadoService.AbrirChamado(aberturaChamadoDTO);
+
                 if (chamado != null)
                 {
                     MessageBox.Show("Chamado aberto com sucesso!",
@@ -61,6 +61,13 @@ namespace TecnPoint.Interfaces
                                     MessageBoxIcon.Error);
                 }
             }
+            else
+            {
+                MessageBox.Show("Não foi possível abrir o chamado\nPreencha corretamente todos os campos",
+                                    "TechSolutions",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Error);
+            }
         }
 
         private PrioridadeChamado ConverterPrioridadeParaEnum(int selectedIndex)
@@ -69,6 +76,16 @@ namespace TecnPoint.Interfaces
             if (selectedIndex == 2) return PrioridadeChamado.MEDIA;
             if (selectedIndex == 3) return PrioridadeChamado.ALTA;
             return PrioridadeChamado.BAIXA;
+        }
+
+        // Retorna verdadeiro se todos os campos estiverem preenchidos corretamente
+        private bool ValidaCamposAberturaChamado()
+        {
+            return validacaoAberturaChamado.ValidaTitulo(txtTitulo.Text) &&
+                validacaoAberturaChamado.ValidaDescricao(txtDescricao.Text) &&
+                validacaoAberturaChamado.ValidaPrioridade(cbxPrioridade.SelectedIndex) &&
+                validacaoAberturaChamado.ValidaModulo(cbxModulo.SelectedIndex) &&
+                validacaoAberturaChamado.ValidaJornada(cbxJornada.SelectedIndex);
         }
 
         private void txtTitulo_Leave(object sender, EventArgs e)

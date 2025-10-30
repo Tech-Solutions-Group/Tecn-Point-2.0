@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using TecnPoint.Exceptions;
 using TecnPoint.Modelos.DTO;
 using TecnPoint.Modelos;
+using System.Text.Json.Serialization;
+using System.Text.Json;
 
 namespace TecnPoint.Services
 {
@@ -19,18 +21,38 @@ namespace TecnPoint.Services
             _httpClient = new HttpClient();
         }
 
-        public async Task<ChamadoDTO> AbrirChamado(AberturaChamadoDTO aberturaChamadoDTO)
+        public async Task<Chamado> AbrirChamado(AberturaChamadoDTO aberturaChamadoDTO)
         {
-            HttpResponseMessage response = await _httpClient.PostAsJsonAsync("http://localhost:8080/chamados/abrir-chamado", aberturaChamadoDTO);
+            var request = new HttpRequestMessage(HttpMethod.Post, "http://localhost:8080/chamados/abrir-chamado");
+
+            var content = new StringContent($@"
+                                            {{
+                                              ""descricao"": ""{aberturaChamadoDTO.descricao}"",
+                                              ""titulo"": ""{aberturaChamadoDTO.titulo}"",
+                                              ""prioridade"": ""{aberturaChamadoDTO.prioridade}"",
+                                              ""idCliente"": {aberturaChamadoDTO.idCliente},
+                                              ""idModulo"": {aberturaChamadoDTO.idModulo},
+                                              ""idJornada"": {aberturaChamadoDTO.idJornada}
+                                            }}", null, "application/json");
+
+            request.Content = content;
+            var response = await _httpClient.SendAsync(request);
+
+            var jsonResposta = await response.Content.ReadAsStringAsync();
 
             if (response.IsSuccessStatusCode)
             {
-                var chamadoAberto = await response.Content.ReadFromJsonAsync<ChamadoDTO>();
+                JsonSerializerOptions options = new JsonSerializerOptions
+                {
+                    Converters = { new JsonStringEnumConverter() }
+                };
+
+                Chamado chamadoAberto = JsonSerializer.Deserialize<Chamado>(jsonResposta, options);
                 return chamadoAberto;
             }
 
-            var erro = await response.Content.ReadFromJsonAsync<MensagemErro>();
-            throw new Exception(erro?.mensagem ?? "Erro ao realizar login");
+            var erroLogin = JsonSerializer.Deserialize<MensagemErro>(jsonResposta);
+            throw new Exception(erroLogin.mensagem);
         }
     }
 }
