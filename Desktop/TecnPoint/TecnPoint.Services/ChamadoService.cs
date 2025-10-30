@@ -9,6 +9,7 @@ using TecnPoint.Modelos.DTO;
 using TecnPoint.Modelos;
 using System.Text.Json.Serialization;
 using System.Text.Json;
+using TecnPoint.Modelos.Enum;
 
 namespace TecnPoint.Services
 {
@@ -49,6 +50,30 @@ namespace TecnPoint.Services
 
                 Chamado chamadoAberto = JsonSerializer.Deserialize<Chamado>(jsonResposta, options);
                 return chamadoAberto;
+            }
+
+            var erroLogin = JsonSerializer.Deserialize<MensagemErro>(jsonResposta);
+            throw new Exception(erroLogin.mensagem);
+        }
+
+        public async Task<List<ChamadoDTO>> BuscarChamadosCliente(long idUsuarioLogado)
+        {
+            
+            var request = new HttpRequestMessage(HttpMethod.Get, $"http://localhost:8080/chamados/chamados-cliente/{idUsuarioLogado}");
+
+            var response = await _httpClient.SendAsync(request);
+
+            var jsonResposta = await response.Content.ReadAsStringAsync();
+
+            if (response.IsSuccessStatusCode)
+            {
+                JsonSerializerOptions options = new JsonSerializerOptions
+                {
+                    Converters = { new JsonStringEnumConverter() }
+                };
+
+                List<ChamadoDTO> listaChamados = JsonSerializer.Deserialize<List<ChamadoDTO>>(jsonResposta, options);
+                return listaChamados;
             }
 
             var erroLogin = JsonSerializer.Deserialize<MensagemErro>(jsonResposta);

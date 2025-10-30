@@ -94,6 +94,7 @@
             tspAcompanharChamado.Size = new Size(191, 36);
             tspAcompanharChamado.Text = "Acompanhar Chamado";
             tspAcompanharChamado.TextImageRelation = TextImageRelation.Overlay;
+            tspAcompanharChamado.Click += tspAcompanharChamado_Click;
             // 
             // tspGerenciarUsuarios
             // 

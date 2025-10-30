@@ -34,7 +34,7 @@ namespace TecnPoint.Interfaces
             cbxModulo.SelectedIndex = 0;
         }
 
-        private void btnConfirmar_Click(object sender, EventArgs e)
+        private async void btnConfirmar_Click(object sender, EventArgs e)
         {
             if (ValidaCamposAberturaChamado())
             {
@@ -46,27 +46,22 @@ namespace TecnPoint.Interfaces
                                                                                 usuarioLogado.id_usuario,
                                                                                 cbxModulo.SelectedIndex,
                                                                                 cbxJornada.SelectedIndex);
-                var chamado = chamadoService.AbrirChamado(aberturaChamadoDTO);
-
-                if (chamado != null)
+                try
                 {
+                    var chamado = await chamadoService.AbrirChamado(aberturaChamadoDTO);
+
                     MessageBox.Show("Chamado aberto com sucesso!",
-                                    "TechSolutions",
-                                    MessageBoxButtons.OK,
-                                    MessageBoxIcon.Information);
+                                        "TechSolutions",
+                                        MessageBoxButtons.OK,
+                                        MessageBoxIcon.Information);
+                    LimparCampos();
 
-                    txtTitulo.Text = "";
-                    txtDescricao.Text = "";
-                    cbxPrioridade.SelectedIndex = 0;
-                    cbxModulo.SelectedIndex = 0;
-                    cbxJornada.SelectedIndex = 0;
-                }
-                else
+                }catch(Exception ex) // Exceção lançada pelo Service
                 {
-                    MessageBox.Show("Não foi possível abrir o chamado",
-                                    "TechSolutions",
-                                    MessageBoxButtons.OK,
-                                    MessageBoxIcon.Error);
+                    MessageBox.Show($"Não foi possível abrir o chamado\n{ex.Message}",
+                                        "TechSolutions",
+                                        MessageBoxButtons.OK,
+                                        MessageBoxIcon.Error);
                 }
             }
             else
@@ -139,6 +134,15 @@ namespace TecnPoint.Interfaces
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             frmMDIPrincipal.CarregaFormLogo();
+        }
+
+        private void LimparCampos()
+        {
+            txtTitulo.Text = "";
+            txtDescricao.Text = "";
+            cbxPrioridade.SelectedIndex = 0;
+            cbxModulo.SelectedIndex = 0;
+            cbxJornada.SelectedIndex = 0;
         }
     }
 }

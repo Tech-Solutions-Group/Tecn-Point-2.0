@@ -28,13 +28,26 @@
         /// </summary>
         private void InitializeComponent()
         {
+            flpPanelCardsChamados = new FlowLayoutPanel();
             SuspendLayout();
+            // 
+            // flpPanelCardsChamados
+            // 
+            flpPanelCardsChamados.AutoScroll = true;
+            flpPanelCardsChamados.BackColor = SystemColors.Control;
+            flpPanelCardsChamados.FlowDirection = FlowDirection.TopDown;
+            flpPanelCardsChamados.Location = new Point(1, 1);
+            flpPanelCardsChamados.Name = "flpPanelCardsChamados";
+            flpPanelCardsChamados.Size = new Size(873, 616);
+            flpPanelCardsChamados.TabIndex = 0;
+            flpPanelCardsChamados.WrapContents = false;
             // 
             // FormAcompanharChamados
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(659, 517);
+            ClientSize = new Size(875, 618);
+            Controls.Add(flpPanelCardsChamados);
             FormBorderStyle = FormBorderStyle.None;
             Name = "FormAcompanharChamados";
             Text = "FormAcompanharChamados";
@@ -42,5 +55,7 @@
         }
 
         #endregion
+
+        private FlowLayoutPanel flpPanelCardsChamados;
     }
 }
