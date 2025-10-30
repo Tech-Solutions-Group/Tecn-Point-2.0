@@ -26,3 +26,4 @@ C:\Users\samuel\OneDrive\Desktop\PIM4\Tecn-Point-2.0\Desktop\TecnPoint\TecnPoint
 C:\Users\samuel\OneDrive\Desktop\PIM4\Tecn-Point-2.0\Desktop\TecnPoint\TecnPoint.Interfaces\obj\Debug\net8.0-windows\ref\TecnPoint.Interfaces.dll
 C:\Users\samuel\OneDrive\Desktop\PIM4\Tecn-Point-2.0\Desktop\TecnPoint\TecnPoint.Interfaces\obj\Debug\net8.0-windows\TecnPoint.Interfaces.FrmMDIPrincipal.resources
 C:\Users\samuel\OneDrive\Desktop\PIM4\Tecn-Point-2.0\Desktop\TecnPoint\TecnPoint.Interfaces\obj\Debug\net8.0-windows\TecnPoint.Interfaces.FormAberturaChamado.resources
+C:\Users\samuel\OneDrive\Desktop\PIM4\Tecn-Point-2.0\Desktop\TecnPoint\TecnPoint.Interfaces\obj\Debug\net8.0-windows\TecnPoint.Interfaces.FormLogo.resources

@@ -20,12 +20,14 @@ namespace TecnPoint.Interfaces
         private ChamadoService chamadoService;
         private ValidacaoAberturaChamado validacaoAberturaChamado;
         private Usuario usuarioLogado;
+        private FrmMDIPrincipal frmMDIPrincipal;
 
-        public FormAberturaChamado(Usuario usuarioLogado)
+        public FormAberturaChamado(Usuario usuarioLogado, FrmMDIPrincipal frmMDIPrincipal)
         {
             this.chamadoService = new ChamadoService();
             this.validacaoAberturaChamado = new ValidacaoAberturaChamado();
             this.usuarioLogado = usuarioLogado;
+            this.frmMDIPrincipal = frmMDIPrincipal;
             InitializeComponent();
             cbxPrioridade.SelectedIndex = 0;
             cbxJornada.SelectedIndex = 0;
@@ -126,6 +128,12 @@ namespace TecnPoint.Interfaces
             {
                 errorProvider1.SetError(cbxModulo, "O módulo deve ser informado");
             }
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            frmMDIPrincipal.CarregaFormLogo();
         }
     }
 }
