@@ -10,11 +10,11 @@ namespace TecnPoint.Modelos.DTO
     public class AtualizaChamadoDTO
     {
         public long id_chamado { get; set; }
-        public PrioridadeChamado prioridade { get; set; }
-        public StatusChamado status { get; set; }
-        public long id_usuario { get; set; }
-        public long idModulo { get; set; }
-        public long idJornada { get; set; }
+        public PrioridadeChamado? prioridade { get; set; }
+        public StatusChamado? status { get; set; }
+        public long? id_usuario { get; set; }
+        public long? idModulo { get; set; }
+        public long? idJornada { get; set; }
 
         public AtualizaChamadoDTO() { }
 

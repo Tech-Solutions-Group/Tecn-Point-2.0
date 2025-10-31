@@ -126,9 +126,9 @@ namespace TecnPoint.Services
             });
 
             var request = new HttpRequestMessage(HttpMethod.Patch, $"http://localhost:8080/chamados/{atualizaChamadoDTO.id_chamado}");
+            var content = new StringContent(jsonBody, Encoding.UTF8, "application/json");
 
-            var content = new StringContent(jsonBody, null, "application/json");
-
+            request.Content = content;
             var response = await _httpClient.SendAsync(request);
             var jsonResposta = await response.Content.ReadAsStringAsync();
 

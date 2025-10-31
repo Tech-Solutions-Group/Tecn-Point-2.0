@@ -100,7 +100,6 @@
             lblDescricao.Size = new Size(120, 26);
             lblDescricao.TabIndex = 3;
             lblDescricao.Text = "Descrição";
-            lblDescricao.Click += lblDescricao_Click;
             // 
             // lblDescricaoDoChamado
             // 
@@ -166,7 +165,6 @@
             lblNomeCliente.Size = new Size(176, 51);
             lblNomeCliente.TabIndex = 10;
             lblNomeCliente.Text = "Nome cliente";
-            lblNomeCliente.Click += lblNomeCliente_Click;
             // 
             // lblNomeFuncionario
             // 
@@ -219,9 +217,10 @@
             // 
             // cbxStatus
             // 
+            cbxStatus.DropDownStyle = ComboBoxStyle.DropDownList;
             cbxStatus.Font = new Font("Consolas", 15F, FontStyle.Bold);
             cbxStatus.FormattingEnabled = true;
-            cbxStatus.Items.AddRange(new object[] { "Aberto", "Em andamento", "Pendente", "Resolvido" });
+            cbxStatus.Items.AddRange(new object[] { "Selecione...", "Aberto", "Em andamento", "Pendente", "Resolvido" });
             cbxStatus.Location = new Point(49, 182);
             cbxStatus.Name = "cbxStatus";
             cbxStatus.Size = new Size(143, 31);
@@ -230,9 +229,10 @@
             // 
             // cbxPrioridade
             // 
+            cbxPrioridade.DropDownStyle = ComboBoxStyle.DropDownList;
             cbxPrioridade.Font = new Font("Consolas", 15F, FontStyle.Bold);
             cbxPrioridade.FormattingEnabled = true;
-            cbxPrioridade.Items.AddRange(new object[] { "Baixa", "Média", "Alta" });
+            cbxPrioridade.Items.AddRange(new object[] { "Selecione...", "Baixa", "Média", "Alta" });
             cbxPrioridade.Location = new Point(249, 182);
             cbxPrioridade.Name = "cbxPrioridade";
             cbxPrioridade.Size = new Size(143, 31);
@@ -241,6 +241,7 @@
             // 
             // cbxNomeFuncionario
             // 
+            cbxNomeFuncionario.DropDownStyle = ComboBoxStyle.DropDownList;
             cbxNomeFuncionario.Font = new Font("Consolas", 14F, FontStyle.Bold);
             cbxNomeFuncionario.FormattingEnabled = true;
             cbxNomeFuncionario.Location = new Point(234, 286);
@@ -296,7 +297,6 @@
             lblStatus.Size = new Size(144, 23);
             lblStatus.TabIndex = 24;
             lblStatus.Text = "status";
-            lblStatus.Click += lblStatus_Click;
             // 
             // lblPrioridade
             // 

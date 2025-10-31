@@ -31,54 +31,14 @@ namespace TecnPoint.Interfaces
             InitializeComponent();
         }
 
+        // Variável para controlar quando disparar o evento de SelectedIndexChanged das Combobox
+        private bool carregandoComboBox = true;
+
         private void FormDetalhesChamado_Load(object sender, EventArgs e)
         {
             PreencherDetalhes();
             CarregaNomeCbxFuncionarios(cbxNomeFuncionario);
-        }
-
-        private void PreencherDetalhes()
-        {
-            lblTitulo.Text = chamado.titulo;
-            lblStatus.Text = chamado.status.ToString();
-            lblStatus.BackColor = FundoStatus(chamado.status);
-            lblPrioridade.Text = chamado.prioridade.ToString();
-            lblNomeCliente.Text = chamado.cliente.nome;
-            lblNomeFuncionario.Text = chamado.funcionario.nome;
-            lblDescricaoDoChamado.Text = chamado.descricao;
-            lblJornada.Text = chamado.jornada.jornada;
-            lblModulo.Text = chamado.modulo.modulo;
-
-            if (usuarioLogado.tipoUsuario == TipoUsuario.CLIENTE)
-            {
-                cbxStatus.Visible = false;
-                cbxPrioridade.Visible = false;
-                cbxNomeFuncionario.Visible = false;
-            }
-        }
-
-        private Color FundoStatus(StatusChamado status)
-        {
-            if (status == StatusChamado.ABERTO)
-            {
-                return Color.FromArgb(67, 180, 128);
-            }
-
-            if (status == StatusChamado.EM_ANDAMENTO)
-            {
-                return Color.FromArgb(236, 169, 44);
-            }
-
-            if (status == StatusChamado.PENDENTE)
-            {
-                return Color.FromArgb(76, 143, 197);
-            }
-
-            if (status == StatusChamado.RESOLVIDO)
-            {
-                return Color.FromArgb(211, 211, 211);
-            }
-            return Color.Gray;
+            carregandoComboBox = false;
         }
 
         private void btnVoltarDetalhesChamado_Click(object sender, EventArgs e)
@@ -108,36 +68,106 @@ namespace TecnPoint.Interfaces
 
         }
 
-        private void lblNomeCliente_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void cbxPrioridade_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblDescricao_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblStatus_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private async void cbxStatus_SelectedIndexChanged(object sender, EventArgs e)
         {
-            AtualizaChamadoDTO dadosParaAtualizarNoChamado = new AtualizaChamadoDTO();
-            dadosParaAtualizarNoChamado.status = (StatusChamado) cbxStatus.SelectedIndex;
-            await chamadoService.AtualizaChamado(dadosParaAtualizarNoChamado);
+            if (!carregandoComboBox && cbxStatus.SelectedIndex > 0)
+            {
+                try
+                {
+                    AtualizaChamadoDTO dadosParaAtualizarNoChamado = new AtualizaChamadoDTO();
+
+                    dadosParaAtualizarNoChamado.id_chamado = chamado.id_chamado;
+                    dadosParaAtualizarNoChamado.status = (StatusChamado)cbxStatus.SelectedIndex - 1;
+
+                    this.chamado = await chamadoService.AtualizaChamado(dadosParaAtualizarNoChamado);
+
+                    lblStatus.Text = ConverteEnumStatus(chamado.status);
+                    lblStatus.BackColor = FundoStatus(chamado.status);
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Não foi possível atualizar o status do chamado,\nselecione um item válido" + ex.Message,
+                                           "TechSolutions",
+                                           MessageBoxButtons.OK,
+                                           MessageBoxIcon.Information);
+                }
+            }
         }
-        /*
-        private AtualizaChamadoDTO InstanciaAtualizaChamadoDTO()
+
+        private async void cbxPrioridade_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //return new AtualizaChamadoDTO(chamado)
-        }*/
+            if (!carregandoComboBox && cbxPrioridade.SelectedIndex > 0)
+            {
+                try
+                {
+                    AtualizaChamadoDTO dadosParaAtualizarNoChamado = new AtualizaChamadoDTO();
+
+                    dadosParaAtualizarNoChamado.id_chamado = chamado.id_chamado;
+                    dadosParaAtualizarNoChamado.prioridade = (PrioridadeChamado)cbxPrioridade.SelectedIndex - 1;
+
+                    this.chamado = await chamadoService.AtualizaChamado(dadosParaAtualizarNoChamado);
+
+                    lblPrioridade.Text = ConverteEnumPrioridade(chamado.prioridade);
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Não foi possível atualizar a prioridade do chamado,\nselecione um item válido" + ex.Message,
+                                           "TechSolutions",
+                                           MessageBoxButtons.OK,
+                                           MessageBoxIcon.Information);
+                }
+            }
+        }
+
+        private void PreencherDetalhes()
+        {
+            lblTitulo.Text = chamado.titulo;
+            lblStatus.Text = ConverteEnumStatus(chamado.status);
+            lblStatus.BackColor = FundoStatus(chamado.status);
+            lblPrioridade.Text = ConverteEnumPrioridade(chamado.prioridade);
+            lblNomeCliente.Text = chamado.cliente.nome;
+            lblNomeFuncionario.Text = chamado.funcionario.nome;
+            lblDescricaoDoChamado.Text = chamado.descricao;
+            lblJornada.Text = chamado.jornada.jornada;
+            lblModulo.Text = chamado.modulo.modulo;
+
+            cbxStatus.SelectedIndex = 0;
+            cbxPrioridade.SelectedIndex = 0;
+
+            if (usuarioLogado.tipoUsuario == TipoUsuario.CLIENTE)
+            {
+                cbxStatus.Visible = false;
+                cbxPrioridade.Visible = false;
+                cbxNomeFuncionario.Visible = false;
+            }
+        }
+
+        private Color FundoStatus(StatusChamado status)
+        {
+            if (status == StatusChamado.ABERTO) return Color.FromArgb(67, 180, 128);
+            if (status == StatusChamado.EM_ANDAMENTO) return Color.FromArgb(236, 169, 44);
+            if (status == StatusChamado.PENDENTE) return Color.FromArgb(76, 143, 197);
+            if (status == StatusChamado.RESOLVIDO) return Color.FromArgb(211, 211, 211);
+            return Color.Gray;
+        }
+
+        private string ConverteEnumStatus(StatusChamado status)
+        {
+            if (status == StatusChamado.ABERTO) return "Aberto";
+            if (status == StatusChamado.EM_ANDAMENTO) return "Em andamento";
+            if (status == StatusChamado.PENDENTE) return "Pendente";
+            if (status == StatusChamado.RESOLVIDO) return "Resolvido";
+            return "";
+        }
+
+        private string ConverteEnumPrioridade(PrioridadeChamado prioridade)
+        {
+            if (prioridade == PrioridadeChamado.BAIXA) return "Baixa";
+            if (prioridade == PrioridadeChamado.MEDIA) return "Média";
+            if (prioridade == PrioridadeChamado.ALTA) return "Alta";
+            return "";
+        }
     }
 }
