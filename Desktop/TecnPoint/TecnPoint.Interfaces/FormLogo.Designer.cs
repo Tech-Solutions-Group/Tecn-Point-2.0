@@ -90,7 +90,7 @@
             BackColor = SystemColors.ControlLightLight;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Center;
-            ClientSize = new Size(875, 618);
+            ClientSize = new Size(876, 620);
             Controls.Add(lblTipoUsuarioFrmLogo);
             Controls.Add(lblEmailFrmLogo);
             Controls.Add(lblNomeFrmLogo);

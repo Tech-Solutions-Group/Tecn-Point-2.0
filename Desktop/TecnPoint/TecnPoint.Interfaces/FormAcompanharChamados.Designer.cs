@@ -28,17 +28,26 @@
         /// </summary>
         private void InitializeComponent()
         {
+            panelDetalhesChamado = new Panel();
             flpPanelCardsChamados = new FlowLayoutPanel();
+            panelDetalhesChamado.SuspendLayout();
             SuspendLayout();
+            // 
+            // panelDetalhesChamado
+            // 
+            panelDetalhesChamado.Controls.Add(flpPanelCardsChamados);
+            panelDetalhesChamado.Location = new Point(0, 0);
+            panelDetalhesChamado.Name = "panelDetalhesChamado";
+            panelDetalhesChamado.Size = new Size(876, 620);
+            panelDetalhesChamado.TabIndex = 0;
             // 
             // flpPanelCardsChamados
             // 
             flpPanelCardsChamados.AutoScroll = true;
-            flpPanelCardsChamados.BackColor = SystemColors.Control;
             flpPanelCardsChamados.FlowDirection = FlowDirection.TopDown;
-            flpPanelCardsChamados.Location = new Point(1, 1);
+            flpPanelCardsChamados.Location = new Point(0, 0);
             flpPanelCardsChamados.Name = "flpPanelCardsChamados";
-            flpPanelCardsChamados.Size = new Size(873, 616);
+            flpPanelCardsChamados.Size = new Size(876, 620);
             flpPanelCardsChamados.TabIndex = 0;
             flpPanelCardsChamados.WrapContents = false;
             // 
@@ -46,16 +55,18 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(875, 618);
-            Controls.Add(flpPanelCardsChamados);
+            ClientSize = new Size(876, 620);
+            Controls.Add(panelDetalhesChamado);
             FormBorderStyle = FormBorderStyle.None;
             Name = "FormAcompanharChamados";
             Text = "FormAcompanharChamados";
+            panelDetalhesChamado.ResumeLayout(false);
             ResumeLayout(false);
         }
 
         #endregion
 
-        private FlowLayoutPanel flpPanelCardsChamados;
+        private Panel panelDetalhesChamado;
+        public FlowLayoutPanel flpPanelCardsChamados;
     }
 }

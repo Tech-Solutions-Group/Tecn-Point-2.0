@@ -238,6 +238,7 @@
             MainMenuStrip = menuStrip;
             Margin = new Padding(4, 3, 4, 3);
             Name = "FrmMDIPrincipal";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "FrmMDIPrincipal";
             menuStrip.ResumeLayout(false);
             menuStrip.PerformLayout();

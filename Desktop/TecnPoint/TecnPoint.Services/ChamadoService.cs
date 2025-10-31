@@ -10,6 +10,8 @@ using TecnPoint.Modelos;
 using System.Text.Json.Serialization;
 using System.Text.Json;
 using TecnPoint.Modelos.Enum;
+using static System.Net.Mime.MediaTypeNames;
+using System.Reflection.Metadata;
 
 namespace TecnPoint.Services
 {
@@ -25,7 +27,7 @@ namespace TecnPoint.Services
         public async Task<Chamado> AbrirChamado(AberturaChamadoDTO aberturaChamadoDTO)
         {
             var request = new HttpRequestMessage(HttpMethod.Post, "http://localhost:8080/chamados/abrir-chamado");
-
+            // Pode lançar formatexception
             var content = new StringContent($@"
                                             {{
                                               ""descricao"": ""{aberturaChamadoDTO.descricao}"",
@@ -52,14 +54,22 @@ namespace TecnPoint.Services
                 return chamadoAberto;
             }
 
-            var erroLogin = JsonSerializer.Deserialize<MensagemErro>(jsonResposta);
-            throw new Exception(erroLogin.mensagem);
+            var erroAbrirChamado = JsonSerializer.Deserialize<MensagemErro>(jsonResposta);
+            throw new Exception(erroAbrirChamado.mensagem);
         }
 
-        public async Task<List<ChamadoDTO>> BuscarChamadosCliente(long idUsuarioLogado)
+        public async Task<List<ChamadoDTO>> BuscarChamados(long idUsuarioLogado, TipoUsuario tipoUsuario)
         {
-            
-            var request = new HttpRequestMessage(HttpMethod.Get, $"http://localhost:8080/chamados/chamados-cliente/{idUsuarioLogado}");
+            var request = new HttpRequestMessage();
+
+            if (tipoUsuario == TipoUsuario.CLIENTE) 
+            { 
+                request = new HttpRequestMessage(HttpMethod.Get, $"http://localhost:8080/chamados/chamados-cliente/{idUsuarioLogado}"); 
+            }
+            else 
+            { 
+                request = new HttpRequestMessage(HttpMethod.Get, $"http://localhost:8080/chamados/chamados-funcionario/{idUsuarioLogado}"); 
+            }
 
             var response = await _httpClient.SendAsync(request);
 
@@ -76,8 +86,65 @@ namespace TecnPoint.Services
                 return listaChamados;
             }
 
-            var erroLogin = JsonSerializer.Deserialize<MensagemErro>(jsonResposta);
-            throw new Exception(erroLogin.mensagem);
+            var erroBuscarChamados = JsonSerializer.Deserialize<MensagemErro>(jsonResposta);
+            throw new Exception(erroBuscarChamados.mensagem);
+        }
+
+        public async Task<List<ListagemFuncionariosDTO>> CarregaNomeFuncionarios()
+        {
+            var request = new HttpRequestMessage(HttpMethod.Get, "http://localhost:8080/usuarios/listar-funcionarios");
+
+            var response = await _httpClient.SendAsync(request);
+
+            var jsonResposta = await response.Content.ReadAsStringAsync();
+
+            if (response.IsSuccessStatusCode)
+            {
+                List<ListagemFuncionariosDTO> listaFuncionarios = JsonSerializer.Deserialize<List<ListagemFuncionariosDTO>>(jsonResposta);
+                return listaFuncionarios;
+            }
+
+            var erroCarregarFuncionarios = JsonSerializer.Deserialize<MensagemErro>(jsonResposta);
+            throw new Exception(erroCarregarFuncionarios.mensagem);
+        }
+
+        public async Task<ChamadoDTO> AtualizaChamado(AtualizaChamadoDTO atualizaChamadoDTO)
+        {
+            AtualizaChamadoDTO conteudoBody = new AtualizaChamadoDTO()
+            {
+                prioridade = atualizaChamadoDTO.prioridade,
+                status = atualizaChamadoDTO.status,
+                id_usuario = atualizaChamadoDTO.id_usuario,
+                idModulo = atualizaChamadoDTO.idModulo,
+                idJornada = atualizaChamadoDTO.idJornada
+            };
+
+            var jsonBody = JsonSerializer.Serialize(conteudoBody, new JsonSerializerOptions
+            {
+                Converters = { new JsonStringEnumConverter() },
+                DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
+            });
+
+            var request = new HttpRequestMessage(HttpMethod.Patch, $"http://localhost:8080/chamados/{atualizaChamadoDTO.id_chamado}");
+
+            var content = new StringContent(jsonBody, null, "application/json");
+
+            var response = await _httpClient.SendAsync(request);
+            var jsonResposta = await response.Content.ReadAsStringAsync();
+
+            if (response.IsSuccessStatusCode)
+            {
+                JsonSerializerOptions options = new JsonSerializerOptions
+                {
+                    Converters = { new JsonStringEnumConverter() }
+                };
+
+                ChamadoDTO chamadoAtualizado = JsonSerializer.Deserialize<ChamadoDTO>(jsonResposta, options);
+                return chamadoAtualizado;
+            }
+
+            var erroAtualizarChamado = JsonSerializer.Deserialize<MensagemErro>(jsonResposta);
+            throw new Exception(erroAtualizarChamado.mensagem);
         }
     }
 }

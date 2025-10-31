@@ -9,10 +9,8 @@ namespace TecnPoint.Modelos
 {
     public class Jornada
     {
-        private long id_jornada;
+        public long id_jornada { get; set; }
 
-        private String jornada;
-
-        private List<Chamado> chamados;
+        public string jornada { get; set; }
     }
 }

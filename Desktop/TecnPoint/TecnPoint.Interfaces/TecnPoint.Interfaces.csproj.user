@@ -7,6 +7,9 @@
     <Compile Update="FormAcompanharChamados.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="FormDetalhesChamado.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="FormLogin.cs">
       <SubType>Form</SubType>
     </Compile>
