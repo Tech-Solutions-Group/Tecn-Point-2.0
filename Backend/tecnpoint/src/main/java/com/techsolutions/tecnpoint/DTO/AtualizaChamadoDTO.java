@@ -10,7 +10,7 @@ public class AtualizaChamadoDTO {
     Long id_chamado;
     PrioridadeChamado prioridade;
     StatusChamado status;
-    Long id_usuario;
+    Long idUsuario;
     Long idModulo;
     Long idJornada;
 }

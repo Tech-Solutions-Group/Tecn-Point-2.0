@@ -19,6 +19,7 @@ import { stat } from 'fs';
   styleUrls: ['./usuario.component.css'],
 })
 export class UsuarioComponent implements OnInit {
+  successModalOpen = false;
   usuarios: Usuario[] = [];
 
   constructor(private usuarioService: UsuarioService) {}
@@ -51,21 +52,27 @@ export class UsuarioComponent implements OnInit {
 
   atualizarLista(usuario: Usuario) {
     const index = this.usuarios.findIndex(
-      (u) => u.id_usuario === usuario.id_usuario
+      (u) => u.idUsuario === usuario.idUsuario
     );
     if (index !== -1) {
       this.usuarios[index] = usuario;
+      this.usuarios = [...this.usuarios];
     } else {
-      this.usuarios.push(usuario);
+      this.usuarios = [...this.usuarios, usuario];
     }
   }
 
   deleteUsuario(id: number): void {
-    if (confirm('Tem certeza que deseja excluir este usuário?')) {
-      this.usuarioService.delUsuario(id).subscribe({
-        next: () => this.loadUsuarios(),
-        error: (err) => console.error('Erro ao excluir usuário:', err),
-      });
-    }
+    this.usuarioService.delUsuario(id).subscribe({
+      next: () => {
+        this.loadUsuarios();
+        this.successModalOpen = true;
+      },
+      error: (err) => console.error('Erro ao excluir usuário:', err),
+    });
+  }
+
+  closeSuccess() {
+    this.successModalOpen = false;
   }
 }

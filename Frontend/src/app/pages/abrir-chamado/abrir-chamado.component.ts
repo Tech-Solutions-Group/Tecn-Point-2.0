@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AberturaChamado, ChamadoService } from '../../service/chamado.service';
 import { UsuarioService } from '../../service/usuario.service';
@@ -13,11 +14,13 @@ import { UsuarioService } from '../../service/usuario.service';
 })
 export class AbrirChamadoComponent {
   formInvalid = false;
+  successModalOpen = false;
 
   constructor(
     private chamadoService: ChamadoService,
     private usuarioService: UsuarioService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router: Router
   ) {}
 
   abrirChamadoForm = this.fb.group({
@@ -48,7 +51,7 @@ export class AbrirChamadoComponent {
       titulo: this.abrirChamadoForm.value.titulo!,
       descricao: this.abrirChamadoForm.value.descricao!,
       prioridade: this.abrirChamadoForm.value.prioridade!,
-      idCliente: usuarioLogado.id_usuario, // <- aqui pega o logado
+      idCliente: usuarioLogado.idUsuario, // <- aqui pega o logado
       idJornada: Number(this.abrirChamadoForm.value.fk_id_jornada),
       idModulo: Number(this.abrirChamadoForm.value.fk_id_modulo),
     };
@@ -57,10 +60,19 @@ export class AbrirChamadoComponent {
       next: (res) => {
         console.log('Chamado aberto com sucesso:', res);
         this.abrirChamadoForm.reset();
+        this.successModalOpen = true;
       },
       error: (erro) => {
         console.error('Erro ao abrir chamado:', erro);
       },
     });
+  }
+
+  closeForm(): void {
+    this.router.navigate(['/home']);
+  }
+
+  closeSuccess() {
+    this.successModalOpen = false;
   }
 }

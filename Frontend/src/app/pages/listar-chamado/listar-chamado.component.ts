@@ -8,10 +8,10 @@ import { Chamado, ChamadoService } from '../../service/chamado.service';
   selector: 'app-chamado',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
-  templateUrl: './chamado.component.html',
-  styleUrl: './chamado.component.css',
+  templateUrl: './listar-chamado.component.html',
+  styleUrl: './listar-chamado.component.css',
 })
-export class ChamadoComponent implements OnInit {
+export class ListarChamadoComponent implements OnInit {
   chamados: Chamado[] = [];
 
   constructor(
@@ -28,6 +28,19 @@ export class ChamadoComponent implements OnInit {
       next: (data) => (this.chamados = data),
       error: (err) => console.error('Erro ao carregar chamados', err),
     });
+  }
+
+  getPrioridadeLabel(prioridade: string): string {
+    switch (prioridade) {
+      case 'BAIXA':
+        return 'Baixa';
+      case 'MEDIA':
+        return 'Média';
+      case 'ALTA':
+        return 'Alta';
+      default:
+        return prioridade;
+    }
   }
 
   getStatusLabel(status: string): string {

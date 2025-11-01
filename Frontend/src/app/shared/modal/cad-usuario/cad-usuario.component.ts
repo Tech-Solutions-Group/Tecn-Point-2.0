@@ -13,6 +13,7 @@ import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 export class CadUsuarioComponent {
   formInvalid = false;
   isOpen = false;
+  successModalOpen = false;
 
   @Input() refresh!: () => void;
   @Output() usuarioCadastrado = new EventEmitter<Usuario>();
@@ -46,6 +47,7 @@ export class CadUsuarioComponent {
         this.usuarioCadastrado.emit(res);
         this.cadUsuarioForm.reset();
         this.close();
+        this.successModalOpen = true;
       },
       error: (erro) => {
         console.error('Erro ao cadastrar usuário:', erro);
@@ -59,5 +61,9 @@ export class CadUsuarioComponent {
 
   close() {
     this.isOpen = false;
+  }
+
+  closeSuccess() {
+    this.successModalOpen = false;
   }
 }

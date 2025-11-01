@@ -17,10 +17,10 @@ export interface Chamado {
   descricao: string;
   prioridade: string;
   status: string;
-  cliente: { id_usuario: number; nome: string; tipoUsuario: string };
-  funcionario: { id_usuario: number; nome: string; tipoUsuario: string };
-  jornada: any;
-  modulo: any;
+  cliente: { idUsuario: number; nome: string; tipoUsuario: string };
+  funcionario: { idUsuario: number; nome: string; tipoUsuario: string };
+  jornada: { idJornada: number; jornada: string };
+  modulo: { idModulo: number; modulo: string };
 }
 
 @Injectable({

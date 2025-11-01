@@ -25,26 +25,26 @@ public class ChamadoService {
     private UsuarioService usuarioService;
 
     /* ========== CRIAÇÃO ========== */
-    public ChamadoDTO postChamado(AberturaChamadoDTO aberturaChamadoDTO){
+    public ChamadoDTO postChamado(AberturaChamadoDTO aberturaChamadoDTO) {
         Chamados chamado = buildChamado(aberturaChamadoDTO);
         return buildChamadoDTO(chamadoRepository.save(chamado));
     }
 
     /* ========== LEITURAS ========== */
-    public List<ChamadoDTO> getAllChamados(){
+    public List<ChamadoDTO> getAllChamados() {
         return chamadoRepository.findAll()
                 .stream()
                 .map(this::buildChamadoDTO)
                 .toList();
     }
 
-    public ChamadoDTO getChamadoPorId(Long id_chamado){
+    public ChamadoDTO getChamadoPorId(Long id_chamado) {
         Chamados chamado = chamadoRepository.findById(id_chamado)
                 .orElseThrow(() -> new ChamadoNaoEncontradoException("O chamado não foi encontrado."));
         return buildChamadoDTO(chamado);
     }
 
-    public List<ChamadoDTO> getChamadosCliente(Long id_cliente){
+    public List<ChamadoDTO> getChamadosCliente(Long id_cliente) {
         Usuarios cliente = usuarioService.getUsuarioById(id_cliente)
                 .orElseThrow(() -> new UsuarioNaoEncontradoException("O cliente não foi encontrado."));
 
@@ -56,7 +56,7 @@ public class ChamadoService {
                 .toList();
     }
 
-    public List<ChamadoDTO> getChamadosFuncionario(Long id_funcionario){
+    public List<ChamadoDTO> getChamadosFuncionario(Long id_funcionario) {
         Usuarios funcionario = usuarioService.getUsuarioById(id_funcionario)
                 .orElseThrow(() -> new UsuarioNaoEncontradoException("O funcionário não foi encontrado."));
 
@@ -69,7 +69,7 @@ public class ChamadoService {
     }
 
     /* ========== ATUALIZAÇÃO ========== */
-    public ChamadoDTO updateChamado(Long idChamado, AtualizaChamadoDTO dto){
+    public ChamadoDTO updateChamado(Long idChamado, AtualizaChamadoDTO dto) {
         Chamados chamado = chamadoRepository.findById(idChamado)
                 .orElseThrow(() -> new ChamadoNaoEncontradoException("O chamado não foi encontrado."));
 
@@ -84,11 +84,11 @@ public class ChamadoService {
         }
 
         // Atualiza funcionário responsável
-        if (dto.getId_usuario() != null &&
+        if (dto.getIdUsuario() != null &&
                 (chamado.getFuncionario() == null ||
-                        !chamado.getFuncionario().getId_usuario().equals(dto.getId_usuario()))) {
+                        !chamado.getFuncionario().getIdUsuario().equals(dto.getIdUsuario()))) {
 
-            Usuarios novoFuncionario = usuarioService.getUsuarioById(dto.getId_usuario())
+            Usuarios novoFuncionario = usuarioService.getUsuarioById(dto.getIdUsuario())
                     .orElseThrow(() -> new UsuarioNaoEncontradoException("O funcionário não foi encontrado."));
 
             if (!isFuncionario(novoFuncionario))
@@ -115,13 +115,12 @@ public class ChamadoService {
             chamado.setModulo(novoModulo);
         }
 
-
         Chamados atualizado = chamadoRepository.save(chamado);
         return buildChamadoDTO(atualizado);
     }
 
     /* ========== VALIDAÇÕES E HELPERS ========== */
-    private void validaAberturaChamado(AberturaChamadoDTO dto){
+    private void validaAberturaChamado(AberturaChamadoDTO dto) {
         if (dto.getTitulo() == null || dto.getTitulo().trim().isEmpty())
             throw new DadosChamadoInvalidosException("O título do chamado deve ser informado");
 
@@ -141,7 +140,7 @@ public class ChamadoService {
             throw new DadosChamadoInvalidosException("O módulo deve ser informado");
     }
 
-    private Chamados buildChamado(AberturaChamadoDTO dto){
+    private Chamados buildChamado(AberturaChamadoDTO dto) {
         validaAberturaChamado(dto);
 
         Jornada jornada = jornadaRepository.findById(dto.getIdJornada())
@@ -157,7 +156,8 @@ public class ChamadoService {
             throw new TipoUsuarioInvalidoException("O cliente informado deve ser do tipo CLIENTE");
 
         Usuarios funcionarioPadrao = usuarioService.getUsuarioById(1L)
-                .orElseThrow(() -> new UsuarioNaoEncontradoException("O funcionário Tech Solutions não foi encontrado"));
+                .orElseThrow(
+                        () -> new UsuarioNaoEncontradoException("O funcionário Tech Solutions não foi encontrado"));
 
         return Chamados.builder()
                 .titulo(dto.getTitulo())
@@ -171,15 +171,15 @@ public class ChamadoService {
                 .build();
     }
 
-    private ChamadoDTO buildChamadoDTO(Chamados chamado){
+    private ChamadoDTO buildChamadoDTO(Chamados chamado) {
         UsuarioDTO cliente = UsuarioDTO.builder()
-                .id_usuario(chamado.getCliente().getId_usuario())
+                .idUsuario(chamado.getCliente().getIdUsuario())
                 .nome(chamado.getCliente().getNome())
                 .tipoUsuario(chamado.getCliente().getTipoUsuario())
                 .build();
 
         UsuarioDTO funcionario = UsuarioDTO.builder()
-                .id_usuario(chamado.getFuncionario().getId_usuario())
+                .idUsuario(chamado.getFuncionario().getIdUsuario())
                 .nome(chamado.getFuncionario().getNome())
                 .tipoUsuario(chamado.getFuncionario().getTipoUsuario())
                 .build();
@@ -197,7 +197,7 @@ public class ChamadoService {
                 .build();
     }
 
-    private boolean isFuncionario(Usuarios usuario){
+    private boolean isFuncionario(Usuarios usuario) {
         return usuario.getTipoUsuario() == TipoUsuario.FUNCIONARIO;
     }
 }

@@ -43,7 +43,7 @@ namespace TecnPoint.Interfaces
                 AberturaChamadoDTO aberturaChamadoDTO = new AberturaChamadoDTO(txtTitulo.Text,
                                                                                 txtDescricao.Text,
                                                                                 prioridadeChamado,
-                                                                                usuarioLogado.id_usuario,
+                                                                                usuarioLogado.idUsuario,
                                                                                 cbxModulo.SelectedIndex,
                                                                                 cbxJornada.SelectedIndex);
                 var chamado = chamadoService.AbrirChamado(aberturaChamadoDTO);

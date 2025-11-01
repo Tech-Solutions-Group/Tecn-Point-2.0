@@ -19,41 +19,42 @@ public class UsuarioController {
     private UsuarioService usuarioService;
 
     @PostMapping("/login")
-    public ResponseEntity<Usuarios> loginUsuario(@RequestBody LoginUsuarioDTO loginUsuarioDTO){
+    public ResponseEntity<Usuarios> loginUsuario(@RequestBody LoginUsuarioDTO loginUsuarioDTO) {
         return ResponseEntity.status(200).body(usuarioService.efetuarLogin(loginUsuarioDTO));
     }
 
     @GetMapping
-    public ResponseEntity<List<Usuarios>> getUsuarios(){
+    public ResponseEntity<List<Usuarios>> getAllUsuarios() {
         return ResponseEntity.status(200).body(usuarioService.getUsuarios());
     }
 
-    @GetMapping("/{id_usuario}")
-    public ResponseEntity<Usuarios> getUsuarioById(@PathVariable Long id_usuario){
-        return usuarioService.getUsuarioById(id_usuario)
+    @GetMapping("/{idUsuario}")
+    public ResponseEntity<Usuarios> getUsuarioById(@PathVariable Long idUsuario) {
+        return usuarioService.getUsuarioById(idUsuario)
                 .map(usuarios -> ResponseEntity.status(200).body(usuarios))
                 .orElse(ResponseEntity.status(404).build());
     }
 
     @PostMapping("/adicionar")
-    public ResponseEntity<Usuarios> postUsuario(@RequestBody Usuarios usuarios){
+    public ResponseEntity<Usuarios> postUsuario(@RequestBody Usuarios usuarios) {
         return ResponseEntity.status(201).body(usuarioService.postUsuarios(usuarios));
     }
 
-    @DeleteMapping("/{id_usuario}")
-    public ResponseEntity<Void> delUsuario(@PathVariable Long id_usuario){
-        usuarioService.delUsuarios(id_usuario);
+    @DeleteMapping("/{idUsuario}")
+    public ResponseEntity<Void> delUsuario(@PathVariable Long idUsuario) {
+        usuarioService.delUsuarios(idUsuario);
         return ResponseEntity.status(200).build();
     }
 
-    @PutMapping("/{id_usuario}")
-    public ResponseEntity<Usuarios> atualizarUsuario(@PathVariable Long id_usuario, @RequestBody AtualizaUsuarioDTO atualizaUsuarioDTO){
+    @PutMapping("/{idUsuario}")
+    public ResponseEntity<Usuarios> atualizarUsuario(@PathVariable Long idUsuario,
+            @RequestBody AtualizaUsuarioDTO atualizaUsuarioDTO) {
         // Tirar o retorno do usuário futuramente
-        return ResponseEntity.status(201).body(usuarioService.editarUsuario(id_usuario, atualizaUsuarioDTO));
+        return ResponseEntity.status(201).body(usuarioService.editarUsuario(idUsuario, atualizaUsuarioDTO));
     }
 
     @GetMapping("/listar-funcionarios")
-    public ResponseEntity<List<FuncionarioDTO>> listarFuncionarios(){
+    public ResponseEntity<List<FuncionarioDTO>> listarFuncionarios() {
         return ResponseEntity.status(200).body(usuarioService.listarFuncionarios());
     }
 }
