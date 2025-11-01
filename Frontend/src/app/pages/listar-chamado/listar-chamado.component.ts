@@ -59,6 +59,6 @@ export class ListarChamadoComponent implements OnInit {
   }
 
   goToHome() {
-    this.router.navigate(['/home']);
+    this.router.navigate(['/chamado']);
   }
 }
