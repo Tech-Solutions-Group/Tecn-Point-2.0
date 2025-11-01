@@ -12,7 +12,7 @@ export interface AberturaChamado {
 }
 
 export interface Chamado {
-  id_chamado: number;
+  idChamado: number;
   titulo: string;
   descricao: string;
   prioridade: string;

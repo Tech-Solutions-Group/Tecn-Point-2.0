@@ -6,6 +6,7 @@ import com.techsolutions.tecnpoint.enums.*;
 import com.techsolutions.tecnpoint.exceptions.*;
 import com.techsolutions.tecnpoint.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import java.util.*;
 
@@ -32,14 +33,13 @@ public class ChamadoService {
 
     /* ========== LEITURAS ========== */
     public List<ChamadoDTO> getAllChamados() {
-        return chamadoRepository.findAll()
-                .stream()
+        return chamadoRepository.findAll(Sort.by(Sort.Direction.ASC, "idChamado"))                .stream()
                 .map(this::buildChamadoDTO)
                 .toList();
     }
 
-    public ChamadoDTO getChamadoPorId(Long id_chamado) {
-        Chamados chamado = chamadoRepository.findById(id_chamado)
+    public ChamadoDTO getChamadoPorId(Long idChamado) {
+        Chamados chamado = chamadoRepository.findById(idChamado)
                 .orElseThrow(() -> new ChamadoNaoEncontradoException("O chamado não foi encontrado."));
         return buildChamadoDTO(chamado);
     }
@@ -185,7 +185,7 @@ public class ChamadoService {
                 .build();
 
         return ChamadoDTO.builder()
-                .id_chamado(chamado.getIdChamado())
+                .idChamado(chamado.getIdChamado())
                 .titulo(chamado.getTitulo())
                 .descricao(chamado.getDescricao())
                 .prioridade(chamado.getPrioridade())

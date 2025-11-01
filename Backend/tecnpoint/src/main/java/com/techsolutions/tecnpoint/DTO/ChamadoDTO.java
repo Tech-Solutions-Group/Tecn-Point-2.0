@@ -11,7 +11,7 @@ import lombok.Getter;
 @Builder
 public class ChamadoDTO {
 
-    Long id_chamado;
+    Long idChamado;
     String descricao;
     String titulo;
     PrioridadeChamado prioridade;
