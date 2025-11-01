@@ -68,7 +68,7 @@ namespace TecnPoint.Services
             }
             else 
             { 
-                request = new HttpRequestMessage(HttpMethod.Get, $"http://localhost:8080/chamados/chamados-funcionario/{idUsuarioLogado}"); 
+                request = new HttpRequestMessage(HttpMethod.Get, $"http://localhost:8080/chamados/exibir-todos-chamados"); 
             }
 
             var response = await _httpClient.SendAsync(request);

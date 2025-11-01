@@ -39,7 +39,7 @@ namespace TecnPoint.Interfaces
                     {
                         Size = new Size(600, 100),
                         Font = new Font("Consolas", 11, FontStyle.Bold),
-                        BackColor = Color.FromArgb(160, 83, 232),
+                        BackColor = Color.FromArgb(190, 140, 255),
                         Cursor = Cursors.Hand
                     };
 

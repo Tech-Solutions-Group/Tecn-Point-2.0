@@ -233,10 +233,10 @@ namespace TecnPoint.Interfaces
 
         private Color FundoStatus(StatusChamado status)
         {
-            if (status == StatusChamado.ABERTO) return Color.FromArgb(67, 180, 128);
+            if (status == StatusChamado.ABERTO) return Color.FromArgb(211, 211, 211);
             if (status == StatusChamado.EM_ANDAMENTO) return Color.FromArgb(236, 169, 44);
             if (status == StatusChamado.PENDENTE) return Color.FromArgb(76, 143, 197);
-            if (status == StatusChamado.RESOLVIDO) return Color.FromArgb(211, 211, 211);
+            if (status == StatusChamado.RESOLVIDO) return Color.FromArgb(67, 180, 128);
             return Color.Gray;
         }
 
