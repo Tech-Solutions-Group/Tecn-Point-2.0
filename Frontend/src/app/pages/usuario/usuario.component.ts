@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CadUsuarioComponent } from '../../shared/modal/cad-usuario/cad-usuario.component';
 import { EdtUsuarioComponent } from '../../shared/modal/edt-usuario/edt-usuario.component';
+import { stat } from 'fs';
 
 @Component({
   selector: 'app-usuario',
@@ -21,6 +22,17 @@ export class UsuarioComponent implements OnInit {
   usuarios: Usuario[] = [];
 
   constructor(private usuarioService: UsuarioService) {}
+
+  getFuncionario(status: string): string {
+    switch (status) {
+      case 'CLIENTE':
+        return 'Cliente';
+      case 'FUNCIONARIO':
+        return 'Funcionário';
+      default:
+        return status;
+    }
+  }
 
   ngOnInit(): void {
     this.loadUsuarios();

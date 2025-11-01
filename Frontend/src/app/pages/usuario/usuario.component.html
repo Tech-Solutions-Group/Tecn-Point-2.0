@@ -2,20 +2,20 @@
   Cadastrar
 </button>
 
-<table class="table table-striped align-middle shadow-sm table-bordered">
+<table class="table align-middle">
   <thead style="--bs-table-bg: #8b5cf6; --bs-table-color: #fff">
     <tr>
-      <th>Nome</th>
-      <th>Email</th>
-      <th>Tipo Usuário</th>
-      <th style="width: 10rem" class="text-center action_user">Ações</th>
+      <th>NOME</th>
+      <th>EMAIL</th>
+      <th>TIPO USUÁRIO</th>
+      <th style="width: 10rem" class="text-center action_user">AÇÕES</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let usuario of usuarios">
       <td>{{ usuario.nome }}</td>
       <td>{{ usuario.email }}</td>
-      <td>{{ usuario.tipoUsuario }}</td>
+      <td>{{ getFuncionario(usuario.tipoUsuario) }}</td>
       <td class="text-center">
         <button
           class="btn btn-sm btn-outline-primary me-2"

@@ -3,7 +3,23 @@
 <div class="comum_modal" *ngIf="isOpen">
   <div class="comum_modal-header">
     <h2>Cadastro</h2>
-    <button (click)="close()">X</button>
+    <button class="btn" (click)="close()">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="23"
+        height="23"
+        fill="currentColor"
+        class="bi bi-x-circle"
+        viewBox="0 0 16 16"
+      >
+        <path
+          d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"
+        />
+        <path
+          d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"
+        />
+      </svg>
+    </button>
   </div>
   <div class="comum_modal-body">
     <form
@@ -15,7 +31,14 @@
       <!-- Nome -->
       <div class="campo-cadastro">
         <label for="nome">Nome:</label>
-        <input id="nome" type="text" formControlName="nome" />
+        <input
+          id="nome"
+          type="text"
+          class="form-control"
+          placeholder="Insira o Nome"
+          aria-label="Insira o Nome"
+          formControlName="nome"
+        />
         <small
           *ngIf="
             cadUsuarioForm.get('nome')?.invalid &&
@@ -29,7 +52,20 @@
       <!-- Email -->
       <div class="campo-cadastro">
         <label for="email">Email:</label>
-        <input id="email" type="email" formControlName="email" />
+        <div class="input-group mb-2">
+          <input
+            id="email"
+            type="email"
+            class="form-control"
+            placeholder="Insira o Email"
+            aria-label="Insira o Email"
+            aria-describedby="basic-addon2"
+            formControlName="email"
+          />
+          <span class="input-group-text" id="basic-addon2"
+            >&#64;exemplo.com</span
+          >
+        </div>
         <small
           *ngIf="
             cadUsuarioForm.get('email')?.invalid &&
@@ -43,7 +79,14 @@
       <!-- Senha -->
       <div class="campo-cadastro">
         <label for="senha">Senha:</label>
-        <input id="senha" type="password" formControlName="senha" />
+        <input
+          id="senha"
+          type="password"
+          class="form-control"
+          placeholder="Insira a Senha"
+          aria-label="Insira a Senha"
+          formControlName="senha"
+        />
         <small
           *ngIf="
             cadUsuarioForm.get('senha')?.invalid &&
@@ -57,9 +100,14 @@
       <!-- Tipo de Usuário -->
       <div class="campo-cadastro">
         <label for="tipoUsuario">Tipo Usuário:</label>
-        <select id="tipoUsuario" formControlName="tipoUsuario">
-          <option value="CLIENTE">CLIENTE</option>
-          <option value="FUNCIONARIO">FUNCIONARIO</option>
+        <select
+          id="tipoUsuario"
+          class="form-select mb-2"
+          aria-label="Default select example"
+          formControlName="tipoUsuario"
+        >
+          <option value="CLIENTE">Cliente</option>
+          <option value="FUNCIONARIO">Funcionário</option>
         </select>
         <small
           *ngIf="
@@ -73,8 +121,10 @@
 
       <!-- Botões -->
       <div class="action">
-        <button type="button" (click)="close()">Cancelar</button>
-        <button type="submit">Cadastrar</button>
+        <button class="btn btn-danger" type="button" (click)="close()">
+          Cancelar
+        </button>
+        <button class="btn btn-success" type="submit">Cadastrar</button>
       </div>
     </form>
   </div>

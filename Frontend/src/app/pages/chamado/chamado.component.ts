@@ -30,6 +30,21 @@ export class ChamadoComponent implements OnInit {
     });
   }
 
+  getStatusLabel(status: string): string {
+    switch (status) {
+      case 'ABERTO':
+        return 'Aberto';
+      case 'PENDENTE':
+        return 'Pendente';
+      case 'RESOLVIDO':
+        return 'Resolvido';
+      case 'EM_ANDAMENTO':
+        return 'Em Andamento';
+      default:
+        return status;
+    }
+  }
+
   goToHome() {
     this.router.navigate(['/home']);
   }

@@ -1,5 +1,26 @@
 table {
   width: 85%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  overflow: hidden;
+}
+
+th,
+td {
+  border-right: #dee2e6 solid 2px;
+  padding: 10px;
+  text-align: left;
+}
+
+th:last-child,
+td:last-child {
+  border-right: none;
+}
+
+tr {
+  border-left: black solid 1px;
 }
 
 th {
@@ -11,49 +32,49 @@ th {
 }
 
 .status-aberto {
-  background-color: #43b480;
+  background-color: #aaaaaa;
   color: #fff;
 }
 
 .trBody:hover .status-aberto {
-  background-color: #fff;
-  color: #43b480;
+  background-color: #8b5cf633;
+  color: #aaaaaa;
   font-weight: bold;
-  box-shadow: inset 0 0 0 2px #43b480;
+  box-shadow: inset 0 0 0 2px #aaaaaa;
 }
 
 .status-pendente {
-  background-color: #4c8fc5;
+  background-color: #30a4dc;
   color: #fff;
 }
 
 .trBody:hover .status-pendente {
-  background-color: #fff;
-  color: #4c8fc5;
+  background-color: #8b5cf633;
+  color: #30a4dc;
   font-weight: bold;
-  box-shadow: inset 0 0 0 2px #4c8fc5;
+  box-shadow: inset 0 0 0 2px #30a4dc;
 }
 
 .status-resolvido {
-  background-color: #e9616c;
+  background-color: #7fc241;
   color: #fff;
 }
 
 .trBody:hover .status-resolvido {
-  background-color: #fff;
-  color: #e9616c;
+  background-color: #8b5cf633;
+  color: #7fc241;
   font-weight: bold;
-  box-shadow: inset 0 0 0 2px #e9616c;
+  box-shadow: inset 0 0 0 2px #7fc241;
 }
-
+/* e9616c */
 .status-em-andamento {
-  background-color: #eca92c;
+  background-color: #f99d33;
   color: #fff;
 }
 
 .trBody:hover .status-em-andamento {
-  background-color: #fff;
-  color: #eca92c;
+  background-color: #8b5cf633;
+  color: #f99d33;
   font-weight: bold;
-  box-shadow: inset 0 0 0 2px #eca92c;
+  box-shadow: inset 0 0 0 2px #f99d33;
 }

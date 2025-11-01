@@ -1,6 +1,22 @@
 table {
   width: 85%;
-  border-radius: 5px;
+  border-collapse: collapse;
+  border-spacing: 0;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  overflow: hidden;
+}
+
+th,
+td {
+  border-right: #dee2e6 solid 2px;
+  padding: 10px;
+  text-align: left;
+}
+
+th:last-child,
+td:last-child {
+  border-right: none;
 }
 
 th {
