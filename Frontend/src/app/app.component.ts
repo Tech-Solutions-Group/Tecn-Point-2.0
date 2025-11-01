@@ -35,14 +35,14 @@ export class AppComponent implements OnInit {
   }
 
   cadChamado() {
-    this.router.navigate(['/abrir-chamado']);
+    this.router.navigate(['/open-chamado']);
   }
 
   listChamado() {
-    this.router.navigate(['/chamado']);
+    this.router.navigate(['/list-chamado']);
   }
 
   listUsuarios() {
-    this.router.navigate(['/usuario']);
+    this.router.navigate(['/list-usuario']);
   }
 }
