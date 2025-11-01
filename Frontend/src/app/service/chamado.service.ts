@@ -2,16 +2,25 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
+export interface AberturaChamado {
+  titulo: string;
+  descricao: string;
+  prioridade: string;
+  idCliente: number;
+  idJornada: number;
+  idModulo: number;
+}
+
 export interface Chamado {
   id_chamado: number;
+  titulo: string;
   descricao: string;
   prioridade: string;
   status: string;
-  titulo: string;
-  fk_id_cliente: number;
-  fk_id_funcionario: number;
-  fk_id_jornada: number;
-  fk_id_modulo: number;
+  cliente: { id_usuario: number; nome: string; tipoUsuario: string };
+  funcionario: { id_usuario: number; nome: string; tipoUsuario: string };
+  jornada: any;
+  modulo: any;
 }
 
 @Injectable({
@@ -30,11 +39,11 @@ export class ChamadoService {
     return this.http.get<Chamado>(`${this.apiUrl}/${id}`);
   }
 
-  postChamado(data: Chamado): Observable<Chamado> {
+  postChamado(data: AberturaChamado): Observable<Chamado> {
     return this.http.post<Chamado>(`${this.apiUrl}/abrir-chamado`, data);
   }
 
-  patchChamado(id: number, data: Chamado): Observable<Chamado> {
+  patchChamado(id: number, data: Partial<Chamado>): Observable<Chamado> {
     return this.http.patch<Chamado>(`${this.apiUrl}/${id}`, data);
   }
 

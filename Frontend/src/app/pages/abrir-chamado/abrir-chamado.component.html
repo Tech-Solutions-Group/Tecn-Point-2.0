@@ -1,0 +1,108 @@
+<form
+  [formGroup]="abrirChamadoForm"
+  (ngSubmit)="onSubmit()"
+  class="p-4 border rounded shadow-sm bg-light"
+>
+  <div class="mb-3">
+    <label for="titulo" class="form-label">Título do Chamado</label>
+    <input
+      type="text"
+      id="titulo"
+      class="form-control"
+      formControlName="titulo"
+      placeholder="Insira o título do chamado"
+    />
+    <div
+      *ngIf="
+        abrirChamadoForm.get('titulo')?.invalid &&
+        abrirChamadoForm.get('titulo')?.touched
+      "
+      class="text-danger mt-1"
+    >
+      Título é obrigatório.
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label for="descricao" class="form-label">Descrição do Chamado</label>
+    <textarea
+      id="descricao"
+      class="form-control"
+      formControlName="descricao"
+      rows="4"
+      placeholder="Descreva o problema ou solicitação"
+    ></textarea>
+    <div
+      *ngIf="
+        abrirChamadoForm.get('descricao')?.invalid &&
+        abrirChamadoForm.get('descricao')?.touched
+      "
+      class="text-danger mt-1"
+    >
+      Descrição é obrigatória.
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label for="prioridade" class="form-label">Prioridade</label>
+    <select id="prioridade" class="form-select" formControlName="prioridade">
+      <option value="" disabled selected>Selecione a prioridade</option>
+      <option value="BAIXA">Baixa</option>
+      <option value="MÉDIA">Média</option>
+      <option value="ALTA">Alta</option>
+    </select>
+    <div
+      *ngIf="
+        abrirChamadoForm.get('prioridade')?.invalid &&
+        abrirChamadoForm.get('prioridade')?.touched
+      "
+      class="text-danger mt-1"
+    >
+      Prioridade é obrigatória.
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label for="idJornada" class="form-label">ID da Jornada</label>
+    <select id="idJornada" class="form-select" formControlName="fk_id_jornada">
+      <option value="" disabled selected>Selecione a jornada</option>
+      <option value="1">Financeiro</option>
+      <option value="2">Marketing</option>
+      <option value="3">Recursos Humanos</option>
+    </select>
+    <div
+      *ngIf="
+        abrirChamadoForm.get('fk_id_jornada')?.invalid &&
+        abrirChamadoForm.get('fk_id_jornada')?.touched
+      "
+      class="text-danger mt-1"
+    >
+      Jornada é obrigatória.
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label for="idModulo" class="form-label">ID do Módulo</label>
+    <select id="idModulo" class="form-select" formControlName="fk_id_modulo">
+      <option value="" disabled selected>Selecione o módulo</option>
+      <option value="1">Hardware</option>
+      <option value="2">Software</option>
+      <option value="3">Rede</option>
+    </select>
+    <div
+      *ngIf="
+        abrirChamadoForm.get('fk_id_modulo')?.invalid &&
+        abrirChamadoForm.get('fk_id_modulo')?.touched
+      "
+      class="text-danger mt-1"
+    >
+      Módulo é obrigatório.
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-primary">Abrir Chamado</button>
+
+  <div *ngIf="formInvalid" class="alert alert-danger mt-3">
+    Por favor, preencha todos os campos obrigatórios corretamente.
+  </div>
+</form>
