@@ -26,20 +26,23 @@ export class AppComponent implements OnInit {
 
   loadUsuario(id: number = 3): void {
     this.usuarioService.getUsuarioById(id).subscribe({
-      next: (data) => (this.usuarios = data),
+      next: (data) => {
+        this.usuarios = data;
+        this.usuarioService.usuarioLogado = data;
+      },
       error: (err) => console.error('Erros ao carregar usuario', err),
     });
   }
 
   cadChamado() {
-    this.router.navigate(['/home']);
+    this.router.navigate(['/open-chamado']);
   }
 
   listChamado() {
-    this.router.navigate(['/chamado']);
+    this.router.navigate(['/list-chamado']);
   }
 
   listUsuarios() {
-    this.router.navigate(['/usuario']);
+    this.router.navigate(['/list-usuario']);
   }
 }

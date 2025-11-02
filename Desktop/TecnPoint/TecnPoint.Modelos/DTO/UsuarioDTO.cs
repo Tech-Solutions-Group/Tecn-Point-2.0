@@ -10,7 +10,7 @@ namespace TecnPoint.Modelos.DTO
 {
     public class UsuarioDTO
     {
-        public long id_usuario { get; set; }
+        public long idUsuario { get; set; }
         public string nome { get; set; }
         public TipoUsuario tipoUsuario { get; set; }
     }

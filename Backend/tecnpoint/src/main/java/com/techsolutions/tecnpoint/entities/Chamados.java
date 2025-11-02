@@ -19,6 +19,7 @@ public class Chamados {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idChamado")
     private Long idChamado;
 
     @Column(nullable = false, columnDefinition = "TEXT")

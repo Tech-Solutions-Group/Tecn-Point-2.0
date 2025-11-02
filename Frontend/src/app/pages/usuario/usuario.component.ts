@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CadUsuarioComponent } from '../../shared/modal/cad-usuario/cad-usuario.component';
 import { EdtUsuarioComponent } from '../../shared/modal/edt-usuario/edt-usuario.component';
+import { stat } from 'fs';
 
 @Component({
   selector: 'app-usuario',
@@ -18,9 +19,21 @@ import { EdtUsuarioComponent } from '../../shared/modal/edt-usuario/edt-usuario.
   styleUrls: ['./usuario.component.css'],
 })
 export class UsuarioComponent implements OnInit {
+  successModalOpen = false;
   usuarios: Usuario[] = [];
 
   constructor(private usuarioService: UsuarioService) {}
+
+  getFuncionario(status: string): string {
+    switch (status) {
+      case 'CLIENTE':
+        return 'Cliente';
+      case 'FUNCIONARIO':
+        return 'Funcionário';
+      default:
+        return status;
+    }
+  }
 
   ngOnInit(): void {
     this.loadUsuarios();
@@ -39,21 +52,27 @@ export class UsuarioComponent implements OnInit {
 
   atualizarLista(usuario: Usuario) {
     const index = this.usuarios.findIndex(
-      (u) => u.id_usuario === usuario.id_usuario
+      (u) => u.idUsuario === usuario.idUsuario
     );
     if (index !== -1) {
       this.usuarios[index] = usuario;
+      this.usuarios = [...this.usuarios];
     } else {
-      this.usuarios.push(usuario);
+      this.usuarios = [...this.usuarios, usuario];
     }
   }
 
   deleteUsuario(id: number): void {
-    if (confirm('Tem certeza que deseja excluir este usuário?')) {
-      this.usuarioService.delUsuario(id).subscribe({
-        next: () => this.loadUsuarios(),
-        error: (err) => console.error('Erro ao excluir usuário:', err),
-      });
-    }
+    this.usuarioService.delUsuario(id).subscribe({
+      next: () => {
+        this.loadUsuarios();
+        this.successModalOpen = true;
+      },
+      error: (err) => console.error('Erro ao excluir usuário:', err),
+    });
+  }
+
+  closeSuccess() {
+    this.successModalOpen = false;
   }
 }

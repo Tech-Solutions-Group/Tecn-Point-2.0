@@ -1,0 +1,80 @@
+table {
+  width: 85%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  overflow: hidden;
+}
+
+th,
+td {
+  border-right: #dee2e6 solid 2px;
+  padding: 10px;
+  text-align: left;
+}
+
+th:last-child,
+td:last-child {
+  border-right: none;
+}
+
+tr {
+  border-left: black solid 1px;
+}
+
+th {
+  text-align: initial;
+}
+
+.trBody:hover {
+  cursor: pointer;
+}
+
+.status-aberto {
+  background-color: #aaaaaa;
+  color: #fff;
+}
+
+.trBody:hover .status-aberto {
+  background-color: #8b5cf633;
+  color: #aaaaaa;
+  font-weight: bold;
+  box-shadow: inset 0 0 0 2px #aaaaaa;
+}
+
+.status-pendente {
+  background-color: #30a4dc;
+  color: #fff;
+}
+
+.trBody:hover .status-pendente {
+  background-color: #8b5cf633;
+  color: #30a4dc;
+  font-weight: bold;
+  box-shadow: inset 0 0 0 2px #30a4dc;
+}
+
+.status-resolvido {
+  background-color: #7fc241;
+  color: #fff;
+}
+
+.trBody:hover .status-resolvido {
+  background-color: #8b5cf633;
+  color: #7fc241;
+  font-weight: bold;
+  box-shadow: inset 0 0 0 2px #7fc241;
+}
+/* e9616c */
+.status-em-andamento {
+  background-color: #f99d33;
+  color: #fff;
+}
+
+.trBody:hover .status-em-andamento {
+  background-color: #8b5cf633;
+  color: #f99d33;
+  font-weight: bold;
+  box-shadow: inset 0 0 0 2px #f99d33;
+}

@@ -13,6 +13,7 @@ import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 export class EdtUsuarioComponent {
   formInvalid = false;
   isOpen = false;
+  successModalOpen = false;
   usuarioId!: number;
 
   @Input() refresh!: () => void;
@@ -45,6 +46,7 @@ export class EdtUsuarioComponent {
           console.log('Usuário atualizado com sucesso:', res);
           this.usuarioAtualizado.emit(res);
           this.close();
+          this.successModalOpen = true;
         },
         error: (err) => {
           console.error('Erro ao atualizar usuário:', err);
@@ -53,9 +55,9 @@ export class EdtUsuarioComponent {
   }
 
   open(usuario: Usuario) {
-    this.usuarioId = usuario.id_usuario;
+    this.usuarioId = usuario.idUsuario;
 
-    this.usuarioService.getUsuarioById(usuario.id_usuario).subscribe({
+    this.usuarioService.getUsuarioById(usuario.idUsuario).subscribe({
       next: (user) => {
         this.attUsuarioForm.patchValue({
           nome: user.nome,
@@ -72,5 +74,9 @@ export class EdtUsuarioComponent {
 
   close() {
     this.isOpen = false;
+  }
+
+  closeSuccess() {
+    this.successModalOpen = false;
   }
 }

@@ -11,7 +11,7 @@ namespace TecnPoint.Modelos.DTO
 {
     public class ChamadoDTO
     {
-        public long id_chamado { get; set; }
+        public long idChamado { get; set; }
         public string descricao { get; set; }
         public string titulo { get; set; }
         public PrioridadeChamado prioridade { get; set; }

@@ -7,10 +7,10 @@ import lombok.Getter;
 
 @Getter
 public class AtualizaChamadoDTO {
-    Long id_chamado;
+    Long idChamado;
     PrioridadeChamado prioridade;
     StatusChamado status;
-    Long id_usuario;
+    Long idUsuario;
     Long idModulo;
     Long idJornada;
 }

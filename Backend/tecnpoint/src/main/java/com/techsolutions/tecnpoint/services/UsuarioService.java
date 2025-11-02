@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import org.springframework.data.domain.Sort;
 
 @Service
 public class UsuarioService {
@@ -37,7 +38,7 @@ public class UsuarioService {
     }
 
     public List<Usuarios> getUsuarios(){
-        return usuarioRepository.findAll();
+        return usuarioRepository.findAll(Sort.by(Sort.Direction.ASC, "idUsuario"));
     }
 
     public Optional<Usuarios> getUsuarioById(Long id){
@@ -87,7 +88,7 @@ public class UsuarioService {
         List<FuncionarioDTO> listaFuncionariosDTO = new ArrayList<>();
         for(Usuarios funcionario : listaFuncionarios){
             listaFuncionariosDTO.add(FuncionarioDTO.builder()
-                                    .id(funcionario.getId_usuario())
+                                    .id(funcionario.getIdUsuario())
                                     .nome(funcionario.getNome())
                                     .build());
         }

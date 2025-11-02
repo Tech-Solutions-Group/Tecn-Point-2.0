@@ -2,20 +2,20 @@
   Cadastrar
 </button>
 
-<table class="table table-striped align-middle shadow-sm table-bordered">
+<table class="table align-middle">
   <thead style="--bs-table-bg: #8b5cf6; --bs-table-color: #fff">
     <tr>
-      <th>Nome</th>
-      <th>Email</th>
-      <th>Tipo Usuário</th>
-      <th style="width: 10rem" class="text-center action_user">Ações</th>
+      <th>NOME</th>
+      <th>EMAIL</th>
+      <th>TIPO USUÁRIO</th>
+      <th style="width: 10rem" class="text-center action_user">AÇÕES</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let usuario of usuarios">
       <td>{{ usuario.nome }}</td>
       <td>{{ usuario.email }}</td>
-      <td>{{ usuario.tipoUsuario }}</td>
+      <td>{{ getFuncionario(usuario.tipoUsuario) }}</td>
       <td class="text-center">
         <button
           class="btn btn-sm btn-outline-primary me-2"
@@ -41,7 +41,7 @@
         </button>
         <button
           class="btn btn-sm btn-outline-danger"
-          (click)="deleteUsuario(usuario.id_usuario)"
+          (click)="deleteUsuario(usuario.idUsuario)"
         >
           <!-- btn de deletar -->
           <svg
@@ -75,3 +75,36 @@
   title="Modal cadastro"
 >
 </app-cad-usuario>
+
+<div
+  class="comum_modal-backdrop"
+  *ngIf="successModalOpen"
+  (click)="closeSuccess()"
+></div>
+
+<div class="comum_modal bg-light" *ngIf="successModalOpen">
+  <div class="comum_modal-header">
+    <h2>Sucesso!</h2>
+    <button class="btn" (click)="closeSuccess()">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="23"
+        height="23"
+        fill="currentColor"
+        class="bi bi-x-circle"
+        viewBox="0 0 16 16"
+      >
+        <path
+          d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"
+        />
+        <path
+          d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"
+        />
+      </svg>
+    </button>
+  </div>
+  <div class="comum_modal-body">Usuário cadastrado com sucesso!</div>
+  <div class="modal-footer">
+    <button class="btn btn-primary" (click)="closeSuccess()">Fechar</button>
+  </div>
+</div>

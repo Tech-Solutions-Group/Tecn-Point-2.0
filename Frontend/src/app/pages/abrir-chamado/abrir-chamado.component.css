@@ -1,8 +1,6 @@
-.campo-editar {
-  width: 26rem;
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 10px;
+small {
+  font-size: 18px;
+  color: red;
 }
 
 .action {
@@ -12,14 +10,15 @@
 
 .action button {
   margin-top: 2rem;
-  width: 135px;
+  width: 16rem;
   height: 100%;
   font-size: 25px;
 }
 
-small {
-  font-size: 1.5rem;
-  color: red;
+form {
+  width: 65%;
+  margin: auto;
+  margin-top: 3rem;
 }
 
 .comum_modal-backdrop {

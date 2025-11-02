@@ -8,7 +8,7 @@ import lombok.Getter;
 @Builder
 public class UsuarioDTO {
 
-    Long id_usuario;
+    Long idUsuario;
     String nome;
     TipoUsuario tipoUsuario;
 }

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 export interface Usuario {
-  id_usuario: number;
+  idUsuario: number;
   nome: string;
   email: string;
   senha: string;
@@ -14,6 +14,8 @@ export interface Usuario {
   providedIn: 'root',
 })
 export class UsuarioService {
+  usuarioLogado?: Usuario;
+
   private apiUrl = 'http://localhost:8080/usuarios';
 
   constructor(private http: HttpClient) {}
