@@ -55,6 +55,7 @@ namespace TecnPoint.Interfaces
 
         private async void FormDetalhesChamado_Load(object sender, EventArgs e)
         {
+            timerAtualizaDados.Enabled = true;
             // Variável para controlar quando disparar o evento de SelectedIndexChanged das Combobox
             carregandoComboBox = true;
 
@@ -363,6 +364,7 @@ namespace TecnPoint.Interfaces
 
         private void pbIconVoltar_Click(object sender, EventArgs e)
         {
+            timerAtualizaDados.Enabled = false;
             formAcompanharChamados.flpPanelCardsChamados.Controls.Clear();
             formAcompanharChamados.CarregaChamados();
             formAcompanharChamados.ExibirCards();

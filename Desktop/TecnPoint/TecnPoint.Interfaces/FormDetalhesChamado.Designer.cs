@@ -365,7 +365,6 @@
             // 
             // timerAtualizaDados
             // 
-            timerAtualizaDados.Enabled = true;
             timerAtualizaDados.Interval = 2000;
             timerAtualizaDados.Tick += timerAtualizaDados_Tick;
             // 

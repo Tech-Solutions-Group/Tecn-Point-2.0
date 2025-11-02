@@ -93,7 +93,6 @@ namespace TecnPoint.Interfaces
                                        MessageBoxButtons.OK,
                                        MessageBoxIcon.Information);
             }
-            
         }
 
         public void ExibirCards()
