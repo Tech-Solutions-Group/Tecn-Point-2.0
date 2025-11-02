@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { Chamado, ChamadoService } from '../../service/chamado.service';
 
 @Component({
-  selector: 'app-chamado',
+  selector: 'app-listar-chamado',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './listar-chamado.component.html',
