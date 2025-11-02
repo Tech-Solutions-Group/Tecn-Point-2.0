@@ -35,7 +35,8 @@
             tspAcompanharChamado = new ToolStripMenuItem();
             tspGerenciarUsuarios = new ToolStripMenuItem();
             tspCadastrarUsuario = new ToolStripMenuItem();
-            tspDeletarUsuario = new ToolStripMenuItem();
+            toolStripSeparator1 = new ToolStripSeparator();
+            tspEditarUsuario = new ToolStripMenuItem();
             toolTip = new ToolTip(components);
             menuStrip.SuspendLayout();
             SuspendLayout();
@@ -85,7 +86,7 @@
             // tspGerenciarUsuarios
             // 
             tspGerenciarUsuarios.BackColor = Color.Transparent;
-            tspGerenciarUsuarios.DropDownItems.AddRange(new ToolStripItem[] { tspCadastrarUsuario, tspDeletarUsuario });
+            tspGerenciarUsuarios.DropDownItems.AddRange(new ToolStripItem[] { tspCadastrarUsuario, toolStripSeparator1, tspEditarUsuario });
             tspGerenciarUsuarios.Font = new Font("Consolas", 14.25F, FontStyle.Bold);
             tspGerenciarUsuarios.ForeColor = SystemColors.ControlLightLight;
             tspGerenciarUsuarios.ImageAlign = ContentAlignment.MiddleLeft;
@@ -98,16 +99,24 @@
             // tspCadastrarUsuario
             // 
             tspCadastrarUsuario.BackColor = Color.Thistle;
+            tspCadastrarUsuario.ForeColor = SystemColors.ControlText;
             tspCadastrarUsuario.Name = "tspCadastrarUsuario";
             tspCadastrarUsuario.Size = new Size(250, 26);
-            tspCadastrarUsuario.Text = "Cadastrar Usuário";
+            tspCadastrarUsuario.Text = "Cadastrar usuário";
+            tspCadastrarUsuario.Click += tspCadastrarUsuario_Click;
             // 
-            // tspDeletarUsuario
+            // toolStripSeparator1
             // 
-            tspDeletarUsuario.BackColor = Color.Thistle;
-            tspDeletarUsuario.Name = "tspDeletarUsuario";
-            tspDeletarUsuario.Size = new Size(250, 26);
-            tspDeletarUsuario.Text = "Deletar Usuário";
+            toolStripSeparator1.Name = "toolStripSeparator1";
+            toolStripSeparator1.Size = new Size(247, 6);
+            // 
+            // tspEditarUsuario
+            // 
+            tspEditarUsuario.BackColor = Color.Thistle;
+            tspEditarUsuario.Name = "tspEditarUsuario";
+            tspEditarUsuario.Size = new Size(250, 26);
+            tspEditarUsuario.Text = "Editar usuário";
+            tspEditarUsuario.Click += tspEditarUsuario_Click;
             // 
             // FrmMDIPrincipal
             // 
@@ -137,7 +146,8 @@
         private ToolStripMenuItem tspAcompanharChamado;
         private ToolStripMenuItem tspGerenciarUsuarios;
         private ToolStripMenuItem tspCadastrarUsuario;
-        private ToolStripMenuItem tspDeletarUsuario;
+        private ToolStripSeparator toolStripSeparator1;
+        private ToolStripMenuItem tspEditarUsuario;
     }
 }
 

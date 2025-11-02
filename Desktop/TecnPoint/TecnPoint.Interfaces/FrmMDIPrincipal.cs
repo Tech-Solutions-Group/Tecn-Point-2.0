@@ -98,5 +98,37 @@ namespace TecnPoint.Interfaces
 
             formAcompanharChamados.Show();
         }
+
+        private void tspCadastrarUsuario_Click(object sender, EventArgs e)
+        {
+            if (this.ActiveMdiChild != null)
+            {
+                this.ActiveMdiChild.Close();
+            }
+
+            FormCadastrarUsuario formCadastrarUsuario = new FormCadastrarUsuario();
+
+            formCadastrarUsuario.MdiParent = this;
+
+            formCadastrarUsuario.Dock = DockStyle.Fill;
+
+            formCadastrarUsuario.Show();
+        }
+
+        private void tspEditarUsuario_Click(object sender, EventArgs e)
+        {
+            if (this.ActiveMdiChild != null)
+            {
+                this.ActiveMdiChild.Close();
+            }
+
+            FormListaUsuarios formListaUsuarios = new FormListaUsuarios();
+
+            formListaUsuarios.MdiParent = this;
+
+            formListaUsuarios.Dock = DockStyle.Fill;
+
+            formListaUsuarios.Show();
+        }
     }
 }
