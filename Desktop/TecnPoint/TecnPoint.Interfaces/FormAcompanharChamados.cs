@@ -31,7 +31,7 @@ namespace TecnPoint.Interfaces
         {
             try
             {
-                var listaChamados = await chamadoService.BuscarChamados(usuarioLogado.id_usuario, usuarioLogado.tipoUsuario);
+                var listaChamados = await chamadoService.BuscarChamados(usuarioLogado.idUsuario, usuarioLogado.tipoUsuario);
 
                 foreach (var chamado in listaChamados)
                 {

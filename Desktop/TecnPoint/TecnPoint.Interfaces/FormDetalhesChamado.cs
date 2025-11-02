@@ -106,8 +106,8 @@ namespace TecnPoint.Interfaces
 
                     AtualizaChamadoDTO dadosParaAtualizarChamado = new AtualizaChamadoDTO
                     {
-                        id_chamado = chamado.id_chamado,
-                        id_usuario = idFuncionarioSelecionado
+                        idChamado = chamado.idChamado,
+                        idUsuario = idFuncionarioSelecionado
                     };
 
                     this.chamado = await chamadoService.AtualizaChamado(dadosParaAtualizarChamado);
@@ -133,7 +133,7 @@ namespace TecnPoint.Interfaces
                 {
                     AtualizaChamadoDTO dadosParaAtualizarChamado = new AtualizaChamadoDTO();
 
-                    dadosParaAtualizarChamado.id_chamado = chamado.id_chamado;
+                    dadosParaAtualizarChamado.idChamado = chamado.idChamado;
                     dadosParaAtualizarChamado.status = (StatusChamado)cbxStatus.SelectedIndex - 1;
 
                     this.chamado = await chamadoService.AtualizaChamado(dadosParaAtualizarChamado);
@@ -160,7 +160,7 @@ namespace TecnPoint.Interfaces
                 {
                     AtualizaChamadoDTO dadosParaAtualizarChamado = new AtualizaChamadoDTO();
 
-                    dadosParaAtualizarChamado.id_chamado = chamado.id_chamado;
+                    dadosParaAtualizarChamado.idChamado = chamado.idChamado;
                     dadosParaAtualizarChamado.prioridade = (PrioridadeChamado)cbxPrioridade.SelectedIndex - 1;
 
                     this.chamado = await chamadoService.AtualizaChamado(dadosParaAtualizarChamado);
@@ -185,7 +185,7 @@ namespace TecnPoint.Interfaces
                 {
                     AtualizaChamadoDTO dadosParaAtualizarNoChamado = new AtualizaChamadoDTO
                     {
-                        id_chamado = chamado.id_chamado,
+                        idChamado = chamado.idChamado,
                         idJornada = cbxJornada.SelectedIndex
                     };
 
@@ -211,7 +211,7 @@ namespace TecnPoint.Interfaces
                 {
                     AtualizaChamadoDTO dadosParaAtualizarChamado = new AtualizaChamadoDTO
                     {
-                        id_chamado = chamado.id_chamado,
+                        idChamado = chamado.idChamado,
                         idModulo = cbxModulo.SelectedIndex
                     };
 
@@ -236,8 +236,8 @@ namespace TecnPoint.Interfaces
                 {
                     MensagemDTO mensagemASerEnviada = new MensagemDTO
                     {
-                        idChamado = this.chamado.id_chamado,
-                        idRemetente = this.usuarioLogado.id_usuario,
+                        idChamado = this.chamado.idChamado,
+                        idRemetente = this.usuarioLogado.idUsuario,
                         mensagem = txtMensagem.Text
                     };
 
@@ -259,7 +259,7 @@ namespace TecnPoint.Interfaces
             List<ConversaDTO> listaMensagens = new List<ConversaDTO>();
             BuscarMensagemDTO buscarMensagemDTO = new BuscarMensagemDTO
             {
-                idChamado = this.chamado.id_chamado,
+                idChamado = this.chamado.idChamado,
                 idUltimaConversa = this.idUltimaMensagem
             };
 
@@ -281,7 +281,7 @@ namespace TecnPoint.Interfaces
         {
             try
             {
-                this.chamado = await chamadoService.BuscaChamadoPorId(this.chamado.id_chamado);
+                this.chamado = await chamadoService.BuscaChamadoPorId(this.chamado.idChamado);
             }
             catch (Exception ex)
             {

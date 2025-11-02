@@ -114,7 +114,7 @@ namespace TecnPoint.Services
             {
                 prioridade = atualizaChamadoDTO.prioridade,
                 status = atualizaChamadoDTO.status,
-                id_usuario = atualizaChamadoDTO.id_usuario,
+                idUsuario = atualizaChamadoDTO.idUsuario,
                 idModulo = atualizaChamadoDTO.idModulo,
                 idJornada = atualizaChamadoDTO.idJornada
             };
@@ -125,7 +125,7 @@ namespace TecnPoint.Services
                 DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
             });
 
-            var request = new HttpRequestMessage(HttpMethod.Patch, $"http://localhost:8080/chamados/{atualizaChamadoDTO.id_chamado}");
+            var request = new HttpRequestMessage(HttpMethod.Patch, $"http://localhost:8080/chamados/{atualizaChamadoDTO.idChamado}");
             var content = new StringContent(jsonBody, Encoding.UTF8, "application/json");
 
             request.Content = content;
