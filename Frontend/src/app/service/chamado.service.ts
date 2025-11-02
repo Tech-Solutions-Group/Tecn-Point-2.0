@@ -46,8 +46,4 @@ export class ChamadoService {
   patchChamado(id: number, data: Partial<Chamado>): Observable<Chamado> {
     return this.http.patch<Chamado>(`${this.apiUrl}/${id}`, data);
   }
-
-  delChamado(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
-  }
 }
