@@ -2,6 +2,17 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Usuario, UsuarioService } from '../../../service/usuario.service';
 import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
+import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
+
+export function senhaMatchValidator(): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    const senha = control.get('senha');
+    const confirmSenha = control.get('confirmSenha');
+
+    if (!senha || !confirmSenha) return null;
+    return senha.value === confirmSenha.value ? null : { confirmSenha: true };
+  };
+}
 
 @Component({
   selector: 'app-cad-usuario',
@@ -23,12 +34,16 @@ export class CadUsuarioComponent {
     private fb: FormBuilder
   ) {}
 
-  cadUsuarioForm = this.fb.group({
-    nome: ['', Validators.required],
-    email: ['', [Validators.required, Validators.email]],
-    senha: ['', Validators.required],
-    tipoUsuario: ['', Validators.required],
-  });
+  cadUsuarioForm = this.fb.group(
+    {
+      nome: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      senha: ['', Validators.required],
+      confirmSenha: ['', Validators.required],
+      tipoUsuario: ['', Validators.required],
+    },
+    { validators: senhaMatchValidator() }
+  );
 
   onSubmit(): void {
     if (this.cadUsuarioForm.invalid) {

@@ -97,6 +97,27 @@
         </small>
       </div>
 
+      <!-- Confirmar Senha -->
+      <div class="campo-cadastro">
+        <label for="confirmSenha">Confirmar Senha:</label>
+        <input
+          id="confirmSenha"
+          type="password"
+          class="form-control"
+          placeholder="Confirme a Senha"
+          aria-label="Confirme a Senha"
+          formControlName="confirmSenha"
+        />
+        <small
+          *ngIf="
+            cadUsuarioForm.errors?.['confirmSenha'] &&
+            cadUsuarioForm.get('confirmSenha')?.touched
+          "
+        >
+          Senhas não coincidem.
+        </small>
+      </div>
+
       <!-- Tipo de Usuário -->
       <div class="campo-cadastro">
         <label for="tipoUsuario">Tipo Usuário:</label>

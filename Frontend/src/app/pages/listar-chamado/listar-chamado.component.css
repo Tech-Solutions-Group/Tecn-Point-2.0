@@ -27,6 +27,12 @@ th {
   text-align: initial;
 }
 
+.limit-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .trBody:hover {
   cursor: pointer;
 }

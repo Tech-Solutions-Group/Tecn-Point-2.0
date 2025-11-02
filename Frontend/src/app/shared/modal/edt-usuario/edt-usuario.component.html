@@ -96,6 +96,26 @@
           Senha é obrigatória.
         </small>
       </div>
+      <!-- Confirmar Senha -->
+      <div class="campo-cadastro">
+        <label for="confirmSenha">Confirmar Senha:</label>
+        <input
+          id="confirmSenha"
+          type="password"
+          class="form-control"
+          placeholder="Confirme a Senha"
+          aria-label="Confirme a Senha"
+          formControlName="confirmSenha"
+        />
+        <small
+          *ngIf="
+            attUsuarioForm.errors?.['confirmSenha'] &&
+            attUsuarioForm.get('confirmSenha')?.touched
+          "
+        >
+          Senhas não coincidem.
+        </small>
+      </div>
 
       <!-- Botões -->
       <div class="action">

@@ -27,8 +27,8 @@ export class AbrirChamadoComponent {
     titulo: ['', Validators.required],
     descricao: ['', Validators.required],
     prioridade: ['', Validators.required],
-    fk_id_jornada: ['', Validators.required],
-    fk_id_modulo: ['', Validators.required],
+    id_jornada: ['', Validators.required],
+    id_modulo: ['', Validators.required],
   });
 
   onSubmit(): void {
@@ -52,8 +52,8 @@ export class AbrirChamadoComponent {
       descricao: this.abrirChamadoForm.value.descricao!,
       prioridade: this.abrirChamadoForm.value.prioridade!,
       idCliente: usuarioLogado.idUsuario, // <- aqui pega o logado
-      idJornada: Number(this.abrirChamadoForm.value.fk_id_jornada),
-      idModulo: Number(this.abrirChamadoForm.value.fk_id_modulo),
+      idJornada: Number(this.abrirChamadoForm.value.id_jornada),
+      idModulo: Number(this.abrirChamadoForm.value.id_modulo),
     };
 
     this.chamadoService.postChamado(dados).subscribe({
