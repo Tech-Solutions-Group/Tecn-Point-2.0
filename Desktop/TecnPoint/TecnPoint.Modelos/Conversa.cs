@@ -9,9 +9,9 @@ namespace TecnPoint.Modelos
     public class Conversa
     {
         public int IdConversa { get; set; }
-        public string mensagem { get; set; }
-        public Chamado chamado { get; set; }
-        public Usuario remetente { get; set; }
-        public DateTime dataHoraEnvio { get; set; }
+        public string Mensagem { get; set; }
+        public Chamado Chamado { get; set; }
+        public Usuario Remetente { get; set; }
+        public DateTime DataHoraEnvio { get; set; }
     }
 }

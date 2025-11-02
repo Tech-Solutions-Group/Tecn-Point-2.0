@@ -17,11 +17,11 @@ namespace TecnPoint.Interfaces
 {
     public partial class FormDetalhesChamado : Form
     {
-        private Usuario usuarioLogado;
-        private ChamadoDTO chamado;
+        private Usuario _usuarioLogado;
+        private ChamadoDTO _chamado;
         private FormAcompanharChamados formAcompanharChamados;
-        private ChamadoService chamadoService;
-        private ConversaService conversaService;
+        private ChamadoService _chamadoService;
+        private ConversaService _conversaService;
 
         long idUltimaMensagem = 0;
 
@@ -32,25 +32,25 @@ namespace TecnPoint.Interfaces
 
         public FormDetalhesChamado(ChamadoDTO chamadoSelecionado, Usuario usuarioLogado, FormAcompanharChamados formAcompanharChamado)
         {
-            this.usuarioLogado = usuarioLogado;
-            this.chamado = chamadoSelecionado;
+            this._usuarioLogado = usuarioLogado;
+            this._chamado = chamadoSelecionado;
             this.formAcompanharChamados = formAcompanharChamado;
-            this.chamadoService = new ChamadoService();
-            this.conversaService = new ConversaService();
+            this._chamadoService = new ChamadoService();
+            this._conversaService = new ConversaService();
             InitializeComponent();
         }
 
         private void PreencherDetalhes()
         {
-            lblTitulo.Text = chamado.titulo;
-            lblStatus.Text = ConverteEnumStatus(chamado.status);
-            lblStatus.BackColor = FundoStatus(chamado.status);
-            lblPrioridade.Text = ConverteEnumPrioridade(chamado.prioridade);
-            lblNomeCliente.Text = chamado.cliente.nome;
-            lblNomeFuncionario.Text = chamado.funcionario.nome;
-            lblDescricaoDoChamado.Text = chamado.descricao;
-            lblJornada.Text = chamado.jornada.jornada;
-            lblModulo.Text = chamado.modulo.modulo;
+            lblTitulo.Text = _chamado.titulo;
+            lblStatus.Text = ConverteEnumStatus(_chamado.status);
+            lblStatus.BackColor = FundoStatus(_chamado.status);
+            lblPrioridade.Text = ConverteEnumPrioridade(_chamado.prioridade);
+            lblNomeCliente.Text = _chamado.cliente.nome;
+            lblNomeFuncionario.Text = _chamado.funcionario.nome;
+            lblDescricaoDoChamado.Text = _chamado.descricao;
+            lblJornada.Text = _chamado.jornada.jornada;
+            lblModulo.Text = _chamado.modulo.modulo;
         }
 
         private async void FormDetalhesChamado_Load(object sender, EventArgs e)
@@ -58,7 +58,7 @@ namespace TecnPoint.Interfaces
             // Variável para controlar quando disparar o evento de SelectedIndexChanged das Combobox
             carregandoComboBox = true;
 
-            if (usuarioLogado.tipoUsuario == TipoUsuario.CLIENTE)
+            if (_usuarioLogado.TipoUsuario == TipoUsuario.CLIENTE)
             {
                 cbxStatus.Visible = false;
                 cbxPrioridade.Visible = false;
@@ -82,7 +82,7 @@ namespace TecnPoint.Interfaces
         {
             try
             {
-                List<ListagemFuncionariosDTO> listaFunc = await chamadoService.CarregaNomeFuncionarios();
+                List<ListagemFuncionariosDTO> listaFunc = await _chamadoService.CarregaNomeFuncionarios();
                 comboBox.DataSource = listaFunc;
                 comboBox.DisplayMember = "nome";
                 comboBox.ValueMember = "id";
@@ -106,14 +106,11 @@ namespace TecnPoint.Interfaces
 
                     AtualizaChamadoDTO dadosParaAtualizarChamado = new AtualizaChamadoDTO
                     {
-                        idChamado = chamado.idChamado,
+                        idChamado = _chamado.idChamado,
                         idUsuario = idFuncionarioSelecionado
                     };
 
-                    this.chamado = await chamadoService.AtualizaChamado(dadosParaAtualizarChamado);
-
-                    lblNomeFuncionario.Text = chamado.funcionario.nome;
-
+                    this._chamado = await _chamadoService.AtualizaChamado(dadosParaAtualizarChamado);
                 }
                 catch (Exception ex)
                 {
@@ -133,14 +130,10 @@ namespace TecnPoint.Interfaces
                 {
                     AtualizaChamadoDTO dadosParaAtualizarChamado = new AtualizaChamadoDTO();
 
-                    dadosParaAtualizarChamado.idChamado = chamado.idChamado;
+                    dadosParaAtualizarChamado.idChamado = _chamado.idChamado;
                     dadosParaAtualizarChamado.status = (StatusChamado)cbxStatus.SelectedIndex - 1;
 
-                    this.chamado = await chamadoService.AtualizaChamado(dadosParaAtualizarChamado);
-
-                    lblStatus.Text = ConverteEnumStatus(chamado.status);
-                    lblStatus.BackColor = FundoStatus(chamado.status);
-
+                    this._chamado = await _chamadoService.AtualizaChamado(dadosParaAtualizarChamado);
                 }
                 catch (Exception ex)
                 {
@@ -160,12 +153,12 @@ namespace TecnPoint.Interfaces
                 {
                     AtualizaChamadoDTO dadosParaAtualizarChamado = new AtualizaChamadoDTO();
 
-                    dadosParaAtualizarChamado.idChamado = chamado.idChamado;
+                    dadosParaAtualizarChamado.idChamado = _chamado.idChamado;
                     dadosParaAtualizarChamado.prioridade = (PrioridadeChamado)cbxPrioridade.SelectedIndex - 1;
 
-                    this.chamado = await chamadoService.AtualizaChamado(dadosParaAtualizarChamado);
+                    this._chamado = await _chamadoService.AtualizaChamado(dadosParaAtualizarChamado);
 
-                    lblPrioridade.Text = ConverteEnumPrioridade(chamado.prioridade);
+                    lblPrioridade.Text = ConverteEnumPrioridade(_chamado.prioridade);
                 }
                 catch (Exception ex)
                 {
@@ -185,13 +178,11 @@ namespace TecnPoint.Interfaces
                 {
                     AtualizaChamadoDTO dadosParaAtualizarNoChamado = new AtualizaChamadoDTO
                     {
-                        idChamado = chamado.idChamado,
+                        idChamado = _chamado.idChamado,
                         idJornada = cbxJornada.SelectedIndex
                     };
 
-                    this.chamado = await chamadoService.AtualizaChamado(dadosParaAtualizarNoChamado);
-
-                    lblJornada.Text = this.chamado.jornada.jornada;
+                    this._chamado = await _chamadoService.AtualizaChamado(dadosParaAtualizarNoChamado);
                 }
                 catch (Exception ex)
                 {
@@ -211,13 +202,13 @@ namespace TecnPoint.Interfaces
                 {
                     AtualizaChamadoDTO dadosParaAtualizarChamado = new AtualizaChamadoDTO
                     {
-                        idChamado = chamado.idChamado,
+                        idChamado = _chamado.idChamado,
                         idModulo = cbxModulo.SelectedIndex
                     };
 
-                    this.chamado = await chamadoService.AtualizaChamado(dadosParaAtualizarChamado);
+                    this._chamado = await _chamadoService.AtualizaChamado(dadosParaAtualizarChamado);
 
-                    lblModulo.Text = this.chamado.modulo.modulo;
+                    lblModulo.Text = this._chamado.modulo.modulo;
                 }
                 catch (Exception ex)
                 {
@@ -236,12 +227,12 @@ namespace TecnPoint.Interfaces
                 {
                     MensagemDTO mensagemASerEnviada = new MensagemDTO
                     {
-                        idChamado = this.chamado.idChamado,
-                        idRemetente = this.usuarioLogado.idUsuario,
+                        idChamado = this._chamado.idChamado,
+                        idRemetente = this._usuarioLogado.idUsuario,
                         mensagem = txtMensagem.Text
                     };
 
-                    await conversaService.EnviarMensagem(mensagemASerEnviada);
+                    await _conversaService.EnviarMensagem(mensagemASerEnviada);
                     txtMensagem.Clear();
                 }
                 catch (Exception ex)
@@ -259,11 +250,11 @@ namespace TecnPoint.Interfaces
             List<ConversaDTO> listaMensagens = new List<ConversaDTO>();
             BuscarMensagemDTO buscarMensagemDTO = new BuscarMensagemDTO
             {
-                idChamado = this.chamado.idChamado,
+                idChamado = this._chamado.idChamado,
                 idUltimaConversa = this.idUltimaMensagem
             };
 
-            listaMensagens = await conversaService.BuscarConversa(buscarMensagemDTO);
+            listaMensagens = await _conversaService.BuscarConversa(buscarMensagemDTO);
 
             foreach (var mensagem in listaMensagens)
             {
@@ -281,7 +272,7 @@ namespace TecnPoint.Interfaces
         {
             try
             {
-                this.chamado = await chamadoService.BuscaChamadoPorId(this.chamado.idChamado);
+                this._chamado = await _chamadoService.BuscaChamadoPorId(this._chamado.idChamado);
             }
             catch (Exception ex)
             {

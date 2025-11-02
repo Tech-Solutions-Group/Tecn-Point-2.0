@@ -14,12 +14,12 @@ namespace TecnPoint.Interfaces
     public partial class FrmMDIPrincipal : Form
     {
         private int childFormNumber = 0;
-        private Usuario usuarioLogado;
+        private Usuario _usuarioLogado;
 
         public FrmMDIPrincipal(Usuario usuarioLogado)
         {
             InitializeComponent();
-            this.usuarioLogado = usuarioLogado;
+            this._usuarioLogado = usuarioLogado;
             CarregaFormLogo();
             AlterarVisualizacao();
         }
@@ -45,7 +45,7 @@ namespace TecnPoint.Interfaces
 
         private void AlterarVisualizacao()
         {
-            if (usuarioLogado.tipoUsuario == Modelos.Enum.TipoUsuario.CLIENTE)
+            if (_usuarioLogado.TipoUsuario == Modelos.Enum.TipoUsuario.CLIENTE)
             {
                 tspGerenciarUsuarios.Visible = false;
             }
@@ -58,7 +58,7 @@ namespace TecnPoint.Interfaces
                 this.ActiveMdiChild.Close();
             }
 
-            FormAberturaChamado formAberturaChamado = new FormAberturaChamado(usuarioLogado, this);
+            FormAberturaChamado formAberturaChamado = new FormAberturaChamado(_usuarioLogado, this);
 
             formAberturaChamado.MdiParent = this;
 
@@ -74,7 +74,7 @@ namespace TecnPoint.Interfaces
                 this.ActiveMdiChild.Close();
             }
 
-            FormLogo formLogo = new FormLogo(usuarioLogado.nome, usuarioLogado.email, usuarioLogado.tipoUsuario);
+            FormLogo formLogo = new FormLogo(_usuarioLogado.Nome, _usuarioLogado.Email, _usuarioLogado.TipoUsuario);
 
             formLogo.MdiParent = this;
 
@@ -90,7 +90,7 @@ namespace TecnPoint.Interfaces
                 this.ActiveMdiChild.Close();
             }
 
-            FormAcompanharChamados formAcompanharChamados = new FormAcompanharChamados(usuarioLogado, this);
+            FormAcompanharChamados formAcompanharChamados = new FormAcompanharChamados(_usuarioLogado, this);
 
             formAcompanharChamados.MdiParent = this;
 

@@ -15,7 +15,7 @@ namespace TecnPoint.Interfaces
 {
     public partial class FormLogin : Form
     {
-        UsuarioService _usuarioService;
+        private UsuarioService _usuarioService;
 
         public FormLogin()
         {
@@ -29,9 +29,15 @@ namespace TecnPoint.Interfaces
             {
                 ValidaLogin(tbxEmail.Text, tbxSenha.Text);
 
-                LoginUsuarioDTO loginUsuarioDTO = new LoginUsuarioDTO(tbxEmail.Text.ToLower(), tbxSenha.Text);
+                UsuarioLogadoDTO usuarioRetornado = await _usuarioService.RealizarLogin(new LoginUsuarioDTO(tbxEmail.Text.ToLower(), tbxSenha.Text));
 
-                Usuario usuarioLogado = await _usuarioService.RealizarLogin(loginUsuarioDTO);
+                Usuario usuarioLogado = new Usuario
+                {
+                    idUsuario = usuarioRetornado.idUsuario,
+                    Nome = usuarioRetornado.nome,
+                    Email = usuarioRetornado.email,
+                    TipoUsuario = usuarioRetornado.tipoUsuario,
+                };
 
                 MessageBox.Show($"Login efetuado com sucesso!\n{usuarioLogado}",
                                 "TechSolutions",
@@ -58,8 +64,6 @@ namespace TecnPoint.Interfaces
                                 MessageBoxButtons.OK,
                                 MessageBoxIcon.Information);
             }
-
-
         }
 
         private void ValidaLogin(string email, string senha)

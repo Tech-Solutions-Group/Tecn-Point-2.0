@@ -17,16 +17,16 @@ namespace TecnPoint.Interfaces
 {
     public partial class FormAberturaChamado : Form
     {
-        private ChamadoService chamadoService;
-        private ValidacaoAberturaChamado validacaoAberturaChamado;
-        private Usuario usuarioLogado;
+        private ChamadoService _chamadoService;
+        private ValidacaoAberturaChamado _validacaoAberturaChamado;
+        private Usuario _usuarioLogado;
         private FrmMDIPrincipal frmMDIPrincipal;
 
         public FormAberturaChamado(Usuario usuarioLogado, FrmMDIPrincipal frmMDIPrincipal)
         {
-            this.chamadoService = new ChamadoService();
-            this.validacaoAberturaChamado = new ValidacaoAberturaChamado();
-            this.usuarioLogado = usuarioLogado;
+            this._chamadoService = new ChamadoService();
+            this._validacaoAberturaChamado = new ValidacaoAberturaChamado();
+            this._usuarioLogado = usuarioLogado;
             this.frmMDIPrincipal = frmMDIPrincipal;
             InitializeComponent();
             cbxPrioridade.SelectedIndex = 0;
@@ -43,12 +43,12 @@ namespace TecnPoint.Interfaces
                 AberturaChamadoDTO aberturaChamadoDTO = new AberturaChamadoDTO(txtTitulo.Text,
                                                                                 txtDescricao.Text,
                                                                                 prioridadeChamado,
-                                                                                usuarioLogado.idUsuario,
+                                                                                _usuarioLogado.idUsuario,
                                                                                 cbxModulo.SelectedIndex,
                                                                                 cbxJornada.SelectedIndex);
                 try
                 {
-                    var chamado = await chamadoService.AbrirChamado(aberturaChamadoDTO);
+                    var chamado = await _chamadoService.AbrirChamado(aberturaChamadoDTO);
 
                     MessageBox.Show("Chamado aberto com sucesso!",
                                         "TechSolutions",
@@ -84,16 +84,16 @@ namespace TecnPoint.Interfaces
         // Retorna verdadeiro se todos os campos estiverem preenchidos corretamente
         private bool ValidaCamposAberturaChamado()
         {
-            return validacaoAberturaChamado.ValidaTitulo(txtTitulo.Text) &&
-                validacaoAberturaChamado.ValidaDescricao(txtDescricao.Text) &&
-                validacaoAberturaChamado.ValidaPrioridade(cbxPrioridade.SelectedIndex) &&
-                validacaoAberturaChamado.ValidaModulo(cbxModulo.SelectedIndex) &&
-                validacaoAberturaChamado.ValidaJornada(cbxJornada.SelectedIndex);
+            return _validacaoAberturaChamado.ValidaTitulo(txtTitulo.Text) &&
+                _validacaoAberturaChamado.ValidaDescricao(txtDescricao.Text) &&
+                _validacaoAberturaChamado.ValidaPrioridade(cbxPrioridade.SelectedIndex) &&
+                _validacaoAberturaChamado.ValidaModulo(cbxModulo.SelectedIndex) &&
+                _validacaoAberturaChamado.ValidaJornada(cbxJornada.SelectedIndex);
         }
 
         private void txtTitulo_Leave(object sender, EventArgs e)
         {
-            if (!validacaoAberturaChamado.ValidaTitulo(txtTitulo.Text))
+            if (!_validacaoAberturaChamado.ValidaTitulo(txtTitulo.Text))
             {
                 errorProvider1.SetError(txtTitulo, "O título do chamado deve ser informado");
             }
@@ -101,7 +101,7 @@ namespace TecnPoint.Interfaces
 
         private void txtDescricao_Leave(object sender, EventArgs e)
         {
-            if (!validacaoAberturaChamado.ValidaDescricao(txtDescricao.Text))
+            if (!_validacaoAberturaChamado.ValidaDescricao(txtDescricao.Text))
             {
                 errorProvider1.SetError(txtDescricao, "A descrição do chamado deve ser informada");
             }
@@ -109,7 +109,7 @@ namespace TecnPoint.Interfaces
 
         private void cbxPrioridade_Leave(object sender, EventArgs e)
         {
-            if (!validacaoAberturaChamado.ValidaPrioridade(cbxPrioridade.SelectedIndex))
+            if (!_validacaoAberturaChamado.ValidaPrioridade(cbxPrioridade.SelectedIndex))
             {
                 errorProvider1.SetError(cbxPrioridade, "A prioridade do chamado deve ser informada");
             }
@@ -117,7 +117,7 @@ namespace TecnPoint.Interfaces
 
         private void cbxJornada_Leave(object sender, EventArgs e)
         {
-            if (!validacaoAberturaChamado.ValidaJornada(cbxJornada.SelectedIndex))
+            if (!_validacaoAberturaChamado.ValidaJornada(cbxJornada.SelectedIndex))
             {
                 errorProvider1.SetError(cbxJornada, "A jornada deve ser informada");
             }
@@ -125,7 +125,7 @@ namespace TecnPoint.Interfaces
 
         private void cbxModulo_Leave(object sender, EventArgs e)
         {
-            if (!validacaoAberturaChamado.ValidaModulo(cbxModulo.SelectedIndex))
+            if (!_validacaoAberturaChamado.ValidaModulo(cbxModulo.SelectedIndex))
             {
                 errorProvider1.SetError(cbxModulo, "O módulo deve ser informado");
             }

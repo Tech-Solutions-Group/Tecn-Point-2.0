@@ -17,7 +17,7 @@ namespace TecnPoint.Services
             _httpClient = new HttpClient();
         }
 
-        public async Task<Usuario> RealizarLogin(LoginUsuarioDTO loginUsuarioDTO)
+        public async Task<UsuarioLogadoDTO> RealizarLogin(LoginUsuarioDTO loginUsuarioDTO)
         {
             var request = new HttpRequestMessage(HttpMethod.Post, "http://localhost:8080/usuarios/login");
 
@@ -38,7 +38,7 @@ namespace TecnPoint.Services
                     Converters = { new JsonStringEnumConverter() }
                 }; 
 
-                Usuario usuarioLogado = JsonSerializer.Deserialize<Usuario>(jsonResposta, options);
+                UsuarioLogadoDTO usuarioLogado = JsonSerializer.Deserialize<UsuarioLogadoDTO>(jsonResposta, options);
                 return usuarioLogado;
             }
 

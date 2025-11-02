@@ -16,13 +16,13 @@ namespace TecnPoint.Interfaces
 {
     public partial class FormAcompanharChamados : Form
     {
-        private Usuario usuarioLogado;
-        private ChamadoService chamadoService;
+        private Usuario _usuarioLogado;
+        private ChamadoService _chamadoService;
 
         public FormAcompanharChamados(Usuario usuarioLogado, FrmMDIPrincipal frmMDIPrincipal)
         {
-            this.usuarioLogado = usuarioLogado;
-            this.chamadoService = new ChamadoService();
+            this._usuarioLogado = usuarioLogado;
+            this._chamadoService = new ChamadoService();
             InitializeComponent();
             CarregaChamados();
         }
@@ -31,7 +31,7 @@ namespace TecnPoint.Interfaces
         {
             try
             {
-                var listaChamados = await chamadoService.BuscarChamados(usuarioLogado.idUsuario, usuarioLogado.tipoUsuario);
+                var listaChamados = await _chamadoService.BuscarChamados(_usuarioLogado.idUsuario, _usuarioLogado.TipoUsuario);
 
                 foreach (var chamado in listaChamados)
                 {
@@ -69,7 +69,7 @@ namespace TecnPoint.Interfaces
                     void AbrirDetalhes(ChamadoDTO chamadoSelecionado)
                     {
                         Usuario usuarioParam = new Usuario();
-                        usuarioParam = usuarioLogado;
+                        usuarioParam = _usuarioLogado;
                         panelDetalhesChamado.BringToFront();
 
                         FormDetalhesChamado detalhesChamado = new FormDetalhesChamado(chamadoSelecionado, usuarioParam, this);
