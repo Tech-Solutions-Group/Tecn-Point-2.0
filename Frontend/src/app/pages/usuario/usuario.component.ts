@@ -22,6 +22,9 @@ export class UsuarioComponent implements OnInit {
   successModalOpen = false;
   usuarios: Usuario[] = [];
 
+  confirmDeleteModalOpen = false;
+  usuarioSelecionado: Usuario | null = null;
+
   constructor(private usuarioService: UsuarioService) {}
 
   getFuncionario(status: string): string {
@@ -62,17 +65,36 @@ export class UsuarioComponent implements OnInit {
     }
   }
 
-  deleteUsuario(id: number): void {
-    this.usuarioService.delUsuario(id).subscribe({
-      next: () => {
-        this.loadUsuarios();
-        this.successModalOpen = true;
-      },
-      error: (err) => console.error('Erro ao excluir usuário:', err),
-    });
+  // 🆕 Abre o modal de confirmação
+  openConfirmDelete(usuario: Usuario): void {
+    this.usuarioSelecionado = usuario;
+    this.confirmDeleteModalOpen = true;
   }
 
-  closeSuccess() {
+  // 🆕 Fecha o modal de confirmação
+  closeConfirmDelete(): void {
+    this.usuarioSelecionado = null;
+    this.confirmDeleteModalOpen = false;
+  }
+
+  // 🆕 Confirma a exclusão e chama o service
+  confirmDelete(): void {
+    if (!this.usuarioSelecionado) return;
+
+    this.usuarioService
+      .delUsuario(this.usuarioSelecionado.idUsuario)
+      .subscribe({
+        next: () => {
+          this.loadUsuarios(); // atualiza tabela
+          this.closeConfirmDelete();
+          this.successModalOpen = true; // mostra modal de sucesso
+        },
+        error: (err) => console.error('Erro ao excluir usuário:', err),
+      });
+  }
+
+  // Mantém seu modal de sucesso funcionando
+  closeSuccess(): void {
     this.successModalOpen = false;
   }
 }

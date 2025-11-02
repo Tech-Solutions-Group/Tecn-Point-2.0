@@ -61,7 +61,7 @@
 
   <div class="mb-3">
     <label for="idJornada" class="form-label">ID da Jornada</label>
-    <select id="idJornada" class="form-select" formControlName="fk_id_jornada">
+    <select id="idJornada" class="form-select" formControlName="id_jornada">
       <option value="" disabled selected>Selecione a jornada</option>
       <option value="1">Financeiro</option>
       <option value="2">Marketing</option>
@@ -69,8 +69,8 @@
     </select>
     <small
       *ngIf="
-        abrirChamadoForm.get('fk_id_jornada')?.invalid &&
-        abrirChamadoForm.get('fk_id_jornada')?.touched
+        abrirChamadoForm.get('id_jornada')?.invalid &&
+        abrirChamadoForm.get('id_jornada')?.touched
       "
     >
       Jornada é obrigatória.
@@ -79,7 +79,7 @@
 
   <div class="mb-3">
     <label for="idModulo" class="form-label">ID do Módulo</label>
-    <select id="idModulo" class="form-select" formControlName="fk_id_modulo">
+    <select id="idModulo" class="form-select" formControlName="id_modulo">
       <option value="" disabled selected>Selecione o módulo</option>
       <option value="1">Hardware</option>
       <option value="2">Software</option>
@@ -87,8 +87,8 @@
     </select>
     <small
       *ngIf="
-        abrirChamadoForm.get('fk_id_modulo')?.invalid &&
-        abrirChamadoForm.get('fk_id_modulo')?.touched
+        abrirChamadoForm.get('id_modulo')?.invalid &&
+        abrirChamadoForm.get('id_modulo')?.touched
       "
     >
       Módulo é obrigatório.

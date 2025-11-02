@@ -6,19 +6,23 @@
     <tr>
       <th>TITULO</th>
       <th>DESCRIÇÃO</th>
-      <th>PRIORIDADE</th>
-      <th>MODULO</th>
+      <th style="width: 8rem" class="text-center">PRIORIDADE</th>
+      <th style="width: 8rem" class="text-center">MODULO</th>
       <th>CLIENTE</th>
       <th>FUNCIONARIO</th>
-      <th style="width: 12rem" class="text-center">STATUS</th>
+      <th style="width: 11rem" class="text-center">STATUS</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let chamado of chamados" class="trBody" (click)="goToHome()">
-      <td>{{ chamado.titulo }}</td>
-      <td>{{ chamado.descricao }}</td>
-      <td>{{ getPrioridadeLabel(chamado.prioridade) }}</td>
-      <td>{{ chamado.modulo.modulo }}</td>
+      <td style="width: 10rem; max-width: 10rem" class="limit-text">
+        {{ chamado.titulo }}
+      </td>
+      <td style="width: 20rem; max-width: 20rem" class="limit-text">
+        {{ chamado.descricao }}
+      </td>
+      <td class="text-center">{{ getPrioridadeLabel(chamado.prioridade) }}</td>
+      <td class="text-center">{{ chamado.modulo.modulo }}</td>
       <td>{{ chamado.cliente.nome }}</td>
       <td>{{ chamado.funcionario.nome }}</td>
       <td

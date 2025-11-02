@@ -2,6 +2,18 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Usuario, UsuarioService } from '../../../service/usuario.service';
 import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
+import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
+
+export function senhaMatchValidator(): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    const senha = control.get('senha');
+    const confirmSenha = control.get('confirmSenha');
+
+    if (!senha || !confirmSenha) return null;
+
+    return senha.value === confirmSenha.value ? null : { confirmSenha: true };
+  };
+}
 
 @Component({
   selector: 'app-edt-usuario',
@@ -24,11 +36,15 @@ export class EdtUsuarioComponent {
     private fb: FormBuilder
   ) {}
 
-  attUsuarioForm = this.fb.group({
-    nome: ['', Validators.required],
-    email: ['', [Validators.required, Validators.email]],
-    senha: ['', Validators.required],
-  });
+  attUsuarioForm = this.fb.group(
+    {
+      nome: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      senha: ['', Validators.required],
+      confirmSenha: ['', Validators.required],
+    },
+    { validators: senhaMatchValidator() }
+  );
 
   onSubmit(): void {
     if (this.attUsuarioForm.invalid) {
@@ -63,6 +79,7 @@ export class EdtUsuarioComponent {
           nome: user.nome,
           email: user.email,
           senha: user.senha,
+          confirmSenha: null,
         });
         this.isOpen = true;
       },
