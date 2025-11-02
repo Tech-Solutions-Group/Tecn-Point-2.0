@@ -32,14 +32,14 @@ public class ChamadoController {
         return ResponseEntity.status(200).body(chamadoService.getChamadoPorId(idChamado));
     }
 
-    @GetMapping("/chamados-cliente/{id_cliente}")
-    public ResponseEntity<List<ChamadoDTO>> getChamadosCliente(@PathVariable Long id_cliente){
-        return ResponseEntity.status(200).body(chamadoService.getChamadosCliente(id_cliente));
+    @GetMapping("/chamados-cliente/{idCliente}")
+    public ResponseEntity<List<ChamadoDTO>> getChamadosCliente(@PathVariable Long idCliente){
+        return ResponseEntity.status(200).body(chamadoService.getChamadosCliente(idCliente));
     }
 
-    @GetMapping("/chamados-funcionario/{id_funcionario}")
-    public ResponseEntity<List<ChamadoDTO>> getChamadosFuncionario(@PathVariable Long id_funcionario){
-        return ResponseEntity.status(200).body(chamadoService.getChamadosFuncionario(id_funcionario));
+    @GetMapping("/chamados-funcionario/{idFuncionario}")
+    public ResponseEntity<List<ChamadoDTO>> getChamadosFuncionario(@PathVariable Long idFuncionario){
+        return ResponseEntity.status(200).body(chamadoService.getChamadosFuncionario(idFuncionario));
     }
 
     @PatchMapping("/{idChamado}")

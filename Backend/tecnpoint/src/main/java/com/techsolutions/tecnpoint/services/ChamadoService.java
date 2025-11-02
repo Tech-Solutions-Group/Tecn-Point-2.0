@@ -44,8 +44,8 @@ public class ChamadoService {
         return buildChamadoDTO(chamado);
     }
 
-    public List<ChamadoDTO> getChamadosCliente(Long id_cliente) {
-        Usuarios cliente = usuarioService.getUsuarioById(id_cliente)
+    public List<ChamadoDTO> getChamadosCliente(Long idCliente) {
+        Usuarios cliente = usuarioService.getUsuarioById(idCliente)
                 .orElseThrow(() -> new UsuarioNaoEncontradoException("O cliente não foi encontrado."));
 
         if (isFuncionario(cliente))
@@ -56,8 +56,8 @@ public class ChamadoService {
                 .toList();
     }
 
-    public List<ChamadoDTO> getChamadosFuncionario(Long id_funcionario) {
-        Usuarios funcionario = usuarioService.getUsuarioById(id_funcionario)
+    public List<ChamadoDTO> getChamadosFuncionario(Long idFuncionario) {
+        Usuarios funcionario = usuarioService.getUsuarioById(idFuncionario)
                 .orElseThrow(() -> new UsuarioNaoEncontradoException("O funcionário não foi encontrado."));
 
         if (!isFuncionario(funcionario))
@@ -99,7 +99,7 @@ public class ChamadoService {
 
         // Atualiza jornada
         if (dto.getIdJornada() != null &&
-                (chamado.getJornada() == null || !chamado.getJornada().getId_jornada().equals(dto.getIdJornada()))) {
+                (chamado.getJornada() == null || !chamado.getJornada().getIdJornada().equals(dto.getIdJornada()))) {
 
             Jornada novaJornada = jornadaRepository.findById(dto.getIdJornada())
                     .orElseThrow(() -> new JornadaNaoEncontradaException("A jornada informada não foi encontrada"));
@@ -108,7 +108,7 @@ public class ChamadoService {
 
         // Atualiza módulo
         if (dto.getIdModulo() != null &&
-                (chamado.getModulo() == null || !chamado.getModulo().getId_modulo().equals(dto.getIdModulo()))) {
+                (chamado.getModulo() == null || !chamado.getModulo().getIdModulo().equals(dto.getIdModulo()))) {
 
             Modulo novoModulo = moduloRepository.findById(dto.getIdModulo())
                     .orElseThrow(() -> new ModuloNaoEncontradoException("O módulo informado não foi encontrado"));
