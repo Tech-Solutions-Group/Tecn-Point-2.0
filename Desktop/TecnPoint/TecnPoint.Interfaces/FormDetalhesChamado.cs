@@ -21,9 +21,14 @@ namespace TecnPoint.Interfaces
         private ChamadoDTO chamado;
         private FormAcompanharChamados formAcompanharChamados;
         private ChamadoService chamadoService;
+        private ConversaService conversaService;
+
+        long idUltimaMensagem = 0;
 
         // Variável para controlar quando disparar o evento de SelectedIndexChanged das Combobox
         private bool carregandoComboBox = true;
+
+        private bool atualizandoDadosChamado = false;
 
         public FormDetalhesChamado(ChamadoDTO chamadoSelecionado, Usuario usuarioLogado, FormAcompanharChamados formAcompanharChamado)
         {
@@ -31,6 +36,7 @@ namespace TecnPoint.Interfaces
             this.chamado = chamadoSelecionado;
             this.formAcompanharChamados = formAcompanharChamado;
             this.chamadoService = new ChamadoService();
+            this.conversaService = new ConversaService();
             InitializeComponent();
         }
 
@@ -57,15 +63,16 @@ namespace TecnPoint.Interfaces
                 cbxStatus.Visible = false;
                 cbxPrioridade.Visible = false;
                 cbxNomeFuncionario.Visible = false;
+                cbxJornada.Visible = false;
+                cbxModulo.Visible = false;
             }
 
             PreencherDetalhes();
             await CarregaNomeCbxFuncionarios(cbxNomeFuncionario);
+            await CarregaMensagens();
 
             cbxStatus.SelectedIndex = 0;
             cbxPrioridade.SelectedIndex = 0;
-            //cbxJornada.SelectedIndex = Convert.ToInt32(chamado.jornada.id_jornada);
-            //cbxModulo.SelectedIndex = Convert.ToInt32(chamado.modulo.id_modulo);
             cbxJornada.SelectedIndex = 0;
             cbxModulo.SelectedIndex = 0;
             carregandoComboBox = false;
@@ -118,7 +125,6 @@ namespace TecnPoint.Interfaces
             }
         }
 
-
         private async void cbxStatus_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (!carregandoComboBox && cbxStatus.SelectedIndex > 0)
@@ -160,7 +166,6 @@ namespace TecnPoint.Interfaces
                     this.chamado = await chamadoService.AtualizaChamado(dadosParaAtualizarChamado);
 
                     lblPrioridade.Text = ConverteEnumPrioridade(chamado.prioridade);
-
                 }
                 catch (Exception ex)
                 {
@@ -222,6 +227,147 @@ namespace TecnPoint.Interfaces
                                            MessageBoxIcon.Information);
                 }
             }
+        }
+        private async void pbIconEnviarMensagem_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(txtMensagem.Text))
+            {
+                try
+                {
+                    MensagemDTO mensagemASerEnviada = new MensagemDTO
+                    {
+                        idChamado = this.chamado.id_chamado,
+                        idRemetente = this.usuarioLogado.id_usuario,
+                        mensagem = txtMensagem.Text
+                    };
+
+                    await conversaService.EnviarMensagem(mensagemASerEnviada);
+                    txtMensagem.Clear();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Não foi possível enviar a mensagem,\n" + ex.Message,
+                                           "TechSolutions",
+                                           MessageBoxButtons.OK,
+                                           MessageBoxIcon.Information);
+                }
+            }
+        }
+
+        private async Task CarregaMensagens()
+        {
+            List<ConversaDTO> listaMensagens = new List<ConversaDTO>();
+            BuscarMensagemDTO buscarMensagemDTO = new BuscarMensagemDTO
+            {
+                idChamado = this.chamado.id_chamado,
+                idUltimaConversa = this.idUltimaMensagem
+            };
+
+            listaMensagens = await conversaService.BuscarConversa(buscarMensagemDTO);
+
+            foreach (var mensagem in listaMensagens)
+            {
+                ExibeMensagens(mensagem); //Exibe as mensagem, passa os dados da listaMensagens para a função
+
+                //Atualiza o idUltimaMensagem
+                if (mensagem.idConversa > this.idUltimaMensagem)
+                {
+                    this.idUltimaMensagem = mensagem.idConversa;
+                }
+            }
+        }
+
+        private async Task CarregaInfosChamado()
+        {
+            try
+            {
+                this.chamado = await chamadoService.BuscaChamadoPorId(this.chamado.id_chamado);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao buscar informações do chamado\n" + ex.Message,
+                                           "TechSolutions",
+                                           MessageBoxButtons.OK,
+                                           MessageBoxIcon.Information);
+            }
+        }
+
+        private async void timerAtualizaDados_Tick(object sender, EventArgs e)
+        {
+            if (atualizandoDadosChamado) return;
+            try
+            {
+                atualizandoDadosChamado = true;
+                await CarregaInfosChamado();
+                await CarregaMensagens();
+                PreencherDetalhes();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao buscar informações do chamado\n" + ex.Message,
+                                           "TechSolutions",
+                                           MessageBoxButtons.OK,
+                                           MessageBoxIcon.Information);
+            }
+            finally
+            {
+                atualizandoDadosChamado = false;
+            }
+
+        }
+
+        private void ExibeMensagens(ConversaDTO mensagem)
+        {
+            Panel mensagemNoPanel = new Panel()
+            {
+                BackColor = Color.FromArgb(167, 112, 197),
+                Width = panelConversa.Width - 30,
+                AutoSize = true,
+                Margin = new Padding(5),
+                Padding = new Padding(10)
+            };
+
+            // Nome do remetente
+            Label lblRemetente = new Label()
+            {
+                Text = mensagem.remetente.nome,
+                AutoSize = true,
+                Font = new Font("Segoe UI", 10, FontStyle.Bold),
+                Location = new Point(5, 5)
+            };
+
+            mensagemNoPanel.Controls.Add(lblRemetente);
+
+            // Data e hora de envio
+            Label lblDataHora = new Label()
+            {
+                Text = mensagem.dataHoraEnvio.ToString("dd/MM/yyyy HH:mm"),
+                AutoSize = true,
+                Font = new Font("Segoe UI", 8, FontStyle.Italic),
+                ForeColor = Color.Black,
+                Anchor = AnchorStyles.Top | AnchorStyles.Right
+            };
+
+            lblDataHora.Location = new Point(mensagemNoPanel.Width - lblDataHora.Width - 10, 8);
+
+            // Texto da mensagem
+            Label lblMensagem = new Label()
+            {
+                Text = mensagem.mensagem,
+                AutoSize = true,
+                Font = new Font("Segoe UI", 10),
+                MaximumSize = new Size(panelConversa.Width - 70, 0),
+                Location = new Point(5, lblRemetente.Bottom + 5)
+            };
+
+            // Adiciona os controles
+            mensagemNoPanel.Controls.Add(lblMensagem);
+            mensagemNoPanel.Controls.Add(lblDataHora);
+
+            // Adiciona o painel ao FlowLayoutPanel
+            panelConversa.Controls.Add(mensagemNoPanel);
+            panelConversa.ScrollControlIntoView(mensagemNoPanel);
+
         }
 
         private void pbIconVoltar_Click(object sender, EventArgs e)

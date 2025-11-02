@@ -146,5 +146,28 @@ namespace TecnPoint.Services
             var erroAtualizarChamado = JsonSerializer.Deserialize<MensagemErro>(jsonResposta);
             throw new Exception(erroAtualizarChamado.mensagem);
         }
+
+        public async Task<ChamadoDTO> BuscaChamadoPorId(long idChamado)
+        {
+            var request = new HttpRequestMessage(HttpMethod.Get, $"http://localhost:8080/chamados/{idChamado}");
+
+            var response = await _httpClient.SendAsync(request);
+
+            var jsonResposta = await response.Content.ReadAsStringAsync();
+
+            if (response.IsSuccessStatusCode)
+            {
+                JsonSerializerOptions options = new JsonSerializerOptions
+                {
+                    Converters = { new JsonStringEnumConverter() }
+                };
+
+                ChamadoDTO chamadoAtualizado = JsonSerializer.Deserialize<ChamadoDTO>(jsonResposta, options);
+                return chamadoAtualizado;
+            }
+
+            var erroCarregarChamado = JsonSerializer.Deserialize<MensagemErro>(jsonResposta);
+            throw new Exception(erroCarregarChamado.mensagem);
+        }
     }
 }
