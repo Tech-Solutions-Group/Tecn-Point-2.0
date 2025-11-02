@@ -12,7 +12,7 @@ public class Jornada {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_jornada;
+    private Long idJornada;
 
     private String jornada;
 

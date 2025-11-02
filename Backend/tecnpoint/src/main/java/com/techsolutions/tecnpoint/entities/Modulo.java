@@ -13,7 +13,7 @@ public class Modulo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_modulo;
+    private Long idModulo;
 
     private String modulo;
 
