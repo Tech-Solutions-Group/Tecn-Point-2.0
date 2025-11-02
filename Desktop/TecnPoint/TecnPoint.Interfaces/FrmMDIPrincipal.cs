@@ -53,7 +53,7 @@ namespace TecnPoint.Interfaces
 
         private void tspAbrirChamado_Click(object sender, EventArgs e)
         {
-            if(this.ActiveMdiChild != null)
+            if (this.ActiveMdiChild != null)
             {
                 this.ActiveMdiChild.Close();
             }
@@ -81,6 +81,22 @@ namespace TecnPoint.Interfaces
             formLogo.Dock = DockStyle.Fill;
 
             formLogo.Show();
+        }
+
+        private void tspAcompanharChamado_Click(object sender, EventArgs e)
+        {
+            if (this.ActiveMdiChild != null)
+            {
+                this.ActiveMdiChild.Close();
+            }
+
+            FormAcompanharChamados formAcompanharChamados = new FormAcompanharChamados(usuarioLogado, this);
+
+            formAcompanharChamados.MdiParent = this;
+
+            formAcompanharChamados.Dock = DockStyle.Fill;
+
+            formAcompanharChamados.Show();
         }
     }
 }

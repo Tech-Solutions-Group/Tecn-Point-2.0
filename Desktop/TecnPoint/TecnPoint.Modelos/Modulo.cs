@@ -10,7 +10,5 @@ namespace TecnPoint.Modelos
     {
         public long id_modulo { get; set; }
         public string modulo { get; set; }
-
-        public List<Chamado> chamados { get; set; }
     }
 }

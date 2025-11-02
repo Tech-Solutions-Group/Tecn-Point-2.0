@@ -40,7 +40,7 @@
             // 
             pictureBox1.BackColor = Color.Transparent;
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(243, 99);
+            pictureBox1.Location = new Point(351, 154);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(172, 176);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
@@ -52,7 +52,7 @@
             lblNomeFrmLogo.BackColor = Color.Transparent;
             lblNomeFrmLogo.Font = new Font("Consolas", 14.25F, FontStyle.Bold);
             lblNomeFrmLogo.ForeColor = SystemColors.ControlLightLight;
-            lblNomeFrmLogo.Location = new Point(123, 328);
+            lblNomeFrmLogo.Location = new Point(231, 383);
             lblNomeFrmLogo.Name = "lblNomeFrmLogo";
             lblNomeFrmLogo.Size = new Size(413, 22);
             lblNomeFrmLogo.TabIndex = 1;
@@ -64,7 +64,7 @@
             lblEmailFrmLogo.BackColor = Color.Transparent;
             lblEmailFrmLogo.Font = new Font("Consolas", 14.25F, FontStyle.Bold);
             lblEmailFrmLogo.ForeColor = SystemColors.ControlLightLight;
-            lblEmailFrmLogo.Location = new Point(123, 370);
+            lblEmailFrmLogo.Location = new Point(231, 425);
             lblEmailFrmLogo.Name = "lblEmailFrmLogo";
             lblEmailFrmLogo.Size = new Size(413, 22);
             lblEmailFrmLogo.TabIndex = 2;
@@ -76,7 +76,7 @@
             lblTipoUsuarioFrmLogo.BackColor = Color.Transparent;
             lblTipoUsuarioFrmLogo.Font = new Font("Consolas", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblTipoUsuarioFrmLogo.ForeColor = SystemColors.ControlLightLight;
-            lblTipoUsuarioFrmLogo.Location = new Point(123, 283);
+            lblTipoUsuarioFrmLogo.Location = new Point(231, 338);
             lblTipoUsuarioFrmLogo.Name = "lblTipoUsuarioFrmLogo";
             lblTipoUsuarioFrmLogo.Size = new Size(413, 28);
             lblTipoUsuarioFrmLogo.TabIndex = 3;
@@ -89,7 +89,8 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlLightLight;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
-            ClientSize = new Size(659, 517);
+            BackgroundImageLayout = ImageLayout.Center;
+            ClientSize = new Size(876, 620);
             Controls.Add(lblTipoUsuarioFrmLogo);
             Controls.Add(lblEmailFrmLogo);
             Controls.Add(lblNomeFrmLogo);

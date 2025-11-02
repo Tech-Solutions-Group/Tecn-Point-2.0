@@ -17,7 +17,7 @@ namespace TecnPoint.Interfaces
         {
             InitializeComponent();
             this.lblNomeFrmLogo.Text = nomeUsuario;
-            this.lblNomeFrmLogo.Text = emailUsuario;
+            this.lblEmailFrmLogo.Text = emailUsuario;
             this.lblTipoUsuarioFrmLogo.Text = tipoUsuario.ToString();
         }
     }
