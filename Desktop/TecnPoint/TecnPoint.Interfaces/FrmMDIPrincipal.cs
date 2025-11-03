@@ -13,14 +13,17 @@ namespace TecnPoint.Interfaces
 {
     public partial class FrmMDIPrincipal : Form
     {
+        private readonly bool _modoDaltonico;
         private int childFormNumber = 0;
         private Usuario _usuarioLogado;
 
-        public FrmMDIPrincipal(Usuario usuarioLogado)
+        public FrmMDIPrincipal(Usuario usuarioLogado, bool modoDaltonico)
         {
             InitializeComponent();
+            this._modoDaltonico = modoDaltonico;
             this._usuarioLogado = usuarioLogado;
             CarregaFormLogo();
+            ModoDaltonismo();
             AlterarVisualizacao();
         }
 
@@ -49,6 +52,11 @@ namespace TecnPoint.Interfaces
             {
                 tspGerenciarUsuarios.Visible = false;
             }
+
+            if(_usuarioLogado.TipoUsuario == Modelos.Enum.TipoUsuario.FUNCIONARIO)
+            {
+                tspAbrirChamado.Visible = false;
+            }
         }
 
         private void tspAbrirChamado_Click(object sender, EventArgs e)
@@ -58,7 +66,7 @@ namespace TecnPoint.Interfaces
                 this.ActiveMdiChild.Close();
             }
 
-            FormAberturaChamado formAberturaChamado = new FormAberturaChamado(_usuarioLogado, this);
+            FormAberturaChamado formAberturaChamado = new FormAberturaChamado(_usuarioLogado, this, _modoDaltonico);
 
             formAberturaChamado.MdiParent = this;
 
@@ -74,7 +82,7 @@ namespace TecnPoint.Interfaces
                 this.ActiveMdiChild.Close();
             }
 
-            FormLogo formLogo = new FormLogo(_usuarioLogado.Nome, _usuarioLogado.Email, _usuarioLogado.TipoUsuario);
+            FormLogo formLogo = new FormLogo(_usuarioLogado.Nome, _usuarioLogado.Email, _usuarioLogado.TipoUsuario, _modoDaltonico);
 
             formLogo.MdiParent = this;
 
@@ -90,7 +98,7 @@ namespace TecnPoint.Interfaces
                 this.ActiveMdiChild.Close();
             }
 
-            FormAcompanharChamados formAcompanharChamados = new FormAcompanharChamados(_usuarioLogado, this);
+            FormAcompanharChamados formAcompanharChamados = new FormAcompanharChamados(_usuarioLogado, this, _modoDaltonico);
 
             formAcompanharChamados.MdiParent = this;
 
@@ -106,7 +114,7 @@ namespace TecnPoint.Interfaces
                 this.ActiveMdiChild.Close();
             }
 
-            FormCadastrarUsuario formCadastrarUsuario = new FormCadastrarUsuario();
+            FormCadastrarUsuario formCadastrarUsuario = new FormCadastrarUsuario(this);
 
             formCadastrarUsuario.MdiParent = this;
 
@@ -122,7 +130,7 @@ namespace TecnPoint.Interfaces
                 this.ActiveMdiChild.Close();
             }
 
-            FormListaUsuarios formListaUsuarios = new FormListaUsuarios();
+            FormListaUsuarios formListaUsuarios = new FormListaUsuarios(_modoDaltonico);
 
             formListaUsuarios.MdiParent = this;
 
@@ -130,5 +138,25 @@ namespace TecnPoint.Interfaces
 
             formListaUsuarios.Show();
         }
+
+        private void FrmMDIPrincipal_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            FormLogin telaLogin = new FormLogin();
+            telaLogin.DefinirModoDaltonico(_modoDaltonico);
+            telaLogin.Show();
+        }
+
+        private void ModoDaltonismo()
+        {
+            if (_modoDaltonico)
+            {
+                this.menuStrip.BackgroundImage = Interfaces.Properties.Resources.TelaInicioDaltonico;
+            }
+            else
+            {
+                this.menuStrip.BackgroundImage = Interfaces.Properties.Resources.TelaFundo;
+            }
+        }
+        
     }
 }

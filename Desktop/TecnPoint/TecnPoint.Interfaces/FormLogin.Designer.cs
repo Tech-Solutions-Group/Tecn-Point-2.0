@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormLogin));
             lblNomeEmpresa = new Label();
             lblDescricaoLogin = new Label();
             lblEmail = new Label();
@@ -38,16 +37,17 @@
             btnEntrar = new Button();
             lblDescSistemaDeSuporteAoCliente = new Label();
             lblCriadoPor = new Label();
+            chcbModoDaltonico = new CheckBox();
             SuspendLayout();
             // 
             // lblNomeEmpresa
             // 
             lblNomeEmpresa.AutoSize = true;
             lblNomeEmpresa.BackColor = Color.Transparent;
-            lblNomeEmpresa.Font = new Font("Consolas", 30F, FontStyle.Bold);
-            lblNomeEmpresa.Location = new Point(235, 75);
+            lblNomeEmpresa.Font = new Font("Consolas", 39.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblNomeEmpresa.Location = new Point(343, 119);
             lblNomeEmpresa.Name = "lblNomeEmpresa";
-            lblNomeEmpresa.Size = new Size(328, 47);
+            lblNomeEmpresa.Size = new Size(433, 62);
             lblNomeEmpresa.TabIndex = 0;
             lblNomeEmpresa.Text = "Lar dos Sonhos";
             // 
@@ -55,11 +55,11 @@
             // 
             lblDescricaoLogin.AutoSize = true;
             lblDescricaoLogin.BackColor = Color.Transparent;
-            lblDescricaoLogin.Font = new Font("Consolas", 10F);
+            lblDescricaoLogin.Font = new Font("Consolas", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblDescricaoLogin.ForeColor = SystemColors.ControlDarkDark;
-            lblDescricaoLogin.Location = new Point(295, 131);
+            lblDescricaoLogin.Location = new Point(432, 206);
             lblDescricaoLogin.Name = "lblDescricaoLogin";
-            lblDescricaoLogin.Size = new Size(216, 17);
+            lblDescricaoLogin.Size = new Size(243, 19);
             lblDescricaoLogin.TabIndex = 1;
             lblDescricaoLogin.Text = "Entre com suas credenciais";
             // 
@@ -67,10 +67,10 @@
             // 
             lblEmail.AutoSize = true;
             lblEmail.BackColor = Color.Transparent;
-            lblEmail.Font = new Font("Consolas", 13F);
-            lblEmail.Location = new Point(247, 165);
+            lblEmail.Font = new Font("Consolas", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblEmail.Location = new Point(387, 247);
             lblEmail.Name = "lblEmail";
-            lblEmail.Size = new Size(60, 22);
+            lblEmail.Size = new Size(70, 24);
             lblEmail.TabIndex = 2;
             lblEmail.Text = "Email";
             // 
@@ -78,40 +78,41 @@
             // 
             lblSenha.AutoSize = true;
             lblSenha.BackColor = Color.Transparent;
-            lblSenha.Font = new Font("Consolas", 13F);
-            lblSenha.Location = new Point(247, 244);
+            lblSenha.Font = new Font("Consolas", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblSenha.Location = new Point(387, 330);
             lblSenha.Name = "lblSenha";
-            lblSenha.Size = new Size(60, 22);
+            lblSenha.Size = new Size(70, 24);
             lblSenha.TabIndex = 3;
             lblSenha.Text = "Senha";
             // 
             // tbxEmail
             // 
-            tbxEmail.Font = new Font("Consolas", 11F);
-            tbxEmail.Location = new Point(265, 195);
+            tbxEmail.Font = new Font("Consolas", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            tbxEmail.Location = new Point(415, 283);
             tbxEmail.Name = "tbxEmail";
             tbxEmail.PlaceholderText = "Digite seu e-mail";
-            tbxEmail.Size = new Size(270, 25);
+            tbxEmail.Size = new Size(270, 26);
             tbxEmail.TabIndex = 4;
             // 
             // tbxSenha
             // 
-            tbxSenha.Font = new Font("Consolas", 11F);
-            tbxSenha.Location = new Point(265, 274);
+            tbxSenha.Font = new Font("Consolas", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            tbxSenha.Location = new Point(415, 366);
             tbxSenha.Name = "tbxSenha";
+            tbxSenha.PasswordChar = '•';
             tbxSenha.PlaceholderText = "Digite sua senha";
-            tbxSenha.Size = new Size(270, 25);
+            tbxSenha.Size = new Size(270, 26);
             tbxSenha.TabIndex = 5;
             // 
             // btnEntrar
             // 
             btnEntrar.BackColor = Color.FromArgb(126, 105, 171);
             btnEntrar.FlatStyle = FlatStyle.Flat;
-            btnEntrar.Font = new Font("Consolas", 11F);
+            btnEntrar.Font = new Font("Consolas", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnEntrar.ForeColor = SystemColors.ButtonHighlight;
-            btnEntrar.Location = new Point(325, 319);
+            btnEntrar.Location = new Point(474, 409);
             btnEntrar.Name = "btnEntrar";
-            btnEntrar.Size = new Size(150, 30);
+            btnEntrar.Size = new Size(171, 43);
             btnEntrar.TabIndex = 6;
             btnEntrar.Text = "Entrar";
             btnEntrar.UseVisualStyleBackColor = false;
@@ -121,11 +122,11 @@
             // 
             lblDescSistemaDeSuporteAoCliente.AutoSize = true;
             lblDescSistemaDeSuporteAoCliente.BackColor = Color.Transparent;
-            lblDescSistemaDeSuporteAoCliente.Font = new Font("Consolas", 11F);
+            lblDescSistemaDeSuporteAoCliente.Font = new Font("Consolas", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblDescSistemaDeSuporteAoCliente.ForeColor = SystemColors.ControlDarkDark;
-            lblDescSistemaDeSuporteAoCliente.Location = new Point(280, 361);
+            lblDescSistemaDeSuporteAoCliente.Location = new Point(424, 464);
             lblDescSistemaDeSuporteAoCliente.Name = "lblDescSistemaDeSuporteAoCliente";
-            lblDescSistemaDeSuporteAoCliente.Size = new Size(240, 18);
+            lblDescSistemaDeSuporteAoCliente.Size = new Size(270, 19);
             lblDescSistemaDeSuporteAoCliente.TabIndex = 7;
             lblDescSistemaDeSuporteAoCliente.Text = "Sistema de Suporte ao Cliente";
             // 
@@ -133,21 +134,36 @@
             // 
             lblCriadoPor.AutoSize = true;
             lblCriadoPor.BackColor = Color.Transparent;
-            lblCriadoPor.Font = new Font("Consolas", 8F);
-            lblCriadoPor.Location = new Point(318, 382);
+            lblCriadoPor.Font = new Font("Consolas", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblCriadoPor.Location = new Point(468, 485);
             lblCriadoPor.Name = "lblCriadoPor";
-            lblCriadoPor.Size = new Size(157, 13);
+            lblCriadoPor.Size = new Size(182, 15);
             lblCriadoPor.TabIndex = 8;
             lblCriadoPor.Text = "Criado por Tech Solutions";
+            // 
+            // chcbModoDaltonico
+            // 
+            chcbModoDaltonico.AutoSize = true;
+            chcbModoDaltonico.BackColor = Color.Transparent;
+            chcbModoDaltonico.Font = new Font("Segoe UI", 10F);
+            chcbModoDaltonico.ForeColor = Color.LightGray;
+            chcbModoDaltonico.Location = new Point(12, 610);
+            chcbModoDaltonico.Name = "chcbModoDaltonico";
+            chcbModoDaltonico.Size = new Size(127, 23);
+            chcbModoDaltonico.TabIndex = 9;
+            chcbModoDaltonico.Text = "Modo Daltônico";
+            chcbModoDaltonico.UseVisualStyleBackColor = false;
+            chcbModoDaltonico.CheckedChanged += chcbModoDaltonico_CheckedChanged;
             // 
             // FormLogin
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(100, 52, 144);
-            BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
-            BackgroundImageLayout = ImageLayout.Zoom;
-            ClientSize = new Size(800, 450);
+            BackgroundImage = Properties.Resources.TelaFundoLogin;
+            BackgroundImageLayout = ImageLayout.Stretch;
+            ClientSize = new Size(1119, 645);
+            Controls.Add(chcbModoDaltonico);
             Controls.Add(lblCriadoPor);
             Controls.Add(lblDescSistemaDeSuporteAoCliente);
             Controls.Add(btnEntrar);
@@ -177,5 +193,6 @@
         private Button btnEntrar;
         private Label lblDescSistemaDeSuporteAoCliente;
         private Label lblCriadoPor;
+        private CheckBox chcbModoDaltonico;
     }
 }

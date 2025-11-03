@@ -22,6 +22,7 @@ namespace TecnPoint.Interfaces
         private FormAcompanharChamados formAcompanharChamados;
         private ChamadoService _chamadoService;
         private ConversaService _conversaService;
+        private readonly bool _modoDaltonico;
 
         long idUltimaMensagem = 0;
 
@@ -30,7 +31,7 @@ namespace TecnPoint.Interfaces
 
         private bool atualizandoDadosChamado = false;
 
-        public FormDetalhesChamado(ChamadoDTO chamadoSelecionado, Usuario usuarioLogado, FormAcompanharChamados formAcompanharChamado)
+        public FormDetalhesChamado(ChamadoDTO chamadoSelecionado, Usuario usuarioLogado, FormAcompanharChamados formAcompanharChamado, bool modoDaltonico)
         {
             this._usuarioLogado = usuarioLogado;
             this._chamado = chamadoSelecionado;
@@ -38,13 +39,15 @@ namespace TecnPoint.Interfaces
             this._chamadoService = new ChamadoService();
             this._conversaService = new ConversaService();
             InitializeComponent();
+            _modoDaltonico = modoDaltonico;
+            ModoDaltonismo();
         }
 
         private void PreencherDetalhes()
         {
             lblTitulo.Text = _chamado.titulo;
             lblStatus.Text = ConverteEnumStatus(_chamado.status);
-            lblStatus.BackColor = FundoStatus(_chamado.status);
+            lblStatus.BackColor = FundoStatus(_chamado.status, _modoDaltonico);
             lblPrioridade.Text = ConverteEnumPrioridade(_chamado.prioridade);
             lblNomeCliente.Text = _chamado.cliente.nome;
             lblNomeFuncionario.Text = _chamado.funcionario.nome;
@@ -308,11 +311,19 @@ namespace TecnPoint.Interfaces
 
         }
 
+        private void btnVoltar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            this.formAcompanharChamados.flpPanelCardsChamados.Controls.Clear();
+            this.formAcompanharChamados.CarregaChamados();
+            this.formAcompanharChamados.ExibirCards();
+        }
+
         private void ExibeMensagens(ConversaDTO mensagem)
         {
             Panel mensagemNoPanel = new Panel()
             {
-                BackColor = Color.FromArgb(167, 112, 197),
+                BackColor = _modoDaltonico ? Color.FromArgb(171, 126, 105) : Color.FromArgb(167, 112, 197),
                 Width = panelConversa.Width - 30,
                 AutoSize = true,
                 Margin = new Padding(5),
@@ -362,20 +373,12 @@ namespace TecnPoint.Interfaces
 
         }
 
-        private void pbIconVoltar_Click(object sender, EventArgs e)
-        {
-            timerAtualizaDados.Enabled = false;
-            formAcompanharChamados.flpPanelCardsChamados.Controls.Clear();
-            formAcompanharChamados.CarregaChamados();
-            formAcompanharChamados.ExibirCards();
-        }
-
-        private Color FundoStatus(StatusChamado status)
+        private Color FundoStatus(StatusChamado status, bool modoDaltonico)
         {
             if (status == StatusChamado.ABERTO) return Color.FromArgb(211, 211, 211);
-            if (status == StatusChamado.EM_ANDAMENTO) return Color.FromArgb(236, 169, 44);
-            if (status == StatusChamado.PENDENTE) return Color.FromArgb(76, 143, 197);
-            if (status == StatusChamado.RESOLVIDO) return Color.FromArgb(67, 180, 128);
+            if (status == StatusChamado.EM_ANDAMENTO) return modoDaltonico ? Color.FromArgb(235, 181, 102) : Color.FromArgb(236, 169, 44);
+            if (status == StatusChamado.PENDENTE) return modoDaltonico ? Color.FromArgb(77, 138, 195) : Color.FromArgb(76, 143, 197);
+            if (status == StatusChamado.RESOLVIDO) return modoDaltonico ? Color.FromArgb(93, 162, 176) : Color.FromArgb(67, 180, 128);
             return Color.Gray;
         }
 
@@ -394,6 +397,26 @@ namespace TecnPoint.Interfaces
             if (prioridade == PrioridadeChamado.MEDIA) return "Média";
             if (prioridade == PrioridadeChamado.ALTA) return "Alta";
             return "";
+        }
+
+        private void ModoDaltonismo()
+        {
+            if (_modoDaltonico)
+            {
+                pbIconPrioridade.Image = Interfaces.Properties.Resources.IconPrioridadeDaltonico;
+                pbIconDescricao.Image = Interfaces.Properties.Resources.IconsDocumentoDaltonico;
+                pbIconJornada.Image = Interfaces.Properties.Resources.IconMarcadorDaltonico;
+                pbIconModulo.Image = Interfaces.Properties.Resources.IconEngrenagemDaltonico;
+                pbIconEnviarMensagem.Image = Interfaces.Properties.Resources.IconEnviarDaltonico;
+            }
+            else
+            {
+                pbIconPrioridade.Image = Interfaces.Properties.Resources.icons8_alta_prioridade_48;
+                pbIconDescricao.Image = Interfaces.Properties.Resources.icons8_documento_48;
+                pbIconJornada.Image = Interfaces.Properties.Resources.icons8_marcador_48;
+                pbIconModulo.Image = Interfaces.Properties.Resources.icons8_configurações_48;
+                pbIconEnviarMensagem.Image = Interfaces.Properties.Resources.IconEnviar;
+            }
         }
     }
 }

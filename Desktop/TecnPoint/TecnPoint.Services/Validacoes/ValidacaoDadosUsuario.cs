@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace TecnPoint.Services.Validacoes
 {
-    public class ValidacaoCadastroUsuario
+    public class ValidacaoDadosUsuario
     {
+        
         public bool ValidaNome(string nome)
         {
-            return (!string.IsNullOrWhiteSpace(nome));
+            return !string.IsNullOrWhiteSpace(nome);
         }
 
         public bool ValidaEmail(string email)
@@ -20,12 +21,12 @@ namespace TecnPoint.Services.Validacoes
 
         public bool ValidaSenha(string senha)
         {
-            return (!string.IsNullOrWhiteSpace(senha));
+            return !string.IsNullOrWhiteSpace(senha);
         }
 
         public bool ValidaConfirmacaoDeSenha(string senha, string confirmaSenha)
         {
-            return (senha.Equals(confirmaSenha));
+            return senha.Equals(confirmaSenha);
         }
 
         public bool ValidaTipoUsuario(int indiceSelecionado)

@@ -21,8 +21,9 @@ namespace TecnPoint.Interfaces
         private ValidacaoAberturaChamado _validacaoAberturaChamado;
         private Usuario _usuarioLogado;
         private FrmMDIPrincipal frmMDIPrincipal;
+        private readonly bool _modoDaltonico;
 
-        public FormAberturaChamado(Usuario usuarioLogado, FrmMDIPrincipal frmMDIPrincipal)
+        public FormAberturaChamado(Usuario usuarioLogado, FrmMDIPrincipal frmMDIPrincipal, bool modoDaltonico)
         {
             this._chamadoService = new ChamadoService();
             this._validacaoAberturaChamado = new ValidacaoAberturaChamado();
@@ -32,6 +33,8 @@ namespace TecnPoint.Interfaces
             cbxPrioridade.SelectedIndex = 0;
             cbxJornada.SelectedIndex = 0;
             cbxModulo.SelectedIndex = 0;
+            _modoDaltonico = modoDaltonico;
+            ModoDaltonismo();
         }
 
         private async void btnConfirmar_Click(object sender, EventArgs e)
@@ -56,7 +59,8 @@ namespace TecnPoint.Interfaces
                                         MessageBoxIcon.Information);
                     LimparCampos();
 
-                }catch(Exception ex) // Exceção lançada pelo Service
+                }
+                catch (Exception ex) // Exceção lançada pelo Service
                 {
                     MessageBox.Show($"Não foi possível abrir o chamado\n{ex.Message}",
                                         "TechSolutions",
@@ -97,6 +101,10 @@ namespace TecnPoint.Interfaces
             {
                 errorProvider1.SetError(txtTitulo, "O título do chamado deve ser informado");
             }
+            else
+            {
+                errorProvider1.SetError(txtTitulo, "");
+            }
         }
 
         private void txtDescricao_Leave(object sender, EventArgs e)
@@ -104,6 +112,10 @@ namespace TecnPoint.Interfaces
             if (!_validacaoAberturaChamado.ValidaDescricao(txtDescricao.Text))
             {
                 errorProvider1.SetError(txtDescricao, "A descrição do chamado deve ser informada");
+            }
+            else
+            {
+                errorProvider1.SetError(txtDescricao, "");
             }
         }
 
@@ -113,6 +125,10 @@ namespace TecnPoint.Interfaces
             {
                 errorProvider1.SetError(cbxPrioridade, "A prioridade do chamado deve ser informada");
             }
+            else
+            {
+                errorProvider1.SetError(cbxPrioridade, "");
+            }
         }
 
         private void cbxJornada_Leave(object sender, EventArgs e)
@@ -121,6 +137,10 @@ namespace TecnPoint.Interfaces
             {
                 errorProvider1.SetError(cbxJornada, "A jornada deve ser informada");
             }
+            else
+            {
+                errorProvider1.SetError(cbxJornada, "");
+            }
         }
 
         private void cbxModulo_Leave(object sender, EventArgs e)
@@ -128,6 +148,10 @@ namespace TecnPoint.Interfaces
             if (!_validacaoAberturaChamado.ValidaModulo(cbxModulo.SelectedIndex))
             {
                 errorProvider1.SetError(cbxModulo, "O módulo deve ser informado");
+            }
+            else
+            {
+                errorProvider1.SetError(cbxModulo, "");
             }
         }
 
@@ -143,6 +167,58 @@ namespace TecnPoint.Interfaces
             cbxPrioridade.SelectedIndex = 0;
             cbxModulo.SelectedIndex = 0;
             cbxJornada.SelectedIndex = 0;
+        }
+
+        private void ModoDaltonismo()
+        {
+            if (_modoDaltonico)
+            {
+                btnConfirmar.BackColor = Color.FromArgb(171, 126, 105);
+                btnConfirmar.FlatAppearance.MouseDownBackColor = Color.FromArgb(254, 190, 137);
+                btnConfirmar.FlatAppearance.MouseOverBackColor = Color.FromArgb(253, 163, 89);
+
+                btnCancelar.FlatAppearance.MouseDownBackColor = Color.FromArgb(254, 190, 137);
+                btnCancelar.FlatAppearance.MouseOverBackColor = Color.FromArgb(253, 163, 89);
+
+                pbInfoJornada.Image = Interfaces.Properties.Resources.logoInfoDaltonico;
+                pbInfoModulo.Image = Interfaces.Properties.Resources.logoInfoDaltonico;
+            }
+            else
+            {
+                btnConfirmar.BackColor = Color.FromArgb(126, 105, 171);
+                btnConfirmar.FlatAppearance.MouseDownBackColor = Color.FromArgb(190, 137, 254);
+                btnConfirmar.FlatAppearance.MouseOverBackColor = Color.FromArgb(163, 89, 253);
+
+                btnCancelar.FlatAppearance.MouseDownBackColor = Color.FromArgb(190, 137, 254);
+                btnCancelar.FlatAppearance.MouseOverBackColor = Color.FromArgb(163, 89, 253);
+
+                pbInfoModulo.Image = Interfaces.Properties.Resources.icons8_informações_48;
+                pbInfoJornada.Image = Interfaces.Properties.Resources.icons8_informações_48;
+            }
+        }
+
+        private void pbInfoJornada_Click(object sender, EventArgs e)
+        {
+            if (lblInfoJornada.Visible == false)
+            {
+                lblInfoJornada.Visible = true;
+            }
+            else
+            {
+                lblInfoJornada.Visible = false;
+            }
+        }
+
+        private void pbInfoModulo_Click(object sender, EventArgs e)
+        {
+            if (lblInfoModulo.Visible == false)
+            {
+                lblInfoModulo.Visible = true;
+            }
+            else
+            {
+                lblInfoModulo.Visible = false;
+            }
         }
     }
 }

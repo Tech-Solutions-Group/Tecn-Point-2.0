@@ -86,5 +86,31 @@ namespace TecnPoint.Services
             var erroBuscarUsuarios = JsonSerializer.Deserialize<MensagemErro>(jsonResposta);
             throw new Exception(erroBuscarUsuarios.mensagem);
         }
+
+        public async Task<UsuarioAtualizadoDTO> EditarDadosUsuario(EditarUsuarioDTO editarUsuarioDTO)
+        {
+            var request = new HttpRequestMessage(HttpMethod.Put, $"http://localhost:8080/usuarios/{editarUsuarioDTO.idUsuario}");
+
+            var jsonBody = JsonSerializer.Serialize(editarUsuarioDTO, new JsonSerializerOptions
+            {
+                Converters = { new JsonStringEnumConverter() },
+                DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
+            });
+
+            var content = new StringContent(jsonBody, null, "application/json");
+
+            request.Content = content;
+
+            var response = await _httpClient.SendAsync(request);
+            var jsonResposta = await response.Content.ReadAsStringAsync();
+
+            if (response.IsSuccessStatusCode)
+            {
+                UsuarioAtualizadoDTO usuarioAtualizado = JsonSerializer.Deserialize<UsuarioAtualizadoDTO>(jsonResposta, opcoesJson);
+                return usuarioAtualizado;
+            }
+            var erroAtualizarUsuario = JsonSerializer.Deserialize<MensagemErro>(jsonResposta);
+            throw new Exception(erroAtualizarUsuario.mensagem);
+        }
     }
 }

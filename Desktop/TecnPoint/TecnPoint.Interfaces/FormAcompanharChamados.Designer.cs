@@ -38,7 +38,7 @@
             panelDetalhesChamado.Controls.Add(flpPanelCardsChamados);
             panelDetalhesChamado.Location = new Point(0, 0);
             panelDetalhesChamado.Name = "panelDetalhesChamado";
-            panelDetalhesChamado.Size = new Size(876, 620);
+            panelDetalhesChamado.Size = new Size(896, 645);
             panelDetalhesChamado.TabIndex = 0;
             // 
             // flpPanelCardsChamados
@@ -47,7 +47,7 @@
             flpPanelCardsChamados.FlowDirection = FlowDirection.TopDown;
             flpPanelCardsChamados.Location = new Point(0, 0);
             flpPanelCardsChamados.Name = "flpPanelCardsChamados";
-            flpPanelCardsChamados.Size = new Size(876, 620);
+            flpPanelCardsChamados.Size = new Size(896, 645);
             flpPanelCardsChamados.TabIndex = 0;
             flpPanelCardsChamados.WrapContents = false;
             // 
@@ -55,7 +55,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(876, 620);
+            ClientSize = new Size(896, 645);
             Controls.Add(panelDetalhesChamado);
             FormBorderStyle = FormBorderStyle.None;
             Name = "FormAcompanharChamados";

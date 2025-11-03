@@ -23,6 +23,13 @@ namespace TecnPoint.Interfaces
             InitializeComponent();
         }
 
+        public void DefinirModoDaltonico(bool modoDaltonico)
+        {
+            chcbModoDaltonico.Checked = modoDaltonico;
+        }
+
+        public bool ModoDaltonicoAtivo => chcbModoDaltonico.Checked;
+
         private async void btnEntrar_Click(object sender, EventArgs e)
         {
             try
@@ -44,20 +51,22 @@ namespace TecnPoint.Interfaces
                                 MessageBoxButtons.OK,
                                 MessageBoxIcon.Information);
 
-                if(usuarioLogado != null)
+                if (usuarioLogado != null)
                 {
-                    FrmMDIPrincipal frmMDIPrincipal = new FrmMDIPrincipal(usuarioLogado);
+                    FrmMDIPrincipal frmMDIPrincipal = new FrmMDIPrincipal(usuarioLogado, ModoDaltonicoAtivo);
                     frmMDIPrincipal.Show();
                     this.Hide();
                 }
 
-            }catch(ArgumentException ex)
+            }
+            catch (ArgumentException ex)
             {
-                MessageBox.Show(ex.Message,     
+                MessageBox.Show(ex.Message,
                                 "TechSolutions",
                                 MessageBoxButtons.OK,
                                 MessageBoxIcon.Information);
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message,
                                 "TechSolutions",
@@ -70,6 +79,32 @@ namespace TecnPoint.Interfaces
         {
             if (string.IsNullOrWhiteSpace(email)) throw new ArgumentException("O e-mail deve ser informado!");
             if (string.IsNullOrWhiteSpace(senha)) throw new ArgumentException("A senha deve ser informada!");
+        }
+
+        private void AtivarModoDaltonico()
+        {
+            this.BackgroundImage = Interfaces.Properties.Resources.TelaInicioDaltonico;
+
+            btnEntrar.BackColor = Color.FromArgb(171, 126, 105);
+        }
+
+        private void DesativarModoDaltonico()
+        {
+            this.BackgroundImage = Interfaces.Properties.Resources.TelaFundoLogin;
+
+            btnEntrar.BackColor = Color.FromArgb(126, 105, 171);
+        }
+
+        private void chcbModoDaltonico_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chcbModoDaltonico.Checked)
+            {
+                AtivarModoDaltonico();
+            }
+            else
+            {
+                DesativarModoDaltonico();
+            }
         }
     }
 }

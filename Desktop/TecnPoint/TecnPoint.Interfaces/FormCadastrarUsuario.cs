@@ -17,12 +17,14 @@ namespace TecnPoint.Interfaces
     public partial class FormCadastrarUsuario : Form
     {
         private UsuarioService _usuarioService;
-        private ValidacaoCadastroUsuario _validacaoCadastro;
+        private ValidacaoDadosUsuario _validacaoCadastro;
+        private FrmMDIPrincipal frmMDIPrincipal;
 
-        public FormCadastrarUsuario()
+        public FormCadastrarUsuario(FrmMDIPrincipal frmMDIPrincipal)
         {
             this._usuarioService = new UsuarioService();
-            this._validacaoCadastro = new ValidacaoCadastroUsuario();
+            this._validacaoCadastro = new ValidacaoDadosUsuario();
+            this.frmMDIPrincipal = frmMDIPrincipal;
             InitializeComponent();
         }
 
@@ -72,6 +74,11 @@ namespace TecnPoint.Interfaces
                 lblInfoEmail.Visible = false;
                 lblExclamacaoInfoEmail.Visible = false;
             }
+        }
+
+        private void btnVoltar_Click(object sender, EventArgs e)
+        {
+            this.frmMDIPrincipal.CarregaFormLogo();
         }
 
         private bool ValidaCadastroUsuario()
@@ -128,7 +135,7 @@ namespace TecnPoint.Interfaces
 
         private void txtConfirmaSenhaUsuario_Leave(object sender, EventArgs e)
         {
-            if(!_validacaoCadastro.ValidaConfirmacaoDeSenha(txtSenhaUsuario.Text, txtConfirmaSenhaUsuario.Text))
+            if (!_validacaoCadastro.ValidaConfirmacaoDeSenha(txtSenhaUsuario.Text, txtConfirmaSenhaUsuario.Text))
             {
                 errorDadosCadastroInvalidos.SetError(txtConfirmaSenhaUsuario, "As senhas são diferentes");
             }
@@ -148,6 +155,11 @@ namespace TecnPoint.Interfaces
             {
                 errorDadosCadastroInvalidos.SetError(cbxTipoUsuario, "");
             }
+        }
+
+        private void txtSenhaUsuario_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

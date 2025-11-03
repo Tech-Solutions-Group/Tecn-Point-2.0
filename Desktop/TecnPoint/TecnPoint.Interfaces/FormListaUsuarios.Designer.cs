@@ -32,13 +32,14 @@
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormListaUsuarios));
             dgvUsuarios = new DataGridView();
-            btnVoltar = new Button();
-            pbInformacaoEditar = new PictureBox();
-            lblInfoEditar = new Label();
             nome = new DataGridViewTextBoxColumn();
             Email = new DataGridViewTextBoxColumn();
             tipoUsuario = new DataGridViewTextBoxColumn();
             Editar = new DataGridViewImageColumn();
+            btnVoltar = new Button();
+            pbInformacaoEditar = new PictureBox();
+            lblInfoEditar = new Label();
+            flpEditarUsuario = new FlowLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)dgvUsuarios).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbInformacaoEditar).BeginInit();
             SuspendLayout();
@@ -76,8 +77,40 @@
             dgvUsuarios.GridColor = SystemColors.Control;
             dgvUsuarios.Location = new Point(60, 60);
             dgvUsuarios.Name = "dgvUsuarios";
+            dgvUsuarios.RowHeadersVisible = false;
             dgvUsuarios.Size = new Size(776, 531);
             dgvUsuarios.TabIndex = 0;
+            dgvUsuarios.CellClick += dgvUsuarios_CellClick;
+            // 
+            // nome
+            // 
+            nome.DataPropertyName = "nome";
+            nome.HeaderText = "Nome";
+            nome.Name = "nome";
+            nome.ReadOnly = true;
+            // 
+            // Email
+            // 
+            Email.DataPropertyName = "email";
+            Email.HeaderText = "Email";
+            Email.Name = "Email";
+            Email.ReadOnly = true;
+            // 
+            // tipoUsuario
+            // 
+            tipoUsuario.DataPropertyName = "tipoUsuario";
+            tipoUsuario.HeaderText = "Tipo Usuário";
+            tipoUsuario.Name = "tipoUsuario";
+            tipoUsuario.ReadOnly = true;
+            // 
+            // Editar
+            // 
+            Editar.HeaderText = "Ações";
+            Editar.Image = (Image)resources.GetObject("Editar.Image");
+            Editar.ImageLayout = DataGridViewImageCellLayout.Zoom;
+            Editar.Name = "Editar";
+            Editar.ReadOnly = true;
+            Editar.Resizable = DataGridViewTriState.True;
             // 
             // btnVoltar
             // 
@@ -114,31 +147,13 @@
             lblInfoEditar.Text = "Clique no ícone de edição na tabela para editar o usuário desejado";
             lblInfoEditar.Visible = false;
             // 
-            // nome
+            // flpEditarUsuario
             // 
-            nome.DataPropertyName = "nome";
-            nome.HeaderText = "Nome";
-            nome.Name = "nome";
-            // 
-            // Email
-            // 
-            Email.DataPropertyName = "email";
-            Email.HeaderText = "Email";
-            Email.Name = "Email";
-            // 
-            // tipoUsuario
-            // 
-            tipoUsuario.DataPropertyName = "tipoUsuario";
-            tipoUsuario.HeaderText = "Tipo Usuário";
-            tipoUsuario.Name = "tipoUsuario";
-            // 
-            // Editar
-            // 
-            Editar.HeaderText = "Ações";
-            Editar.Image = (Image)resources.GetObject("Editar.Image");
-            Editar.ImageLayout = DataGridViewImageCellLayout.Zoom;
-            Editar.Name = "Editar";
-            Editar.Resizable = DataGridViewTriState.True;
+            flpEditarUsuario.Location = new Point(0, 0);
+            flpEditarUsuario.Name = "flpEditarUsuario";
+            flpEditarUsuario.Size = new Size(896, 645);
+            flpEditarUsuario.TabIndex = 4;
+            flpEditarUsuario.Visible = false;
             // 
             // FormListaUsuarios
             // 
@@ -150,6 +165,7 @@
             Controls.Add(pbInformacaoEditar);
             Controls.Add(btnVoltar);
             Controls.Add(dgvUsuarios);
+            Controls.Add(flpEditarUsuario);
             FormBorderStyle = FormBorderStyle.None;
             Name = "FormListaUsuarios";
             Text = "FormListaUsuarios";
@@ -170,5 +186,6 @@
         private DataGridViewTextBoxColumn Email;
         private DataGridViewTextBoxColumn tipoUsuario;
         private DataGridViewImageColumn Editar;
+        private FlowLayoutPanel flpEditarUsuario;
     }
 }

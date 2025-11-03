@@ -42,83 +42,85 @@
             cbxModulo = new ComboBox();
             btnConfirmar = new Button();
             btnCancelar = new Button();
-            pictureBox1 = new PictureBox();
-            pictureBox2 = new PictureBox();
+            pbInfoModulo = new PictureBox();
+            pbInfoJornada = new PictureBox();
             errorProvider1 = new ErrorProvider(components);
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
+            lblInfoJornada = new Label();
+            lblInfoModulo = new Label();
+            ((System.ComponentModel.ISupportInitialize)pbInfoModulo).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbInfoJornada).BeginInit();
             ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
             SuspendLayout();
             // 
             // lblModulo
             // 
             lblModulo.AutoSize = true;
-            lblModulo.Font = new Font("Consolas", 13F);
-            lblModulo.Location = new Point(274, 412);
+            lblModulo.Font = new Font("Consolas", 15.75F, FontStyle.Bold);
+            lblModulo.Location = new Point(263, 461);
             lblModulo.Name = "lblModulo";
-            lblModulo.Size = new Size(70, 22);
+            lblModulo.Size = new Size(82, 24);
             lblModulo.TabIndex = 1;
             lblModulo.Text = "Módulo";
             // 
             // lblJornada
             // 
             lblJornada.AutoSize = true;
-            lblJornada.Font = new Font("Consolas", 13F);
-            lblJornada.Location = new Point(266, 320);
+            lblJornada.Font = new Font("Consolas", 15.75F, FontStyle.Bold);
+            lblJornada.Location = new Point(263, 373);
             lblJornada.Name = "lblJornada";
-            lblJornada.Size = new Size(80, 22);
+            lblJornada.Size = new Size(94, 24);
             lblJornada.TabIndex = 2;
             lblJornada.Text = "Jornada";
             // 
             // lblPrioridade
             // 
             lblPrioridade.AutoSize = true;
-            lblPrioridade.Font = new Font("Consolas", 13F);
-            lblPrioridade.Location = new Point(268, 243);
+            lblPrioridade.Font = new Font("Consolas", 15.75F, FontStyle.Bold);
+            lblPrioridade.Location = new Point(263, 278);
             lblPrioridade.Name = "lblPrioridade";
-            lblPrioridade.Size = new Size(110, 22);
+            lblPrioridade.Size = new Size(130, 24);
             lblPrioridade.TabIndex = 3;
             lblPrioridade.Text = "Prioridade";
             // 
             // lblTitulo
             // 
             lblTitulo.AutoSize = true;
-            lblTitulo.Font = new Font("Consolas", 13F);
-            lblTitulo.Location = new Point(274, 46);
+            lblTitulo.Font = new Font("Consolas", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblTitulo.Location = new Point(263, 61);
             lblTitulo.Name = "lblTitulo";
-            lblTitulo.Size = new Size(70, 22);
+            lblTitulo.Size = new Size(82, 24);
             lblTitulo.TabIndex = 4;
             lblTitulo.Text = "Título";
             // 
             // lblDescricao
             // 
             lblDescricao.AutoSize = true;
-            lblDescricao.Font = new Font("Consolas", 13F);
-            lblDescricao.Location = new Point(268, 120);
+            lblDescricao.Font = new Font("Consolas", 15.75F, FontStyle.Bold);
+            lblDescricao.Location = new Point(263, 145);
             lblDescricao.Name = "lblDescricao";
-            lblDescricao.Size = new Size(100, 22);
+            lblDescricao.Size = new Size(118, 24);
             lblDescricao.TabIndex = 5;
             lblDescricao.Text = "Descrição";
             // 
             // txtTitulo
             // 
             txtTitulo.Font = new Font("Segoe UI", 12F);
-            txtTitulo.Location = new Point(274, 81);
+            txtTitulo.Location = new Point(278, 97);
             txtTitulo.Name = "txtTitulo";
             txtTitulo.PlaceholderText = "Descreva brevemente o problema";
-            txtTitulo.Size = new Size(332, 29);
+            txtTitulo.Size = new Size(355, 29);
             txtTitulo.TabIndex = 6;
             txtTitulo.Leave += txtTitulo_Leave;
             // 
             // txtDescricao
             // 
             txtDescricao.Font = new Font("Segoe UI", 12F);
-            txtDescricao.Location = new Point(274, 152);
+            txtDescricao.Location = new Point(278, 176);
             txtDescricao.Multiline = true;
             txtDescricao.Name = "txtDescricao";
             txtDescricao.PlaceholderText = "Detalhe o problema encontrado";
             txtDescricao.ScrollBars = ScrollBars.Vertical;
-            txtDescricao.Size = new Size(332, 81);
+            txtDescricao.Size = new Size(355, 81);
             txtDescricao.TabIndex = 7;
             txtDescricao.Leave += txtDescricao_Leave;
             // 
@@ -128,9 +130,9 @@
             cbxPrioridade.Font = new Font("Segoe UI", 12F);
             cbxPrioridade.FormattingEnabled = true;
             cbxPrioridade.Items.AddRange(new object[] { "Selecione a prioridade...", "Baixa", "Média", "Alta" });
-            cbxPrioridade.Location = new Point(276, 275);
+            cbxPrioridade.Location = new Point(278, 315);
             cbxPrioridade.Name = "cbxPrioridade";
-            cbxPrioridade.Size = new Size(330, 29);
+            cbxPrioridade.Size = new Size(355, 29);
             cbxPrioridade.TabIndex = 8;
             cbxPrioridade.Leave += cbxPrioridade_Leave;
             // 
@@ -140,9 +142,9 @@
             cbxJornada.Font = new Font("Segoe UI", 12F);
             cbxJornada.FormattingEnabled = true;
             cbxJornada.Items.AddRange(new object[] { "Selecione a jornada...", "Financeiro", "Marketing", "Recursos Humanos" });
-            cbxJornada.Location = new Point(274, 353);
+            cbxJornada.Location = new Point(278, 410);
             cbxJornada.Name = "cbxJornada";
-            cbxJornada.Size = new Size(330, 29);
+            cbxJornada.Size = new Size(353, 29);
             cbxJornada.TabIndex = 9;
             cbxJornada.Leave += cbxJornada_Leave;
             // 
@@ -152,9 +154,9 @@
             cbxModulo.Font = new Font("Segoe UI", 12F);
             cbxModulo.FormattingEnabled = true;
             cbxModulo.Items.AddRange(new object[] { "Selecione o módulo...", "Hardware", "Software", "Rede" });
-            cbxModulo.Location = new Point(274, 451);
+            cbxModulo.Location = new Point(276, 500);
             cbxModulo.Name = "cbxModulo";
-            cbxModulo.Size = new Size(332, 29);
+            cbxModulo.Size = new Size(355, 29);
             cbxModulo.TabIndex = 10;
             cbxModulo.Leave += cbxModulo_Leave;
             // 
@@ -164,7 +166,7 @@
             btnConfirmar.FlatStyle = FlatStyle.Flat;
             btnConfirmar.Font = new Font("Consolas", 11F);
             btnConfirmar.ForeColor = SystemColors.ControlLightLight;
-            btnConfirmar.Location = new Point(497, 499);
+            btnConfirmar.Location = new Point(526, 545);
             btnConfirmar.Name = "btnConfirmar";
             btnConfirmar.Size = new Size(107, 38);
             btnConfirmar.TabIndex = 11;
@@ -174,11 +176,11 @@
             // 
             // btnCancelar
             // 
-            btnCancelar.BackColor = SystemColors.ButtonHighlight;
+            btnCancelar.BackColor = SystemColors.Control;
             btnCancelar.FlatStyle = FlatStyle.Flat;
             btnCancelar.Font = new Font("Consolas", 11F);
-            btnCancelar.ForeColor = SystemColors.ControlDarkDark;
-            btnCancelar.Location = new Point(274, 499);
+            btnCancelar.ForeColor = Color.DimGray;
+            btnCancelar.Location = new Point(278, 545);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(107, 38);
             btnCancelar.TabIndex = 12;
@@ -186,38 +188,63 @@
             btnCancelar.UseVisualStyleBackColor = false;
             btnCancelar.Click += btnCancelar_Click;
             // 
-            // pictureBox1
+            // pbInfoModulo
             // 
-            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(346, 413);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(22, 21);
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox1.TabIndex = 13;
-            pictureBox1.TabStop = false;
+            pbInfoModulo.Image = (Image)resources.GetObject("pbInfoModulo.Image");
+            pbInfoModulo.Location = new Point(348, 463);
+            pbInfoModulo.Name = "pbInfoModulo";
+            pbInfoModulo.Size = new Size(22, 21);
+            pbInfoModulo.SizeMode = PictureBoxSizeMode.Zoom;
+            pbInfoModulo.TabIndex = 13;
+            pbInfoModulo.TabStop = false;
+            pbInfoModulo.Click += pbInfoModulo_Click;
             // 
-            // pictureBox2
+            // pbInfoJornada
             // 
-            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(352, 321);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(22, 21);
-            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox2.TabIndex = 14;
-            pictureBox2.TabStop = false;
+            pbInfoJornada.Image = Properties.Resources.icons8_informações_48;
+            pbInfoJornada.Location = new Point(359, 376);
+            pbInfoJornada.Name = "pbInfoJornada";
+            pbInfoJornada.Size = new Size(22, 21);
+            pbInfoJornada.SizeMode = PictureBoxSizeMode.Zoom;
+            pbInfoJornada.TabIndex = 14;
+            pbInfoJornada.TabStop = false;
+            pbInfoJornada.Click += pbInfoJornada_Click;
             // 
             // errorProvider1
             // 
             errorProvider1.ContainerControl = this;
             // 
+            // lblInfoJornada
+            // 
+            lblInfoJornada.AutoSize = true;
+            lblInfoJornada.Font = new Font("Consolas", 9F);
+            lblInfoJornada.Location = new Point(387, 379);
+            lblInfoJornada.Name = "lblInfoJornada";
+            lblInfoJornada.Size = new Size(273, 14);
+            lblInfoJornada.TabIndex = 15;
+            lblInfoJornada.Text = "Setor em que está ocorrendo o problema";
+            lblInfoJornada.Visible = false;
+            // 
+            // lblInfoModulo
+            // 
+            lblInfoModulo.Font = new Font("Consolas", 9F);
+            lblInfoModulo.Location = new Point(376, 450);
+            lblInfoModulo.Name = "lblInfoModulo";
+            lblInfoModulo.Size = new Size(244, 47);
+            lblInfoModulo.TabIndex = 16;
+            lblInfoModulo.Text = "Hardware = Componente físico; \r\nSoftware = Programa/Aplicativo; \r\nRede = Internet.";
+            lblInfoModulo.Visible = false;
+            // 
             // FormAberturaChamado
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = SystemColors.ControlLightLight;
-            ClientSize = new Size(875, 618);
-            Controls.Add(pictureBox2);
-            Controls.Add(pictureBox1);
+            BackColor = SystemColors.Control;
+            ClientSize = new Size(896, 645);
+            Controls.Add(lblInfoModulo);
+            Controls.Add(lblInfoJornada);
+            Controls.Add(pbInfoJornada);
+            Controls.Add(pbInfoModulo);
             Controls.Add(btnCancelar);
             Controls.Add(btnConfirmar);
             Controls.Add(cbxModulo);
@@ -233,8 +260,8 @@
             FormBorderStyle = FormBorderStyle.None;
             Name = "FormAberturaChamado";
             Text = "FormAberturaChamado";
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbInfoModulo).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbInfoJornada).EndInit();
             ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -253,8 +280,10 @@
         private ComboBox cbxModulo;
         private Button btnConfirmar;
         private Button btnCancelar;
-        private PictureBox pictureBox1;
-        private PictureBox pictureBox2;
+        private PictureBox pbInfoModulo;
+        private PictureBox pbInfoJornada;
         private ErrorProvider errorProvider1;
+        private Label lblInfoModulo;
+        private Label lblInfoJornada;
     }
 }

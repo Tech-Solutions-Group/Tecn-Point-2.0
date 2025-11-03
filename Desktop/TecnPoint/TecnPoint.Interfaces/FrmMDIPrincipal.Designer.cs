@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMDIPrincipal));
             menuStrip = new MenuStrip();
             tspAbrirChamado = new ToolStripMenuItem();
             tspAcompanharChamado = new ToolStripMenuItem();
@@ -45,7 +44,7 @@
             // 
             menuStrip.AutoSize = false;
             menuStrip.BackColor = Color.MediumOrchid;
-            menuStrip.BackgroundImage = (Image)resources.GetObject("menuStrip.BackgroundImage");
+            menuStrip.BackgroundImage = Properties.Resources.TelaFundo;
             menuStrip.Dock = DockStyle.Left;
             menuStrip.Items.AddRange(new ToolStripItem[] { tspAbrirChamado, tspAcompanharChamado, tspGerenciarUsuarios });
             menuStrip.Location = new Point(0, 0);
@@ -98,7 +97,7 @@
             // 
             // tspCadastrarUsuario
             // 
-            tspCadastrarUsuario.BackColor = Color.Thistle;
+            tspCadastrarUsuario.BackColor = Color.Transparent;
             tspCadastrarUsuario.ForeColor = SystemColors.ControlText;
             tspCadastrarUsuario.Name = "tspCadastrarUsuario";
             tspCadastrarUsuario.Size = new Size(250, 26);
@@ -112,7 +111,7 @@
             // 
             // tspEditarUsuario
             // 
-            tspEditarUsuario.BackColor = Color.Thistle;
+            tspEditarUsuario.BackColor = Color.Transparent;
             tspEditarUsuario.Name = "tspEditarUsuario";
             tspEditarUsuario.Size = new Size(250, 26);
             tspEditarUsuario.Text = "Editar usuário";
@@ -132,6 +131,7 @@
             Name = "FrmMDIPrincipal";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "FrmMDIPrincipal";
+            FormClosed += FrmMDIPrincipal_FormClosed;
             menuStrip.ResumeLayout(false);
             menuStrip.PerformLayout();
             ResumeLayout(false);
