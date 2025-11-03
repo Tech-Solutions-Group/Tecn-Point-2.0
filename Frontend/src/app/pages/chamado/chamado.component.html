@@ -5,15 +5,22 @@
   </div>
   <div class="dados-chamado">
     <span>Status</span>
+    <p>{{ chamados.status }}</p>
     <span>Prioridade</span>
+    <p>{{ chamados.prioridade }}</p>
     <span>Aberto por</span>
+    <p>{{ chamados.cliente.nome }}</p>
     <span>Responsável</span>
+    <p>{{ chamados.funcionario.nome }}</p>
   </div>
   <div class="conteudo">
     <p>Descrição do Chamado</p>
+    <p>{{ chamados.descricao }}</p>
   </div>
   <div class="informacoes-adicionais">
     <span>Jornada</span>
+    <p>{{ chamados.jornada.jornada }}</p>
     <span>Modulo</span>
+    <p>{{ chamados.modulo.modulo }}</p>
   </div>
 </div>

@@ -12,6 +12,7 @@ import { Chamado, ChamadoService } from '../../service/chamado.service';
   styleUrl: './listar-chamado.component.css',
 })
 export class ListarChamadoComponent implements OnInit {
+  chamado!: Chamado;
   chamados: Chamado[] = [];
 
   constructor(
@@ -58,7 +59,7 @@ export class ListarChamadoComponent implements OnInit {
     }
   }
 
-  goToHome() {
-    this.router.navigate(['/chamado']);
+  goToHome(id: number) {
+    this.router.navigate(['/chamados/', id]);
   }
 }
