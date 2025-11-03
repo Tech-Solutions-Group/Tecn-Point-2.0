@@ -17,10 +17,12 @@ namespace TecnPoint.Interfaces
     {
         private UsuarioService _usuarioService;
         private bool _modoDaltonico;
-        public FormListaUsuarios(bool modoDaltonico)
+        private FrmMDIPrincipal frmMDIPrincipal;
+        public FormListaUsuarios(bool modoDaltonico, FrmMDIPrincipal frmMDIPrincipal)
         {
             this._usuarioService = new UsuarioService();
             this._modoDaltonico = modoDaltonico;
+            this.frmMDIPrincipal = frmMDIPrincipal;
             InitializeComponent();
             ModoDaltonico();
         }
@@ -60,7 +62,7 @@ namespace TecnPoint.Interfaces
 
         private void dgvUsuarios_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            FormEditarUsuario formEditarUsuario = new FormEditarUsuario(RecuperaDadosUsuarioSelecionado());
+            FormEditarUsuario formEditarUsuario = new FormEditarUsuario(RecuperaDadosUsuarioSelecionado(), _modoDaltonico, frmMDIPrincipal);
             formEditarUsuario.TopLevel = false;
 
             flpEditarUsuario.Controls.Clear();
@@ -68,6 +70,11 @@ namespace TecnPoint.Interfaces
             formEditarUsuario.Show();
             flpEditarUsuario.Visible = true;
             flpEditarUsuario.BringToFront();
+        }
+
+        private void btnVoltar_Click(object sender, EventArgs e)
+        {
+            frmMDIPrincipal.CarregaFormLogo();
         }
 
         private EditarUsuarioDTO RecuperaDadosUsuarioSelecionado()
@@ -90,36 +97,51 @@ namespace TecnPoint.Interfaces
 
         private void ModoDaltonico()
         {
+            var colunaAcoes = (DataGridViewImageColumn)dgvUsuarios.Columns["Editar"];
             if (_modoDaltonico)
             {
-                // 🌈 Cores ajustadas para Deuteranopia
-                dgvUsuarios.BackgroundColor = Color.FromArgb(93, 162, 176);        // Versão adaptada do fundo roxo original (146,76,211)
-                dgvUsuarios.ForeColor = SystemColors.ControlLightLight;
+                Color cabecalho = Color.FromArgb(93, 162, 176);     // Adaptação do roxo (146,76,211)
+                Color selecao = Color.FromArgb(148, 115, 189);      // Adaptação do roxo claro (168,124,209)
+                Color fundo = Color.White;
+                Color texto = SystemColors.ControlText;
 
-                dgvUsuarios.DefaultCellStyle.BackColor = Color.FromArgb(93, 162, 176);
-                dgvUsuarios.DefaultCellStyle.ForeColor = SystemColors.ControlLightLight;
-                dgvUsuarios.DefaultCellStyle.SelectionBackColor = Color.FromArgb(148, 115, 189);  // Roxo adaptado (167,112,197)
+                dgvUsuarios.BackgroundColor = fundo;
+                dgvUsuarios.ForeColor = texto;
+                dgvUsuarios.DefaultCellStyle.SelectionBackColor = selecao;
                 dgvUsuarios.DefaultCellStyle.SelectionForeColor = SystemColors.ControlLightLight;
 
-                dgvUsuarios.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(77, 138, 195);  // Azul mais neutro
+                dgvUsuarios.ColumnHeadersDefaultCellStyle.BackColor = cabecalho;
                 dgvUsuarios.ColumnHeadersDefaultCellStyle.ForeColor = SystemColors.ControlLightLight;
+
+                btnVoltar.FlatAppearance.MouseDownBackColor = Color.FromArgb(254, 190, 137);
+                btnVoltar.FlatAppearance.MouseOverBackColor = Color.FromArgb(253, 163, 89);
+
+                pbInformacaoEditar.Image = Interfaces.Properties.Resources.logoInfoDaltonico;
+
+                colunaAcoes.Image = Interfaces.Properties.Resources.IconEditarDaltonico;
             }
             else
             {
-                // 🎨 Cores originais do modo normal
-                dgvUsuarios.BackgroundColor = Color.FromArgb(146, 76, 211);
-                dgvUsuarios.ForeColor = SystemColors.ControlLightLight;
+                // Cores normais
+                Color cabecalho = Color.FromArgb(146, 76, 211);
+                Color selecao = Color.FromArgb(168, 124, 209);
+                Color fundo = Color.White;
 
-                dgvUsuarios.DefaultCellStyle.BackColor = Color.FromArgb(146, 76, 211);
-                dgvUsuarios.DefaultCellStyle.ForeColor = SystemColors.ControlLightLight;
-                dgvUsuarios.DefaultCellStyle.SelectionBackColor = Color.FromArgb(168, 124, 209);
+                dgvUsuarios.BackgroundColor = fundo;
+                dgvUsuarios.ForeColor = SystemColors.ControlText;
+                dgvUsuarios.DefaultCellStyle.SelectionBackColor = selecao;
                 dgvUsuarios.DefaultCellStyle.SelectionForeColor = SystemColors.ControlLightLight;
 
-                dgvUsuarios .ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(146, 76, 211);
+                dgvUsuarios.ColumnHeadersDefaultCellStyle.BackColor = cabecalho;
                 dgvUsuarios.ColumnHeadersDefaultCellStyle.ForeColor = SystemColors.ControlLightLight;
-            }
 
-            // Garante que os estilos personalizados sejam aplicados
+                btnVoltar.FlatAppearance.MouseDownBackColor = Color.FromArgb(190, 137, 254);
+                btnVoltar.FlatAppearance.MouseOverBackColor = Color.FromArgb(163, 89, 253);
+
+                pbInformacaoEditar.Image = Interfaces.Properties.Resources.icons8_informações_48;
+
+                colunaAcoes.Image = Interfaces.Properties.Resources.icons8_crie_um_novo_48;
+            }
             dgvUsuarios.EnableHeadersVisualStyles = false;
         }
     }

@@ -18,13 +18,18 @@ namespace TecnPoint.Interfaces
         private UsuarioService _usuarioService;
         private EditarUsuarioDTO _editarUsuarioDTO;
         private ValidacaoDadosUsuario _validacaoDadosUsuario;
+        private FrmMDIPrincipal frmMDIPrincipal;
+        private bool _modoDaltonico;
 
-        public FormEditarUsuario(EditarUsuarioDTO editarUsuarioDTO)
+        public FormEditarUsuario(EditarUsuarioDTO editarUsuarioDTO, bool modoDaltonico, FrmMDIPrincipal frmMDIPrincipal)
         {
             this._usuarioService = new UsuarioService();
             this._editarUsuarioDTO = editarUsuarioDTO;
             this._validacaoDadosUsuario = new ValidacaoDadosUsuario();
+            this.frmMDIPrincipal = frmMDIPrincipal;
+            this._modoDaltonico = modoDaltonico;
             InitializeComponent();
+            ModoDaltonico();
         }
 
         private async void btnSalvar_Click(object sender, EventArgs e)
@@ -40,7 +45,7 @@ namespace TecnPoint.Interfaces
                                             MessageBoxButtons.OK,
                                             MessageBoxIcon.Information);
                         return;
-                    }  
+                    }
 
                     UsuarioAtualizadoDTO usuarioAtualizado = await _usuarioService.EditarDadosUsuario(_editarUsuarioDTO);
 
@@ -81,7 +86,7 @@ namespace TecnPoint.Interfaces
         {
             PreencherDadosParaEdicao();
         }
-        
+
         private bool VerificaAtualizacao()
         {
             bool houveAlteracao = false;
@@ -143,7 +148,7 @@ namespace TecnPoint.Interfaces
 
         private void txtConfirmaSenha_Leave(object sender, EventArgs e)
         {
-            if(!_validacaoDadosUsuario.ValidaConfirmacaoDeSenha(txtSenha.Text, txtConfirmaSenha.Text))
+            if (!_validacaoDadosUsuario.ValidaConfirmacaoDeSenha(txtSenha.Text, txtConfirmaSenha.Text))
             {
                 errorDadosAtualizarUsuario.SetError(txtConfirmaSenha, "As senhas não são iguais");
             }
@@ -162,7 +167,29 @@ namespace TecnPoint.Interfaces
 
         private void ModoDaltonico()
         {
-            btnSalvar.BackColor = Color.FromArgb(171, 126, 105);
+            if (_modoDaltonico)
+            {
+                btnSalvar.BackColor = Color.FromArgb(171, 126, 105);
+                btnSalvar.FlatAppearance.MouseDownBackColor = Color.FromArgb(254, 190, 137);
+                btnSalvar.FlatAppearance.MouseOverBackColor = Color.FromArgb(253, 163, 89);
+
+                btnVoltar.FlatAppearance.MouseDownBackColor = Color.FromArgb(254, 190, 137);
+                btnVoltar.FlatAppearance.MouseOverBackColor = Color.FromArgb(253, 163, 89);
+            }
+            else
+            {
+                btnSalvar.BackColor = Color.FromArgb(126, 105, 171);
+                btnSalvar.FlatAppearance.MouseDownBackColor = Color.FromArgb(190, 137, 254);
+                btnSalvar.FlatAppearance.MouseOverBackColor = Color.FromArgb(163, 89, 253);
+
+                btnVoltar.FlatAppearance.MouseDownBackColor = Color.FromArgb(190, 137, 254);
+                btnVoltar.FlatAppearance.MouseOverBackColor = Color.FromArgb(163, 89, 253);
+            }
+        }
+
+        private void btnVoltar_Click(object sender, EventArgs e)
+        {
+            frmMDIPrincipal.CarregaFormLogo();
         }
     }
 }

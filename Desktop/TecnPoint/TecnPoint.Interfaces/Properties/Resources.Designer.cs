@@ -63,6 +63,16 @@ namespace TecnPoint.Interfaces.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap IconEditarDaltonico {
+            get {
+                object obj = ResourceManager.GetObject("IconEditarDaltonico", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap IconEngrenagemDaltonico {
             get {
                 object obj = ResourceManager.GetObject("IconEngrenagemDaltonico", resourceCulture);
@@ -126,6 +136,16 @@ namespace TecnPoint.Interfaces.Properties {
         internal static System.Drawing.Bitmap icons8_configurações_48 {
             get {
                 object obj = ResourceManager.GetObject("icons8-configurações-48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_crie_um_novo_48 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-crie-um-novo-48", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

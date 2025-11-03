@@ -39,7 +39,6 @@
             txtConfirmaSenha = new TextBox();
             btnSalvar = new Button();
             btnVoltar = new Button();
-            lblEditar = new Label();
             errorDadosAtualizarUsuario = new ErrorProvider(components);
             ((System.ComponentModel.ISupportInitialize)errorDadosAtualizarUsuario).BeginInit();
             SuspendLayout();
@@ -48,7 +47,7 @@
             // 
             lblNome.AutoSize = true;
             lblNome.Font = new Font("Consolas", 15.75F, FontStyle.Bold);
-            lblNome.Location = new Point(250, 142);
+            lblNome.Location = new Point(268, 123);
             lblNome.Name = "lblNome";
             lblNome.Size = new Size(58, 24);
             lblNome.TabIndex = 0;
@@ -58,7 +57,7 @@
             // 
             lblEmail.AutoSize = true;
             lblEmail.Font = new Font("Consolas", 15.75F, FontStyle.Bold);
-            lblEmail.Location = new Point(250, 230);
+            lblEmail.Location = new Point(268, 211);
             lblEmail.Name = "lblEmail";
             lblEmail.Size = new Size(82, 24);
             lblEmail.TabIndex = 1;
@@ -68,7 +67,7 @@
             // 
             lblSenha.AutoSize = true;
             lblSenha.Font = new Font("Consolas", 15.75F, FontStyle.Bold);
-            lblSenha.Location = new Point(250, 316);
+            lblSenha.Location = new Point(268, 297);
             lblSenha.Name = "lblSenha";
             lblSenha.Size = new Size(70, 24);
             lblSenha.TabIndex = 2;
@@ -78,7 +77,7 @@
             // 
             lblConfirmarSenha.AutoSize = true;
             lblConfirmarSenha.Font = new Font("Consolas", 15.75F, FontStyle.Bold);
-            lblConfirmarSenha.Location = new Point(250, 407);
+            lblConfirmarSenha.Location = new Point(268, 388);
             lblConfirmarSenha.Name = "lblConfirmarSenha";
             lblConfirmarSenha.Size = new Size(190, 24);
             lblConfirmarSenha.TabIndex = 3;
@@ -87,7 +86,7 @@
             // txtNome
             // 
             txtNome.Font = new Font("Segoe UI", 14F);
-            txtNome.Location = new Point(272, 180);
+            txtNome.Location = new Point(290, 161);
             txtNome.Name = "txtNome";
             txtNome.Size = new Size(338, 32);
             txtNome.TabIndex = 4;
@@ -96,7 +95,7 @@
             // txtEmail
             // 
             txtEmail.Font = new Font("Segoe UI", 14F);
-            txtEmail.Location = new Point(272, 266);
+            txtEmail.Location = new Point(290, 247);
             txtEmail.Name = "txtEmail";
             txtEmail.Size = new Size(338, 32);
             txtEmail.TabIndex = 5;
@@ -105,7 +104,7 @@
             // txtSenha
             // 
             txtSenha.Font = new Font("Segoe UI", 14F);
-            txtSenha.Location = new Point(272, 354);
+            txtSenha.Location = new Point(290, 335);
             txtSenha.Name = "txtSenha";
             txtSenha.PasswordChar = '•';
             txtSenha.Size = new Size(338, 32);
@@ -115,7 +114,7 @@
             // txtConfirmaSenha
             // 
             txtConfirmaSenha.Font = new Font("Segoe UI", 14F);
-            txtConfirmaSenha.Location = new Point(272, 449);
+            txtConfirmaSenha.Location = new Point(290, 430);
             txtConfirmaSenha.Name = "txtConfirmaSenha";
             txtConfirmaSenha.Size = new Size(338, 32);
             txtConfirmaSenha.TabIndex = 7;
@@ -127,7 +126,7 @@
             btnSalvar.FlatStyle = FlatStyle.Flat;
             btnSalvar.Font = new Font("Consolas", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnSalvar.ForeColor = SystemColors.ControlLightLight;
-            btnSalvar.Location = new Point(513, 501);
+            btnSalvar.Location = new Point(531, 482);
             btnSalvar.Name = "btnSalvar";
             btnSalvar.Size = new Size(97, 40);
             btnSalvar.TabIndex = 8;
@@ -141,22 +140,13 @@
             btnVoltar.FlatStyle = FlatStyle.Flat;
             btnVoltar.Font = new Font("Consolas", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnVoltar.ForeColor = SystemColors.ControlDarkDark;
-            btnVoltar.Location = new Point(272, 501);
+            btnVoltar.Location = new Point(290, 482);
             btnVoltar.Name = "btnVoltar";
             btnVoltar.Size = new Size(97, 40);
             btnVoltar.TabIndex = 9;
             btnVoltar.Text = "Voltar";
             btnVoltar.UseVisualStyleBackColor = false;
-            // 
-            // lblEditar
-            // 
-            lblEditar.AutoSize = true;
-            lblEditar.Font = new Font("Consolas", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblEditar.Location = new Point(397, 27);
-            lblEditar.Name = "lblEditar";
-            lblEditar.Size = new Size(104, 32);
-            lblEditar.TabIndex = 10;
-            lblEditar.Text = "Editar";
+            btnVoltar.Click += btnVoltar_Click;
             // 
             // errorDadosAtualizarUsuario
             // 
@@ -168,7 +158,6 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Control;
             ClientSize = new Size(896, 645);
-            Controls.Add(lblEditar);
             Controls.Add(btnVoltar);
             Controls.Add(btnSalvar);
             Controls.Add(txtConfirmaSenha);
@@ -200,7 +189,6 @@
         private TextBox txtConfirmaSenha;
         private Button btnSalvar;
         private Button btnVoltar;
-        private Label lblEditar;
         private ErrorProvider errorDadosAtualizarUsuario;
     }
 }

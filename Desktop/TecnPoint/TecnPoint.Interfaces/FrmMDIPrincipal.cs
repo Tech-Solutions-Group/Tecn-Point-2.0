@@ -114,7 +114,7 @@ namespace TecnPoint.Interfaces
                 this.ActiveMdiChild.Close();
             }
 
-            FormCadastrarUsuario formCadastrarUsuario = new FormCadastrarUsuario(this);
+            FormCadastrarUsuario formCadastrarUsuario = new FormCadastrarUsuario(this, _modoDaltonico);
 
             formCadastrarUsuario.MdiParent = this;
 
@@ -130,7 +130,7 @@ namespace TecnPoint.Interfaces
                 this.ActiveMdiChild.Close();
             }
 
-            FormListaUsuarios formListaUsuarios = new FormListaUsuarios(_modoDaltonico);
+            FormListaUsuarios formListaUsuarios = new FormListaUsuarios(_modoDaltonico, this);
 
             formListaUsuarios.MdiParent = this;
 

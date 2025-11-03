@@ -19,13 +19,16 @@ namespace TecnPoint.Interfaces
         private UsuarioService _usuarioService;
         private ValidacaoDadosUsuario _validacaoCadastro;
         private FrmMDIPrincipal frmMDIPrincipal;
+        private bool _modoDaltonico;
 
-        public FormCadastrarUsuario(FrmMDIPrincipal frmMDIPrincipal)
+        public FormCadastrarUsuario(FrmMDIPrincipal frmMDIPrincipal, bool modoDaltonico)
         {
             this._usuarioService = new UsuarioService();
             this._validacaoCadastro = new ValidacaoDadosUsuario();
             this.frmMDIPrincipal = frmMDIPrincipal;
             InitializeComponent();
+            _modoDaltonico = modoDaltonico;
+            ModoDaltonico();
         }
 
         private async void btnCadastrar_Click(object sender, EventArgs e)
@@ -154,6 +157,32 @@ namespace TecnPoint.Interfaces
             else
             {
                 errorDadosCadastroInvalidos.SetError(cbxTipoUsuario, "");
+            }
+        }
+
+        private void ModoDaltonico()
+        {
+            if (_modoDaltonico)
+            {
+                btnCadastrar.BackColor = Color.FromArgb(171, 126, 105);
+                btnCadastrar.FlatAppearance.MouseDownBackColor = Color.FromArgb(254, 190, 137);
+                btnCadastrar.FlatAppearance.MouseOverBackColor = Color.FromArgb(253, 163, 89);
+
+                btnVoltar.FlatAppearance.MouseDownBackColor = Color.FromArgb(254, 190, 137);
+                btnVoltar.FlatAppearance.MouseOverBackColor = Color.FromArgb(253, 163, 89);
+
+                pictureBox1.Image = Interfaces.Properties.Resources.logoInfoDaltonico;
+            }
+            else
+            {
+                btnCadastrar.BackColor = Color.FromArgb(126, 105, 171);
+                btnCadastrar.FlatAppearance.MouseDownBackColor = Color.FromArgb(190, 137, 254);
+                btnCadastrar.FlatAppearance.MouseOverBackColor = Color.FromArgb(163, 89, 253);
+
+                btnVoltar.FlatAppearance.MouseDownBackColor = Color.FromArgb(190, 137, 254);
+                btnVoltar.FlatAppearance.MouseOverBackColor = Color.FromArgb(163, 89, 253);
+
+                pictureBox1.Image = Interfaces.Properties.Resources.icons8_informações_48;
             }
         }
 

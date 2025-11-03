@@ -408,6 +408,8 @@ namespace TecnPoint.Interfaces
                 pbIconJornada.Image = Interfaces.Properties.Resources.IconMarcadorDaltonico;
                 pbIconModulo.Image = Interfaces.Properties.Resources.IconEngrenagemDaltonico;
                 pbIconEnviarMensagem.Image = Interfaces.Properties.Resources.IconEnviarDaltonico;
+                btnVoltar.FlatAppearance.MouseDownBackColor = Color.FromArgb(254, 190, 137);
+                btnVoltar.FlatAppearance.MouseOverBackColor = Color.FromArgb(253, 163, 89);
             }
             else
             {
@@ -416,6 +418,8 @@ namespace TecnPoint.Interfaces
                 pbIconJornada.Image = Interfaces.Properties.Resources.icons8_marcador_48;
                 pbIconModulo.Image = Interfaces.Properties.Resources.icons8_configurações_48;
                 pbIconEnviarMensagem.Image = Interfaces.Properties.Resources.IconEnviar;
+                btnVoltar.FlatAppearance.MouseDownBackColor = Color.FromArgb(190, 137, 254);
+                btnVoltar.FlatAppearance.MouseOverBackColor = Color.FromArgb(163, 89, 253);
             }
         }
     }

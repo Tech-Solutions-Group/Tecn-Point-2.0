@@ -114,16 +114,17 @@
             // 
             // btnVoltar
             // 
-            btnVoltar.BackColor = Color.FromArgb(146, 76, 211);
+            btnVoltar.BackColor = SystemColors.Control;
             btnVoltar.FlatStyle = FlatStyle.Flat;
-            btnVoltar.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnVoltar.ForeColor = SystemColors.ControlLightLight;
+            btnVoltar.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnVoltar.ForeColor = Color.DimGray;
             btnVoltar.Location = new Point(60, 597);
             btnVoltar.Name = "btnVoltar";
             btnVoltar.Size = new Size(98, 36);
             btnVoltar.TabIndex = 1;
             btnVoltar.Text = "Voltar";
             btnVoltar.UseVisualStyleBackColor = false;
+            btnVoltar.Click += btnVoltar_Click;
             // 
             // pbInformacaoEditar
             // 
