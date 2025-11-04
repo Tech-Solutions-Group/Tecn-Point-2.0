@@ -96,7 +96,7 @@ namespace TecnPoint.Services
                 Converters = { new JsonStringEnumConverter() },
                 DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
             });
-
+            
             var content = new StringContent(jsonBody, null, "application/json");
 
             request.Content = content;

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TecnPoint.Interfaces")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f6966c90db38d0afb7a4788cda1955e6e22a537a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+123b73ab25502cf8f9d70a4deab97cdc7085fd5e")]
 [assembly: System.Reflection.AssemblyProductAttribute("TecnPoint.Interfaces")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TecnPoint.Interfaces")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

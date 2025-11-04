@@ -133,6 +133,16 @@ namespace TecnPoint.Interfaces.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_bot_48 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-bot-48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_configurações_48 {
             get {
                 object obj = ResourceManager.GetObject("icons8-configurações-48", resourceCulture);

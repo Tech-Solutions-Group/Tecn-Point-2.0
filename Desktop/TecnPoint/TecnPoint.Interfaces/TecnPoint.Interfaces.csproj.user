@@ -10,6 +10,9 @@
     <Compile Update="FormCadastrarUsuario.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="FormChatBot.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="FormDetalhesChamado.cs">
       <SubType>Form</SubType>
     </Compile>

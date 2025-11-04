@@ -121,8 +121,8 @@
   <data name="TelaFundoLogin" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\TelaFundoLogin.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="IconPrioridadeDaltonico" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\IconPrioridadeDaltonico.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="IconsDocumentoDaltonico" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\IconsDocumentoDaltonico.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ImagemLogo-Daltonico" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ImagemLogo-Daltonico.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -154,8 +154,8 @@
   <data name="icons8-informações-48" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icons8-informações-48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="IconsDocumentoDaltonico" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\IconsDocumentoDaltonico.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="IconPrioridadeDaltonico" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\IconPrioridadeDaltonico.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ImagemFundoForm21" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ImagemFundoForm2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -175,10 +175,13 @@
   <data name="ImagemFundoForm2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ImagemFundoForm2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="icons8-crie-um-novo-48" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icons8-crie-um-novo-481.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="IconEnviar" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\IconEnviar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="icons8-crie-um-novo-48" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icons8-crie-um-novo-481.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="icons8-bot-48" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icons8-bot-481.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
