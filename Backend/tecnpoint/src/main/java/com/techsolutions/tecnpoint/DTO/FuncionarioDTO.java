@@ -10,6 +10,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @Builder
 public class FuncionarioDTO {
-    Long id;
+    Long idUsuario;
     String nome;
 }

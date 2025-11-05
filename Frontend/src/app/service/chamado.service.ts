@@ -27,9 +27,9 @@ export interface Chamado {
   providedIn: 'root',
 })
 export class ChamadoService {
-  private apiUrl = 'http://localhost:8080/chamados';
+  readonly apiUrl = 'http://localhost:8080/chamados';
 
-  constructor(private http: HttpClient) {}
+  constructor(readonly http: HttpClient) {}
 
   getAllChamados(): Observable<Chamado[]> {
     return this.http.get<Chamado[]>(`${this.apiUrl}/exibir-todos-chamados`);

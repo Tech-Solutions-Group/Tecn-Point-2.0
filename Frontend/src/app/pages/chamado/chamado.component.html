@@ -1,14 +1,16 @@
 <form
-  class="um bg-light"
+  class="chat bg-light"
   [formGroup]="enviarMensagemForm"
   (ngSubmit)="onSubmit()"
 >
-  <div class="conversa" *ngFor="let conversa of conversas">
-    <strong>{{ conversa.remetente.nome }}:</strong>
-    <span
-      >{{ conversa.mensagem }}
-      {{ conversa.dataHoraEnvio | date : "short" }}</span
-    >
+  <div class="conversa">
+    <div *ngFor="let conversa of conversas">
+      <strong>{{ conversa.remetente.nome }}: </strong>
+      <span
+        >{{ conversa.mensagem }}
+        {{ conversa.dataHoraEnvio | date : "short" }}</span
+      >
+    </div>
   </div>
   <div class="input-group mb-3 enviar">
     <input
@@ -43,18 +45,39 @@
     > -->
   </div>
 </form>
-<form *ngIf="chamados" class="dois bg-light">
-  <div class="title">
-    <h1>Titutlo do Chamado</h1>
+<form *ngIf="chamados" class="menu bg-light">
+  <div class="title text-bold">
+    <h1>{{ chamados.titulo }}</h1>
   </div>
   <div class="dados-chamado">
     <div>
       <span>Status</span>
-      <p>{{ getStatusLabel(chamados.status) }}</p>
+      <select
+        class="form-select"
+        (change)="onPatch('status', $any($event.target).value)"
+      >
+        <option value="" disabled selected>
+          {{ getStatusLabel(chamados.status) }}
+        </option>
+        <option value="ABERTO">Aberto</option>
+        <option value="EM_ANDAMENTO">Em andamento</option>
+        <option value="PENDENTE">Pendente</option>
+        <option value="RESOLVIDO">Resolvido</option>
+      </select>
     </div>
     <div>
       <span>Prioridade</span>
-      <p>{{ getPrioridadeLabel(chamados.prioridade) }}</p>
+      <select
+        class="form-select"
+        (change)="onPatch('prioridade', $any($event.target).value)"
+      >
+        <option value="" disabled selected>
+          {{ getPrioridadeLabel(chamados.prioridade) }}
+        </option>
+        <option value="ALTA">Alta</option>
+        <option value="MEDIA">Média</option>
+        <option value="BAIXA">Baixa</option>
+      </select>
     </div>
     <div>
       <span>Aberto por</span>
@@ -62,7 +85,17 @@
     </div>
     <div>
       <span>Responsável</span>
-      <p>{{ chamados.funcionario.nome }}</p>
+      <select
+        class="form-select"
+        (change)="onPatch('idUsuario', $any($event.target).value)"
+      >
+        <option value="" disabled selected>
+          {{ chamados.funcionario.nome }}
+        </option>
+        <option *ngFor="let usuario of usuarios" [value]="usuario.idUsuario">
+          {{ usuario.nome }}
+        </option>
+      </select>
     </div>
   </div>
   <div class="conteudo">
@@ -72,11 +105,31 @@
   <div class="informacoes-adicionais">
     <div>
       <span>Jornada</span>
-      <p>{{ chamados.jornada.jornada }}</p>
+      <select
+        class="form-select"
+        (change)="onPatch('idJornada', $any($event.target).value)"
+      >
+        <option value="" disabled selected>
+          {{ chamados.jornada.jornada }}
+        </option>
+        <option value="1">Financeiro</option>
+        <option value="2">Marketing</option>
+        <option value="3">Recursos Humanos</option>
+      </select>
     </div>
     <div>
       <span>Modulo</span>
-      <p>{{ chamados.modulo.modulo }}</p>
+      <select
+        class="form-select"
+        (change)="onPatch('idModulo', $any($event.target).value)"
+      >
+        <option value="" disabled selected>
+          {{ chamados.modulo.modulo }}
+        </option>
+        <option value="1">Hardware</option>
+        <option value="2">Software</option>
+        <option value="3">Rede</option>
+      </select>
     </div>
   </div>
 </form>

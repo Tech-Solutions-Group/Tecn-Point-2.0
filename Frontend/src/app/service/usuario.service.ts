@@ -16,9 +16,9 @@ export interface Usuario {
 export class UsuarioService {
   usuarioLogado?: Usuario;
 
-  private apiUrl = 'http://localhost:8080/usuarios';
+  readonly apiUrl = 'http://localhost:8080/usuarios';
 
-  constructor(private http: HttpClient) {}
+  constructor(readonly http: HttpClient) {}
 
   getAllUsuario(): Observable<Usuario[]> {
     return this.http.get<Usuario[]>(this.apiUrl);
@@ -26,6 +26,10 @@ export class UsuarioService {
 
   getUsuarioById(id: number): Observable<Usuario> {
     return this.http.get<Usuario>(`${this.apiUrl}/${id}`);
+  }
+
+  getFuncionarios(): Observable<Usuario[]> {
+    return this.http.get<Usuario[]>(`${this.apiUrl}/listar-funcionarios`);
   }
 
   postUsuario(data: Usuario): Observable<Usuario> {

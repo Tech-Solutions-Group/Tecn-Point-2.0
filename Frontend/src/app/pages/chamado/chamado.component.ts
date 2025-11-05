@@ -1,26 +1,34 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { interval, Subscription, switchMap, catchError, of } from 'rxjs';
+import {
+  FormBuilder,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { timer, switchMap, filter, Subscription, catchError, of } from 'rxjs';
 import {
   Conversa,
   Mensagem,
   ConversaService,
 } from '../../service/conversa.service';
 import { Chamado, ChamadoService } from '../../service/chamado.service';
-import { UsuarioService } from '../../service/usuario.service';
+import { Usuario, UsuarioService } from '../../service/usuario.service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-chamado',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule],
   templateUrl: './chamado.component.html',
   styleUrls: ['./chamado.component.css'],
 })
 export class ChamadoComponent implements OnInit, OnDestroy {
   chamados!: Chamado;
   conversas: Conversa[] = [];
+  usuarios: Usuario[] = [];
+  funcionarios: number = 0;
+
   private pollingSubscription?: Subscription;
   private lastConversaId = 0;
   private pollingIntervalMs = 3000;
@@ -40,6 +48,7 @@ export class ChamadoComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.loadChamados();
     this.loadConversas().then(() => this.startPolling());
+    this.loadFuncionarios();
   }
 
   ngOnDestroy(): void {
@@ -54,7 +63,6 @@ export class ChamadoComponent implements OnInit, OnDestroy {
     });
   }
 
-  // retorna Promise para garantir sequência ao iniciar o polling
   loadConversas(): Promise<void> {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     return new Promise((resolve) => {
@@ -66,7 +74,6 @@ export class ChamadoComponent implements OnInit, OnDestroy {
         .subscribe({
           next: (res) => {
             this.conversas = res ?? [];
-            // calcula último id conhecido (campo idConversa pode variar; usa 0 se não existir)
             this.lastConversaId = Math.max(
               0,
               ...this.conversas.map((c: any) => c.idConversa ?? 0)
@@ -82,11 +89,23 @@ export class ChamadoComponent implements OnInit, OnDestroy {
     });
   }
 
+  loadFuncionarios(): void {
+    this.usuarioService.getFuncionarios().subscribe({
+      next: (data) => {
+        this.usuarios = data;
+        console.log('Funcionários carregados:', this.usuarios);
+      },
+      error: (err) => console.error('Erro ao carregar funcionários', err),
+    });
+  }
+
   startPolling(): void {
-    this.stopPolling();
     const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.pollingSubscription = interval(this.pollingIntervalMs)
+    this.stopPolling();
+
+    this.pollingSubscription = timer(0, this.pollingIntervalMs)
       .pipe(
+        filter(() => typeof document !== 'undefined' && !document.hidden),
         switchMap(() =>
           this.conversaService
             .postNovaMensagem({
@@ -101,12 +120,12 @@ export class ChamadoComponent implements OnInit, OnDestroy {
             )
         )
       )
-      .subscribe((res: Conversa[]) => {
-        if (!res || res.length === 0) return;
-        // adiciona apenas as novas mensagens e atualiza lastConversaId
-        this.conversas = [...this.conversas, ...res];
-        const maxId = Math.max(0, ...res.map((c: any) => c.idConversa ?? 0));
-        if (maxId > this.lastConversaId) this.lastConversaId = maxId;
+      .subscribe((novas: Conversa[]) => {
+        if (novas.length > 0) {
+          this.conversas = [...this.conversas, ...novas];
+          const maxId = Math.max(...novas.map((c: any) => c.idConversa ?? 0));
+          this.lastConversaId = Math.max(this.lastConversaId, maxId);
+        }
       });
   }
 
@@ -117,7 +136,6 @@ export class ChamadoComponent implements OnInit, OnDestroy {
     }
   }
 
-  // busca uma vez por novas mensagens (usado após envio)
   fetchNewMessagesOnce(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     this.conversaService
@@ -158,14 +176,61 @@ export class ChamadoComponent implements OnInit, OnDestroy {
     };
 
     this.conversaService.postMensagem(dados).subscribe({
-      next: (res) => {
+      next: () => {
         console.log('Mensagem enviada com sucesso');
         this.enviarMensagemForm.reset();
-        // buscar imediatamente as mensagens novas
         this.fetchNewMessagesOnce();
       },
       error: (erro) => {
         console.log('Erro ao enviar a mensagem: ', erro);
+      },
+    });
+  }
+
+  onPatch(campo: string, valor: any): void {
+    console.log(
+      'Campo:',
+      campo,
+      'Valor recebido:',
+      valor,
+      'Tipo:',
+      typeof valor
+    );
+
+    const idChamado = Number(this.route.snapshot.paramMap.get('id'));
+    if (!idChamado) {
+      console.error('ID do chamado inválido');
+      return;
+    }
+
+    const payload: any = {};
+
+    // Monta o payload dinamicamente com base no campo alterado
+    switch (campo) {
+      case 'status':
+        payload.status = valor;
+        break;
+      case 'prioridade':
+        payload.prioridade = valor;
+        break;
+      case 'idUsuario':
+        payload.idUsuario = Number(valor);
+        break;
+      case 'idModulo':
+        payload.idModulo = Number(valor);
+        break;
+      case 'idJornada':
+        payload.idJornada = Number(valor);
+        break;
+    }
+
+    this.chamadoService.patchChamado(idChamado, payload).subscribe({
+      next: (chamadoAtualizado) => {
+        console.log('Chamado atualizado com sucesso:', chamadoAtualizado);
+        this.chamados = chamadoAtualizado; // Atualiza a view
+      },
+      error: (err) => {
+        console.error('Erro ao atualizar chamado:', err);
       },
     });
   }
