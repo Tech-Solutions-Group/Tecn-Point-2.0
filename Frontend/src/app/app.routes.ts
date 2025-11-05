@@ -11,5 +11,5 @@ export const routes: Routes = [
   { path: 'list-usuario', component: UsuarioComponent },
   { path: 'list-chamado', component: ListarChamadoComponent },
   { path: 'open-chamado', component: AbrirChamadoComponent },
-  { path: 'chamado', component: ChamadoComponent },
+  { path: 'chamados/:id', component: ChamadoComponent },
 ];

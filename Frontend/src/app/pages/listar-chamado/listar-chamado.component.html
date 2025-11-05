@@ -14,7 +14,11 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let chamado of chamados" class="trBody" (click)="goToHome()">
+    <tr
+      *ngFor="let chamado of chamados"
+      class="trBody"
+      (click)="goToHome(chamado.idChamado)"
+    >
       <td style="width: 10rem; max-width: 10rem" class="limit-text">
         {{ chamado.titulo }}
       </td>

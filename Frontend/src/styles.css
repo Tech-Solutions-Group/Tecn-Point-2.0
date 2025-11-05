@@ -26,3 +26,14 @@ app-usuario {
   margin-top: 3rem;
   flex-direction: column;
 }
+
+app-chamado {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  justify-content: space-around;
+}
+

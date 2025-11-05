@@ -88,7 +88,7 @@ public class UsuarioService {
         List<FuncionarioDTO> listaFuncionariosDTO = new ArrayList<>();
         for(Usuarios funcionario : listaFuncionarios){
             listaFuncionariosDTO.add(FuncionarioDTO.builder()
-                                    .id(funcionario.getIdUsuario())
+                                    .idUsuario(funcionario.getIdUsuario())
                                     .nome(funcionario.getNome())
                                     .build());
         }

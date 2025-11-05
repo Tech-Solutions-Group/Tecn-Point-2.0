@@ -22,7 +22,7 @@ public class ConversaController {
         return ResponseEntity.status(201).body(conversaService.enviarMensagem(mensagemDTO));
     }
 
-    @PostMapping("buscar-mensagens")
+    @PostMapping("/buscar-mensagens")
     public ResponseEntity<List<ConversaDTO>> buscarMensagensPorChamado(@RequestBody BuscarMensagensDTO buscarMensagensDTO){
         return ResponseEntity.status(200).body(conversaService.buscarMensagens(buscarMensagensDTO));
     }
