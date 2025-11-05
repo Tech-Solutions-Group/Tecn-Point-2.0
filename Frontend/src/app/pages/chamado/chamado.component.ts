@@ -16,6 +16,7 @@ import { Chamado, ChamadoService } from '../../service/chamado.service';
 import { Usuario, UsuarioService } from '../../service/usuario.service';
 import { ActivatedRoute } from '@angular/router';
 
+
 @Component({
   selector: 'app-chamado',
   standalone: true,
@@ -262,4 +263,5 @@ export class ChamadoComponent implements OnInit, OnDestroy {
         return prioridade;
     }
   }
+
 }
