@@ -36,6 +36,7 @@
             tspCadastrarUsuario = new ToolStripMenuItem();
             toolStripSeparator1 = new ToolStripSeparator();
             tspEditarUsuario = new ToolStripMenuItem();
+            tspChatBot = new ToolStripMenuItem();
             toolTip = new ToolTip(components);
             menuStrip.SuspendLayout();
             SuspendLayout();
@@ -46,7 +47,7 @@
             menuStrip.BackColor = Color.MediumOrchid;
             menuStrip.BackgroundImage = Properties.Resources.TelaFundo;
             menuStrip.Dock = DockStyle.Left;
-            menuStrip.Items.AddRange(new ToolStripItem[] { tspAbrirChamado, tspAcompanharChamado, tspGerenciarUsuarios });
+            menuStrip.Items.AddRange(new ToolStripItem[] { tspAbrirChamado, tspAcompanharChamado, tspGerenciarUsuarios, tspChatBot });
             menuStrip.Location = new Point(0, 0);
             menuStrip.Name = "menuStrip";
             menuStrip.Padding = new Padding(7, 2, 0, 2);
@@ -117,6 +118,18 @@
             tspEditarUsuario.Text = "Editar usuário";
             tspEditarUsuario.Click += tspEditarUsuario_Click;
             // 
+            // tspChatBot
+            // 
+            tspChatBot.BackColor = Color.Transparent;
+            tspChatBot.Font = new Font("Consolas", 14.25F, FontStyle.Bold);
+            tspChatBot.ForeColor = SystemColors.ControlLightLight;
+            tspChatBot.Margin = new Padding(10);
+            tspChatBot.Name = "tspChatBot";
+            tspChatBot.Padding = new Padding(5, 0, 4, 0);
+            tspChatBot.Size = new Size(191, 26);
+            tspChatBot.Text = "Chatbot";
+            tspChatBot.Click += tspChatBot_Click;
+            // 
             // FrmMDIPrincipal
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -130,7 +143,7 @@
             Margin = new Padding(4, 3, 4, 3);
             Name = "FrmMDIPrincipal";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "FrmMDIPrincipal";
+            Text = "Tecn Point";
             FormClosed += FrmMDIPrincipal_FormClosed;
             menuStrip.ResumeLayout(false);
             menuStrip.PerformLayout();
@@ -148,6 +161,7 @@
         private ToolStripMenuItem tspCadastrarUsuario;
         private ToolStripSeparator toolStripSeparator1;
         private ToolStripMenuItem tspEditarUsuario;
+        private ToolStripMenuItem tspChatBot;
     }
 }
 

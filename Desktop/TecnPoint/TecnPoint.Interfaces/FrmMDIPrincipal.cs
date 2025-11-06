@@ -53,13 +53,14 @@ namespace TecnPoint.Interfaces
                 tspGerenciarUsuarios.Visible = false;
             }
 
-            if(_usuarioLogado.TipoUsuario == Modelos.Enum.TipoUsuario.FUNCIONARIO)
+            if (_usuarioLogado.TipoUsuario == Modelos.Enum.TipoUsuario.FUNCIONARIO)
             {
                 tspAbrirChamado.Visible = false;
+                tspChatBot.Visible = false;
             }
         }
 
-        private void tspAbrirChamado_Click(object sender, EventArgs e)
+        public void tspAbrirChamado_Click(object sender, EventArgs e)
         {
             if (this.ActiveMdiChild != null)
             {
@@ -157,6 +158,21 @@ namespace TecnPoint.Interfaces
                 this.menuStrip.BackgroundImage = Interfaces.Properties.Resources.TelaFundo;
             }
         }
-        
+
+        private void tspChatBot_Click(object sender, EventArgs e)
+        {
+            if (this.ActiveMdiChild != null)
+            {
+                this.ActiveMdiChild.Close();
+            }
+
+            FormChatBot formChatBot = new FormChatBot(_modoDaltonico, this, _usuarioLogado);
+
+            formChatBot.MdiParent = this;
+
+            formChatBot.Dock = DockStyle.Fill;
+
+            formChatBot.Show();
+        }
     }
 }

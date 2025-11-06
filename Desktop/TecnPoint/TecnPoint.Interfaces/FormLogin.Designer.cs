@@ -177,7 +177,7 @@
             FormBorderStyle = FormBorderStyle.FixedToolWindow;
             Name = "FormLogin";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "FormLogin";
+            Text = "Tecn Point";
             ResumeLayout(false);
             PerformLayout();
         }

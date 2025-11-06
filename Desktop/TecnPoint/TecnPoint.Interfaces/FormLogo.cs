@@ -21,7 +21,7 @@ namespace TecnPoint.Interfaces
             this._modoDaltonico = modoDaltonico;
             this.lblNomeFrmLogo.Text = nomeUsuario;
             this.lblEmailFrmLogo.Text = emailUsuario;
-            this.lblTipoUsuarioFrmLogo.Text = tipoUsuario.ToString();
+            this.lblTipoUsuarioFrmLogo.Text = tipoUsuario == Modelos.Enum.TipoUsuario.CLIENTE ? "Cliente" : "Funcionário";
             ModoDaltonismo();
         }
 

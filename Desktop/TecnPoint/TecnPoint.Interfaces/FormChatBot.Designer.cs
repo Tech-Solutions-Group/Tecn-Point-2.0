@@ -32,7 +32,7 @@
             pictureBox1 = new PictureBox();
             lblTecnBot = new Label();
             flpConversaChatBot = new FlowLayoutPanel();
-            txtUsuario = new TextBox();
+            txtMensagemUsuario = new TextBox();
             pbEnviar = new PictureBox();
             pnlCabecalhoChatBot.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -42,6 +42,7 @@
             // pnlCabecalhoChatBot
             // 
             pnlCabecalhoChatBot.BackColor = Color.FromArgb(126, 105, 171);
+            pnlCabecalhoChatBot.BackgroundImage = Properties.Resources.TelaFundoLogin;
             pnlCabecalhoChatBot.Controls.Add(pictureBox1);
             pnlCabecalhoChatBot.Controls.Add(lblTecnBot);
             pnlCabecalhoChatBot.Location = new Point(0, 0);
@@ -51,6 +52,7 @@
             // 
             // pictureBox1
             // 
+            pictureBox1.BackColor = Color.Transparent;
             pictureBox1.Image = Properties.Resources.icons8_bot_48;
             pictureBox1.Location = new Point(24, 21);
             pictureBox1.Name = "pictureBox1";
@@ -62,6 +64,7 @@
             // lblTecnBot
             // 
             lblTecnBot.AutoSize = true;
+            lblTecnBot.BackColor = Color.Transparent;
             lblTecnBot.Font = new Font("Consolas", 17.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblTecnBot.ForeColor = SystemColors.ControlLightLight;
             lblTecnBot.Location = new Point(77, 36);
@@ -72,19 +75,22 @@
             // 
             // flpConversaChatBot
             // 
+            flpConversaChatBot.AutoScroll = true;
+            flpConversaChatBot.FlowDirection = FlowDirection.TopDown;
             flpConversaChatBot.Location = new Point(0, 94);
             flpConversaChatBot.Name = "flpConversaChatBot";
             flpConversaChatBot.Size = new Size(896, 501);
             flpConversaChatBot.TabIndex = 1;
+            flpConversaChatBot.WrapContents = false;
             // 
-            // txtUsuario
+            // txtMensagemUsuario
             // 
-            txtUsuario.Location = new Point(251, 601);
-            txtUsuario.Multiline = true;
-            txtUsuario.Name = "txtUsuario";
-            txtUsuario.PlaceholderText = "Digite aqui...";
-            txtUsuario.Size = new Size(370, 36);
-            txtUsuario.TabIndex = 0;
+            txtMensagemUsuario.Location = new Point(251, 601);
+            txtMensagemUsuario.Multiline = true;
+            txtMensagemUsuario.Name = "txtMensagemUsuario";
+            txtMensagemUsuario.PlaceholderText = "Digite aqui...";
+            txtMensagemUsuario.Size = new Size(370, 36);
+            txtMensagemUsuario.TabIndex = 0;
             // 
             // pbEnviar
             // 
@@ -95,6 +101,7 @@
             pbEnviar.SizeMode = PictureBoxSizeMode.Zoom;
             pbEnviar.TabIndex = 2;
             pbEnviar.TabStop = false;
+            pbEnviar.Click += pbEnviar_Click;
             // 
             // FormChatBot
             // 
@@ -102,12 +109,13 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(896, 645);
             Controls.Add(pbEnviar);
-            Controls.Add(txtUsuario);
+            Controls.Add(txtMensagemUsuario);
             Controls.Add(flpConversaChatBot);
             Controls.Add(pnlCabecalhoChatBot);
             FormBorderStyle = FormBorderStyle.None;
             Name = "FormChatBot";
             Text = "FormChatBot";
+            Load += FormChatBot_Load;
             pnlCabecalhoChatBot.ResumeLayout(false);
             pnlCabecalhoChatBot.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
@@ -122,7 +130,7 @@
         private PictureBox pictureBox1;
         private Label lblTecnBot;
         private FlowLayoutPanel flpConversaChatBot;
-        private TextBox txtUsuario;
+        private TextBox txtMensagemUsuario;
         private PictureBox pbEnviar;
     }
 }
