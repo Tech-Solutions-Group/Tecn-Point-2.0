@@ -1,4 +1,11 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  AfterViewChecked,
+  ViewChild,
+  ElementRef,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   FormBuilder,
@@ -16,7 +23,6 @@ import { Chamado, ChamadoService } from '../../service/chamado.service';
 import { Usuario, UsuarioService } from '../../service/usuario.service';
 import { ActivatedRoute } from '@angular/router';
 
-
 @Component({
   selector: 'app-chamado',
   standalone: true,
@@ -24,7 +30,8 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './chamado.component.html',
   styleUrls: ['./chamado.component.css'],
 })
-export class ChamadoComponent implements OnInit, OnDestroy {
+export class ChamadoComponent implements OnInit, OnDestroy, AfterViewChecked {
+  @ViewChild('scrollContainer') readonly scrollContainer!: ElementRef;
   chamados!: Chamado;
   conversas: Conversa[] = [];
   usuarios: Usuario[] = [];
@@ -50,6 +57,17 @@ export class ChamadoComponent implements OnInit, OnDestroy {
     this.loadChamados();
     this.loadConversas().then(() => this.startPolling());
     this.loadFuncionarios();
+  }
+
+  ngAfterViewChecked(): void {
+    this.scrollToBottom();
+  }
+
+  private scrollToBottom(): void {
+    try {
+      this.scrollContainer.nativeElement.scrollTop =
+        this.scrollContainer.nativeElement.scrollHeight;
+    } catch (err) {}
   }
 
   ngOnDestroy(): void {
@@ -79,7 +97,6 @@ export class ChamadoComponent implements OnInit, OnDestroy {
               0,
               ...this.conversas.map((c: any) => c.idConversa ?? 0)
             );
-            console.log('Conversas carregadas, lastId=', this.lastConversaId);
             resolve();
           },
           error: (err) => {
@@ -94,7 +111,6 @@ export class ChamadoComponent implements OnInit, OnDestroy {
     this.usuarioService.getFuncionarios().subscribe({
       next: (data) => {
         this.usuarios = data;
-        console.log('Funcionários carregados:', this.usuarios);
       },
       error: (err) => console.error('Erro ao carregar funcionários', err),
     });
@@ -126,6 +142,7 @@ export class ChamadoComponent implements OnInit, OnDestroy {
           this.conversas = [...this.conversas, ...novas];
           const maxId = Math.max(...novas.map((c: any) => c.idConversa ?? 0));
           this.lastConversaId = Math.max(this.lastConversaId, maxId);
+          this.scrollToBottom();
         }
       });
   }
@@ -153,6 +170,7 @@ export class ChamadoComponent implements OnInit, OnDestroy {
               ...res.map((c: any) => c.idConversa ?? 0)
             );
             if (maxId > this.lastConversaId) this.lastConversaId = maxId;
+            this.scrollToBottom();
           }
         },
         error: (err) => console.error('Erro ao buscar novas mensagens', err),
@@ -178,26 +196,16 @@ export class ChamadoComponent implements OnInit, OnDestroy {
 
     this.conversaService.postMensagem(dados).subscribe({
       next: () => {
-        console.log('Mensagem enviada com sucesso');
         this.enviarMensagemForm.reset();
         this.fetchNewMessagesOnce();
       },
       error: (erro) => {
-        console.log('Erro ao enviar a mensagem: ', erro);
+        console.error('Erro ao enviar a mensagem: ', erro);
       },
     });
   }
 
   onPatch(campo: string, valor: any): void {
-    console.log(
-      'Campo:',
-      campo,
-      'Valor recebido:',
-      valor,
-      'Tipo:',
-      typeof valor
-    );
-
     const idChamado = Number(this.route.snapshot.paramMap.get('id'));
     if (!idChamado) {
       console.error('ID do chamado inválido');
@@ -227,8 +235,7 @@ export class ChamadoComponent implements OnInit, OnDestroy {
 
     this.chamadoService.patchChamado(idChamado, payload).subscribe({
       next: (chamadoAtualizado) => {
-        console.log('Chamado atualizado com sucesso:', chamadoAtualizado);
-        this.chamados = chamadoAtualizado; // Atualiza a view
+        this.chamados = chamadoAtualizado;
       },
       error: (err) => {
         console.error('Erro ao atualizar chamado:', err);
@@ -263,5 +270,4 @@ export class ChamadoComponent implements OnInit, OnDestroy {
         return prioridade;
     }
   }
-
 }

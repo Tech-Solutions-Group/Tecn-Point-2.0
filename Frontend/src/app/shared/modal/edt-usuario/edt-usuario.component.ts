@@ -59,7 +59,6 @@ export class EdtUsuarioComponent {
       .putUsuario(this.usuarioId, this.attUsuarioForm.value as Usuario)
       .subscribe({
         next: (res) => {
-          console.log('Usuário atualizado com sucesso:', res);
           this.usuarioAtualizado.emit(res);
           this.close();
           this.successModalOpen = true;

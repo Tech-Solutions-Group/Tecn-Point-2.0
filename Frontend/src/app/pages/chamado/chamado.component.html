@@ -3,15 +3,16 @@
   [formGroup]="enviarMensagemForm"
   (ngSubmit)="onSubmit()"
 >
-  <div class="conversa">
+  <div class="conversa" #scrollContainer>
     <div *ngFor="let conversa of conversas">
       <strong>{{ conversa.remetente.nome }}: </strong>
-      <span
-        >{{ conversa.mensagem }}
-        {{ conversa.dataHoraEnvio | date : "short" }}</span
-      >
+      <span>
+        {{ conversa.mensagem }}
+        {{ conversa.dataHoraEnvio | date : "short" }}
+      </span>
     </div>
   </div>
+
   <div class="input-group mb-3 enviar">
     <input
       type="text"
@@ -40,9 +41,6 @@
         />
       </svg>
     </button>
-    <!-- <small *ngIf="enviarMensagemForm.get('mensagem')?.invalid"
-      >Digite uma mensagem para continuar</small
-    > -->
   </div>
 </form>
 <form *ngIf="chamados" class="menu bg-light">

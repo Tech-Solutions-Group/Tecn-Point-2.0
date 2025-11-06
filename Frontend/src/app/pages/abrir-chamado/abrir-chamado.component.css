@@ -21,6 +21,10 @@ form {
   margin-top: 3rem;
 }
 
+select:hover {
+  cursor: pointer;
+}
+
 .comum_modal-backdrop {
   position: fixed;
   top: 0;

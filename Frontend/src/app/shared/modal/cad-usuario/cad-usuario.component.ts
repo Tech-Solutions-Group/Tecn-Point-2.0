@@ -58,7 +58,6 @@ export class CadUsuarioComponent {
 
     this.usuarioService.postUsuario(dados).subscribe({
       next: (res) => {
-        console.log('Usuário cadastrado com sucesso:', res);
         this.usuarioCadastrado.emit(res);
         this.cadUsuarioForm.reset();
         this.close();

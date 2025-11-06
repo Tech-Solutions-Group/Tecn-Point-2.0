@@ -10,7 +10,7 @@ app-root {
   flex-direction: row;
 }
 
-app-chamado {
+app-listar-chamado {
   width: 100%;
   display: flex;
   align-items: flex-start;
@@ -36,4 +36,3 @@ app-chamado {
   flex-direction: row;
   justify-content: space-around;
 }
-

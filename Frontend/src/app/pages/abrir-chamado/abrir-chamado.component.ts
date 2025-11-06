@@ -51,14 +51,13 @@ export class AbrirChamadoComponent {
       titulo: this.abrirChamadoForm.value.titulo!,
       descricao: this.abrirChamadoForm.value.descricao!,
       prioridade: this.abrirChamadoForm.value.prioridade!,
-      idCliente: usuarioLogado.idUsuario, // <- aqui pega o logado
+      idCliente: usuarioLogado.idUsuario,
       idJornada: Number(this.abrirChamadoForm.value.id_jornada),
       idModulo: Number(this.abrirChamadoForm.value.id_modulo),
     };
 
     this.chamadoService.postChamado(dados).subscribe({
-      next: (res) => {
-        console.log('Chamado aberto com sucesso:', res);
+      next: () => {
         this.abrirChamadoForm.reset();
         this.successModalOpen = true;
       },
@@ -74,5 +73,6 @@ export class AbrirChamadoComponent {
 
   closeSuccess() {
     this.successModalOpen = false;
+    this.router.navigate(['/list-chamado']);
   }
 }
