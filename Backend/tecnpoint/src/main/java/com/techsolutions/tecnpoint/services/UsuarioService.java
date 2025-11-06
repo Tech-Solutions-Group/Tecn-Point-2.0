@@ -11,6 +11,7 @@ import com.techsolutions.tecnpoint.exceptions.UsuarioNaoEncontradoException;
 import com.techsolutions.tecnpoint.repositories.UsuarioRepository;
 import com.techsolutions.tecnpoint.DTO.AtualizaUsuarioDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,8 +47,12 @@ public class UsuarioService {
     }
 
     public Usuarios postUsuarios(Usuarios usuarios){
-        Usuarios usuarioSalvo = usuarioRepository.save(usuarios);
-        return usuarioSalvo;
+        try{
+            Usuarios usuarioSalvo = usuarioRepository.save(usuarios);
+            return usuarioSalvo;
+        }catch(DataIntegrityViolationException ex){
+            throw new EmailExistenteException("O e-mail informado para cadastro já existe");
+        }
     }
 
     public void delUsuarios(Long id){

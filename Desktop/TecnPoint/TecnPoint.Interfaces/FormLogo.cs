@@ -13,12 +13,28 @@ namespace TecnPoint.Interfaces
 {
     public partial class FormLogo : Form
     {
-        public FormLogo(string nomeUsuario, string emailUsuario, TipoUsuario tipoUsuario)
+        private readonly bool _modoDaltonico;
+
+        public FormLogo(string nomeUsuario, string emailUsuario, TipoUsuario tipoUsuario, bool modoDaltonico)
         {
             InitializeComponent();
+            this._modoDaltonico = modoDaltonico;
             this.lblNomeFrmLogo.Text = nomeUsuario;
             this.lblEmailFrmLogo.Text = emailUsuario;
-            this.lblTipoUsuarioFrmLogo.Text = tipoUsuario.ToString();
+            this.lblTipoUsuarioFrmLogo.Text = tipoUsuario == Modelos.Enum.TipoUsuario.CLIENTE ? "Cliente" : "Funcionário";
+            ModoDaltonismo();
+        }
+
+        private void ModoDaltonismo()
+        {
+            if (_modoDaltonico)
+            {
+                this.BackgroundImage = Interfaces.Properties.Resources.ImagemLogo_Daltonico;
+            }
+            else
+            {
+                this.BackgroundImage = Interfaces.Properties.Resources.ImagemFundoForm21;
+            }
         }
     }
 }

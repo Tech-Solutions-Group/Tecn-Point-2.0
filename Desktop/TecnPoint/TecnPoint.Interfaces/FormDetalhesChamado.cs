@@ -17,11 +17,12 @@ namespace TecnPoint.Interfaces
 {
     public partial class FormDetalhesChamado : Form
     {
-        private Usuario usuarioLogado;
-        private ChamadoDTO chamado;
+        private Usuario _usuarioLogado;
+        private ChamadoDTO _chamado;
         private FormAcompanharChamados formAcompanharChamados;
-        private ChamadoService chamadoService;
-        private ConversaService conversaService;
+        private ChamadoService _chamadoService;
+        private ConversaService _conversaService;
+        private readonly bool _modoDaltonico;
 
         long idUltimaMensagem = 0;
 
@@ -30,35 +31,38 @@ namespace TecnPoint.Interfaces
 
         private bool atualizandoDadosChamado = false;
 
-        public FormDetalhesChamado(ChamadoDTO chamadoSelecionado, Usuario usuarioLogado, FormAcompanharChamados formAcompanharChamado)
+        public FormDetalhesChamado(ChamadoDTO chamadoSelecionado, Usuario usuarioLogado, FormAcompanharChamados formAcompanharChamado, bool modoDaltonico)
         {
-            this.usuarioLogado = usuarioLogado;
-            this.chamado = chamadoSelecionado;
+            this._usuarioLogado = usuarioLogado;
+            this._chamado = chamadoSelecionado;
             this.formAcompanharChamados = formAcompanharChamado;
-            this.chamadoService = new ChamadoService();
-            this.conversaService = new ConversaService();
+            this._chamadoService = new ChamadoService();
+            this._conversaService = new ConversaService();
             InitializeComponent();
+            _modoDaltonico = modoDaltonico;
+            ModoDaltonismo();
         }
 
         private void PreencherDetalhes()
         {
-            lblTitulo.Text = chamado.titulo;
-            lblStatus.Text = ConverteEnumStatus(chamado.status);
-            lblStatus.BackColor = FundoStatus(chamado.status);
-            lblPrioridade.Text = ConverteEnumPrioridade(chamado.prioridade);
-            lblNomeCliente.Text = chamado.cliente.nome;
-            lblNomeFuncionario.Text = chamado.funcionario.nome;
-            lblDescricaoDoChamado.Text = chamado.descricao;
-            lblJornada.Text = chamado.jornada.jornada;
-            lblModulo.Text = chamado.modulo.modulo;
+            lblTitulo.Text = _chamado.titulo;
+            lblStatus.Text = ConverteEnumStatus(_chamado.status);
+            lblStatus.BackColor = FundoStatus(_chamado.status, _modoDaltonico);
+            lblPrioridade.Text = ConverteEnumPrioridade(_chamado.prioridade);
+            lblNomeCliente.Text = _chamado.cliente.nome;
+            lblNomeFuncionario.Text = _chamado.funcionario.nome;
+            lblDescricaoDoChamado.Text = _chamado.descricao;
+            lblJornada.Text = _chamado.jornada.jornada;
+            lblModulo.Text = _chamado.modulo.modulo;
         }
 
         private async void FormDetalhesChamado_Load(object sender, EventArgs e)
         {
+            timerAtualizaDados.Enabled = true;
             // Variável para controlar quando disparar o evento de SelectedIndexChanged das Combobox
             carregandoComboBox = true;
 
-            if (usuarioLogado.tipoUsuario == TipoUsuario.CLIENTE)
+            if (_usuarioLogado.TipoUsuario == TipoUsuario.CLIENTE)
             {
                 cbxStatus.Visible = false;
                 cbxPrioridade.Visible = false;
@@ -82,7 +86,7 @@ namespace TecnPoint.Interfaces
         {
             try
             {
-                List<ListagemFuncionariosDTO> listaFunc = await chamadoService.CarregaNomeFuncionarios();
+                List<ListagemFuncionariosDTO> listaFunc = await _chamadoService.CarregaNomeFuncionarios();
                 comboBox.DataSource = listaFunc;
                 comboBox.DisplayMember = "nome";
                 comboBox.ValueMember = "id";
@@ -106,14 +110,11 @@ namespace TecnPoint.Interfaces
 
                     AtualizaChamadoDTO dadosParaAtualizarChamado = new AtualizaChamadoDTO
                     {
-                        idChamado = chamado.idChamado,
+                        idChamado = _chamado.idChamado,
                         idUsuario = idFuncionarioSelecionado
                     };
 
-                    this.chamado = await chamadoService.AtualizaChamado(dadosParaAtualizarChamado);
-
-                    lblNomeFuncionario.Text = chamado.funcionario.nome;
-
+                    this._chamado = await _chamadoService.AtualizaChamado(dadosParaAtualizarChamado);
                 }
                 catch (Exception ex)
                 {
@@ -133,14 +134,10 @@ namespace TecnPoint.Interfaces
                 {
                     AtualizaChamadoDTO dadosParaAtualizarChamado = new AtualizaChamadoDTO();
 
-                    dadosParaAtualizarChamado.idChamado = chamado.idChamado;
+                    dadosParaAtualizarChamado.idChamado = _chamado.idChamado;
                     dadosParaAtualizarChamado.status = (StatusChamado)cbxStatus.SelectedIndex - 1;
 
-                    this.chamado = await chamadoService.AtualizaChamado(dadosParaAtualizarChamado);
-
-                    lblStatus.Text = ConverteEnumStatus(chamado.status);
-                    lblStatus.BackColor = FundoStatus(chamado.status);
-
+                    this._chamado = await _chamadoService.AtualizaChamado(dadosParaAtualizarChamado);
                 }
                 catch (Exception ex)
                 {
@@ -160,12 +157,12 @@ namespace TecnPoint.Interfaces
                 {
                     AtualizaChamadoDTO dadosParaAtualizarChamado = new AtualizaChamadoDTO();
 
-                    dadosParaAtualizarChamado.idChamado = chamado.idChamado;
+                    dadosParaAtualizarChamado.idChamado = _chamado.idChamado;
                     dadosParaAtualizarChamado.prioridade = (PrioridadeChamado)cbxPrioridade.SelectedIndex - 1;
 
-                    this.chamado = await chamadoService.AtualizaChamado(dadosParaAtualizarChamado);
+                    this._chamado = await _chamadoService.AtualizaChamado(dadosParaAtualizarChamado);
 
-                    lblPrioridade.Text = ConverteEnumPrioridade(chamado.prioridade);
+                    lblPrioridade.Text = ConverteEnumPrioridade(_chamado.prioridade);
                 }
                 catch (Exception ex)
                 {
@@ -185,13 +182,11 @@ namespace TecnPoint.Interfaces
                 {
                     AtualizaChamadoDTO dadosParaAtualizarNoChamado = new AtualizaChamadoDTO
                     {
-                        idChamado = chamado.idChamado,
+                        idChamado = _chamado.idChamado,
                         idJornada = cbxJornada.SelectedIndex
                     };
 
-                    this.chamado = await chamadoService.AtualizaChamado(dadosParaAtualizarNoChamado);
-
-                    lblJornada.Text = this.chamado.jornada.jornada;
+                    this._chamado = await _chamadoService.AtualizaChamado(dadosParaAtualizarNoChamado);
                 }
                 catch (Exception ex)
                 {
@@ -211,13 +206,13 @@ namespace TecnPoint.Interfaces
                 {
                     AtualizaChamadoDTO dadosParaAtualizarChamado = new AtualizaChamadoDTO
                     {
-                        idChamado = chamado.idChamado,
+                        idChamado = _chamado.idChamado,
                         idModulo = cbxModulo.SelectedIndex
                     };
 
-                    this.chamado = await chamadoService.AtualizaChamado(dadosParaAtualizarChamado);
+                    this._chamado = await _chamadoService.AtualizaChamado(dadosParaAtualizarChamado);
 
-                    lblModulo.Text = this.chamado.modulo.modulo;
+                    lblModulo.Text = this._chamado.modulo.modulo;
                 }
                 catch (Exception ex)
                 {
@@ -236,12 +231,12 @@ namespace TecnPoint.Interfaces
                 {
                     MensagemDTO mensagemASerEnviada = new MensagemDTO
                     {
-                        idChamado = this.chamado.idChamado,
-                        idRemetente = this.usuarioLogado.idUsuario,
+                        idChamado = this._chamado.idChamado,
+                        idRemetente = this._usuarioLogado.idUsuario,
                         mensagem = txtMensagem.Text
                     };
 
-                    await conversaService.EnviarMensagem(mensagemASerEnviada);
+                    await _conversaService.EnviarMensagem(mensagemASerEnviada);
                     txtMensagem.Clear();
                 }
                 catch (Exception ex)
@@ -259,11 +254,11 @@ namespace TecnPoint.Interfaces
             List<ConversaDTO> listaMensagens = new List<ConversaDTO>();
             BuscarMensagemDTO buscarMensagemDTO = new BuscarMensagemDTO
             {
-                idChamado = this.chamado.idChamado,
+                idChamado = this._chamado.idChamado,
                 idUltimaConversa = this.idUltimaMensagem
             };
 
-            listaMensagens = await conversaService.BuscarConversa(buscarMensagemDTO);
+            listaMensagens = await _conversaService.BuscarConversa(buscarMensagemDTO);
 
             foreach (var mensagem in listaMensagens)
             {
@@ -281,7 +276,7 @@ namespace TecnPoint.Interfaces
         {
             try
             {
-                this.chamado = await chamadoService.BuscaChamadoPorId(this.chamado.idChamado);
+                this._chamado = await _chamadoService.BuscaChamadoPorId(this._chamado.idChamado);
             }
             catch (Exception ex)
             {
@@ -316,11 +311,19 @@ namespace TecnPoint.Interfaces
 
         }
 
+        private void btnVoltar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            this.formAcompanharChamados.flpPanelCardsChamados.Controls.Clear();
+            this.formAcompanharChamados.CarregaChamados();
+            this.formAcompanharChamados.ExibirCards();
+        }
+
         private void ExibeMensagens(ConversaDTO mensagem)
         {
             Panel mensagemNoPanel = new Panel()
             {
-                BackColor = Color.FromArgb(167, 112, 197),
+                BackColor = _modoDaltonico ? Color.FromArgb(171, 126, 105) : Color.FromArgb(167, 112, 197),
                 Width = panelConversa.Width - 30,
                 AutoSize = true,
                 Margin = new Padding(5),
@@ -370,19 +373,12 @@ namespace TecnPoint.Interfaces
 
         }
 
-        private void pbIconVoltar_Click(object sender, EventArgs e)
-        {
-            formAcompanharChamados.flpPanelCardsChamados.Controls.Clear();
-            formAcompanharChamados.CarregaChamados();
-            formAcompanharChamados.ExibirCards();
-        }
-
-        private Color FundoStatus(StatusChamado status)
+        private Color FundoStatus(StatusChamado status, bool modoDaltonico)
         {
             if (status == StatusChamado.ABERTO) return Color.FromArgb(211, 211, 211);
-            if (status == StatusChamado.EM_ANDAMENTO) return Color.FromArgb(236, 169, 44);
-            if (status == StatusChamado.PENDENTE) return Color.FromArgb(76, 143, 197);
-            if (status == StatusChamado.RESOLVIDO) return Color.FromArgb(67, 180, 128);
+            if (status == StatusChamado.EM_ANDAMENTO) return modoDaltonico ? Color.FromArgb(235, 181, 102) : Color.FromArgb(236, 169, 44);
+            if (status == StatusChamado.PENDENTE) return modoDaltonico ? Color.FromArgb(77, 138, 195) : Color.FromArgb(76, 143, 197);
+            if (status == StatusChamado.RESOLVIDO) return modoDaltonico ? Color.FromArgb(93, 162, 176) : Color.FromArgb(67, 180, 128);
             return Color.Gray;
         }
 
@@ -401,6 +397,30 @@ namespace TecnPoint.Interfaces
             if (prioridade == PrioridadeChamado.MEDIA) return "Média";
             if (prioridade == PrioridadeChamado.ALTA) return "Alta";
             return "";
+        }
+
+        private void ModoDaltonismo()
+        {
+            if (_modoDaltonico)
+            {
+                pbIconPrioridade.Image = Interfaces.Properties.Resources.IconPrioridadeDaltonico;
+                pbIconDescricao.Image = Interfaces.Properties.Resources.IconsDocumentoDaltonico;
+                pbIconJornada.Image = Interfaces.Properties.Resources.IconMarcadorDaltonico;
+                pbIconModulo.Image = Interfaces.Properties.Resources.IconEngrenagemDaltonico;
+                pbIconEnviarMensagem.Image = Interfaces.Properties.Resources.IconEnviarDaltonico;
+                btnVoltar.FlatAppearance.MouseDownBackColor = Color.FromArgb(254, 190, 137);
+                btnVoltar.FlatAppearance.MouseOverBackColor = Color.FromArgb(253, 163, 89);
+            }
+            else
+            {
+                pbIconPrioridade.Image = Interfaces.Properties.Resources.icons8_alta_prioridade_48;
+                pbIconDescricao.Image = Interfaces.Properties.Resources.icons8_documento_48;
+                pbIconJornada.Image = Interfaces.Properties.Resources.icons8_marcador_48;
+                pbIconModulo.Image = Interfaces.Properties.Resources.icons8_configurações_48;
+                pbIconEnviarMensagem.Image = Interfaces.Properties.Resources.IconEnviar;
+                btnVoltar.FlatAppearance.MouseDownBackColor = Color.FromArgb(190, 137, 254);
+                btnVoltar.FlatAppearance.MouseOverBackColor = Color.FromArgb(163, 89, 253);
+            }
         }
     }
 }

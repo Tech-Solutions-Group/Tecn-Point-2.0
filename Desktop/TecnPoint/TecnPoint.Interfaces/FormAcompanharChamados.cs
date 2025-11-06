@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -16,13 +17,17 @@ namespace TecnPoint.Interfaces
 {
     public partial class FormAcompanharChamados : Form
     {
-        private Usuario usuarioLogado;
-        private ChamadoService chamadoService;
+        private Usuario _usuarioLogado;
+        private ChamadoService _chamadoService;
+        private FrmMDIPrincipal frmMDIPrincipal;
+        private readonly bool _modoDaltonico;
 
-        public FormAcompanharChamados(Usuario usuarioLogado, FrmMDIPrincipal frmMDIPrincipal)
+        public FormAcompanharChamados(Usuario usuarioLogado, FrmMDIPrincipal frmMDIPrincipal, bool modoDaltonico)
         {
-            this.usuarioLogado = usuarioLogado;
-            this.chamadoService = new ChamadoService();
+            this._usuarioLogado = usuarioLogado;
+            this._chamadoService = new ChamadoService();
+            this.frmMDIPrincipal = frmMDIPrincipal;
+            this._modoDaltonico = modoDaltonico;
             InitializeComponent();
             CarregaChamados();
         }
@@ -31,22 +36,21 @@ namespace TecnPoint.Interfaces
         {
             try
             {
-                var listaChamados = await chamadoService.BuscarChamados(usuarioLogado.idUsuario, usuarioLogado.tipoUsuario);
+                var listaChamados = await _chamadoService.BuscarChamados(_usuarioLogado.idUsuario, _usuarioLogado.TipoUsuario);
 
                 foreach (var chamado in listaChamados)
                 {
-                    Panel card = new Panel
+                    GroupBox card = new GroupBox
                     {
                         Size = new Size(600, 100),
                         Font = new Font("Consolas", 11, FontStyle.Bold),
-                        BackColor = Color.FromArgb(190, 140, 255),
                         Cursor = Cursors.Hand
                     };
 
                     Label lblTitulo = new Label { Text = $"{chamado.titulo}", Location = new Point(10, 20), AutoSize = false, Size = new Size(250, 40) };
                     Label lblCliente = new Label { Text = $"Criado por: {chamado.cliente.nome}", Location = new Point(10, 70), AutoSize = true };
                     Label lblFuncionario = new Label { Text = $"Atribuído: {chamado.funcionario.nome}", Location = new Point(375, 70), AutoSize = true };
-                    Label lblStatus = new Label { Text = $"Status: {chamado.status}", Location = new Point(375, 20), AutoSize = true, BackColor = FundoStatus(chamado.status) };
+                    Label lblStatus = new Label { Text = $"Status: {chamado.status}", Location = new Point(375, 20), AutoSize = true, BackColor = FundoStatus(chamado.status, _modoDaltonico) };
 
                     card.Controls.Add(lblTitulo);
                     card.Controls.Add(lblCliente);
@@ -69,10 +73,10 @@ namespace TecnPoint.Interfaces
                     void AbrirDetalhes(ChamadoDTO chamadoSelecionado)
                     {
                         Usuario usuarioParam = new Usuario();
-                        usuarioParam = usuarioLogado;
+                        usuarioParam = _usuarioLogado;
                         panelDetalhesChamado.BringToFront();
 
-                        FormDetalhesChamado detalhesChamado = new FormDetalhesChamado(chamadoSelecionado, usuarioParam, this);
+                        FormDetalhesChamado detalhesChamado = new FormDetalhesChamado(chamadoSelecionado, usuarioParam, this, _modoDaltonico);
                         detalhesChamado.TopLevel = false;
 
                         flpPanelCardsChamados.Controls.Clear();
@@ -93,7 +97,6 @@ namespace TecnPoint.Interfaces
                                        MessageBoxButtons.OK,
                                        MessageBoxIcon.Information);
             }
-            
         }
 
         public void ExibirCards()
@@ -101,27 +104,12 @@ namespace TecnPoint.Interfaces
             flpPanelCardsChamados.BringToFront();
         }
 
-        private Color FundoStatus(StatusChamado status)
+        private Color FundoStatus(StatusChamado status, bool modoDaltonico)
         {
-            if(status == StatusChamado.ABERTO)
-            {
-                return Color.FromArgb(67, 180, 128);
-            }
-            
-            if(status == StatusChamado.EM_ANDAMENTO)
-            {
-                return Color.FromArgb(236, 169, 44);
-            }
-
-            if(status == StatusChamado.PENDENTE)
-            {
-                return Color.FromArgb(76, 143, 197);
-            }
-
-            if(status == StatusChamado.RESOLVIDO)
-            {
-                return Color.FromArgb(211, 211, 211);
-            }
+            if(status == StatusChamado.ABERTO) return Color.FromArgb(211, 211, 211);
+            if(status == StatusChamado.EM_ANDAMENTO) return modoDaltonico ? Color.FromArgb(235, 181, 102) : Color.FromArgb(236, 169, 44);
+            if(status == StatusChamado.PENDENTE)return modoDaltonico ? Color.FromArgb(77, 138, 195) : Color.FromArgb(76, 143, 197);
+            if(status == StatusChamado.RESOLVIDO)return modoDaltonico ? Color.FromArgb(93, 162, 176) : Color.FromArgb(67, 180, 128);
             return Color.Gray;
         }
     }

@@ -6,13 +6,13 @@ namespace TecnPoint.Modelos
     public class Usuario
     {
         public long idUsuario { get; set; }
-        public string nome { get; set; }
-        public string email { get; set; }
-        public TipoUsuario tipoUsuario { get; set; }
+        public string Nome { get; set; }
+        public string Email { get; set; }
+        public TipoUsuario TipoUsuario { get; set; }
 
         public override string ToString()
         {
-            return $"Id: {idUsuario} \nNome: {nome} \nEmail: {email} \nTipo Usuário: {tipoUsuario}";
+            return $"Id: {idUsuario} \nNome: {Nome} \nEmail: {Email} \nTipo Usuário: {TipoUsuario}";
         }
     }
 }

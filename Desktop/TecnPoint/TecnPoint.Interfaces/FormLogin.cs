@@ -15,7 +15,7 @@ namespace TecnPoint.Interfaces
 {
     public partial class FormLogin : Form
     {
-        UsuarioService _usuarioService;
+        private UsuarioService _usuarioService;
 
         public FormLogin()
         {
@@ -23,49 +23,88 @@ namespace TecnPoint.Interfaces
             InitializeComponent();
         }
 
+        public void DefinirModoDaltonico(bool modoDaltonico)
+        {
+            chcbModoDaltonico.Checked = modoDaltonico;
+        }
+
+        public bool ModoDaltonicoAtivo => chcbModoDaltonico.Checked;
+
         private async void btnEntrar_Click(object sender, EventArgs e)
         {
             try
             {
                 ValidaLogin(tbxEmail.Text, tbxSenha.Text);
 
-                LoginUsuarioDTO loginUsuarioDTO = new LoginUsuarioDTO(tbxEmail.Text.ToLower(), tbxSenha.Text);
+                UsuarioLogadoDTO usuarioRetornado = await _usuarioService.RealizarLogin(new LoginUsuarioDTO(tbxEmail.Text.ToLower(), tbxSenha.Text));
 
-                Usuario usuarioLogado = await _usuarioService.RealizarLogin(loginUsuarioDTO);
+                Usuario usuarioLogado = new Usuario
+                {
+                    idUsuario = usuarioRetornado.idUsuario,
+                    Nome = usuarioRetornado.nome,
+                    Email = usuarioRetornado.email,
+                    TipoUsuario = usuarioRetornado.tipoUsuario,
+                };
 
                 MessageBox.Show($"Login efetuado com sucesso!\n{usuarioLogado}",
                                 "TechSolutions",
                                 MessageBoxButtons.OK,
                                 MessageBoxIcon.Information);
 
-                if(usuarioLogado != null)
+                if (usuarioLogado != null)
                 {
-                    FrmMDIPrincipal frmMDIPrincipal = new FrmMDIPrincipal(usuarioLogado);
+                    FrmMDIPrincipal frmMDIPrincipal = new FrmMDIPrincipal(usuarioLogado, ModoDaltonicoAtivo);
                     frmMDIPrincipal.Show();
                     this.Hide();
                 }
 
-            }catch(ArgumentException ex)
-            {
-                MessageBox.Show(ex.Message,     
-                                "TechSolutions",
-                                MessageBoxButtons.OK,
-                                MessageBoxIcon.Information);
-            }catch(Exception ex)
+            }
+            catch (ArgumentException ex)
             {
                 MessageBox.Show(ex.Message,
                                 "TechSolutions",
                                 MessageBoxButtons.OK,
                                 MessageBoxIcon.Information);
             }
-
-
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message,
+                                "TechSolutions",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
+            }
         }
 
         private void ValidaLogin(string email, string senha)
         {
             if (string.IsNullOrWhiteSpace(email)) throw new ArgumentException("O e-mail deve ser informado!");
             if (string.IsNullOrWhiteSpace(senha)) throw new ArgumentException("A senha deve ser informada!");
+        }
+
+        private void AtivarModoDaltonico()
+        {
+            this.BackgroundImage = Interfaces.Properties.Resources.TelaInicioDaltonico;
+
+            btnEntrar.BackColor = Color.FromArgb(171, 126, 105);
+        }
+
+        private void DesativarModoDaltonico()
+        {
+            this.BackgroundImage = Interfaces.Properties.Resources.TelaFundoLogin;
+
+            btnEntrar.BackColor = Color.FromArgb(126, 105, 171);
+        }
+
+        private void chcbModoDaltonico_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chcbModoDaltonico.Checked)
+            {
+                AtivarModoDaltonico();
+            }
+            else
+            {
+                DesativarModoDaltonico();
+            }
         }
     }
 }

@@ -29,13 +29,14 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMDIPrincipal));
             menuStrip = new MenuStrip();
             tspAbrirChamado = new ToolStripMenuItem();
             tspAcompanharChamado = new ToolStripMenuItem();
             tspGerenciarUsuarios = new ToolStripMenuItem();
             tspCadastrarUsuario = new ToolStripMenuItem();
-            tspDeletarUsuario = new ToolStripMenuItem();
+            toolStripSeparator1 = new ToolStripSeparator();
+            tspEditarUsuario = new ToolStripMenuItem();
+            tspChatBot = new ToolStripMenuItem();
             toolTip = new ToolTip(components);
             menuStrip.SuspendLayout();
             SuspendLayout();
@@ -44,9 +45,9 @@
             // 
             menuStrip.AutoSize = false;
             menuStrip.BackColor = Color.MediumOrchid;
-            menuStrip.BackgroundImage = (Image)resources.GetObject("menuStrip.BackgroundImage");
+            menuStrip.BackgroundImage = Properties.Resources.TelaFundo;
             menuStrip.Dock = DockStyle.Left;
-            menuStrip.Items.AddRange(new ToolStripItem[] { tspAbrirChamado, tspAcompanharChamado, tspGerenciarUsuarios });
+            menuStrip.Items.AddRange(new ToolStripItem[] { tspAbrirChamado, tspAcompanharChamado, tspGerenciarUsuarios, tspChatBot });
             menuStrip.Location = new Point(0, 0);
             menuStrip.Name = "menuStrip";
             menuStrip.Padding = new Padding(7, 2, 0, 2);
@@ -85,7 +86,7 @@
             // tspGerenciarUsuarios
             // 
             tspGerenciarUsuarios.BackColor = Color.Transparent;
-            tspGerenciarUsuarios.DropDownItems.AddRange(new ToolStripItem[] { tspCadastrarUsuario, tspDeletarUsuario });
+            tspGerenciarUsuarios.DropDownItems.AddRange(new ToolStripItem[] { tspCadastrarUsuario, toolStripSeparator1, tspEditarUsuario });
             tspGerenciarUsuarios.Font = new Font("Consolas", 14.25F, FontStyle.Bold);
             tspGerenciarUsuarios.ForeColor = SystemColors.ControlLightLight;
             tspGerenciarUsuarios.ImageAlign = ContentAlignment.MiddleLeft;
@@ -97,17 +98,37 @@
             // 
             // tspCadastrarUsuario
             // 
-            tspCadastrarUsuario.BackColor = Color.Thistle;
+            tspCadastrarUsuario.BackColor = Color.Transparent;
+            tspCadastrarUsuario.ForeColor = SystemColors.ControlText;
             tspCadastrarUsuario.Name = "tspCadastrarUsuario";
             tspCadastrarUsuario.Size = new Size(250, 26);
-            tspCadastrarUsuario.Text = "Cadastrar Usuário";
+            tspCadastrarUsuario.Text = "Cadastrar usuário";
+            tspCadastrarUsuario.Click += tspCadastrarUsuario_Click;
             // 
-            // tspDeletarUsuario
+            // toolStripSeparator1
             // 
-            tspDeletarUsuario.BackColor = Color.Thistle;
-            tspDeletarUsuario.Name = "tspDeletarUsuario";
-            tspDeletarUsuario.Size = new Size(250, 26);
-            tspDeletarUsuario.Text = "Deletar Usuário";
+            toolStripSeparator1.Name = "toolStripSeparator1";
+            toolStripSeparator1.Size = new Size(247, 6);
+            // 
+            // tspEditarUsuario
+            // 
+            tspEditarUsuario.BackColor = Color.Transparent;
+            tspEditarUsuario.Name = "tspEditarUsuario";
+            tspEditarUsuario.Size = new Size(250, 26);
+            tspEditarUsuario.Text = "Editar usuário";
+            tspEditarUsuario.Click += tspEditarUsuario_Click;
+            // 
+            // tspChatBot
+            // 
+            tspChatBot.BackColor = Color.Transparent;
+            tspChatBot.Font = new Font("Consolas", 14.25F, FontStyle.Bold);
+            tspChatBot.ForeColor = SystemColors.ControlLightLight;
+            tspChatBot.Margin = new Padding(10);
+            tspChatBot.Name = "tspChatBot";
+            tspChatBot.Padding = new Padding(5, 0, 4, 0);
+            tspChatBot.Size = new Size(191, 26);
+            tspChatBot.Text = "Chatbot";
+            tspChatBot.Click += tspChatBot_Click;
             // 
             // FrmMDIPrincipal
             // 
@@ -122,7 +143,8 @@
             Margin = new Padding(4, 3, 4, 3);
             Name = "FrmMDIPrincipal";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "FrmMDIPrincipal";
+            Text = "Tecn Point";
+            FormClosed += FrmMDIPrincipal_FormClosed;
             menuStrip.ResumeLayout(false);
             menuStrip.PerformLayout();
             ResumeLayout(false);
@@ -137,7 +159,9 @@
         private ToolStripMenuItem tspAcompanharChamado;
         private ToolStripMenuItem tspGerenciarUsuarios;
         private ToolStripMenuItem tspCadastrarUsuario;
-        private ToolStripMenuItem tspDeletarUsuario;
+        private ToolStripSeparator toolStripSeparator1;
+        private ToolStripMenuItem tspEditarUsuario;
+        private ToolStripMenuItem tspChatBot;
     }
 }
 

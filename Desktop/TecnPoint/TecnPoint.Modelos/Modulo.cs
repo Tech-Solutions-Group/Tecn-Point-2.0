@@ -8,7 +8,7 @@ namespace TecnPoint.Modelos
 {
     public class Modulo
     {
-        public long id_modulo { get; set; }
+        public long idModulo { get; set; }
         public string modulo { get; set; }
     }
 }

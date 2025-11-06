@@ -14,22 +14,22 @@ namespace TecnPoint.Modelos
     {
         public long idChamado;
 
-        public string descricao;
+        public string Descricao;
 
-        public string titulo;
+        public string Titulo;
 
-        public PrioridadeChamado prioridade;
+        public PrioridadeChamado Prioridade;
 
-        public StatusChamado status;
+        public StatusChamado Status;
 
-        public Usuario cliente;
+        public Usuario Cliente;
 
-        public Usuario funcionario;
+        public Usuario Funcionario;
 
-        public Jornada jornada;
+        public Jornada Jornada;
 
-        public Modulo modulo;
+        public Modulo Modulo;
 
-        public List<Conversa> conversas;
+        public List<Conversa> Conversas;
     }
 }
