@@ -1,30 +1,44 @@
-<form>
-  <div class="container">
-    <div class="login-header">
-      <h1 style="font-weight: bold">Lar dos sonhos</h1>
-      <h3 style="color: gray">Entre com suas credenciais para acessar</h3>
-    </div>
-    <div class="login-body">
-      <div class="email input-group-lg">
-        <h3>Email:</h3>
-        <input
-          type="email"
-          class="form-control"
-          placeholder="Email"
-          aria-label="Email"
-        />
+<div *ngIf="!usuarioLogado">
+  <form [formGroup]="usuarioLoginForm" (ngSubmit)="onSubmit()">
+    <div class="container">
+      <div class="login-header">
+        <h1 style="font-weight: bold">Lar dos sonhos</h1>
+        <h3 style="color: gray">Entre com suas credenciais para acessar</h3>
       </div>
-      <div class="senha input-group-lg">
-        <h3>Senha:</h3>
-        <input
-          type="password"
-          class="form-control"
-          placeholder="Senha"
-          aria-label="Senha"
-        />
+      <div class="login-body">
+        <div class="email input-group-lg">
+          <h3>Email:</h3>
+          <input
+            formControlName="email"
+            type="email"
+            class="form-control"
+            placeholder="Email"
+            aria-label="Email"
+          />
+          <!-- <small
+          *ngIf="login.get('email')?.invalid && login.get('email')?.touched"
+        >
+          Email é obrigatório.
+        </small> -->
+        </div>
+        <div class="senha input-group-lg">
+          <h3>Senha:</h3>
+          <input
+            formControlName="senha"
+            type="password"
+            class="form-control"
+            placeholder="Senha"
+            aria-label="Senha"
+          />
+          <!-- <small
+          *ngIf="login.get('senha')?.invalid && login.get('senha')?.touched"
+        >
+          Senha é obrigatório.
+        </small> -->
+        </div>
+        <button type="submit" class="btn btn-success">Entrar</button>
+        <span style="color: gray">Sistema de Atendimento ao Cliente</span>
       </div>
-      <button type="submit" class="btn btn-success">Entrar</button>
-      <span style="color: gray">Sistema de Atendimento ao Cliente</span>
     </div>
-  </div>
-</form>
+  </form>
+</div>

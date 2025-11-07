@@ -180,7 +180,7 @@ export class ChamadoComponent implements OnInit, OnDestroy, AfterViewChecked {
   onSubmit(): void {
     if (this.enviarMensagemForm.invalid) return;
 
-    const usuarioLogado: any = this.usuarioService.usuarioLogado;
+    const usuarioLogado = this.usuarioService.obterUsuarioLogado();
     const id = Number(this.route.snapshot.paramMap.get('id'));
 
     if (!usuarioLogado) {
@@ -214,7 +214,6 @@ export class ChamadoComponent implements OnInit, OnDestroy, AfterViewChecked {
 
     const payload: any = {};
 
-    // Monta o payload dinamicamente com base no campo alterado
     switch (campo) {
       case 'status':
         payload.status = valor;

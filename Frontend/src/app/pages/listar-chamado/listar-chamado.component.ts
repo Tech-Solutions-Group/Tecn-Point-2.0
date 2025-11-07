@@ -60,6 +60,6 @@ export class ListarChamadoComponent implements OnInit {
   }
 
   goToHome(id: number) {
-    this.router.navigate(['/chamados/', id]);
+    this.router.navigate(['app/chamados/', id]);
   }
 }

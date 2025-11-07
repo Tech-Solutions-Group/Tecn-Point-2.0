@@ -43,3 +43,8 @@ button {
 .senha input {
   width: 35rem;
 }
+
+small {
+  font-size: 18px;
+  color: red;
+}

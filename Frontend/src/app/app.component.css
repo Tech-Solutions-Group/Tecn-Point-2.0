@@ -4,81 +4,9 @@
   width: 100%;
 }
 
-.nav-bar {
-  width: 20%;
-  background-color: #8b5cf6;
-  padding-top: 1rem;
-}
-
 .content {
   flex: 1;
-  padding: 5px;
   overflow-y: auto;
-}
-
-.profile {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  margin-top: 1rem;
-  width: 60%;
-}
-
-.avatar {
-  width: 48px;
-  height: 48px;
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 50%;
-}
-
-.info {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-
-.profile h3 {
-  color: aliceblue;
-  margin: 0;
-  font-size: 16px;
-}
-
-.profile span {
-  color: aliceblue;
-  font-size: 13px;
-  opacity: 0.8;
-}
-
-.menu {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  gap: 10px;
-  margin-top: 20px;
-}
-
-.menu-btn {
-  background: white;
-  color: #6b21a8;
-  border: none;
-  border-radius: 10px;
-  padding: 14px;
-  text-align: left;
-  font-weight: 500;
-  cursor: pointer;
-  transition: 0.2s;
-  width: 80%;
-  margin-bottom: 0.5rem;
-}
-
-.menu-btn:hover:not(:disabled) {
-  background: #f3e8ff;
-  transform: scale(1.02);
-}
-
-.menu-btn.disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
 }
 
 .full-width {
