@@ -37,13 +37,7 @@ public class UsuarioService {
         Usuarios usuarioEncontrado = usuarioRepository.findByEmailAndSenha(loginUsuarioDTO.getEmail(), loginUsuarioDTO.getSenha())
                 .orElseThrow(() -> new LoginInvalidoException("Login inválido"));
 
-        UsuarioLogadoDTO usuarioLogadoDTO = UsuarioLogadoDTO.builder()
-                                            .idUsuario(usuarioEncontrado.getIdUsuario())
-                                            .nome(usuarioEncontrado.getNome())
-                                            .email(usuarioEncontrado.getEmail())
-                                            .tipoUsuario(usuarioEncontrado.getTipoUsuario()).build();
-
-        return usuarioLogadoDTO;
+        return buildUsuarioLogado(usuarioEncontrado);
     }
 
     public List<Usuarios> getUsuarios(){
@@ -106,5 +100,13 @@ public class UsuarioService {
                                     .build());
         }
         return listaFuncionariosDTO;
+    }
+
+    private UsuarioLogadoDTO buildUsuarioLogado(Usuarios usuario){
+        return UsuarioLogadoDTO.builder()
+                .idUsuario(usuario.getIdUsuario())
+                .nome(usuario.getNome())
+                .email(usuario.getEmail())
+                .tipoUsuario(usuario.getTipoUsuario()).build();
     }
 }
