@@ -2,6 +2,7 @@ package com.techsolutions.tecnpoint.services;
 
 import com.techsolutions.tecnpoint.DTO.FuncionarioDTO;
 import com.techsolutions.tecnpoint.DTO.LoginUsuarioDTO;
+import com.techsolutions.tecnpoint.DTO.UsuarioLogadoDTO;
 import com.techsolutions.tecnpoint.entities.Usuarios;
 import com.techsolutions.tecnpoint.enums.TipoUsuario;
 import com.techsolutions.tecnpoint.exceptions.DadosLoginInvalidosException;
@@ -24,7 +25,7 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
-    public Usuarios efetuarLogin(LoginUsuarioDTO loginUsuarioDTO){
+    public UsuarioLogadoDTO efetuarLogin(LoginUsuarioDTO loginUsuarioDTO){
         if(loginUsuarioDTO.getEmail() == null || loginUsuarioDTO.getEmail().trim().isEmpty()){
             throw new DadosLoginInvalidosException("O e-mail deve ser informado");
         }
@@ -35,7 +36,14 @@ public class UsuarioService {
 
         Usuarios usuarioEncontrado = usuarioRepository.findByEmailAndSenha(loginUsuarioDTO.getEmail(), loginUsuarioDTO.getSenha())
                 .orElseThrow(() -> new LoginInvalidoException("Login inválido"));
-        return usuarioEncontrado;
+
+        UsuarioLogadoDTO usuarioLogadoDTO = UsuarioLogadoDTO.builder()
+                                            .idUsuario(usuarioEncontrado.getIdUsuario())
+                                            .nome(usuarioEncontrado.getNome())
+                                            .email(usuarioEncontrado.getEmail())
+                                            .tipoUsuario(usuarioEncontrado.getTipoUsuario()).build();
+
+        return usuarioLogadoDTO;
     }
 
     public List<Usuarios> getUsuarios(){

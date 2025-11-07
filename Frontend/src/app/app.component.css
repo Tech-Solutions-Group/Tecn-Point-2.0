@@ -80,3 +80,10 @@
   opacity: 0.5;
   cursor: not-allowed;
 }
+
+.full-width {
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+}

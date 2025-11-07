@@ -1,5 +1,5 @@
 <div class="layout">
-  <div class="nav-bar">
+  <div class="nav-bar" *ngIf="showNavbar">
     <div class="profile" *ngIf="usuarios">
       <div class="avatar"></div>
       <div class="info">
@@ -18,7 +18,7 @@
     </nav>
   </div>
 
-  <div class="content">
+  <div class="content" [ngClass]="{ 'full-width': !showNavbar }">
     <router-outlet></router-outlet>
   </div>
 </div>

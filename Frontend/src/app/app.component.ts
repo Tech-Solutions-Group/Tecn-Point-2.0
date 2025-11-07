@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterOutlet, Router } from '@angular/router';
+import { RouterOutlet, Router, NavigationEnd } from '@angular/router';
 import { Usuario, UsuarioService } from '../app/service/usuario.service';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -14,11 +15,18 @@ import { ReactiveFormsModule } from '@angular/forms';
 export class AppComponent implements OnInit {
   usuarios?: Usuario;
   title = 'Frontend';
+  showNavbar: boolean = true;
 
   constructor(
     readonly usuarioService: UsuarioService,
     readonly router: Router
-  ) {}
+  ) {
+    this.router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe((event: any) => {
+        this.showNavbar = !event.url.includes('/login');
+      });
+  }
 
   ngOnInit(): void {
     this.loadUsuario();

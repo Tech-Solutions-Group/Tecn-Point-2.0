@@ -10,6 +10,18 @@ export interface Usuario {
   tipoUsuario: string;
 }
 
+export interface UsuarioLogin {
+  nome: string;
+  senha: string;
+}
+
+export interface UsuarioLogado {
+  idUsuario: number;
+  nome: string;
+  email: string;
+  tipoUsuario: string;
+}
+
 @Injectable({
   providedIn: 'root',
 })

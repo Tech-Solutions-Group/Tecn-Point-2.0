@@ -17,10 +17,10 @@ export class AbrirChamadoComponent {
   successModalOpen = false;
 
   constructor(
-    private chamadoService: ChamadoService,
-    private usuarioService: UsuarioService,
-    private fb: FormBuilder,
-    private router: Router
+    readonly chamadoService: ChamadoService,
+    readonly usuarioService: UsuarioService,
+    readonly fb: FormBuilder,
+    readonly router: Router
   ) {}
 
   abrirChamadoForm = this.fb.group({

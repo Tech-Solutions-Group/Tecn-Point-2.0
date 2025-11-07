@@ -1,0 +1,45 @@
+form {
+  display: flex;
+  width: 55rem;
+  height: 40rem;
+  border-radius: 20px;
+  background-color: white;
+}
+
+button {
+  margin-top: 1rem;
+  font-size: 2rem;
+  width: 35rem;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-header {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: 4rem;
+}
+
+.login-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.email,
+.senha {
+  display: flex;
+  flex-direction: column;
+}
+
+.email input,
+.senha input {
+  width: 35rem;
+}
