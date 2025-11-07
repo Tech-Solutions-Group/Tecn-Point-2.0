@@ -1,48 +1,43 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterOutlet, Router } from '@angular/router';
-import { Usuario, UsuarioService } from '../app/service/usuario.service';
+import { Router, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs/operators';
+import { RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NavbarComponent } from './shared/navbar/navbar.component';
+import { UsuarioService, UsuarioLogado } from './service/usuario.service';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, CommonModule, ReactiveFormsModule],
+  imports: [RouterOutlet, CommonModule, ReactiveFormsModule, NavbarComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
 export class AppComponent implements OnInit {
-  usuarios?: Usuario;
-  title = 'Frontend';
+  showNavbar = false;
+  usuario?: UsuarioLogado | null;
 
-  constructor(
-    readonly usuarioService: UsuarioService,
-    readonly router: Router
-  ) {}
+  constructor(private usuarioService: UsuarioService, private router: Router) {}
 
-  ngOnInit(): void {
-    this.loadUsuario();
-  }
+  ngOnInit() {
+    if (typeof window !== 'undefined') {
+      (this.usuarioService as any).loadFromStorage?.();
+      if (!(this.usuarioService as any).loadFromStorage) {
+        const saved = this.usuarioService.obterUsuarioLogado();
+        (this.usuarioService as any).setUsuarioLogado?.(saved ?? null);
+      }
+    }
 
-  loadUsuario(id: number = 3): void {
-    this.usuarioService.getUsuarioById(id).subscribe({
-      next: (data) => {
-        this.usuarios = data;
-        this.usuarioService.usuarioLogado = data;
-      },
-      error: (err) => console.error('Erros ao carregar usuario', err),
+    this.usuarioService.usuario$.subscribe((u) => {
+      this.usuario = u;
     });
-  }
 
-  cadChamado() {
-    this.router.navigate(['/open-chamado']);
-  }
-
-  listChamado() {
-    this.router.navigate(['/list-chamado']);
-  }
-
-  listUsuarios() {
-    this.router.navigate(['/list-usuario']);
+    this.router.events
+      .pipe(filter((e): e is NavigationEnd => e instanceof NavigationEnd))
+      .subscribe((event) => {
+        const cleanUrl = event.urlAfterRedirects.split('?')[0].split(';')[0];
+        this.showNavbar = cleanUrl.startsWith('/app');
+      });
   }
 }

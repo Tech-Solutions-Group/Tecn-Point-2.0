@@ -17,10 +17,10 @@ export class AbrirChamadoComponent {
   successModalOpen = false;
 
   constructor(
-    private chamadoService: ChamadoService,
-    private usuarioService: UsuarioService,
-    private fb: FormBuilder,
-    private router: Router
+    readonly chamadoService: ChamadoService,
+    readonly usuarioService: UsuarioService,
+    readonly fb: FormBuilder,
+    readonly router: Router
   ) {}
 
   abrirChamadoForm = this.fb.group({
@@ -32,7 +32,7 @@ export class AbrirChamadoComponent {
   });
 
   onSubmit(): void {
-    const usuarioLogado = this.usuarioService.usuarioLogado;
+    const usuarioLogado = this.usuarioService.obterUsuarioLogado();
 
     if (!usuarioLogado) {
       console.error('Usuário logado não definido');
@@ -61,8 +61,8 @@ export class AbrirChamadoComponent {
         this.abrirChamadoForm.reset();
         this.successModalOpen = true;
       },
-      error: (erro) => {
-        console.error('Erro ao abrir chamado:', erro);
+      error: (err) => {
+        console.error('Erro ao abrir chamado:', err);
       },
     });
   }

@@ -1,24 +1,7 @@
 <div class="layout">
-  <div class="nav-bar">
-    <div class="profile" *ngIf="usuarios">
-      <div class="avatar"></div>
-      <div class="info">
-        <h3>{{ usuarios.nome }}</h3>
-        <span>{{ usuarios.email }}</span>
-      </div>
-    </div>
-    <nav class="menu">
-      <button class="menu-btn" (click)="cadChamado()">Abrir um chamado</button>
-      <button class="menu-btn" (click)="listChamado()">
-        Acompanhar um chamado
-      </button>
-      <button class="menu-btn" (click)="listUsuarios()">
-        Lista de usuários
-      </button>
-    </nav>
-  </div>
+  <app-navbar *ngIf="showNavbar"></app-navbar>
 
-  <div class="content">
+  <div class="content" [ngClass]="{ 'full-width': !showNavbar }">
     <router-outlet></router-outlet>
   </div>
 </div>

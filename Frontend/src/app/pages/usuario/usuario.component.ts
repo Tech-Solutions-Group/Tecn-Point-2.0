@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CadUsuarioComponent } from '../../shared/modal/cad-usuario/cad-usuario.component';
 import { EdtUsuarioComponent } from '../../shared/modal/edt-usuario/edt-usuario.component';
-import { stat } from 'fs';
 
 @Component({
   selector: 'app-usuario',
@@ -25,7 +24,7 @@ export class UsuarioComponent implements OnInit {
   confirmDeleteModalOpen = false;
   usuarioSelecionado: Usuario | null = null;
 
-  constructor(private usuarioService: UsuarioService) {}
+  constructor(readonly usuarioService: UsuarioService) {}
 
   getFuncionario(status: string): string {
     switch (status) {
@@ -65,19 +64,16 @@ export class UsuarioComponent implements OnInit {
     }
   }
 
-  // 🆕 Abre o modal de confirmação
   openConfirmDelete(usuario: Usuario): void {
     this.usuarioSelecionado = usuario;
     this.confirmDeleteModalOpen = true;
   }
 
-  // 🆕 Fecha o modal de confirmação
   closeConfirmDelete(): void {
     this.usuarioSelecionado = null;
     this.confirmDeleteModalOpen = false;
   }
 
-  // 🆕 Confirma a exclusão e chama o service
   confirmDelete(): void {
     if (!this.usuarioSelecionado) return;
 
@@ -85,15 +81,14 @@ export class UsuarioComponent implements OnInit {
       .delUsuario(this.usuarioSelecionado.idUsuario)
       .subscribe({
         next: () => {
-          this.loadUsuarios(); // atualiza tabela
+          this.loadUsuarios();
           this.closeConfirmDelete();
-          this.successModalOpen = true; // mostra modal de sucesso
+          this.successModalOpen = true;
         },
         error: (err) => console.error('Erro ao excluir usuário:', err),
       });
   }
 
-  // Mantém seu modal de sucesso funcionando
   closeSuccess(): void {
     this.successModalOpen = false;
   }
