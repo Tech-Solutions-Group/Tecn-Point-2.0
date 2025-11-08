@@ -64,30 +64,30 @@ export class UsuarioComponent implements OnInit {
     }
   }
 
-  openConfirmDelete(usuario: Usuario): void {
-    this.usuarioSelecionado = usuario;
-    this.confirmDeleteModalOpen = true;
-  }
+  // openConfirmDelete(usuario: Usuario): void {
+  //   this.usuarioSelecionado = usuario;
+  //   this.confirmDeleteModalOpen = true;
+  // }
 
-  closeConfirmDelete(): void {
-    this.usuarioSelecionado = null;
-    this.confirmDeleteModalOpen = false;
-  }
+  // closeConfirmDelete(): void {
+  //   this.usuarioSelecionado = null;
+  //   this.confirmDeleteModalOpen = false;
+  // }
 
-  confirmDelete(): void {
-    if (!this.usuarioSelecionado) return;
+  // confirmDelete(): void {
+  //   if (!this.usuarioSelecionado) return;
 
-    this.usuarioService
-      .delUsuario(this.usuarioSelecionado.idUsuario)
-      .subscribe({
-        next: () => {
-          this.loadUsuarios();
-          this.closeConfirmDelete();
-          this.successModalOpen = true;
-        },
-        error: (err) => console.error('Erro ao excluir usuário:', err),
-      });
-  }
+  //   this.usuarioService
+  //     .delUsuario(this.usuarioSelecionado.idUsuario)
+  //     .subscribe({
+  //       next: () => {
+  //         this.loadUsuarios();
+  //         this.closeConfirmDelete();
+  //         this.successModalOpen = true;
+  //       },
+  //       error: (err) => console.error('Erro ao excluir usuário:', err),
+  //     });
+  // }
 
   closeSuccess(): void {
     this.successModalOpen = false;
