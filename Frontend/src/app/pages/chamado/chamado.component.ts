@@ -36,6 +36,8 @@ export class ChamadoComponent implements OnInit, OnDestroy, AfterViewChecked {
   conversas: Conversa[] = [];
   usuarios: Usuario[] = [];
   funcionarios: number = 0;
+  isClienteLogado: boolean = false;
+
   usuarioLogado = this.usuarioService.obterUsuarioLogado();
 
   private pollingSubscription?: Subscription;
@@ -56,6 +58,9 @@ export class ChamadoComponent implements OnInit, OnDestroy, AfterViewChecked {
   });
 
   ngOnInit(): void {
+    if (this.usuarioLogado && this.usuarioLogado.tipoUsuario === 'CLIENTE') {
+      this.isClienteLogado = true;
+    }
     this.loadChamados();
     this.loadConversas().then(() => this.startPolling());
     this.loadFuncionarios();
