@@ -68,11 +68,11 @@ export class AbrirChamadoComponent {
   }
 
   closeForm(): void {
-    this.router.navigate(['/home']);
+    this.router.navigate(['/app/home']);
   }
 
   closeSuccess() {
     this.successModalOpen = false;
-    this.router.navigate(['/list-chamado']);
+    this.router.navigate(['/app/list-chamado']);
   }
 }

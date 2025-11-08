@@ -27,18 +27,19 @@ export interface UsuarioLogado {
 })
 export class UsuarioService {
   private readonly KEY = 'usuario';
-  usuarioSubject = new BehaviorSubject<UsuarioLogado | null>(null);
   private isBrowser(): boolean {
     return typeof window !== 'undefined' && typeof localStorage !== 'undefined';
   }
 
-  readonly usuario$ = this.usuarioSubject.asObservable();
-  readonly apiUrl = 'http://localhost:8080/usuarios';
+  usuarioSubject = new BehaviorSubject<UsuarioLogado | null>(null);
 
   constructor(readonly http: HttpClient) {
     const savedUser = this.obterUsuarioLogado();
     this.usuarioSubject.next(savedUser);
   }
+
+  readonly usuario$ = this.usuarioSubject.asObservable();
+  readonly apiUrl = 'http://localhost:8080/usuarios';
 
   postUsarioLogin(data: any): Observable<UsuarioLogado> {
     return new Observable((observer) => {

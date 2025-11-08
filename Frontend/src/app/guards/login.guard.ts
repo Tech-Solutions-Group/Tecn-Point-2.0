@@ -9,7 +9,10 @@ export class LoginGuard implements CanActivate {
   constructor(private usuarioService: UsuarioService, private router: Router) {}
 
   canActivate(): boolean {
-    if (this.usuarioService.usuarioLogado()) {
+    if (typeof window === 'undefined') return false;
+
+    const usuario = this.usuarioService.usuarioLogado();
+    if (usuario) {
       this.router.navigate(['/app/home']);
       return false;
     }
