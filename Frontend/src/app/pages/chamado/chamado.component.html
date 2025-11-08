@@ -1,0 +1,142 @@
+<form
+  class="chat bg-light"
+  [formGroup]="enviarMensagemForm"
+  (ngSubmit)="onSubmit()"
+>
+  <div class="conversa" #scrollContainer>
+    <div
+      *ngFor="let conversa of conversas"
+      [ngClass]="{
+        'msg-user': conversa.remetente.idUsuario === usuarioLogado?.idUsuario,
+        'msg-bot': conversa.remetente.idUsuario !== usuarioLogado?.idUsuario
+      }"
+    >
+      <strong>{{ conversa.remetente.nome }}:</strong>
+      <span class="mensagem">{{ conversa.mensagem }}</span>
+      <span class="msg-hora">
+        {{ conversa.dataHoraEnvio | date : "shortTime" }}
+      </span>
+    </div>
+  </div>
+
+  <div class="input-group mb-3 enviar">
+    <input
+      type="text"
+      id="mensagem"
+      formControlName="mensagem"
+      class="form-control"
+      placeholder="Digite uma mensagem"
+      aria-label="Digite uma mensagem"
+      aria-describedby="button-addon2"
+    />
+    <button
+      class="btn btn-outline-success ml-2"
+      type="submit"
+      id="button-addon2"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        fill="currentColor"
+        class="bi bi-send"
+        viewBox="0 0 16 16"
+      >
+        <path
+          d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576zm6.787-8.201L1.591 6.602l4.339 2.76z"
+        />
+      </svg>
+    </button>
+  </div>
+</form>
+<form *ngIf="chamados" class="menu bg-light">
+  <div>
+    <div class="title text-bold">
+      <h1>{{ chamados.titulo }}</h1>
+    </div>
+    <div class="dados-chamado">
+      <div>
+        <span>Status</span>
+        <select
+          class="form-select"
+          (change)="onPatch('status', $any($event.target).value)"
+        >
+          <option value="" disabled selected>
+            {{ getStatusLabel(chamados.status) }}
+          </option>
+          <option value="ABERTO">Aberto</option>
+          <option value="EM_ANDAMENTO">Em andamento</option>
+          <option value="PENDENTE">Pendente</option>
+          <option value="RESOLVIDO">Resolvido</option>
+        </select>
+      </div>
+      <div>
+        <span>Prioridade</span>
+        <select
+          class="form-select"
+          (change)="onPatch('prioridade', $any($event.target).value)"
+        >
+          <option value="" disabled selected>
+            {{ getPrioridadeLabel(chamados.prioridade) }}
+          </option>
+          <option value="ALTA">Alta</option>
+          <option value="MEDIA">Média</option>
+          <option value="BAIXA">Baixa</option>
+        </select>
+      </div>
+      <div>
+        <span>Aberto por</span>
+        <p>{{ chamados.cliente.nome }}</p>
+      </div>
+      <div>
+        <span>Responsável</span>
+        <select
+          class="form-select"
+          (change)="onPatch('idUsuario', $any($event.target).value)"
+        >
+          <option value="" disabled selected>
+            {{ chamados.funcionario.nome }}
+          </option>
+          <option *ngFor="let usuario of usuarios" [value]="usuario.idUsuario">
+            {{ usuario.nome }}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="conteudo">
+      <span>Descrição do Chamado</span>
+      <p>{{ chamados.descricao }}</p>
+    </div>
+    <div class="informacoes-adicionais">
+      <div>
+        <span>Jornada</span>
+        <select
+          class="form-select"
+          (change)="onPatch('idJornada', $any($event.target).value)"
+        >
+          <option value="" disabled selected>
+            {{ chamados.jornada.jornada }}
+          </option>
+          <option value="1">Financeiro</option>
+          <option value="2">Marketing</option>
+          <option value="3">Recursos Humanos</option>
+        </select>
+      </div>
+      <div>
+        <span>Modulo</span>
+        <select
+          class="form-select"
+          (change)="onPatch('idModulo', $any($event.target).value)"
+        >
+          <option value="" disabled selected>
+            {{ chamados.modulo.modulo }}
+          </option>
+          <option value="1">Hardware</option>
+          <option value="2">Software</option>
+          <option value="3">Rede</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <button class="btn btn-danger voltar" (click)="goToHome()">Voltar</button>
+</form>
