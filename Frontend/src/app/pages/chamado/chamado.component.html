@@ -60,6 +60,7 @@
         <select
           class="form-select"
           (change)="onPatch('status', $any($event.target).value)"
+          [disabled]="isClienteLogado"
         >
           <option value="" disabled selected>
             {{ getStatusLabel(chamados.status) }}
@@ -75,6 +76,7 @@
         <select
           class="form-select"
           (change)="onPatch('prioridade', $any($event.target).value)"
+          [disabled]="isClienteLogado"
         >
           <option value="" disabled selected>
             {{ getPrioridadeLabel(chamados.prioridade) }}
@@ -93,6 +95,7 @@
         <select
           class="form-select"
           (change)="onPatch('idUsuario', $any($event.target).value)"
+          [disabled]="isClienteLogado"
         >
           <option value="" disabled selected>
             {{ chamados.funcionario.nome }}
@@ -113,6 +116,7 @@
         <select
           class="form-select"
           (change)="onPatch('idJornada', $any($event.target).value)"
+          [disabled]="isClienteLogado"
         >
           <option value="" disabled selected>
             {{ chamados.jornada.jornada }}
@@ -127,6 +131,7 @@
         <select
           class="form-select"
           (change)="onPatch('idModulo', $any($event.target).value)"
+          [disabled]="isClienteLogado"
         >
           <option value="" disabled selected>
             {{ chamados.modulo.modulo }}
