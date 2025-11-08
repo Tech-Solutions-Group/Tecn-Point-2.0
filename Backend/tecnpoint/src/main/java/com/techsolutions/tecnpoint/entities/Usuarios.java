@@ -18,16 +18,16 @@ public class Usuarios {
     @Column(name = "id_usuario")
     private Long idUsuario;
 
-    @Column(nullable = false, length = 255)
+    @Column(name = "nome", nullable = false, length = 100)
     private String nome;
 
-    @Column(unique = true, nullable = false, length = 255)
+    @Column(name = "email",unique = true, nullable = false, length = 100)
     private String email;
 
-    @Column(nullable = false)
+    @Column(name = "senha",nullable = false, length = 100)
     private String senha;
 
-    @Column(name = "tipo_usuario", nullable = false)
+    @Column(name = "tipo_usuario", nullable = false, length = 15)
     @Enumerated(EnumType.STRING)
     private TipoUsuario tipoUsuario;
 
