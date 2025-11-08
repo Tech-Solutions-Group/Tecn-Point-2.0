@@ -108,64 +108,169 @@ export class ChatBotComponent {
         }
 
       case 'sub_Software':
-        if (['1', '2', '3', '4', '5'].includes(op)) {
+        if (op === '1') {
+          this.adicionarMensagem(
+            `1 - Aplicativo externo não está abrindo.
+Tente reiniciar o computador e abrir o programa novamente.
+Se o problema continuar, pode ser necessário atualizar o sistema ou consultar o suporte.`,
+            'bot'
+          );
+          this.estadoChat = 'final';
+          return this.mensagemFinal;
+        } else if (op === '2') {
+          this.adicionarMensagem(
+            `2 - Lentidão e travamentos frequentes.
+Reinicie o programa ou o computador para eliminar erros temporários.`,
+            'bot'
+          );
+          this.estadoChat = 'final';
+          return this.mensagemFinal;
+        } else if (op === '3') {
+          this.adicionarMensagem(
+            `3 - Mensagem de erro desconhecida.
+Reinicie o aplicativo e o computador. Se persistir, reinstale o programa e contate o suporte.`,
+            'bot'
+          );
+          this.estadoChat = 'final';
+          return this.mensagemFinal;
+        } else if (op === '4') {
+          this.adicionarMensagem(
+            `4 - Programa pedindo senha/código.
+Verifique com o administrador do sistema se você tem acesso autorizado.`,
+            'bot'
+          );
+          this.estadoChat = 'final';
+          return this.mensagemFinal;
+        } else if (op === '5') {
+          this.adicionarMensagem(
+            `5 - Como cadastrar novo usuário.
+Para cadastrar um novo usuário, abra um chamado informando nome, e-mail e tipo de usuário.`,
+            'bot'
+          );
           this.estadoChat = 'final';
           return this.mensagemFinal;
         } else if (op === '6') {
           this.estadoChat = 'confirma_chamado';
-          return `Certo, então seu problema não está na lista. Deseja abrir um chamado?\n1 - Sim\n2 - Não`;
+          return `Certo, então seu problema não está na lista. Deseja abrir um chamado?
+1 - Sim
+2 - Não`;
         } else return 'Opção inválida!';
 
       case 'sub_Hardware':
-        if (['1', '2', '3', '4', '5'].includes(op)) {
+        if (op === '1') {
+          this.adicionarMensagem(
+            `1 - Teclado/mouse.
+Verifique se estão conectados corretamente ou troque de porta USB.`,
+            'bot'
+          );
+          this.estadoChat = 'final';
+          return this.mensagemFinal;
+        } else if (op === '2') {
+          this.adicionarMensagem(
+            `2 - Monitor sem imagem.
+Verifique se o cabo HDMI está bem conectado e se o monitor está ligado.`,
+            'bot'
+          );
+          this.estadoChat = 'final';
+          return this.mensagemFinal;
+        } else if (op === '3') {
+          this.adicionarMensagem(
+            `3 - Impressora não imprime.
+Verifique se a impressora está ligada, conectada e com papel/tinta.`,
+            'bot'
+          );
+          this.estadoChat = 'final';
+          return this.mensagemFinal;
+        } else if (op === '4') {
+          this.adicionarMensagem(
+            `4 - Falhas no som.
+Verifique se o volume está ativado e se o dispositivo correto está selecionado.`,
+            'bot'
+          );
+          this.estadoChat = 'final';
+          return this.mensagemFinal;
+        } else if (op === '5') {
+          this.adicionarMensagem(
+            `5 - Superaquecimento.
+Verifique se a ventoinha está funcionando. Caso contrário, abra um chamado.`,
+            'bot'
+          );
           this.estadoChat = 'final';
           return this.mensagemFinal;
         } else if (op === '6') {
           this.estadoChat = 'confirma_chamado';
-          return `Certo, então seu problema não está na lista. Deseja abrir um chamado?\n1 - Sim\n2 - Não`;
+          return `Certo, então seu problema não está na lista. Deseja abrir um chamado?
+1 - Sim
+2 - Não`;
         } else return 'Opção inválida!';
 
       case 'sub_Rede':
-        if (['1', '2', '3', '4', '5'].includes(op)) {
+        if (op === '1') {
+          this.adicionarMensagem(
+            `1 - Sem conexão.
+Tente reconectar-se ao Wi-Fi ou reconectar o cabo de rede.`,
+            'bot'
+          );
+          this.estadoChat = 'final';
+          return this.mensagemFinal;
+        } else if (op === '2') {
+          this.adicionarMensagem(
+            `2 - Conexão instável.
+Aproxime-se do roteador ou reconecte o cabo de rede.`,
+            'bot'
+          );
+          this.estadoChat = 'final';
+          return this.mensagemFinal;
+        } else if (op === '3') {
+          this.adicionarMensagem(
+            `3 - Acesso negado a sites.
+Teste outro navegador e verifique restrições no antivírus.`,
+            'bot'
+          );
+          this.estadoChat = 'final';
+          return this.mensagemFinal;
+        } else if (op === '4') {
+          this.adicionarMensagem(
+            `4 - Internet lenta.
+Desconecte dispositivos ociosos e reinicie o roteador.`,
+            'bot'
+          );
+          this.estadoChat = 'final';
+          return this.mensagemFinal;
+        } else if (op === '5') {
+          this.adicionarMensagem(
+            `5 - Ícone de rede sumiu.
+Ative o Wi-Fi ou reconecte o cabo de rede.`,
+            'bot'
+          );
           this.estadoChat = 'final';
           return this.mensagemFinal;
         } else if (op === '6') {
           this.estadoChat = 'confirma_chamado';
-          return `Certo, então seu problema não está na lista. Deseja abrir um chamado?\n1 - Sim\n2 - Não`;
+          return `Certo, então seu problema não está na lista. Deseja abrir um chamado?
+1 - Sim
+2 - Não`;
         } else return 'Opção inválida!';
 
       case 'confirma_chamado':
         if (op === '1') {
           this.adicionarMensagem('Abrindo um chamado...', 'bot');
-
-          setTimeout(() => {
-            this.router.navigate(['/app/open-chamado']);
-          }, 1000);
+          setTimeout(() => this.router.navigate(['/app/open-chamado']), 1000);
           return '';
         } else if (op === '2') {
           this.adicionarMensagem('Tudo bem. Se precisar, estou aqui!', 'bot');
-
-          setTimeout(() => {
-            this.router.navigate(['/app/home']);
-          }, 2000);
+          setTimeout(() => this.router.navigate(['/app/home']), 2000);
           return '';
         } else return 'Opção inválida! Digite 1 ou 2.';
 
       case 'final':
         if (op === '1') {
           this.adicionarMensagem('Abrindo um chamado...', 'bot');
-
-          setTimeout(() => {
-            this.router.navigate(['/app/open-chamado']);
-          }, 1000);
-
+          setTimeout(() => this.router.navigate(['/app/open-chamado']), 1000);
           return '';
         } else if (op === '2') {
           this.adicionarMensagem('Tudo bem, tenha um ótimo dia!', 'bot');
-
-          setTimeout(() => {
-            this.router.navigate(['/app/home']);
-          }, 2000);
+          setTimeout(() => this.router.navigate(['/app/home']), 2000);
           return '';
         } else {
           return 'Não entendi, poderia tentar novamente?';
