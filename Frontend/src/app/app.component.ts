@@ -16,6 +16,7 @@ import { UsuarioService, UsuarioLogado } from './service/usuario.service';
 })
 export class AppComponent implements OnInit {
   showNavbar = false;
+  title = 'frontend';
   usuario?: UsuarioLogado | null;
 
   constructor(private usuarioService: UsuarioService, private router: Router) {}

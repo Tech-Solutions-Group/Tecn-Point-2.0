@@ -15,11 +15,14 @@
             placeholder="Email"
             aria-label="Email"
           />
-          <!-- <small
-          *ngIf="login.get('email')?.invalid && login.get('email')?.touched"
-        >
-          Email é obrigatório.
-        </small> -->
+          <small
+            *ngIf="
+              usuarioLoginForm.get('email')?.invalid &&
+              usuarioLoginForm.get('email')?.touched
+            "
+          >
+            Email é obrigatório.
+          </small>
         </div>
         <div class="senha input-group-lg">
           <h3>Senha:</h3>
@@ -30,11 +33,17 @@
             placeholder="Senha"
             aria-label="Senha"
           />
-          <!-- <small
-          *ngIf="login.get('senha')?.invalid && login.get('senha')?.touched"
-        >
-          Senha é obrigatório.
-        </small> -->
+          <small
+            *ngIf="
+              usuarioLoginForm.get('senha')?.invalid &&
+              usuarioLoginForm.get('senha')?.touched
+            "
+          >
+            Senha é obrigatório.
+          </small>
+        </div>
+        <div *ngIf="loginInvalido" class="alert alert-danger text-center">
+          {{ loginInvalido }}
         </div>
         <button type="submit" class="btn btn-success">Entrar</button>
         <span style="color: gray">Sistema de Atendimento ao Cliente</span>
