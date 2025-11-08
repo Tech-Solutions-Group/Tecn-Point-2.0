@@ -30,6 +30,9 @@
 }
 
 .menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   width: 35rem;
   height: 57rem;
   border: 2px solid gainsboro;
@@ -113,4 +116,45 @@
 
 .menu select:hover {
   cursor: pointer;
+}
+
+.conversa > div {
+  margin-bottom: 8px;
+  word-wrap: break-word;
+  max-width: 70%;
+  padding: 10px 14px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.msg-user {
+  align-self: flex-end;
+  background-color: #d1fae5;
+  color: #064e3b;
+  border-top-right-radius: 0;
+}
+
+.msg-bot {
+  align-self: flex-start;
+  background-color: #f3e8ff;
+  color: #581c87;
+  border-top-left-radius: 0;
+}
+
+.mensagem {
+  font-size: 0.95rem;
+}
+
+.msg-hora {
+  text-align: right;
+  font-size: 0.7rem;
+  color: #777;
+  margin-top: 4px;
+}
+
+.voltar {
+  margin-bottom: 1rem;
+  margin-left: 1rem;
+  width: 8rem;
 }

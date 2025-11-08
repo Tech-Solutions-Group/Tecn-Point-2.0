@@ -33,10 +33,29 @@
   </div>
 
   <nav class="menu">
-    <button class="menu-btn" (click)="cadChamado()">Abrir um chamado</button>
+    <button
+      class="menu-btn"
+      (click)="cadChamado()"
+      *ngIf="usuarioService.obterUsuarioLogado()!.tipoUsuario === 'CLIENTE'"
+    >
+      Abrir um chamado
+    </button>
     <button class="menu-btn" (click)="listChamado()">
       Acompanhar um chamado
     </button>
-    <button class="menu-btn" (click)="listUsuarios()">Lista de usuários</button>
+    <button
+      class="menu-btn"
+      (click)="listUsuarios()"
+      *ngIf="usuarioService.obterUsuarioLogado()!.tipoUsuario === 'FUNCIONARIO'"
+    >
+      Lista de usuários
+    </button>
+    <button
+      class="menu-btn"
+      (click)="chatBot()"
+      *ngIf="usuarioService.obterUsuarioLogado()!.tipoUsuario === 'CLIENTE'"
+    >
+      Chat-Bot
+    </button>
   </nav>
 </nav>

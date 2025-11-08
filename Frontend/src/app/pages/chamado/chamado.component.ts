@@ -21,7 +21,7 @@ import {
 } from '../../service/conversa.service';
 import { Chamado, ChamadoService } from '../../service/chamado.service';
 import { Usuario, UsuarioService } from '../../service/usuario.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-chamado',
@@ -36,6 +36,7 @@ export class ChamadoComponent implements OnInit, OnDestroy, AfterViewChecked {
   conversas: Conversa[] = [];
   usuarios: Usuario[] = [];
   funcionarios: number = 0;
+  usuarioLogado = this.usuarioService.obterUsuarioLogado();
 
   private pollingSubscription?: Subscription;
   private lastConversaId = 0;
@@ -46,6 +47,7 @@ export class ChamadoComponent implements OnInit, OnDestroy, AfterViewChecked {
     readonly chamadoService: ChamadoService,
     readonly conversaService: ConversaService,
     readonly usuarioService: UsuarioService,
+    readonly router: Router,
     readonly fb: FormBuilder
   ) {}
 
@@ -268,5 +270,9 @@ export class ChamadoComponent implements OnInit, OnDestroy, AfterViewChecked {
       default:
         return prioridade;
     }
+  }
+
+  goToHome() {
+    this.router.navigate(['/app/list-chamado']);
   }
 }

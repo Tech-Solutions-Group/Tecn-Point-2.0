@@ -39,6 +39,10 @@ export class ChamadoService {
     return this.http.get<Chamado>(`${this.apiUrl}/${id}`);
   }
 
+  getChamadosByCliente(id: number): Observable<Chamado[]> {
+    return this.http.get<Chamado[]>(`${this.apiUrl}/chamados-cliente/${id}`);
+  }
+
   postChamado(data: AberturaChamado): Observable<Chamado> {
     return this.http.post<Chamado>(`${this.apiUrl}/abrir-chamado`, data);
   }
