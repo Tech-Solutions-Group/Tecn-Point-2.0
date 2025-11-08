@@ -19,40 +19,39 @@ public class Chamados {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idChamado")
+    @Column(name = "id_chamado")
     private Long idChamado;
 
-    @Column(nullable = false, columnDefinition = "TEXT")
+    @Column(name = "descricao", nullable = false, columnDefinition = "TEXT")
     private String descricao;
 
-    @Column(nullable = false, length = 100)
+    @Column(name = "titulo", nullable = false, length = 100)
     private String titulo;
 
-    // Constraints dos campos
-    @Column(nullable = false, length = 5)
+    @Column(name = "prioridade", nullable = false, length = 5)
     @Enumerated(EnumType.STRING)
     private PrioridadeChamado prioridade;
 
-    @Column(nullable = false, length = 15)
+    @Column(name = "status", nullable = false, length = 15)
     @Enumerated(EnumType.STRING)
     private StatusChamado status;
 
     // Usuário que abriu o chamado
     @ManyToOne
-    @JoinColumn(name = "fk_idCliente", nullable = false)
+    @JoinColumn(name = "fk_id_cliente", nullable = false)
     private Usuarios cliente;
 
     // Usuário que vai atender o chamado
     @ManyToOne
-    @JoinColumn(name = "fk_idFuncionario", nullable = false)
+    @JoinColumn(name = "fk_id_funcionario", nullable = false)
     private Usuarios funcionario;
 
     @ManyToOne
-    @JoinColumn(name = "fk_idJornada", nullable = false)
+    @JoinColumn(name = "fk_id_jornada", nullable = false)
     private Jornada jornada;
 
     @ManyToOne
-    @JoinColumn(name = "fk_idModulo", nullable = false)
+    @JoinColumn(name = "fk_id_modulo", nullable = false)
     private Modulo modulo;
 
     @OneToMany(mappedBy = "chamado")

@@ -13,6 +13,8 @@ public class Modulo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    @Column(name = "id_modulo")
     private Long idModulo;
 
     private String modulo;

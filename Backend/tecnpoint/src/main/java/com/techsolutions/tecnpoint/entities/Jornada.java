@@ -12,6 +12,7 @@ public class Jornada {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_jornada")
     private Long idJornada;
 
     private String jornada;
