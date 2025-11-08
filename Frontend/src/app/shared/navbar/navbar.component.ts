@@ -40,4 +40,8 @@ export class NavbarComponent implements OnInit {
   listUsuarios() {
     this.router.navigate(['/app/list-usuario']);
   }
+
+  chatBot() {
+    this.router.navigate(['/app/chat-bot']);
+  }
 }

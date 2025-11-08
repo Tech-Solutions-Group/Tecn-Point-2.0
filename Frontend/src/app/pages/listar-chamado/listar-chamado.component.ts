@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Chamado, ChamadoService } from '../../service/chamado.service';
-
+import { UsuarioLogado, UsuarioService } from '../../service/usuario.service';
 @Component({
   selector: 'app-listar-chamado',
   standalone: true,
@@ -15,16 +15,29 @@ export class ListarChamadoComponent implements OnInit {
   chamado!: Chamado;
   chamados: Chamado[] = [];
 
+  idUsuario: number = this.usuarioService.obterUsuarioLogado()!.idUsuario;
+  tipoUsuario: string = this.usuarioService.obterUsuarioLogado()!.tipoUsuario;
+
   constructor(
     readonly chamadoService: ChamadoService,
+    readonly usuarioService: UsuarioService,
     readonly router: Router
   ) {}
 
   ngOnInit(): void {
-    this.loadChamados();
+    return this.tipoUsuario === 'CLIENTE'
+      ? this.chamadosCliente()
+      : this.chamadosFuncionario();
   }
 
-  loadChamados(): void {
+  chamadosCliente() {
+    this.chamadoService.getChamadosByCliente(this.idUsuario).subscribe({
+      next: (data) => (this.chamados = data),
+      error: (err) => console.error('Erro ao carregar chamados', err),
+    });
+  }
+
+  chamadosFuncionario() {
     this.chamadoService.getAllChamados().subscribe({
       next: (data) => (this.chamados = data),
       error: (err) => console.error('Erro ao carregar chamados', err),

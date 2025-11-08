@@ -10,6 +10,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { LoginGuard } from './guards/login.guard';
 import { RoleGuard } from './guards/role.guard';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { ChatBotComponent } from './pages/chat-bot/chat-bot.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/auth/login', pathMatch: 'full' },
@@ -41,6 +42,12 @@ export const routes: Routes = [
       {
         path: 'open-chamado',
         component: AbrirChamadoComponent,
+        canActivate: [RoleGuard],
+        data: { roles: ['CLIENTE'] },
+      },
+      {
+        path: 'chat-bot',
+        component: ChatBotComponent,
         canActivate: [RoleGuard],
         data: { roles: ['CLIENTE'] },
       },

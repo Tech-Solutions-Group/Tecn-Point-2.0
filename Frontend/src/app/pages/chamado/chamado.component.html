@@ -4,11 +4,17 @@
   (ngSubmit)="onSubmit()"
 >
   <div class="conversa" #scrollContainer>
-    <div *ngFor="let conversa of conversas">
-      <strong>{{ conversa.remetente.nome }}: </strong>
-      <span>
-        {{ conversa.mensagem }}
-        {{ conversa.dataHoraEnvio | date : "short" }}
+    <div
+      *ngFor="let conversa of conversas"
+      [ngClass]="{
+        'msg-user': conversa.remetente.idUsuario === usuarioLogado?.idUsuario,
+        'msg-bot': conversa.remetente.idUsuario !== usuarioLogado?.idUsuario
+      }"
+    >
+      <strong>{{ conversa.remetente.nome }}:</strong>
+      <span class="mensagem">{{ conversa.mensagem }}</span>
+      <span class="msg-hora">
+        {{ conversa.dataHoraEnvio | date : "shortTime" }}
       </span>
     </div>
   </div>

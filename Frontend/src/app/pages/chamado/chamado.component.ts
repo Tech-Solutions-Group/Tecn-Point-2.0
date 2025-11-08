@@ -36,6 +36,7 @@ export class ChamadoComponent implements OnInit, OnDestroy, AfterViewChecked {
   conversas: Conversa[] = [];
   usuarios: Usuario[] = [];
   funcionarios: number = 0;
+  usuarioLogado = this.usuarioService.obterUsuarioLogado();
 
   private pollingSubscription?: Subscription;
   private lastConversaId = 0;
