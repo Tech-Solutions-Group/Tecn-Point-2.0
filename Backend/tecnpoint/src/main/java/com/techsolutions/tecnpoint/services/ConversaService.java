@@ -1,15 +1,15 @@
 package com.techsolutions.tecnpoint.services;
 
-import com.techsolutions.tecnpoint.DTO.BuscarMensagensDTO;
-import com.techsolutions.tecnpoint.DTO.MensagemDTO;
-import com.techsolutions.tecnpoint.DTO.ConversaDTO;
-import com.techsolutions.tecnpoint.DTO.UsuarioDTO;
+import com.techsolutions.tecnpoint.entities.DTO.BuscarMensagensDTO;
+import com.techsolutions.tecnpoint.entities.DTO.MensagemDTO;
+import com.techsolutions.tecnpoint.entities.DTO.ConversaDTO;
+import com.techsolutions.tecnpoint.entities.DTO.UsuarioDTO;
 import com.techsolutions.tecnpoint.entities.Chamados;
 import com.techsolutions.tecnpoint.entities.Conversa;
 import com.techsolutions.tecnpoint.entities.Usuarios;
-import com.techsolutions.tecnpoint.exceptions.ChamadoNaoEncontradoException;
-import com.techsolutions.tecnpoint.exceptions.DadosConversaInvalidosException;
-import com.techsolutions.tecnpoint.exceptions.UsuarioNaoEncontradoException;
+import com.techsolutions.tecnpoint.infrastructure.exceptions.ChamadoNaoEncontradoException;
+import com.techsolutions.tecnpoint.infrastructure.exceptions.DadosConversaInvalidosException;
+import com.techsolutions.tecnpoint.infrastructure.exceptions.UsuarioNaoEncontradoException;
 import com.techsolutions.tecnpoint.repositories.ChamadoRepository;
 import com.techsolutions.tecnpoint.repositories.ConversaRepository;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package com.techsolutions.tecnpoint.enums;
+package com.techsolutions.tecnpoint.entities.enums;
 
 public enum StatusChamado {
     ABERTO,

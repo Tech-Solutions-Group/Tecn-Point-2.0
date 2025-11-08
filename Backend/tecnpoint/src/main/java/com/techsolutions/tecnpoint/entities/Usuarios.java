@@ -1,7 +1,7 @@
 package com.techsolutions.tecnpoint.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.techsolutions.tecnpoint.enums.TipoUsuario;
+import com.techsolutions.tecnpoint.entities.enums.TipoUsuario;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

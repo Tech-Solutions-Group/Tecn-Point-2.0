@@ -1,8 +1,8 @@
 package com.techsolutions.tecnpoint.controllers;
 
-import com.techsolutions.tecnpoint.DTO.AberturaChamadoDTO;
-import com.techsolutions.tecnpoint.DTO.AtualizaChamadoDTO;
-import com.techsolutions.tecnpoint.DTO.ChamadoDTO;
+import com.techsolutions.tecnpoint.entities.DTO.AberturaChamadoDTO;
+import com.techsolutions.tecnpoint.entities.DTO.AtualizaChamadoDTO;
+import com.techsolutions.tecnpoint.entities.DTO.ChamadoDTO;
 import com.techsolutions.tecnpoint.services.ChamadoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

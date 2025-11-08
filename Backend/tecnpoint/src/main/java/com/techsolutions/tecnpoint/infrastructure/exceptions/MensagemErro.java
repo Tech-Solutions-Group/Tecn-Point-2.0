@@ -1,4 +1,4 @@
-package com.techsolutions.tecnpoint.exceptions;
+package com.techsolutions.tecnpoint.infrastructure.exceptions;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

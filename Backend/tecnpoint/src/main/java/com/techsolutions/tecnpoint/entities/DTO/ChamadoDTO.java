@@ -1,9 +1,9 @@
-package com.techsolutions.tecnpoint.DTO;
+package com.techsolutions.tecnpoint.entities.DTO;
 
 import com.techsolutions.tecnpoint.entities.Jornada;
 import com.techsolutions.tecnpoint.entities.Modulo;
-import com.techsolutions.tecnpoint.enums.PrioridadeChamado;
-import com.techsolutions.tecnpoint.enums.StatusChamado;
+import com.techsolutions.tecnpoint.entities.enums.PrioridadeChamado;
+import com.techsolutions.tecnpoint.entities.enums.StatusChamado;
 import lombok.Builder;
 import lombok.Getter;
 

@@ -1,14 +1,14 @@
 package com.techsolutions.tecnpoint.controllers;
 
-import com.techsolutions.tecnpoint.DTO.FuncionarioDTO;
-import com.techsolutions.tecnpoint.DTO.LoginUsuarioDTO;
-import com.techsolutions.tecnpoint.DTO.UsuarioLogadoDTO;
+import com.techsolutions.tecnpoint.entities.DTO.FuncionarioDTO;
+import com.techsolutions.tecnpoint.entities.DTO.LoginUsuarioDTO;
+import com.techsolutions.tecnpoint.entities.DTO.UsuarioLogadoDTO;
 import com.techsolutions.tecnpoint.entities.Usuarios;
 import com.techsolutions.tecnpoint.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.techsolutions.tecnpoint.DTO.AtualizaUsuarioDTO;
+import com.techsolutions.tecnpoint.entities.DTO.AtualizaUsuarioDTO;
 import java.util.List;
 
 @RestController

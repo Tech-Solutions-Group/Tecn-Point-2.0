@@ -1,8 +1,8 @@
 package com.techsolutions.tecnpoint.controllers;
 
-import com.techsolutions.tecnpoint.DTO.BuscarMensagensDTO;
-import com.techsolutions.tecnpoint.DTO.MensagemDTO;
-import com.techsolutions.tecnpoint.DTO.ConversaDTO;
+import com.techsolutions.tecnpoint.entities.DTO.BuscarMensagensDTO;
+import com.techsolutions.tecnpoint.entities.DTO.MensagemDTO;
+import com.techsolutions.tecnpoint.entities.DTO.ConversaDTO;
 import com.techsolutions.tecnpoint.services.ConversaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

@@ -1,16 +1,16 @@
 package com.techsolutions.tecnpoint.services;
 
-import com.techsolutions.tecnpoint.DTO.FuncionarioDTO;
-import com.techsolutions.tecnpoint.DTO.LoginUsuarioDTO;
-import com.techsolutions.tecnpoint.DTO.UsuarioLogadoDTO;
+import com.techsolutions.tecnpoint.entities.DTO.FuncionarioDTO;
+import com.techsolutions.tecnpoint.entities.DTO.LoginUsuarioDTO;
+import com.techsolutions.tecnpoint.entities.DTO.UsuarioLogadoDTO;
 import com.techsolutions.tecnpoint.entities.Usuarios;
-import com.techsolutions.tecnpoint.enums.TipoUsuario;
-import com.techsolutions.tecnpoint.exceptions.DadosLoginInvalidosException;
-import com.techsolutions.tecnpoint.exceptions.EmailExistenteException;
-import com.techsolutions.tecnpoint.exceptions.LoginInvalidoException;
-import com.techsolutions.tecnpoint.exceptions.UsuarioNaoEncontradoException;
+import com.techsolutions.tecnpoint.entities.enums.TipoUsuario;
+import com.techsolutions.tecnpoint.infrastructure.exceptions.DadosLoginInvalidosException;
+import com.techsolutions.tecnpoint.infrastructure.exceptions.EmailExistenteException;
+import com.techsolutions.tecnpoint.infrastructure.exceptions.LoginInvalidoException;
+import com.techsolutions.tecnpoint.infrastructure.exceptions.UsuarioNaoEncontradoException;
 import com.techsolutions.tecnpoint.repositories.UsuarioRepository;
-import com.techsolutions.tecnpoint.DTO.AtualizaUsuarioDTO;
+import com.techsolutions.tecnpoint.entities.DTO.AtualizaUsuarioDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;

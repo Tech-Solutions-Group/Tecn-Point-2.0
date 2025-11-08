@@ -1,9 +1,13 @@
 package com.techsolutions.tecnpoint.services;
 
-import com.techsolutions.tecnpoint.DTO.*;
 import com.techsolutions.tecnpoint.entities.*;
-import com.techsolutions.tecnpoint.enums.*;
-import com.techsolutions.tecnpoint.exceptions.*;
+import com.techsolutions.tecnpoint.entities.DTO.AberturaChamadoDTO;
+import com.techsolutions.tecnpoint.entities.DTO.AtualizaChamadoDTO;
+import com.techsolutions.tecnpoint.entities.DTO.ChamadoDTO;
+import com.techsolutions.tecnpoint.entities.DTO.UsuarioDTO;
+import com.techsolutions.tecnpoint.entities.enums.StatusChamado;
+import com.techsolutions.tecnpoint.entities.enums.TipoUsuario;
+import com.techsolutions.tecnpoint.infrastructure.exceptions.*;
 import com.techsolutions.tecnpoint.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;

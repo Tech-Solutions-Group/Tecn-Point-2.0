@@ -1,4 +1,4 @@
-package com.techsolutions.tecnpoint.exceptions;
+package com.techsolutions.tecnpoint.infrastructure.exceptions;
 
 public class ChamadoNaoEncontradoException extends RuntimeException {
     public ChamadoNaoEncontradoException(String message) {

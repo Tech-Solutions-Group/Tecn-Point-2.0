@@ -1,4 +1,4 @@
-package com.techsolutions.tecnpoint.DTO;
+package com.techsolutions.tecnpoint.entities.DTO;
 
 import lombok.Getter;
 

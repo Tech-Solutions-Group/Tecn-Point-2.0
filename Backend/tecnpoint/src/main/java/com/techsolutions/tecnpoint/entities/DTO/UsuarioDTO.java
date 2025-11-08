@@ -1,6 +1,6 @@
-package com.techsolutions.tecnpoint.DTO;
+package com.techsolutions.tecnpoint.entities.DTO;
 
-import com.techsolutions.tecnpoint.enums.TipoUsuario;
+import com.techsolutions.tecnpoint.entities.enums.TipoUsuario;
 import lombok.Builder;
 import lombok.Getter;
 

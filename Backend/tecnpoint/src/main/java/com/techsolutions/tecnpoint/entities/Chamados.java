@@ -1,8 +1,8 @@
 package com.techsolutions.tecnpoint.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.techsolutions.tecnpoint.enums.PrioridadeChamado;
-import com.techsolutions.tecnpoint.enums.StatusChamado;
+import com.techsolutions.tecnpoint.entities.enums.PrioridadeChamado;
+import com.techsolutions.tecnpoint.entities.enums.StatusChamado;
 import jakarta.persistence.*;
 import lombok.*;
 
