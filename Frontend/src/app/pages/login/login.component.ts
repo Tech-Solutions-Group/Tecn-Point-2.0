@@ -8,6 +8,7 @@ import {
 import { UsuarioLogin, UsuarioService } from '../../service/usuario.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { iif } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -19,6 +20,7 @@ import { CommonModule } from '@angular/common';
 export class LoginComponent implements OnInit {
   formInvalid = false;
   usuarioLogado = false;
+  loginInvalido: string | null = null;
 
   constructor(
     readonly usuarioService: UsuarioService,
@@ -42,6 +44,7 @@ export class LoginComponent implements OnInit {
     }
 
     this.formInvalid = false;
+    this.loginInvalido = null;
 
     const dados: UsuarioLogin = {
       email: this.usuarioLoginForm.value.email!,
@@ -54,6 +57,7 @@ export class LoginComponent implements OnInit {
       },
       error: (err) => {
         console.error('Erro ao logar', err);
+        this.loginInvalido = 'Dados incorretos. Tente novamente.';
       },
     });
   }

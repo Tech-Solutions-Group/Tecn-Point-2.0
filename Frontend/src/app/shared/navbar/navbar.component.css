@@ -23,11 +23,8 @@
   width: 50%;
 }
 
-.avatar {
-  width: 48px;
-  height: 48px;
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 50%;
+#avatar {
+  color: rgba(255, 255, 255, 0.4);
 }
 
 .info {
