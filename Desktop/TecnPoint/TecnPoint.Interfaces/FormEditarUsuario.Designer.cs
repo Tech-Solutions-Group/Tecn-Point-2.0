@@ -172,6 +172,7 @@
             Name = "FormEditarUsuario";
             Text = "FormEditarUsuario";
             Load += FormEditarUsuario_Load;
+            Resize += FormEditarUsuario_Resize;
             ((System.ComponentModel.ISupportInitialize)errorDadosAtualizarUsuario).EndInit();
             ResumeLayout(false);
             PerformLayout();

@@ -39,7 +39,6 @@
             btnVoltar = new Button();
             pbInformacaoEditar = new PictureBox();
             lblInfoEditar = new Label();
-            flpEditarUsuario = new FlowLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)dgvUsuarios).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbInformacaoEditar).BeginInit();
             SuspendLayout();
@@ -81,6 +80,7 @@
             dgvUsuarios.Size = new Size(776, 531);
             dgvUsuarios.TabIndex = 0;
             dgvUsuarios.CellClick += dgvUsuarios_CellClick;
+            dgvUsuarios.KeyDown += dgvUsuarios_KeyDown;
             // 
             // nome
             // 
@@ -148,14 +148,6 @@
             lblInfoEditar.Text = "Clique no ícone de edição na tabela para editar o usuário desejado";
             lblInfoEditar.Visible = false;
             // 
-            // flpEditarUsuario
-            // 
-            flpEditarUsuario.Location = new Point(0, 0);
-            flpEditarUsuario.Name = "flpEditarUsuario";
-            flpEditarUsuario.Size = new Size(896, 645);
-            flpEditarUsuario.TabIndex = 4;
-            flpEditarUsuario.Visible = false;
-            // 
             // FormListaUsuarios
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -166,11 +158,11 @@
             Controls.Add(pbInformacaoEditar);
             Controls.Add(btnVoltar);
             Controls.Add(dgvUsuarios);
-            Controls.Add(flpEditarUsuario);
             FormBorderStyle = FormBorderStyle.None;
             Name = "FormListaUsuarios";
             Text = "FormListaUsuarios";
             Load += FormListaUsuarios_Load;
+            Resize += FormListaUsuarios_Resize;
             ((System.ComponentModel.ISupportInitialize)dgvUsuarios).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbInformacaoEditar).EndInit();
             ResumeLayout(false);
@@ -187,6 +179,5 @@
         private DataGridViewTextBoxColumn Email;
         private DataGridViewTextBoxColumn tipoUsuario;
         private DataGridViewImageColumn Editar;
-        private FlowLayoutPanel flpEditarUsuario;
     }
 }

@@ -80,6 +80,7 @@ namespace TecnPoint.Interfaces
                     void AbrirDetalhes(ChamadoDTO chamadoSelecionado)
                     {
                         Usuario usuarioParam = new Usuario(); usuarioParam = _usuarioLogado; 
+
                         FormDetalhesChamado detalhesChamado = new FormDetalhesChamado(chamadoSelecionado, usuarioParam, frmMDIPrincipal, _modoDaltonico); 
                         detalhesChamado.TopLevel = false; 
                         detalhesChamado.Dock = DockStyle.Fill; 

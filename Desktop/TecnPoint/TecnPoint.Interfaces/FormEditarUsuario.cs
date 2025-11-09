@@ -30,6 +30,7 @@ namespace TecnPoint.Interfaces
             this._modoDaltonico = modoDaltonico;
             InitializeComponent();
             ModoDaltonico();
+            CentralizarControles();
         }
 
         private async void btnSalvar_Click(object sender, EventArgs e)
@@ -56,6 +57,7 @@ namespace TecnPoint.Interfaces
                                             MessageBoxButtons.OK,
                                             MessageBoxIcon.Information);
                         // Voltar para a tabela de usuários
+                        frmMDIPrincipal.CarregaListaUsuario();
                     }
                 }
                 catch (Exception ex)
@@ -85,6 +87,7 @@ namespace TecnPoint.Interfaces
         private void FormEditarUsuario_Load(object sender, EventArgs e)
         {
             PreencherDadosParaEdicao();
+            CentralizarControles();
         }
 
         private bool VerificaAtualizacao()
@@ -190,6 +193,95 @@ namespace TecnPoint.Interfaces
         private void btnVoltar_Click(object sender, EventArgs e)
         {
             frmMDIPrincipal.CarregaFormLogo();
+        }
+
+        private void CentralizarControles()
+        {
+            if (this.ClientSize.Width == 0 || this.ClientSize.Height == 0) return;
+
+            // Calcular o centro horizontal do formulário
+            int centroHorizontal = this.ClientSize.Width / 2;
+
+            // Largura padrão dos controles
+            int larguraControles = 338;
+            int posicaoEsquerda = centroHorizontal - (larguraControles / 2);
+
+            // Centralizar labels e controles horizontalmente
+            lblNome.Left = posicaoEsquerda;
+            txtNome.Left = posicaoEsquerda;
+            txtNome.Width = larguraControles;
+
+            lblEmail.Left = posicaoEsquerda;
+            txtEmail.Left = posicaoEsquerda;
+            txtEmail.Width = larguraControles;
+
+            lblSenha.Left = posicaoEsquerda;
+            txtSenha.Left = posicaoEsquerda;
+            txtSenha.Width = larguraControles;
+
+            lblConfirmarSenha.Left = posicaoEsquerda;
+            txtConfirmaSenha.Left = posicaoEsquerda;
+            txtConfirmaSenha.Width = larguraControles;
+
+            // Centralizar botões
+            int espacoEntreBotoes = 20;
+            int larguraTotalBotoes = btnVoltar.Width + espacoEntreBotoes + btnSalvar.Width;
+            int posicaoInicioBotoes = centroHorizontal - (larguraTotalBotoes / 2);
+
+            btnVoltar.Left = posicaoInicioBotoes;
+            btnSalvar.Left = btnVoltar.Right + espacoEntreBotoes;
+
+            // Centralizar verticalmente
+            CentralizarVerticalmente();
+        }
+
+        private void CentralizarVerticalmente()
+        {
+            int espacamento = 15;
+
+            // Calcular altura total de todos os controles
+            int alturaTotal =
+                lblNome.Height + txtNome.Height + espacamento +
+                lblEmail.Height + txtEmail.Height + espacamento +
+                lblSenha.Height + txtSenha.Height + espacamento +
+                lblConfirmarSenha.Height + txtConfirmaSenha.Height + espacamento +
+                btnSalvar.Height + 40; // 40 = margem extra
+
+            int topoInicial = (this.ClientSize.Height - alturaTotal) / 2;
+            int posicaoAtual = topoInicial;
+
+            // Posicionar verticalmente
+            lblNome.Top = posicaoAtual;
+            posicaoAtual += lblNome.Height + 5;
+
+            txtNome.Top = posicaoAtual;
+            posicaoAtual += txtNome.Height + espacamento;
+
+            lblEmail.Top = posicaoAtual;
+            posicaoAtual += lblEmail.Height + 5;
+
+            txtEmail.Top = posicaoAtual;
+            posicaoAtual += txtEmail.Height + espacamento;
+
+            lblSenha.Top = posicaoAtual;
+            posicaoAtual += lblSenha.Height + 5;
+
+            txtSenha.Top = posicaoAtual;
+            posicaoAtual += txtSenha.Height + espacamento;
+
+            lblConfirmarSenha.Top = posicaoAtual;
+            posicaoAtual += lblConfirmarSenha.Height + 5;
+
+            txtConfirmaSenha.Top = posicaoAtual;
+            posicaoAtual += txtConfirmaSenha.Height + 20;
+
+            btnVoltar.Top = posicaoAtual;
+            btnSalvar.Top = posicaoAtual;
+        }
+
+        private void FormEditarUsuario_Resize(object sender, EventArgs e)
+        {
+            CentralizarControles();
         }
     }
 }

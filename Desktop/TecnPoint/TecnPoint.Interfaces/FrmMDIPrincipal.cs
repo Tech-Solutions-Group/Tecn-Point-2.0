@@ -141,6 +141,11 @@ namespace TecnPoint.Interfaces
 
         private void tspEditarUsuario_Click(object sender, EventArgs e)
         {
+            CarregaListaUsuario();
+        }
+
+        public void CarregaListaUsuario()
+        {
             if (this.ActiveMdiChild != null)
             {
                 this.ActiveMdiChild.Close();
