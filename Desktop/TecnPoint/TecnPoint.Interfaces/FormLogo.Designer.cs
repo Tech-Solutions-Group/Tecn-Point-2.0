@@ -98,6 +98,7 @@
             FormBorderStyle = FormBorderStyle.None;
             Name = "FormLogo";
             Text = "FormLogo";
+            Resize += FormLogo_Resize;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
         }

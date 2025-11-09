@@ -33,3 +33,4 @@ C:\Users\samuel\OneDrive\Desktop\PIM4\Tecn-Point-2.0\Desktop\TecnPoint\TecnPoint
 C:\Users\samuel\OneDrive\Desktop\PIM4\Tecn-Point-2.0\Desktop\TecnPoint\TecnPoint.Interfaces\obj\Debug\net8.0-windows\TecnPoint.Interfaces.FormListaUsuarios.resources
 C:\Users\samuel\OneDrive\Desktop\PIM4\Tecn-Point-2.0\Desktop\TecnPoint\TecnPoint.Interfaces\obj\Debug\net8.0-windows\TecnPoint.Interfaces.FormEditarUsuario.resources
 C:\Users\samuel\OneDrive\Desktop\PIM4\Tecn-Point-2.0\Desktop\TecnPoint\TecnPoint.Interfaces\obj\Debug\net8.0-windows\TecnPoint.Interfaces.FormChatBot.resources
+C:\Users\samuel\OneDrive\Desktop\PIM4\Tecn-Point-2.0\Desktop\TecnPoint\TecnPoint.Interfaces\obj\Debug\net8.0-windows\TecnPoint.Interfaces.FormFaq.resources

@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TecnPoint.Modelos.Enum;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
 
 namespace TecnPoint.Interfaces
 {
@@ -35,6 +36,11 @@ namespace TecnPoint.Interfaces
             {
                 this.BackgroundImage = Interfaces.Properties.Resources.ImagemFundoForm21;
             }
+        }
+
+        private void FormLogo_Resize(object sender, EventArgs e)
+        {
+
         }
     }
 }

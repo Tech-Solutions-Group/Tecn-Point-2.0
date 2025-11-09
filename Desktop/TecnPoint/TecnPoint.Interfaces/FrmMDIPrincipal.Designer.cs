@@ -37,6 +37,7 @@
             toolStripSeparator1 = new ToolStripSeparator();
             tspEditarUsuario = new ToolStripMenuItem();
             tspChatBot = new ToolStripMenuItem();
+            tspFaq = new ToolStripMenuItem();
             toolTip = new ToolTip(components);
             menuStrip.SuspendLayout();
             SuspendLayout();
@@ -47,7 +48,7 @@
             menuStrip.BackColor = Color.MediumOrchid;
             menuStrip.BackgroundImage = Properties.Resources.TelaFundo;
             menuStrip.Dock = DockStyle.Left;
-            menuStrip.Items.AddRange(new ToolStripItem[] { tspAbrirChamado, tspAcompanharChamado, tspGerenciarUsuarios, tspChatBot });
+            menuStrip.Items.AddRange(new ToolStripItem[] { tspAbrirChamado, tspAcompanharChamado, tspGerenciarUsuarios, tspChatBot, tspFaq });
             menuStrip.Location = new Point(0, 0);
             menuStrip.Name = "menuStrip";
             menuStrip.Padding = new Padding(7, 2, 0, 2);
@@ -130,6 +131,18 @@
             tspChatBot.Text = "Chatbot";
             tspChatBot.Click += tspChatBot_Click;
             // 
+            // tspFaq
+            // 
+            tspFaq.BackColor = Color.Transparent;
+            tspFaq.Font = new Font("Consolas", 14.25F, FontStyle.Bold);
+            tspFaq.ForeColor = SystemColors.ControlLightLight;
+            tspFaq.Margin = new Padding(10);
+            tspFaq.Name = "tspFaq";
+            tspFaq.Padding = new Padding(5);
+            tspFaq.Size = new Size(191, 36);
+            tspFaq.Text = "FAQ";
+            tspFaq.Click += tspFaq_Click;
+            // 
             // FrmMDIPrincipal
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -162,6 +175,7 @@
         private ToolStripSeparator toolStripSeparator1;
         private ToolStripMenuItem tspEditarUsuario;
         private ToolStripMenuItem tspChatBot;
+        private ToolStripMenuItem tspFaq;
     }
 }
 

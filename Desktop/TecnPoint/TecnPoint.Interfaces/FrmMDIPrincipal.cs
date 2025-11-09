@@ -57,6 +57,7 @@ namespace TecnPoint.Interfaces
             {
                 tspAbrirChamado.Visible = false;
                 tspChatBot.Visible = false;
+                tspFaq.Visible = false;
             }
         }
 
@@ -173,6 +174,22 @@ namespace TecnPoint.Interfaces
             formChatBot.Dock = DockStyle.Fill;
 
             formChatBot.Show();
+        }
+
+        private void tspFaq_Click(object sender, EventArgs e)
+        {
+            if (this.ActiveMdiChild != null)
+            {
+                this.ActiveMdiChild.Close();
+            }
+
+            FormFaq faq = new FormFaq(this, _modoDaltonico);
+
+            faq.MdiParent = this;
+
+            faq.Dock = DockStyle.Fill;
+
+            faq.Show();
         }
     }
 }
