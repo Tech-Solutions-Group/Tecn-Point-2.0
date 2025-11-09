@@ -50,8 +50,8 @@ public class UsuarioService {
 
     public Usuarios postUsuarios(Usuarios usuarios){
         try{
-            Usuarios usuarioSalvo = usuarioRepository.save(usuarios);
-            return usuarioSalvo;
+            usuarios.setEmail(usuarios.getEmail().toLowerCase());
+            return usuarioRepository.save(usuarios);
         }catch(DataIntegrityViolationException ex){
             throw new EmailExistenteException("O e-mail informado para cadastro já existe");
         }
