@@ -40,7 +40,29 @@ namespace TecnPoint.Interfaces
 
         private void FormLogo_Resize(object sender, EventArgs e)
         {
-
+            CentralizarControles();
         }
-    }
+
+        private void CentralizarControles()
+        {
+            // Centraliza o PictureBox horizontalmente
+            pictureBox1.Left = (this.ClientSize.Width - pictureBox1.Width) / 2;
+
+            // Centraliza as labels horizontalmente
+            lblTipoUsuarioFrmLogo.Left = (this.ClientSize.Width - lblTipoUsuarioFrmLogo.Width) / 2;
+            lblNomeFrmLogo.Left = (this.ClientSize.Width - lblNomeFrmLogo.Width) / 2;
+            lblEmailFrmLogo.Left = (this.ClientSize.Width - lblEmailFrmLogo.Width) / 2;
+
+            // Opcional: Ajustar posição vertical para manter proporção
+            int alturaTotal = pictureBox1.Height + lblTipoUsuarioFrmLogo.Height +
+                              lblNomeFrmLogo.Height + lblEmailFrmLogo.Height + 60; // 60 = espaçamentos
+
+            int topoInicial = (this.ClientSize.Height - alturaTotal) / 2;
+
+            pictureBox1.Top = topoInicial;
+            lblTipoUsuarioFrmLogo.Top = pictureBox1.Bottom + 10;
+            lblNomeFrmLogo.Top = lblTipoUsuarioFrmLogo.Bottom + 15;
+            lblEmailFrmLogo.Top = lblNomeFrmLogo.Bottom + 15;
+        }
+    }    
 }

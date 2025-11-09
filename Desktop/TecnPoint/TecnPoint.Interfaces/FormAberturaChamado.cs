@@ -220,5 +220,105 @@ namespace TecnPoint.Interfaces
                 lblInfoModulo.Visible = false;
             }
         }
+
+        private void CentralizarVerticalmente()
+        {
+            // Calcular altura total dos controles
+            int espacamentoVertical = 15;
+            int alturaTotal =
+                lblTitulo.Height + txtTitulo.Height + espacamentoVertical +
+                lblDescricao.Height + txtDescricao.Height + espacamentoVertical +
+                lblPrioridade.Height + cbxPrioridade.Height + espacamentoVertical +
+                lblJornada.Height + cbxJornada.Height + espacamentoVertical +
+                lblModulo.Height + cbxModulo.Height + espacamentoVertical +
+                btnConfirmar.Height + 40;
+
+            int topoInicial = (this.ClientSize.Height - alturaTotal) / 2;
+
+            // Posicionar controles verticalmente
+            int posicaoAtual = topoInicial;
+
+            lblTitulo.Top = posicaoAtual;
+            posicaoAtual += lblTitulo.Height + 10;
+
+            txtTitulo.Top = posicaoAtual;
+            posicaoAtual += txtTitulo.Height + espacamentoVertical;
+
+            lblDescricao.Top = posicaoAtual;
+            posicaoAtual += lblDescricao.Height + 10;
+
+            txtDescricao.Top = posicaoAtual;
+            posicaoAtual += txtDescricao.Height + espacamentoVertical;
+
+            lblPrioridade.Top = posicaoAtual;
+            posicaoAtual += lblPrioridade.Height + 10;
+
+            cbxPrioridade.Top = posicaoAtual;
+            posicaoAtual += cbxPrioridade.Height + espacamentoVertical;
+
+            lblJornada.Top = posicaoAtual;
+            pbInfoJornada.Top = posicaoAtual;
+            lblInfoJornada.Top = posicaoAtual;
+            posicaoAtual += lblJornada.Height + 10;
+
+            cbxJornada.Top = posicaoAtual;
+            posicaoAtual += cbxJornada.Height + espacamentoVertical;
+
+            lblModulo.Top = posicaoAtual;
+            pbInfoModulo.Top = posicaoAtual;
+            lblInfoModulo.Top = posicaoAtual;
+            posicaoAtual += lblModulo.Height + 10;
+
+            cbxModulo.Top = posicaoAtual;
+            posicaoAtual += cbxModulo.Height + 20;
+
+            btnCancelar.Top = posicaoAtual;
+            btnConfirmar.Top = posicaoAtual;
+        }
+
+        private void CentralizarControles()
+        {
+            // Calcular o centro horizontal do formulário
+            int centroHorizontal = this.ClientSize.Width / 2;
+
+            // Largura padrão dos controles (355px conforme seu designer)
+            int larguraControles = 355;
+            int posicaoEsquerda = centroHorizontal - (larguraControles / 2);
+
+            // Centralizar labels e controles horizontalmente
+            lblTitulo.Left = posicaoEsquerda - 15;
+            txtTitulo.Left = posicaoEsquerda;
+
+            lblDescricao.Left = posicaoEsquerda - 15;
+            txtDescricao.Left = posicaoEsquerda;
+
+            lblPrioridade.Left = posicaoEsquerda - 15;
+            cbxPrioridade.Left = posicaoEsquerda;
+
+            lblJornada.Left = posicaoEsquerda - 15;
+            cbxJornada.Left = posicaoEsquerda;
+            pbInfoJornada.Left = lblJornada.Right + 5;
+            lblInfoJornada.Left = pbInfoJornada.Right + 5;
+
+            lblModulo.Left = posicaoEsquerda - 15;
+            cbxModulo.Left = posicaoEsquerda;
+            pbInfoModulo.Left = lblModulo.Right + 5;
+            lblInfoModulo.Left = pbInfoModulo.Right + 5;
+
+            // Centralizar botões
+            int espacoEntreBotoes = 20;
+            int larguraTotalBotoes = btnCancelar.Width + espacoEntreBotoes + btnConfirmar.Width;
+            int posicaoInicioBotoes = centroHorizontal - (larguraTotalBotoes / 2);
+
+            btnCancelar.Left = posicaoInicioBotoes;
+            btnConfirmar.Left = btnCancelar.Right + espacoEntreBotoes;
+
+            CentralizarVerticalmente();
+        }
+
+        private void FormAberturaChamado_Resize(object sender, EventArgs e)
+        {
+            CentralizarControles();
+        }
     }
 }

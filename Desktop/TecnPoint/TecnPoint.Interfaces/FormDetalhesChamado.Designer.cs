@@ -57,14 +57,13 @@
             cbxJornada = new ComboBox();
             cbxModulo = new ComboBox();
             panelConversa = new FlowLayoutPanel();
-            pbIconEnviarMensagem = new PictureBox();
             timerAtualizaDados = new System.Windows.Forms.Timer(components);
             btnVoltar = new Button();
+            btnEnviarMensagem = new Button();
             ((System.ComponentModel.ISupportInitialize)pbIconPrioridade).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbIconDescricao).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbIconJornada).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbIconModulo).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pbIconEnviarMensagem).BeginInit();
             SuspendLayout();
             // 
             // lblTitulo
@@ -144,8 +143,8 @@
             txtMensagem.Name = "txtMensagem";
             txtMensagem.PlaceholderText = "Digite sua mensagem aqui...";
             txtMensagem.ScrollBars = ScrollBars.Vertical;
-            txtMensagem.Size = new Size(355, 41);
-            txtMensagem.TabIndex = 8;
+            txtMensagem.Size = new Size(355, 49);
+            txtMensagem.TabIndex = 5;
             // 
             // lblNomeCliente
             // 
@@ -214,7 +213,7 @@
             cbxStatus.Location = new Point(52, 191);
             cbxStatus.Name = "cbxStatus";
             cbxStatus.Size = new Size(143, 31);
-            cbxStatus.TabIndex = 17;
+            cbxStatus.TabIndex = 0;
             cbxStatus.SelectedIndexChanged += cbxStatus_SelectedIndexChanged;
             // 
             // cbxPrioridade
@@ -226,7 +225,7 @@
             cbxPrioridade.Location = new Point(274, 191);
             cbxPrioridade.Name = "cbxPrioridade";
             cbxPrioridade.Size = new Size(143, 31);
-            cbxPrioridade.TabIndex = 18;
+            cbxPrioridade.TabIndex = 1;
             cbxPrioridade.SelectedIndexChanged += cbxPrioridade_SelectedIndexChanged;
             // 
             // cbxNomeFuncionario
@@ -237,7 +236,7 @@
             cbxNomeFuncionario.Location = new Point(259, 295);
             cbxNomeFuncionario.Name = "cbxNomeFuncionario";
             cbxNomeFuncionario.Size = new Size(163, 30);
-            cbxNomeFuncionario.TabIndex = 19;
+            cbxNomeFuncionario.TabIndex = 2;
             cbxNomeFuncionario.SelectedIndexChanged += cbxNomeFuncionario_SelectedIndexChanged;
             // 
             // pbIconPrioridade
@@ -315,7 +314,7 @@
             cbxJornada.Location = new Point(52, 539);
             cbxJornada.Name = "cbxJornada";
             cbxJornada.Size = new Size(202, 31);
-            cbxJornada.TabIndex = 27;
+            cbxJornada.TabIndex = 3;
             cbxJornada.SelectedIndexChanged += cbxJornada_SelectedIndexChanged;
             // 
             // cbxModulo
@@ -327,7 +326,7 @@
             cbxModulo.Location = new Point(271, 539);
             cbxModulo.Name = "cbxModulo";
             cbxModulo.Size = new Size(143, 31);
-            cbxModulo.TabIndex = 28;
+            cbxModulo.TabIndex = 4;
             cbxModulo.SelectedIndexChanged += cbxModulo_SelectedIndexChanged;
             // 
             // panelConversa
@@ -342,17 +341,6 @@
             panelConversa.TabIndex = 30;
             panelConversa.WrapContents = false;
             // 
-            // pbIconEnviarMensagem
-            // 
-            pbIconEnviarMensagem.Image = Properties.Resources.IconEnviar;
-            pbIconEnviarMensagem.Location = new Point(809, 551);
-            pbIconEnviarMensagem.Name = "pbIconEnviarMensagem";
-            pbIconEnviarMensagem.Size = new Size(48, 41);
-            pbIconEnviarMensagem.SizeMode = PictureBoxSizeMode.Zoom;
-            pbIconEnviarMensagem.TabIndex = 31;
-            pbIconEnviarMensagem.TabStop = false;
-            pbIconEnviarMensagem.Click += pbIconEnviarMensagem_Click;
-            // 
             // timerAtualizaDados
             // 
             timerAtualizaDados.Interval = 2000;
@@ -366,10 +354,20 @@
             btnVoltar.Location = new Point(51, 576);
             btnVoltar.Name = "btnVoltar";
             btnVoltar.Size = new Size(101, 32);
-            btnVoltar.TabIndex = 32;
+            btnVoltar.TabIndex = 7;
             btnVoltar.Text = "Voltar";
             btnVoltar.UseVisualStyleBackColor = true;
             btnVoltar.Click += btnVoltar_Click;
+            // 
+            // btnEnviarMensagem
+            // 
+            btnEnviarMensagem.BackgroundImage = Properties.Resources.IconEnviar;
+            btnEnviarMensagem.Location = new Point(812, 551);
+            btnEnviarMensagem.Name = "btnEnviarMensagem";
+            btnEnviarMensagem.Size = new Size(48, 49);
+            btnEnviarMensagem.TabIndex = 6;
+            btnEnviarMensagem.UseVisualStyleBackColor = true;
+            btnEnviarMensagem.Click += btnEnviarMensagem_Click;
             // 
             // FormDetalhesChamado
             // 
@@ -377,8 +375,8 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Control;
             ClientSize = new Size(884, 621);
+            Controls.Add(btnEnviarMensagem);
             Controls.Add(btnVoltar);
-            Controls.Add(pbIconEnviarMensagem);
             Controls.Add(panelConversa);
             Controls.Add(cbxModulo);
             Controls.Add(cbxJornada);
@@ -410,11 +408,11 @@
             Name = "FormDetalhesChamado";
             Text = "FormDetalhesChamado";
             Load += FormDetalhesChamado_Load;
+            Resize += FormDetalhesChamado_Resize;
             ((System.ComponentModel.ISupportInitialize)pbIconPrioridade).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbIconDescricao).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbIconJornada).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbIconModulo).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pbIconEnviarMensagem).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -448,8 +446,8 @@
         private ComboBox cbxJornada;
         private ComboBox cbxModulo;
         private FlowLayoutPanel panelConversa;
-        private PictureBox pbIconEnviarMensagem;
         private System.Windows.Forms.Timer timerAtualizaDados;
         private Button btnVoltar;
+        private Button btnEnviarMensagem;
     }
 }

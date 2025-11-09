@@ -50,18 +50,27 @@ namespace TecnPoint.Interfaces
         {
             if (_usuarioLogado.TipoUsuario == Modelos.Enum.TipoUsuario.CLIENTE)
             {
+                tspGerenciarUsuarios.Enabled = false;
                 tspGerenciarUsuarios.Visible = false;
             }
 
             if (_usuarioLogado.TipoUsuario == Modelos.Enum.TipoUsuario.FUNCIONARIO)
             {
                 tspAbrirChamado.Visible = false;
+                tspAbrirChamado.Enabled = false;
+                tspChatBot.Enabled = false;
                 tspChatBot.Visible = false;
+                tspFaq.Enabled = false;
                 tspFaq.Visible = false;
             }
         }
 
         public void tspAbrirChamado_Click(object sender, EventArgs e)
+        {
+            CarregaAberturaChamado();
+        }
+
+        public void CarregaAberturaChamado()
         {
             if (this.ActiveMdiChild != null)
             {
@@ -94,6 +103,11 @@ namespace TecnPoint.Interfaces
         }
 
         private void tspAcompanharChamado_Click(object sender, EventArgs e)
+        {
+            CarregaAcompanharChamado();
+        }
+
+        public void CarregaAcompanharChamado()
         {
             if (this.ActiveMdiChild != null)
             {

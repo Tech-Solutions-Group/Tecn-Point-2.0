@@ -31,12 +31,12 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormFaq));
             lblFrequentes = new Label();
             pnlPergunta1 = new Panel();
-            lblDuvidas = new Label();
-            lblPergunta1 = new Label();
             lblResposta1 = new Label();
+            lblPergunta1 = new Label();
+            lblDuvidas = new Label();
             panel1 = new Panel();
-            lblPergunta2 = new Label();
             lblRespostaPergunta2 = new Label();
+            lblPergunta2 = new Label();
             lblPergunta3 = new Label();
             lblRespostaPergunta3 = new Label();
             pnlPergunta3 = new Panel();
@@ -68,15 +68,14 @@
             pnlPergunta1.Size = new Size(776, 129);
             pnlPergunta1.TabIndex = 1;
             // 
-            // lblDuvidas
+            // lblResposta1
             // 
-            lblDuvidas.Font = new Font("Consolas", 27.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblDuvidas.ForeColor = Color.FromArgb(126, 105, 171);
-            lblDuvidas.Location = new Point(257, 19);
-            lblDuvidas.Name = "lblDuvidas";
-            lblDuvidas.Size = new Size(161, 54);
-            lblDuvidas.TabIndex = 2;
-            lblDuvidas.Text = "Dúvidas";
+            lblResposta1.Font = new Font("Consolas", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblResposta1.Location = new Point(37, 48);
+            lblResposta1.Name = "lblResposta1";
+            lblResposta1.Size = new Size(736, 61);
+            lblResposta1.TabIndex = 4;
+            lblResposta1.Text = "No menu “Acompanhar Chamados”, você pode visualizar a lista de todos os chamados abertos, com informações sobre o status (Aberto, Pendente, Em andamento, Resolvido) e o funcionário responsável.";
             // 
             // lblPergunta1
             // 
@@ -87,14 +86,15 @@
             lblPergunta1.TabIndex = 3;
             lblPergunta1.Text = "Como acompanho o andamento do meu chamado?";
             // 
-            // lblResposta1
+            // lblDuvidas
             // 
-            lblResposta1.Font = new Font("Consolas", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblResposta1.Location = new Point(37, 48);
-            lblResposta1.Name = "lblResposta1";
-            lblResposta1.Size = new Size(736, 61);
-            lblResposta1.TabIndex = 4;
-            lblResposta1.Text = "No menu “Acompanhar Chamados”, você pode visualizar a lista de todos os chamados abertos, com informações sobre o status (Aberto, Pendente, Em andamento, Resolvido) e o funcionário responsável.";
+            lblDuvidas.Font = new Font("Consolas", 27.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblDuvidas.ForeColor = Color.FromArgb(126, 105, 171);
+            lblDuvidas.Location = new Point(257, 19);
+            lblDuvidas.Name = "lblDuvidas";
+            lblDuvidas.Size = new Size(161, 54);
+            lblDuvidas.TabIndex = 2;
+            lblDuvidas.Text = "Dúvidas";
             // 
             // panel1
             // 
@@ -106,15 +106,6 @@
             panel1.Size = new Size(776, 100);
             panel1.TabIndex = 3;
             // 
-            // lblPergunta2
-            // 
-            lblPergunta2.Font = new Font("Consolas", 14.25F, FontStyle.Bold);
-            lblPergunta2.Location = new Point(20, 13);
-            lblPergunta2.Name = "lblPergunta2";
-            lblPergunta2.Size = new Size(741, 23);
-            lblPergunta2.TabIndex = 0;
-            lblPergunta2.Text = "Posso conversar com o suporte dentro do sistema?";
-            // 
             // lblRespostaPergunta2
             // 
             lblRespostaPergunta2.Font = new Font("Consolas", 12F);
@@ -123,6 +114,15 @@
             lblRespostaPergunta2.Size = new Size(724, 51);
             lblRespostaPergunta2.TabIndex = 1;
             lblRespostaPergunta2.Text = "Sim! Cada chamado possui uma área de chat onde você pode enviar mensagens diretamente ao funcionário responsável e receber atualizações em tempo real.";
+            // 
+            // lblPergunta2
+            // 
+            lblPergunta2.Font = new Font("Consolas", 14.25F, FontStyle.Bold);
+            lblPergunta2.Location = new Point(20, 13);
+            lblPergunta2.Name = "lblPergunta2";
+            lblPergunta2.Size = new Size(741, 23);
+            lblPergunta2.TabIndex = 0;
+            lblPergunta2.Text = "Posso conversar com o suporte dentro do sistema?";
             // 
             // lblPergunta3
             // 
@@ -194,6 +194,8 @@
             FormBorderStyle = FormBorderStyle.None;
             Name = "FormFaq";
             Text = "FormFaq";
+            Load += FormFaq_Load;
+            Resize += FormFaq_Resize;
             pnlPergunta1.ResumeLayout(false);
             panel1.ResumeLayout(false);
             pnlPergunta3.ResumeLayout(false);

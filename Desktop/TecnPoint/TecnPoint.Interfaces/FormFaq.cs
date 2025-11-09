@@ -34,5 +34,50 @@ namespace TecnPoint.Interfaces
                 lblDuvidas.ForeColor = Color.FromArgb(126, 105, 171);
             }
         }
+
+        private void CentralizarControlesFaq()
+        {
+            // Calcula o tamanho total vertical de todos os painéis e labels principais
+            int espacamentoVertical = 15;
+            int alturaTotal =
+                lblDuvidas.Height +
+                lblFrequentes.Height +
+                pnlPergunta1.Height +
+                panel1.Height +
+                pnlPergunta3.Height +
+                panel2.Height +
+                (espacamentoVertical * 6);
+
+            // Calcula a posição inicial vertical (para centralizar na altura da tela)
+            int topoInicial = (this.ClientSize.Height - alturaTotal) / 2;
+            int centroHorizontal = this.ClientSize.Width / 2;
+
+            // Centraliza os títulos
+            lblDuvidas.Left = centroHorizontal - (lblDuvidas.Width + lblFrequentes.Width + 10) / 2;
+            lblFrequentes.Left = lblDuvidas.Right + 10;
+
+            lblDuvidas.Top = topoInicial;
+            lblFrequentes.Top = topoInicial;
+
+            // Posiciona os painéis abaixo dos títulos
+            int posicaoAtual = lblFrequentes.Bottom + espacamentoVertical;
+
+            foreach (var painel in new[] { pnlPergunta1, panel1, pnlPergunta3, panel2 })
+            {
+                painel.Left = (this.ClientSize.Width - painel.Width) / 2;
+                painel.Top = posicaoAtual;
+                posicaoAtual += painel.Height + espacamentoVertical;
+            }
+        }
+
+        private void FormFaq_Load(object sender, EventArgs e)
+        {
+            CentralizarControlesFaq();
+        }
+
+        private void FormFaq_Resize(object sender, EventArgs e)
+        {
+            CentralizarControlesFaq();
+        }
     }
 }

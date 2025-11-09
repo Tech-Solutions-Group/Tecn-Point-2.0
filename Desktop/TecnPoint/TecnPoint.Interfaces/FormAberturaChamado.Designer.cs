@@ -260,6 +260,7 @@
             FormBorderStyle = FormBorderStyle.None;
             Name = "FormAberturaChamado";
             Text = "FormAberturaChamado";
+            Resize += FormAberturaChamado_Resize;
             ((System.ComponentModel.ISupportInitialize)pbInfoModulo).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbInfoJornada).EndInit();
             ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
