@@ -11,7 +11,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/chamados")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = {
+        "http://localhost:4200",
+        "http://10.0.2.2",
+})
+
 public class ChamadoController {
 
     @Autowired
