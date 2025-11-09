@@ -19,7 +19,7 @@ namespace TecnPoint.Interfaces
     {
         private Usuario _usuarioLogado;
         private ChamadoDTO _chamado;
-        private FormAcompanharChamados formAcompanharChamados;
+        private FrmMDIPrincipal _frmMDIPrincipal;
         private ChamadoService _chamadoService;
         private ConversaService _conversaService;
         private readonly bool _modoDaltonico;
@@ -31,11 +31,11 @@ namespace TecnPoint.Interfaces
 
         private bool atualizandoDadosChamado = false;
 
-        public FormDetalhesChamado(ChamadoDTO chamadoSelecionado, Usuario usuarioLogado, FormAcompanharChamados formAcompanharChamado, bool modoDaltonico)
+        public FormDetalhesChamado(ChamadoDTO chamadoSelecionado, Usuario usuarioLogado, FrmMDIPrincipal frmMDIPrincipal, bool modoDaltonico)
         {
             this._usuarioLogado = usuarioLogado;
             this._chamado = chamadoSelecionado;
-            this.formAcompanharChamados = formAcompanharChamado;
+            this._frmMDIPrincipal = frmMDIPrincipal;
             this._chamadoService = new ChamadoService();
             this._conversaService = new ConversaService();
             InitializeComponent();
@@ -89,7 +89,7 @@ namespace TecnPoint.Interfaces
                 List<ListagemFuncionariosDTO> listaFunc = await _chamadoService.CarregaNomeFuncionarios();
                 comboBox.DataSource = listaFunc;
                 comboBox.DisplayMember = "nome";
-                comboBox.ValueMember = "id";
+                comboBox.ValueMember = "idUsuario";
             }
             catch (Exception ex)
             {
@@ -223,31 +223,6 @@ namespace TecnPoint.Interfaces
                 }
             }
         }
-        private async void pbIconEnviarMensagem_Click(object sender, EventArgs e)
-        {
-            if (!string.IsNullOrWhiteSpace(txtMensagem.Text))
-            {
-                try
-                {
-                    MensagemDTO mensagemASerEnviada = new MensagemDTO
-                    {
-                        idChamado = this._chamado.idChamado,
-                        idRemetente = this._usuarioLogado.idUsuario,
-                        mensagem = txtMensagem.Text
-                    };
-
-                    await _conversaService.EnviarMensagem(mensagemASerEnviada);
-                    txtMensagem.Clear();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Não foi possível enviar a mensagem,\n" + ex.Message,
-                                           "TechSolutions",
-                                           MessageBoxButtons.OK,
-                                           MessageBoxIcon.Information);
-                }
-            }
-        }
 
         private async Task CarregaMensagens()
         {
@@ -310,13 +285,10 @@ namespace TecnPoint.Interfaces
             }
 
         }
-
         private void btnVoltar_Click(object sender, EventArgs e)
         {
             this.Close();
-            this.formAcompanharChamados.flpPanelCardsChamados.Controls.Clear();
-            this.formAcompanharChamados.CarregaChamados();
-            this.formAcompanharChamados.ExibirCards();
+            _frmMDIPrincipal.CarregaAcompanharChamado();
         }
 
         private void ExibeMensagens(ConversaDTO mensagem)
@@ -407,7 +379,7 @@ namespace TecnPoint.Interfaces
                 pbIconDescricao.Image = Interfaces.Properties.Resources.IconsDocumentoDaltonico;
                 pbIconJornada.Image = Interfaces.Properties.Resources.IconMarcadorDaltonico;
                 pbIconModulo.Image = Interfaces.Properties.Resources.IconEngrenagemDaltonico;
-                pbIconEnviarMensagem.Image = Interfaces.Properties.Resources.IconEnviarDaltonico;
+                btnEnviarMensagem.Image = Interfaces.Properties.Resources.IconEnviarDaltonico;
                 btnVoltar.FlatAppearance.MouseDownBackColor = Color.FromArgb(254, 190, 137);
                 btnVoltar.FlatAppearance.MouseOverBackColor = Color.FromArgb(253, 163, 89);
             }
@@ -417,10 +389,140 @@ namespace TecnPoint.Interfaces
                 pbIconDescricao.Image = Interfaces.Properties.Resources.icons8_documento_48;
                 pbIconJornada.Image = Interfaces.Properties.Resources.icons8_marcador_48;
                 pbIconModulo.Image = Interfaces.Properties.Resources.icons8_configurações_48;
-                pbIconEnviarMensagem.Image = Interfaces.Properties.Resources.IconEnviar;
+                btnEnviarMensagem.Image = Interfaces.Properties.Resources.IconEnviar;
                 btnVoltar.FlatAppearance.MouseDownBackColor = Color.FromArgb(190, 137, 254);
                 btnVoltar.FlatAppearance.MouseOverBackColor = Color.FromArgb(163, 89, 253);
             }
+        }
+
+        private async void btnEnviarMensagem_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(txtMensagem.Text))
+            {
+                try
+                {
+                    MensagemDTO mensagemASerEnviada = new MensagemDTO
+                    {
+                        idChamado = this._chamado.idChamado,
+                        idRemetente = this._usuarioLogado.idUsuario,
+                        mensagem = txtMensagem.Text
+                    };
+
+                    await _conversaService.EnviarMensagem(mensagemASerEnviada);
+                    txtMensagem.Clear();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Não foi possível enviar a mensagem,\n" + ex.Message,
+                                           "TechSolutions",
+                                           MessageBoxButtons.OK,
+                                           MessageBoxIcon.Information);
+                }
+            }
+        }
+
+        private void CentralizarControles()
+        {
+            // Dividir o formulário em duas colunas
+            int larguraFormulario = this.ClientSize.Width;
+            int alturaFormulario = this.ClientSize.Height;
+
+            // Coluna esquerda (informações do chamado) - 50% da largura
+            int larguraColuna = larguraFormulario / 2;
+            int espacamento = 20;
+
+            // Ajustar largura dos painéis principais
+            int larguraInfos = larguraColuna - (espacamento * 2);
+
+            // COLUNA ESQUERDA - Informações do Chamado
+            int posEsquerdaInfos = espacamento;
+
+            // Título
+            lblTitulo.Left = posEsquerdaInfos;
+            lblTitulo.Width = larguraInfos;
+
+            // Linha divisória
+            flowLayoutPanel1.Left = posEsquerdaInfos;
+            flowLayoutPanel1.Width = larguraInfos;
+
+            // Status e Prioridade (lado a lado)
+            int larguraMetade = (larguraInfos - espacamento) / 2;
+
+            lblStatusChamado.Left = posEsquerdaInfos;
+            lblStatus.Left = posEsquerdaInfos;
+            cbxStatus.Left = posEsquerdaInfos;
+
+            lblPrioridadeChamado.Left = posEsquerdaInfos + larguraMetade + espacamento;
+            lblPrioridade.Left = posEsquerdaInfos + larguraMetade + espacamento;
+            cbxPrioridade.Left = posEsquerdaInfos + larguraMetade + espacamento;
+            pbIconPrioridade.Left = lblPrioridadeChamado.Right + 5;
+
+            // Criado por e Responsável
+            lblCriadoPor.Left = posEsquerdaInfos;
+            lblNomeCliente.Left = posEsquerdaInfos;
+
+            lblResponsavelChamado.Left = posEsquerdaInfos + larguraMetade + espacamento;
+            lblNomeFuncionario.Left = posEsquerdaInfos + larguraMetade + espacamento;
+            lblNomeFuncionario.Width = larguraMetade;
+            cbxNomeFuncionario.Left = posEsquerdaInfos + larguraMetade + espacamento;
+            cbxNomeFuncionario.Width = larguraMetade;
+
+            // Descrição
+            lblDescricao.Left = posEsquerdaInfos;
+            pbIconDescricao.Left = lblDescricao.Right + 5;
+            lblDescricaoDoChamado.Left = posEsquerdaInfos;
+            lblDescricaoDoChamado.Width = larguraInfos;
+
+            // Jornada e Módulo
+            lblJornadaChamado.Left = posEsquerdaInfos;
+            lblJornada.Left = posEsquerdaInfos;
+            cbxJornada.Left = posEsquerdaInfos;
+            pbIconJornada.Left = lblJornadaChamado.Right + 5;
+
+            lblModuloChamado.Left = posEsquerdaInfos + larguraMetade + espacamento;
+            lblModulo.Left = posEsquerdaInfos + larguraMetade + espacamento;
+            cbxModulo.Left = posEsquerdaInfos + larguraMetade + espacamento;
+            pbIconModulo.Left = lblModuloChamado.Right + 5;
+
+            // Botão Voltar
+            btnVoltar.Left = posEsquerdaInfos;
+            btnVoltar.Top = alturaFormulario - btnVoltar.Height - espacamento;
+
+            // COLUNA DIREITA - Painel de Conversa
+            int posEsquerdaConversa = larguraColuna + espacamento;
+            int larguraConversa = larguraColuna - (espacamento * 2);
+
+            panelConversa.Left = posEsquerdaConversa;
+            panelConversa.Width = larguraConversa;
+            panelConversa.Height = alturaFormulario - 150; // Deixar espaço para o campo de mensagem
+
+            // Campo de mensagem e botão enviar
+            txtMensagem.Left = posEsquerdaConversa;
+            txtMensagem.Width = larguraConversa - 60; // Espaço para o botão
+            txtMensagem.Top = panelConversa.Bottom + 10;
+
+            btnEnviarMensagem.Left = txtMensagem.Right + 5;
+            btnEnviarMensagem.Top = txtMensagem.Top;
+
+            // Ajustar largura das mensagens no painel de conversa
+            AjustarLarguraMensagens();
+        }
+
+        private void AjustarLarguraMensagens()
+        {
+            // Ajustar a largura de todas as mensagens existentes no painel
+            foreach (Control control in panelConversa.Controls)
+            {
+                if (control is Panel mensagem)
+                {
+                    mensagem.Width = panelConversa.Width - 30;
+                }
+            }
+        }
+
+        private void FormDetalhesChamado_Resize(object sender, EventArgs e)
+        {
+            CentralizarControles();
         }
     }
 }

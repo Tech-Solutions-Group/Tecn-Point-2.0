@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TecnPoint.Exceptions")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+66418461e4d4c3e0593815b456ca3a4a207d292c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ee655a0d03725d9136b2f426562a07779566b526")]
 [assembly: System.Reflection.AssemblyProductAttribute("TecnPoint.Exceptions")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TecnPoint.Exceptions")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

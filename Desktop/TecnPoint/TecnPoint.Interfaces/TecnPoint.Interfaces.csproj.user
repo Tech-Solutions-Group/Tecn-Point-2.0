@@ -19,6 +19,9 @@
     <Compile Update="FormEditarUsuario.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="FormFaq.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="FormListaUsuarios.cs">
       <SubType>Form</SubType>
     </Compile>

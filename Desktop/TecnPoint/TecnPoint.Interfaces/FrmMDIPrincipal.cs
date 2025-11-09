@@ -50,17 +50,31 @@ namespace TecnPoint.Interfaces
         {
             if (_usuarioLogado.TipoUsuario == Modelos.Enum.TipoUsuario.CLIENTE)
             {
+                tspGerenciarUsuarios.Enabled = false;
                 tspGerenciarUsuarios.Visible = false;
+                tspCadastrarUsuario.Enabled = false;
+                tspCadastrarUsuario.Visible = false;
+                tspEditarUsuario.Enabled = false;
+                tspEditarUsuario.Visible = false;
             }
 
             if (_usuarioLogado.TipoUsuario == Modelos.Enum.TipoUsuario.FUNCIONARIO)
             {
                 tspAbrirChamado.Visible = false;
+                tspAbrirChamado.Enabled = false;
+                tspChatBot.Enabled = false;
                 tspChatBot.Visible = false;
+                tspFaq.Enabled = false;
+                tspFaq.Visible = false;
             }
         }
 
         public void tspAbrirChamado_Click(object sender, EventArgs e)
+        {
+            CarregaAberturaChamado();
+        }
+
+        public void CarregaAberturaChamado()
         {
             if (this.ActiveMdiChild != null)
             {
@@ -94,6 +108,11 @@ namespace TecnPoint.Interfaces
 
         private void tspAcompanharChamado_Click(object sender, EventArgs e)
         {
+            CarregaAcompanharChamado();
+        }
+
+        public void CarregaAcompanharChamado()
+        {
             if (this.ActiveMdiChild != null)
             {
                 this.ActiveMdiChild.Close();
@@ -125,6 +144,11 @@ namespace TecnPoint.Interfaces
         }
 
         private void tspEditarUsuario_Click(object sender, EventArgs e)
+        {
+            CarregaListaUsuario();
+        }
+
+        public void CarregaListaUsuario()
         {
             if (this.ActiveMdiChild != null)
             {
@@ -173,6 +197,22 @@ namespace TecnPoint.Interfaces
             formChatBot.Dock = DockStyle.Fill;
 
             formChatBot.Show();
+        }
+
+        private void tspFaq_Click(object sender, EventArgs e)
+        {
+            if (this.ActiveMdiChild != null)
+            {
+                this.ActiveMdiChild.Close();
+            }
+
+            FormFaq faq = new FormFaq(this, _modoDaltonico);
+
+            faq.MdiParent = this;
+
+            faq.Dock = DockStyle.Fill;
+
+            faq.Show();
         }
     }
 }

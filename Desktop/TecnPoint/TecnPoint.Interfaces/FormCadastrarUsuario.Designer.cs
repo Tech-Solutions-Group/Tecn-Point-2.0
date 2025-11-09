@@ -119,7 +119,6 @@
             txtSenhaUsuario.PlaceholderText = "Insira a senha";
             txtSenhaUsuario.Size = new Size(375, 32);
             txtSenhaUsuario.TabIndex = 6;
-            txtSenhaUsuario.TextChanged += txtSenhaUsuario_TextChanged;
             txtSenhaUsuario.Leave += txtSenhaUsuario_Leave;
             // 
             // btnCadastrar
@@ -244,6 +243,7 @@
             FormBorderStyle = FormBorderStyle.None;
             Name = "FormCadastrarUsuario";
             Text = "FormCadastrarUsuario";
+            Resize += FormCadastrarUsuario_Resize;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)errorDadosCadastroInvalidos).EndInit();
             ResumeLayout(false);

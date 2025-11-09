@@ -8,7 +8,7 @@ namespace TecnPoint.Modelos.DTO
 {
     public class ListagemFuncionariosDTO
     {
-        public long id { get; set; }
+        public long idUsuario { get; set; }
         public string nome { get; set; }
     }
 }

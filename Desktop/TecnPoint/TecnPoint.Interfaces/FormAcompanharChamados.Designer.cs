@@ -60,6 +60,7 @@
             FormBorderStyle = FormBorderStyle.None;
             Name = "FormAcompanharChamados";
             Text = "FormAcompanharChamados";
+            Resize += FormAcompanharChamados_Resize;
             panelDetalhesChamado.ResumeLayout(false);
             ResumeLayout(false);
         }

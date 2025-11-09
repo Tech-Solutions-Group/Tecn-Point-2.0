@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TecnPoint.Services")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7c5d4c2e360e162c124c0bd9c49554c3318ed067")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4791e93b7b0ff40a88db06872a3be41e0665b0d8")]
 [assembly: System.Reflection.AssemblyProductAttribute("TecnPoint.Services")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TecnPoint.Services")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

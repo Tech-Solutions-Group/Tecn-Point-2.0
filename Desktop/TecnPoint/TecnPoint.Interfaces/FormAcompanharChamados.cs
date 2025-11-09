@@ -32,6 +32,13 @@ namespace TecnPoint.Interfaces
             CarregaChamados();
         }
 
+        private void AjustarTamanhosPaineis()
+        {
+            // Fazer os painéis preencherem todo o formulário
+            panelDetalhesChamado.Size = this.ClientSize;
+            flpPanelCardsChamados.Size = this.ClientSize;
+        }
+
         public async void CarregaChamados()
         {
             try
@@ -58,7 +65,7 @@ namespace TecnPoint.Interfaces
                     card.Controls.Add(lblStatus);
 
                     card.Tag = chamado;
-                    
+
                     card.Click += (s, e) =>
                     {
                         AbrirDetalhes((ChamadoDTO)card.Tag);
@@ -72,25 +79,28 @@ namespace TecnPoint.Interfaces
 
                     void AbrirDetalhes(ChamadoDTO chamadoSelecionado)
                     {
-                        Usuario usuarioParam = new Usuario();
-                        usuarioParam = _usuarioLogado;
-                        panelDetalhesChamado.BringToFront();
+                        Usuario usuarioParam = new Usuario(); usuarioParam = _usuarioLogado; 
 
-                        FormDetalhesChamado detalhesChamado = new FormDetalhesChamado(chamadoSelecionado, usuarioParam, this, _modoDaltonico);
-                        detalhesChamado.TopLevel = false;
+                        FormDetalhesChamado detalhesChamado = new FormDetalhesChamado(chamadoSelecionado, usuarioParam, frmMDIPrincipal, _modoDaltonico); 
+                        detalhesChamado.TopLevel = false; 
+                        detalhesChamado.Dock = DockStyle.Fill; 
 
-                        flpPanelCardsChamados.Controls.Clear();
-                        flpPanelCardsChamados.Controls.Add(detalhesChamado);
+                        panelDetalhesChamado.Controls.Clear(); 
+                        panelDetalhesChamado.Controls.Add(detalhesChamado); 
+
                         detalhesChamado.Show();
                     }
-                    
+
                     int marginHorizontal = (flpPanelCardsChamados.ClientSize.Width - card.Width) / 2;
                     card.Margin = new Padding(marginHorizontal, 2, 0, 12);
 
                     flpPanelCardsChamados.Controls.Add(card);
                     flpPanelCardsChamados.Controls.SetChildIndex(card, 0);
                 }
-            }catch(Exception ex)
+
+                RecentralizarCards();
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show("Não foi possível carregar os chamados do usuário\n" + ex.Message,
                                        "TechSolutions",
@@ -99,18 +109,37 @@ namespace TecnPoint.Interfaces
             }
         }
 
+        private void RecentralizarCards()
+        {
+            // Recalcular as margens de todos os cards quando o formulário é redimensionado
+            foreach (Control control in flpPanelCardsChamados.Controls)
+            {
+                if (control is GroupBox card)
+                {
+                    int marginHorizontal = (flpPanelCardsChamados.ClientSize.Width - card.Width) / 2;
+                    card.Margin = new Padding(marginHorizontal, 2, 0, 12);
+                }
+            }
+        }
+
         public void ExibirCards()
         {
             flpPanelCardsChamados.BringToFront();
+            RecentralizarCards();
         }
 
         private Color FundoStatus(StatusChamado status, bool modoDaltonico)
         {
-            if(status == StatusChamado.ABERTO) return Color.FromArgb(211, 211, 211);
-            if(status == StatusChamado.EM_ANDAMENTO) return modoDaltonico ? Color.FromArgb(235, 181, 102) : Color.FromArgb(236, 169, 44);
-            if(status == StatusChamado.PENDENTE)return modoDaltonico ? Color.FromArgb(77, 138, 195) : Color.FromArgb(76, 143, 197);
-            if(status == StatusChamado.RESOLVIDO)return modoDaltonico ? Color.FromArgb(93, 162, 176) : Color.FromArgb(67, 180, 128);
+            if (status == StatusChamado.ABERTO) return Color.FromArgb(211, 211, 211);
+            if (status == StatusChamado.EM_ANDAMENTO) return modoDaltonico ? Color.FromArgb(235, 181, 102) : Color.FromArgb(236, 169, 44);
+            if (status == StatusChamado.PENDENTE) return modoDaltonico ? Color.FromArgb(77, 138, 195) : Color.FromArgb(76, 143, 197);
+            if (status == StatusChamado.RESOLVIDO) return modoDaltonico ? Color.FromArgb(93, 162, 176) : Color.FromArgb(67, 180, 128);
             return Color.Gray;
+        }
+
+        private void FormAcompanharChamados_Resize(object sender, EventArgs e)
+        {
+            AjustarTamanhosPaineis();
         }
     }
 }

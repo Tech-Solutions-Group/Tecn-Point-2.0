@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics.Metrics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TecnPoint.Modelos;
 using TecnPoint.Modelos.DTO;
 using TecnPoint.Modelos.Enum;
 using TecnPoint.Services;
@@ -38,6 +40,8 @@ namespace TecnPoint.Interfaces
                 dgvUsuarios.Columns["idUsuario"].Visible = false;
                 dgvUsuarios.Columns["senha"].Visible = false;
 
+                CentralizarControles();
+
             }
             catch (Exception ex)
             {
@@ -62,14 +66,31 @@ namespace TecnPoint.Interfaces
 
         private void dgvUsuarios_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            FormEditarUsuario formEditarUsuario = new FormEditarUsuario(RecuperaDadosUsuarioSelecionado(), _modoDaltonico, frmMDIPrincipal);
-            formEditarUsuario.TopLevel = false;
+            AbreFormDeEdicao();
+        }
 
-            flpEditarUsuario.Controls.Clear();
-            flpEditarUsuario.Controls.Add(formEditarUsuario);
+        private void AbreFormDeEdicao()
+        {
+            // Criar o formulário de edição
+            FormEditarUsuario formEditarUsuario = new FormEditarUsuario(
+                RecuperaDadosUsuarioSelecionado(),
+                _modoDaltonico,
+                frmMDIPrincipal
+            );
+            formEditarUsuario.TopLevel = false;
+            formEditarUsuario.Dock = DockStyle.Fill;
+
+            // Adicionar ao painel
+            this.Controls.Add(formEditarUsuario);
+
+            // Ocultar os controles da lista
+            dgvUsuarios.Visible = false;
+            btnVoltar.Visible = false;
+            pbInformacaoEditar.Visible = false;
+            lblInfoEditar.Visible = false;
+
+            // Mostrar o formulário
             formEditarUsuario.Show();
-            flpEditarUsuario.Visible = true;
-            flpEditarUsuario.BringToFront();
         }
 
         private void btnVoltar_Click(object sender, EventArgs e)
@@ -143,6 +164,63 @@ namespace TecnPoint.Interfaces
                 colunaAcoes.Image = Interfaces.Properties.Resources.icons8_crie_um_novo_48;
             }
             dgvUsuarios.EnableHeadersVisualStyles = false;
+        }
+
+        private void CentralizarControles()
+        {
+            if (this.ClientSize.Width == 0 || this.ClientSize.Height == 0) return;
+
+            int larguraForm = this.ClientSize.Width;
+            int alturaForm = this.ClientSize.Height;
+            int margem = 40;
+
+            // Calcular tamanho do DataGridView (ocupará a maior parte do formulário)
+            int larguraDataGrid = larguraForm - (margem * 2);
+            int alturaDataGrid = alturaForm - 150; // Deixar espaço para botão e informações
+
+            // Centralizar horizontalmente
+            int posXCentral = margem;
+
+            // Ícone de informação e label no topo
+            pbInformacaoEditar.Left = posXCentral;
+            pbInformacaoEditar.Top = margem - 10;
+
+            lblInfoEditar.Left = pbInformacaoEditar.Right + 5;
+            lblInfoEditar.Top = pbInformacaoEditar.Top + 4;
+
+            // DataGridView centralizado
+            dgvUsuarios.Left = posXCentral;
+            dgvUsuarios.Top = pbInformacaoEditar.Bottom + 10;
+            dgvUsuarios.Width = larguraDataGrid;
+            dgvUsuarios.Height = alturaDataGrid;
+
+            // Botão Voltar abaixo do DataGridView
+            btnVoltar.Left = posXCentral;
+            btnVoltar.Top = dgvUsuarios.Bottom + 10;
+        }
+
+        private void flpEditarUsuario_Resize(object sender, EventArgs e)
+        {
+        }
+
+        private void FormListaUsuarios_Resize(object sender, EventArgs e)
+        {
+            CentralizarControles();
+        }
+
+        private void dgvUsuarios_KeyDown(object sender, KeyEventArgs e)
+        {
+            // Pressionar Enter para editar o usuário selecionado
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.Handled = true; // Impede o comportamento padrão do Enter
+
+                if (dgvUsuarios.CurrentRow != null && dgvUsuarios.CurrentRow.Index >= 0)
+                {
+                    // Simular o clique na célula atual
+                    AbreFormDeEdicao();
+                }
+            }
         }
     }
 }
