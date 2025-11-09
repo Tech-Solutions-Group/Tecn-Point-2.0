@@ -52,6 +52,10 @@ namespace TecnPoint.Interfaces
             {
                 tspGerenciarUsuarios.Enabled = false;
                 tspGerenciarUsuarios.Visible = false;
+                tspCadastrarUsuario.Enabled = false;
+                tspCadastrarUsuario.Visible = false;
+                tspEditarUsuario.Enabled = false;
+                tspEditarUsuario.Visible = false;
             }
 
             if (_usuarioLogado.TipoUsuario == Modelos.Enum.TipoUsuario.FUNCIONARIO)
