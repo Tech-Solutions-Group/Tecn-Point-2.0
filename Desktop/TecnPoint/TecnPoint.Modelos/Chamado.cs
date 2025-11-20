@@ -12,24 +12,85 @@ namespace TecnPoint.Modelos
 {
     public class Chamado
     {
-        public long idChamado;
+        private long _idChamado;
 
-        public string Descricao;
+        private string _descricao;
 
-        public string Titulo;
+        private string _titulo;
 
-        public PrioridadeChamado Prioridade;
+        private PrioridadeChamado _prioridade;
 
-        public StatusChamado Status;
+        private StatusChamado _status;
 
-        public Usuario Cliente;
+        private Usuario _cliente;
 
-        public Usuario Funcionario;
+        private Usuario _funcionario;
 
-        public Jornada Jornada;
+        private Jornada _jornada;
 
-        public Modulo Modulo;
+        private Modulo _modulo;
 
-        public List<Conversa> Conversas;
+        private List<Conversa> _conversas;
+
+        public Chamado() { }
+
+        public long IdChamado
+        {
+            get { return _idChamado;}
+            set { _idChamado = value;}
+        }
+
+        public string Descricao
+        {
+            get { return _descricao; }
+            set { _descricao = value; }
+        }
+
+        public string Titulo
+        {
+            get { return _titulo;} 
+            set { _titulo = value; }
+        }
+
+        public PrioridadeChamado Prioridade
+        {
+            get { return _prioridade; }
+            set { _prioridade = value; }
+        }
+
+        public StatusChamado Status
+        {
+            get { return _status; }
+            set { _status = value; }
+        }
+        public Usuario Cliente
+        {
+            get { return _cliente; }
+            set { _cliente = value; }
+        }
+
+        public Usuario Funcionario
+        {
+            get { return _funcionario; }
+            set { _funcionario = value; }
+        }
+
+        public Jornada Jornada
+        {
+            get { return _jornada; }
+            set { _jornada = value; }
+        }
+
+        public Modulo Modulo
+        {
+            get { return _modulo; }
+            set { _modulo = value; }
+        }
+
+        public List<Conversa> Conversas
+        {
+            get { return _conversas; }
+            set { _conversas = value; }
+        } 
     }
 }
