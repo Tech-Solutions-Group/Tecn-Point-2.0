@@ -17,7 +17,7 @@ namespace TecnPoint.Interfaces
 {
     public partial class FormDetalhesChamado : Form
     {
-        private Usuario _usuarioLogado;
+        private UsuarioLogadoDTO _usuarioLogado;
         private ChamadoDTO _chamado;
         private FrmMDIPrincipal _frmMDIPrincipal;
         private ChamadoService _chamadoService;
@@ -31,7 +31,7 @@ namespace TecnPoint.Interfaces
 
         private bool atualizandoDadosChamado = false;
 
-        public FormDetalhesChamado(ChamadoDTO chamadoSelecionado, Usuario usuarioLogado, FrmMDIPrincipal frmMDIPrincipal, bool modoDaltonico)
+        public FormDetalhesChamado(ChamadoDTO chamadoSelecionado, UsuarioLogadoDTO usuarioLogado, FrmMDIPrincipal frmMDIPrincipal, bool modoDaltonico)
         {
             this._usuarioLogado = usuarioLogado;
             this._chamado = chamadoSelecionado;
@@ -62,7 +62,7 @@ namespace TecnPoint.Interfaces
             // Variável para controlar quando disparar o evento de SelectedIndexChanged das Combobox
             carregandoComboBox = true;
 
-            if (_usuarioLogado.TipoUsuario == TipoUsuario.CLIENTE)
+            if (_usuarioLogado.tipoUsuario == TipoUsuario.CLIENTE)
             {
                 cbxStatus.Visible = false;
                 cbxPrioridade.Visible = false;

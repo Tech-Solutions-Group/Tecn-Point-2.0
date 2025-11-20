@@ -19,11 +19,11 @@ namespace TecnPoint.Interfaces
     {
         private ChamadoService _chamadoService;
         private ValidacaoAberturaChamado _validacaoAberturaChamado;
-        private Usuario _usuarioLogado;
+        private UsuarioLogadoDTO _usuarioLogado;
         private FrmMDIPrincipal frmMDIPrincipal;
         private readonly bool _modoDaltonico;
 
-        public FormAberturaChamado(Usuario usuarioLogado, FrmMDIPrincipal frmMDIPrincipal, bool modoDaltonico)
+        public FormAberturaChamado(UsuarioLogadoDTO usuarioLogado, FrmMDIPrincipal frmMDIPrincipal, bool modoDaltonico)
         {
             this._chamadoService = new ChamadoService();
             this._validacaoAberturaChamado = new ValidacaoAberturaChamado();
