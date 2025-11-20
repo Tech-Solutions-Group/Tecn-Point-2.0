@@ -55,6 +55,7 @@ namespace TecnPoint.Interfaces
                                         MessageBoxButtons.OK,
                                         MessageBoxIcon.Information);
                         LimpaCamposCadastro();
+                        frmMDIPrincipal.CarregaListaUsuario();
                     }
 
                 }

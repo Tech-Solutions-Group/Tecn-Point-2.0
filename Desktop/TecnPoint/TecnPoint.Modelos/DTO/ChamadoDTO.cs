@@ -18,7 +18,7 @@ namespace TecnPoint.Modelos.DTO
         public StatusChamado status { get; set; }
         public UsuarioDTO cliente { get; set; }
         public UsuarioDTO funcionario { get; set; }
-        public Jornada jornada { get; set; }
-        public Modulo modulo { get; set; }
+        public JornadaDTO jornada { get; set; }
+        public ModuloDTO modulo { get; set; }
     }
 }

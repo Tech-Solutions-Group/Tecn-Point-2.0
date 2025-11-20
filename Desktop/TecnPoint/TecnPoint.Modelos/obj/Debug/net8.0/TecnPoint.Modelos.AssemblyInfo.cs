@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TecnPoint.Modelos")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0b8374d3449cf585dfec6dfe077df10edd8a750e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ea095b64b5dc6c76ddd0fe3864422f5031dbbd0d")]
 [assembly: System.Reflection.AssemblyProductAttribute("TecnPoint.Modelos")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TecnPoint.Modelos")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
