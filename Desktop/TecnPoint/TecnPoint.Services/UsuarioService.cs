@@ -26,14 +26,14 @@ namespace TecnPoint.Services
         {
             var request = new HttpRequestMessage(HttpMethod.Post, "http://localhost:8080/usuarios/login");
 
-            StringContent content = new StringContent($@"{{
-                                            ""email"": ""{loginUsuarioDTO.email}"",
-                                            ""senha"": ""{loginUsuarioDTO.senha}""
-                                            }}", null, "application/json");
+            LoginUsuarioDTO usuarioBody = new LoginUsuarioDTO(loginUsuarioDTO.email, loginUsuarioDTO.senha);
+
+            var jsonBody = JsonSerializer.Serialize(usuarioBody);
+
+            var content = new StringContent(jsonBody, Encoding.UTF8, "application/json");
 
             request.Content = content;
             var response = await _httpClient.SendAsync(request);
-
             var jsonResposta = await response.Content.ReadAsStringAsync();
 
             if (response.IsSuccessStatusCode)
@@ -50,15 +50,20 @@ namespace TecnPoint.Services
         {
             var request = new HttpRequestMessage(HttpMethod.Post, "http://localhost:8080/usuarios/adicionar");
 
-            StringContent content = new StringContent($@"{{
-                                            ""nome"" : ""{cadastroUsuarioDTO.nome}"",
-                                            ""email"": ""{cadastroUsuarioDTO.email}"",
-                                            ""senha"": ""{cadastroUsuarioDTO.senha}"",
-                                            ""tipoUsuario"" : ""{cadastroUsuarioDTO.tipoUsuario}""
-                                            }}", null, "application/json");
+            CadastroUsuarioDTO usuarioBody = new CadastroUsuarioDTO
+            {
+                nome = cadastroUsuarioDTO.nome,
+                email = cadastroUsuarioDTO.email,
+                senha = cadastroUsuarioDTO.senha,
+                tipoUsuario = cadastroUsuarioDTO.tipoUsuario
+            };
+
+            var jsonBody = JsonSerializer.Serialize(usuarioBody, opcoesJson);
+            
+            var content = new StringContent(jsonBody, Encoding.UTF8, "application/json");
+
             request.Content = content;
             var response = await _httpClient.SendAsync(request);
-
             var jsonResposta = await response.Content.ReadAsStringAsync();
 
             if (response.IsSuccessStatusCode)
@@ -97,7 +102,7 @@ namespace TecnPoint.Services
                 DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
             });
             
-            var content = new StringContent(jsonBody, null, "application/json");
+            var content = new StringContent(jsonBody, Encoding.UTF8, "application/json");
 
             request.Content = content;
 

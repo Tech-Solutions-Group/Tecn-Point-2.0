@@ -30,7 +30,7 @@ namespace TecnPoint.Services
             var jsonBody = JsonSerializer.Serialize(mensagem);
 
             var request = new HttpRequestMessage(HttpMethod.Post, "http://localhost:8080/conversas/buscar-mensagens");
-            var content = new StringContent(jsonBody, null, "application/json");
+            var content = new StringContent(jsonBody, Encoding.UTF8, "application/json");
 
             request.Content = content;
             var response = await _httpClient.SendAsync(request);
@@ -57,7 +57,7 @@ namespace TecnPoint.Services
 
             var request = new HttpRequestMessage(HttpMethod.Post, "http://localhost:8080/conversas/enviar-mensagem");
 
-            var content = new StringContent(jsonBody, null, "application/json");
+            var content = new StringContent(jsonBody, Encoding.UTF8, "application/json");
 
             request.Content = content;
 
