@@ -54,7 +54,9 @@ namespace TecnPoint.Interfaces
                                         "Tech Solutions",
                                         MessageBoxButtons.OK,
                                         MessageBoxIcon.Information);
+                        LimpaCamposCadastro();
                     }
+
                 }
                 catch (Exception ex)
                 {
@@ -289,6 +291,14 @@ namespace TecnPoint.Interfaces
         private void FormCadastrarUsuario_Resize(object sender, EventArgs e)
         {
             CentralizarControles();
+        }
+
+        private void LimpaCamposCadastro()
+        {
+            txtNomeUsuario.Text = "";
+            txtEmailUsuario.Text = "";
+            txtSenhaUsuario.Text = "";
+            txtConfirmaSenhaUsuario.Text = "";
         }
     }
 }

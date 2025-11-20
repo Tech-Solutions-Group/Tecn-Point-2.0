@@ -46,7 +46,7 @@ namespace TecnPoint.Interfaces
                     TipoUsuario = usuarioRetornado.tipoUsuario,
                 };
 
-                MessageBox.Show($"Login efetuado com sucesso!\n{usuarioLogado}",
+                MessageBox.Show("Login efetuado com sucesso!",
                                 "TechSolutions",
                                 MessageBoxButtons.OK,
                                 MessageBoxIcon.Information);
