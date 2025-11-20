@@ -89,7 +89,7 @@
             txtNome.Location = new Point(290, 161);
             txtNome.Name = "txtNome";
             txtNome.Size = new Size(338, 32);
-            txtNome.TabIndex = 4;
+            txtNome.TabIndex = 0;
             txtNome.Leave += txtNome_Leave;
             // 
             // txtEmail
@@ -98,7 +98,7 @@
             txtEmail.Location = new Point(290, 247);
             txtEmail.Name = "txtEmail";
             txtEmail.Size = new Size(338, 32);
-            txtEmail.TabIndex = 5;
+            txtEmail.TabIndex = 1;
             txtEmail.Leave += txtEmail_Leave;
             // 
             // txtSenha
@@ -108,7 +108,7 @@
             txtSenha.Name = "txtSenha";
             txtSenha.PasswordChar = '•';
             txtSenha.Size = new Size(338, 32);
-            txtSenha.TabIndex = 6;
+            txtSenha.TabIndex = 2;
             txtSenha.Leave += txtSenha_Leave;
             // 
             // txtConfirmaSenha
@@ -117,7 +117,7 @@
             txtConfirmaSenha.Location = new Point(290, 430);
             txtConfirmaSenha.Name = "txtConfirmaSenha";
             txtConfirmaSenha.Size = new Size(338, 32);
-            txtConfirmaSenha.TabIndex = 7;
+            txtConfirmaSenha.TabIndex = 3;
             txtConfirmaSenha.Leave += txtConfirmaSenha_Leave;
             // 
             // btnSalvar
@@ -129,7 +129,7 @@
             btnSalvar.Location = new Point(531, 482);
             btnSalvar.Name = "btnSalvar";
             btnSalvar.Size = new Size(97, 40);
-            btnSalvar.TabIndex = 8;
+            btnSalvar.TabIndex = 4;
             btnSalvar.Text = "Salvar";
             btnSalvar.UseVisualStyleBackColor = false;
             btnSalvar.Click += btnSalvar_Click;
@@ -143,7 +143,7 @@
             btnVoltar.Location = new Point(290, 482);
             btnVoltar.Name = "btnVoltar";
             btnVoltar.Size = new Size(97, 40);
-            btnVoltar.TabIndex = 9;
+            btnVoltar.TabIndex = 5;
             btnVoltar.Text = "Voltar";
             btnVoltar.UseVisualStyleBackColor = false;
             btnVoltar.Click += btnVoltar_Click;
