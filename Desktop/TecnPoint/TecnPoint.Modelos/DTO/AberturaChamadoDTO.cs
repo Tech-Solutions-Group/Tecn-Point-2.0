@@ -16,6 +16,8 @@ namespace TecnPoint.Modelos.DTO
         public long idModulo { get; set; }
         public long idJornada { get; set; }
 
+        public AberturaChamadoDTO() { }
+
         public AberturaChamadoDTO(string titulo, string descricao, PrioridadeChamado prioridade, long idCliente, long idModulo, long idJornada)
         {
             this.titulo = titulo;

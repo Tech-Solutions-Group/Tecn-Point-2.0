@@ -24,23 +24,29 @@ namespace TecnPoint.Services
             _httpClient = new HttpClient();
         }
 
-        public async Task<Chamado> AbrirChamado(AberturaChamadoDTO aberturaChamadoDTO)
+        public async Task<ChamadoDTO> AbrirChamado(AberturaChamadoDTO aberturaChamadoDTO)
         {
             var request = new HttpRequestMessage(HttpMethod.Post, "http://localhost:8080/chamados/abrir-chamado");
-            // Pode lançar formatexception
-            var content = new StringContent($@"
-                                            {{
-                                              ""descricao"": ""{aberturaChamadoDTO.descricao}"",
-                                              ""titulo"": ""{aberturaChamadoDTO.titulo}"",
-                                              ""prioridade"": ""{aberturaChamadoDTO.prioridade}"",
-                                              ""idCliente"": {aberturaChamadoDTO.idCliente},
-                                              ""idModulo"": {aberturaChamadoDTO.idModulo},
-                                              ""idJornada"": {aberturaChamadoDTO.idJornada}
-                                            }}", null, "application/json");
+
+            AberturaChamadoDTO chamadoBody = new AberturaChamadoDTO()
+            {
+                titulo = aberturaChamadoDTO.titulo,
+                descricao = aberturaChamadoDTO.descricao,
+                prioridade = aberturaChamadoDTO.prioridade,
+                idCliente = aberturaChamadoDTO.idCliente,
+                idModulo = aberturaChamadoDTO.idModulo,
+                idJornada = aberturaChamadoDTO.idJornada
+            };
+
+            var jsonBody = JsonSerializer.Serialize(chamadoBody, new JsonSerializerOptions
+            {
+                Converters = { new JsonStringEnumConverter() }
+            });
+
+            var content = new StringContent(jsonBody, Encoding.UTF8, "application/json");
 
             request.Content = content;
             var response = await _httpClient.SendAsync(request);
-
             var jsonResposta = await response.Content.ReadAsStringAsync();
 
             if (response.IsSuccessStatusCode)
@@ -50,7 +56,7 @@ namespace TecnPoint.Services
                     Converters = { new JsonStringEnumConverter() }
                 };
 
-                Chamado chamadoAberto = JsonSerializer.Deserialize<Chamado>(jsonResposta, options);
+                ChamadoDTO chamadoAberto = JsonSerializer.Deserialize<ChamadoDTO>(jsonResposta, options);
                 return chamadoAberto;
             }
 

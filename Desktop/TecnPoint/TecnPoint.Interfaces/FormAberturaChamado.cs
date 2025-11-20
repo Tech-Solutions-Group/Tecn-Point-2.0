@@ -51,7 +51,7 @@ namespace TecnPoint.Interfaces
                                                                                 cbxJornada.SelectedIndex);
                 try
                 {
-                    var chamado = await _chamadoService.AbrirChamado(aberturaChamadoDTO);
+                    ChamadoDTO chamado = await _chamadoService.AbrirChamado(aberturaChamadoDTO);
 
                     MessageBox.Show("Chamado aberto com sucesso!",
                                         "TechSolutions",
