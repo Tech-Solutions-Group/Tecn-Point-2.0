@@ -53,12 +53,22 @@ namespace TecnPoint.Interfaces
                 {
                     ChamadoDTO chamado = await _chamadoService.AbrirChamado(aberturaChamadoDTO);
 
-                    MessageBox.Show("Chamado aberto com sucesso!",
+                    if(chamado != null)
+                    {
+                        MessageBox.Show("Chamado aberto com sucesso!",
                                         "TechSolutions",
                                         MessageBoxButtons.OK,
                                         MessageBoxIcon.Information);
-                    LimparCampos();
-
+                        LimparCampos();
+                        frmMDIPrincipal.CarregaAcompanharChamado();
+                    }
+                    else
+                    {
+                        MessageBox.Show($"Não foi possível abrir o chamado",
+                                        "TechSolutions",
+                                        MessageBoxButtons.OK,
+                                        MessageBoxIcon.Error);
+                    }
                 }
                 catch (Exception ex) // Exceção lançada pelo Service
                 {
