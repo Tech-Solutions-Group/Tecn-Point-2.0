@@ -202,7 +202,7 @@
             // pbInfoJornada
             // 
             pbInfoJornada.Image = Properties.Resources.icons8_informações_48;
-            pbInfoJornada.Location = new Point(359, 376);
+            pbInfoJornada.Location = new Point(359, 375);
             pbInfoJornada.Name = "pbInfoJornada";
             pbInfoJornada.Size = new Size(22, 21);
             pbInfoJornada.SizeMode = PictureBoxSizeMode.Zoom;
@@ -218,7 +218,7 @@
             // 
             lblInfoJornada.AutoSize = true;
             lblInfoJornada.Font = new Font("Consolas", 9F);
-            lblInfoJornada.Location = new Point(387, 379);
+            lblInfoJornada.Location = new Point(384, 378);
             lblInfoJornada.Name = "lblInfoJornada";
             lblInfoJornada.Size = new Size(273, 14);
             lblInfoJornada.TabIndex = 15;
@@ -227,6 +227,7 @@
             // 
             // lblInfoModulo
             // 
+            lblInfoModulo.BackColor = Color.Transparent;
             lblInfoModulo.Font = new Font("Consolas", 9F);
             lblInfoModulo.Location = new Point(376, 450);
             lblInfoModulo.Name = "lblInfoModulo";

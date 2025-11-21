@@ -9,8 +9,21 @@ namespace TecnPoint.Modelos
 {
     public class Jornada
     {
-        public long idJornada { get; set; }
+        private long _idJornada;
+        private string _jornada;
 
-        public string jornada { get; set; }
+        public Jornada() { }
+
+        public long IdJornada
+        {
+            get { return _idJornada; }
+            set { _idJornada = value; }
+        }
+
+        public string JornadaChamado
+        {
+            get { return _jornada; }
+            set { _jornada = value; }
+        }
     }
 }

@@ -17,7 +17,7 @@ namespace TecnPoint.Interfaces
 {
     public partial class FormDetalhesChamado : Form
     {
-        private Usuario _usuarioLogado;
+        private UsuarioLogadoDTO _usuarioLogado;
         private ChamadoDTO _chamado;
         private FrmMDIPrincipal _frmMDIPrincipal;
         private ChamadoService _chamadoService;
@@ -31,7 +31,7 @@ namespace TecnPoint.Interfaces
 
         private bool atualizandoDadosChamado = false;
 
-        public FormDetalhesChamado(ChamadoDTO chamadoSelecionado, Usuario usuarioLogado, FrmMDIPrincipal frmMDIPrincipal, bool modoDaltonico)
+        public FormDetalhesChamado(ChamadoDTO chamadoSelecionado, UsuarioLogadoDTO usuarioLogado, FrmMDIPrincipal frmMDIPrincipal, bool modoDaltonico)
         {
             this._usuarioLogado = usuarioLogado;
             this._chamado = chamadoSelecionado;
@@ -62,7 +62,7 @@ namespace TecnPoint.Interfaces
             // Variável para controlar quando disparar o evento de SelectedIndexChanged das Combobox
             carregandoComboBox = true;
 
-            if (_usuarioLogado.TipoUsuario == TipoUsuario.CLIENTE)
+            if (_usuarioLogado.tipoUsuario == TipoUsuario.CLIENTE)
             {
                 cbxStatus.Visible = false;
                 cbxPrioridade.Visible = false;
@@ -434,8 +434,26 @@ namespace TecnPoint.Interfaces
             // Ajustar largura dos painéis principais
             int larguraInfos = larguraColuna - (espacamento * 2);
 
-            // COLUNA ESQUERDA - Informações do Chamado
-            int posEsquerdaInfos = espacamento;
+            // COLUNA ESQUERDA - Painel de Conversa
+            int posEsquerdaConversa = espacamento;
+
+            panelConversa.Left = posEsquerdaConversa;
+            panelConversa.Width = larguraInfos;
+            panelConversa.Height = alturaFormulario - 150; // Deixar espaço para o campo de mensagem
+
+            // Campo de mensagem e botão enviar
+            txtMensagem.Left = posEsquerdaConversa;
+            txtMensagem.Width = larguraInfos - 60; // Espaço para o botão
+            txtMensagem.Top = panelConversa.Bottom + 10;
+
+            btnEnviarMensagem.Left = txtMensagem.Right + 5;
+            btnEnviarMensagem.Top = txtMensagem.Top;
+
+            // COLUNA DIREITA - Informações do Chamado
+            int posEsquerdaInfos = larguraColuna + espacamento;
+
+            // Status e Prioridade (lado a lado)
+            int larguraMetade = (larguraInfos - espacamento) / 2;
 
             // Título
             lblTitulo.Left = posEsquerdaInfos;
@@ -444,9 +462,6 @@ namespace TecnPoint.Interfaces
             // Linha divisória
             flowLayoutPanel1.Left = posEsquerdaInfos;
             flowLayoutPanel1.Width = larguraInfos;
-
-            // Status e Prioridade (lado a lado)
-            int larguraMetade = (larguraInfos - espacamento) / 2;
 
             lblStatusChamado.Left = posEsquerdaInfos;
             lblStatus.Left = posEsquerdaInfos;
@@ -485,24 +500,8 @@ namespace TecnPoint.Interfaces
             pbIconModulo.Left = lblModuloChamado.Right + 5;
 
             // Botão Voltar
-            btnVoltar.Left = posEsquerdaInfos;
+            btnVoltar.Left = posEsquerdaConversa;
             btnVoltar.Top = alturaFormulario - btnVoltar.Height - espacamento;
-
-            // COLUNA DIREITA - Painel de Conversa
-            int posEsquerdaConversa = larguraColuna + espacamento;
-            int larguraConversa = larguraColuna - (espacamento * 2);
-
-            panelConversa.Left = posEsquerdaConversa;
-            panelConversa.Width = larguraConversa;
-            panelConversa.Height = alturaFormulario - 150; // Deixar espaço para o campo de mensagem
-
-            // Campo de mensagem e botão enviar
-            txtMensagem.Left = posEsquerdaConversa;
-            txtMensagem.Width = larguraConversa - 60; // Espaço para o botão
-            txtMensagem.Top = panelConversa.Bottom + 10;
-
-            btnEnviarMensagem.Left = txtMensagem.Right + 5;
-            btnEnviarMensagem.Top = txtMensagem.Top;
 
             // Ajustar largura das mensagens no painel de conversa
             AjustarLarguraMensagens();
@@ -510,12 +509,20 @@ namespace TecnPoint.Interfaces
 
         private void AjustarLarguraMensagens()
         {
-            // Ajustar a largura de todas as mensagens existentes no painel
             foreach (Control control in panelConversa.Controls)
             {
                 if (control is Panel mensagem)
                 {
                     mensagem.Width = panelConversa.Width - 30;
+
+                    // Ajustar também os labels internos se necessário
+                    foreach (Control subControl in mensagem.Controls)
+                    {
+                        if (subControl is Label lbl && lbl.Name != "lblDataHora" && lbl.Name != "lblRemetente")
+                        {
+                            lbl.MaximumSize = new Size(panelConversa.Width - 70, 0);
+                        }
+                    }
                 }
             }
         }

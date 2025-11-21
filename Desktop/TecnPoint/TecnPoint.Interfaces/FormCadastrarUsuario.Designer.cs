@@ -98,7 +98,7 @@
             txtNomeUsuario.Name = "txtNomeUsuario";
             txtNomeUsuario.PlaceholderText = "Insira o nome";
             txtNomeUsuario.Size = new Size(375, 32);
-            txtNomeUsuario.TabIndex = 4;
+            txtNomeUsuario.TabIndex = 1;
             txtNomeUsuario.Leave += txtNomeUsuario_Leave;
             // 
             // txtEmailUsuario
@@ -108,7 +108,7 @@
             txtEmailUsuario.Name = "txtEmailUsuario";
             txtEmailUsuario.PlaceholderText = "exemplo@gmail.com";
             txtEmailUsuario.Size = new Size(375, 32);
-            txtEmailUsuario.TabIndex = 5;
+            txtEmailUsuario.TabIndex = 2;
             txtEmailUsuario.Leave += txtEmailUsuario_Leave;
             // 
             // txtSenhaUsuario
@@ -118,7 +118,7 @@
             txtSenhaUsuario.Name = "txtSenhaUsuario";
             txtSenhaUsuario.PlaceholderText = "Insira a senha";
             txtSenhaUsuario.Size = new Size(375, 32);
-            txtSenhaUsuario.TabIndex = 6;
+            txtSenhaUsuario.TabIndex = 3;
             txtSenhaUsuario.Leave += txtSenhaUsuario_Leave;
             // 
             // btnCadastrar
@@ -130,7 +130,7 @@
             btnCadastrar.Location = new Point(508, 536);
             btnCadastrar.Name = "btnCadastrar";
             btnCadastrar.Size = new Size(134, 45);
-            btnCadastrar.TabIndex = 9;
+            btnCadastrar.TabIndex = 6;
             btnCadastrar.Text = "Cadastrar";
             btnCadastrar.UseVisualStyleBackColor = false;
             btnCadastrar.Click += btnCadastrar_Click;
@@ -144,7 +144,7 @@
             cbxTipoUsuario.Location = new Point(267, 486);
             cbxTipoUsuario.Name = "cbxTipoUsuario";
             cbxTipoUsuario.Size = new Size(375, 33);
-            cbxTipoUsuario.TabIndex = 10;
+            cbxTipoUsuario.TabIndex = 5;
             cbxTipoUsuario.Leave += cbxTipoUsuario_Leave;
             // 
             // lblConfirmaSenha
@@ -164,7 +164,7 @@
             txtConfirmaSenhaUsuario.Name = "txtConfirmaSenhaUsuario";
             txtConfirmaSenhaUsuario.PlaceholderText = "Digite a senha novamente";
             txtConfirmaSenhaUsuario.Size = new Size(375, 32);
-            txtConfirmaSenhaUsuario.TabIndex = 12;
+            txtConfirmaSenhaUsuario.TabIndex = 4;
             txtConfirmaSenhaUsuario.Leave += txtConfirmaSenhaUsuario_Leave;
             // 
             // pictureBox1
@@ -215,7 +215,7 @@
             btnVoltar.Location = new Point(267, 538);
             btnVoltar.Name = "btnVoltar";
             btnVoltar.Size = new Size(134, 45);
-            btnVoltar.TabIndex = 16;
+            btnVoltar.TabIndex = 7;
             btnVoltar.Text = "Voltar";
             btnVoltar.UseVisualStyleBackColor = false;
             btnVoltar.Click += btnVoltar_Click;

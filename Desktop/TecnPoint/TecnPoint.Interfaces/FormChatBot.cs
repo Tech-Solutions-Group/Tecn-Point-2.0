@@ -9,17 +9,18 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using TecnPoint.Modelos;
 using TecnPoint.Interfaces.Utils;
+using TecnPoint.Modelos.DTO;
 
 namespace TecnPoint.Interfaces
 {
     public partial class FormChatBot : Form
     {
         private FrmMDIPrincipal frmMDIPrincipal;
-        private Usuario _usuarioLogado;
+        private UsuarioLogadoDTO _usuarioLogado;
         private bool _modoDaltonico;
         private MensagensChatBot _mensagens;
 
-        public FormChatBot(bool modoDaltonico, FrmMDIPrincipal frmMDIPrincipal, Usuario usuarioLogado)
+        public FormChatBot(bool modoDaltonico, FrmMDIPrincipal frmMDIPrincipal, UsuarioLogadoDTO usuarioLogado)
         {
             this.frmMDIPrincipal = frmMDIPrincipal;
             this._usuarioLogado = usuarioLogado;
@@ -261,7 +262,7 @@ namespace TecnPoint.Interfaces
 
         private void FormChatBot_Load(object sender, EventArgs e)
         {
-            AdicionaMensagem($"Olá {_usuarioLogado.Nome} ! sou o TecnBot, que pena que está com problemas :(\nmas estou aqui para te ajudar! Onde está o problema? " +
+            AdicionaMensagem($"Olá {_usuarioLogado.nome} ! sou o TecnBot, que pena que está com problemas :(\nmas estou aqui para te ajudar! Onde está o problema? " +
                            "\n\t1 - Software (aplicativos/programas)\n\t2 - Hardware (componentes físicos)\n\t3 - Rede");
             AjustarLayoutDinamico();
             CentralizarElementosChatBot();

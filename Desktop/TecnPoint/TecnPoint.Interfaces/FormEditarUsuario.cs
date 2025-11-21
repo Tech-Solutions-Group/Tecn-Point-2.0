@@ -214,7 +214,7 @@ namespace TecnPoint.Interfaces
             lblEmail.Left = posicaoEsquerda;
             txtEmail.Left = posicaoEsquerda;
             txtEmail.Width = larguraControles;
-
+      
             lblSenha.Left = posicaoEsquerda;
             txtSenha.Left = posicaoEsquerda;
             txtSenha.Width = larguraControles;

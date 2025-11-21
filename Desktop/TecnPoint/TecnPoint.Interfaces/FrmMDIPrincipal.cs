@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TecnPoint.Modelos;
+using TecnPoint.Modelos.DTO;
 
 namespace TecnPoint.Interfaces
 {
@@ -15,9 +16,9 @@ namespace TecnPoint.Interfaces
     {
         private readonly bool _modoDaltonico;
         private int childFormNumber = 0;
-        private Usuario _usuarioLogado;
+        private UsuarioLogadoDTO _usuarioLogado;
 
-        public FrmMDIPrincipal(Usuario usuarioLogado, bool modoDaltonico)
+        public FrmMDIPrincipal(UsuarioLogadoDTO usuarioLogado, bool modoDaltonico)
         {
             InitializeComponent();
             this._modoDaltonico = modoDaltonico;
@@ -27,28 +28,9 @@ namespace TecnPoint.Interfaces
             AlterarVisualizacao();
         }
 
-        private void ShowNewForm(object sender, EventArgs e)
-        {
-            Form childForm = new Form();
-            childForm.MdiParent = this;
-            childForm.Text = "Janela " + childFormNumber++;
-            childForm.Show();
-        }
-
-        private void OpenFile(object sender, EventArgs e)
-        {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-            openFileDialog.Filter = "Arquivos de texto (*.txt)|*.txt|Todos os arquivos (*.*)|*.*";
-            if (openFileDialog.ShowDialog(this) == DialogResult.OK)
-            {
-                string FileName = openFileDialog.FileName;
-            }
-        }
-
         private void AlterarVisualizacao()
         {
-            if (_usuarioLogado.TipoUsuario == Modelos.Enum.TipoUsuario.CLIENTE)
+            if (_usuarioLogado.tipoUsuario == Modelos.Enum.TipoUsuario.CLIENTE)
             {
                 tspGerenciarUsuarios.Enabled = false;
                 tspGerenciarUsuarios.Visible = false;
@@ -58,7 +40,7 @@ namespace TecnPoint.Interfaces
                 tspEditarUsuario.Visible = false;
             }
 
-            if (_usuarioLogado.TipoUsuario == Modelos.Enum.TipoUsuario.FUNCIONARIO)
+            if (_usuarioLogado.tipoUsuario == Modelos.Enum.TipoUsuario.FUNCIONARIO)
             {
                 tspAbrirChamado.Visible = false;
                 tspAbrirChamado.Enabled = false;
@@ -97,7 +79,7 @@ namespace TecnPoint.Interfaces
                 this.ActiveMdiChild.Close();
             }
 
-            FormLogo formLogo = new FormLogo(_usuarioLogado.Nome, _usuarioLogado.Email, _usuarioLogado.TipoUsuario, _modoDaltonico);
+            FormLogo formLogo = new FormLogo(_usuarioLogado.nome, _usuarioLogado.email, _usuarioLogado.tipoUsuario, _modoDaltonico);
 
             formLogo.MdiParent = this;
 

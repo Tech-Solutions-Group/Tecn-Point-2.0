@@ -19,11 +19,11 @@ namespace TecnPoint.Interfaces
     {
         private ChamadoService _chamadoService;
         private ValidacaoAberturaChamado _validacaoAberturaChamado;
-        private Usuario _usuarioLogado;
+        private UsuarioLogadoDTO _usuarioLogado;
         private FrmMDIPrincipal frmMDIPrincipal;
         private readonly bool _modoDaltonico;
 
-        public FormAberturaChamado(Usuario usuarioLogado, FrmMDIPrincipal frmMDIPrincipal, bool modoDaltonico)
+        public FormAberturaChamado(UsuarioLogadoDTO usuarioLogado, FrmMDIPrincipal frmMDIPrincipal, bool modoDaltonico)
         {
             this._chamadoService = new ChamadoService();
             this._validacaoAberturaChamado = new ValidacaoAberturaChamado();
@@ -51,14 +51,24 @@ namespace TecnPoint.Interfaces
                                                                                 cbxJornada.SelectedIndex);
                 try
                 {
-                    var chamado = await _chamadoService.AbrirChamado(aberturaChamadoDTO);
+                    ChamadoDTO chamado = await _chamadoService.AbrirChamado(aberturaChamadoDTO);
 
-                    MessageBox.Show("Chamado aberto com sucesso!",
+                    if(chamado != null)
+                    {
+                        MessageBox.Show("Chamado aberto com sucesso!",
                                         "TechSolutions",
                                         MessageBoxButtons.OK,
                                         MessageBoxIcon.Information);
-                    LimparCampos();
-
+                        LimparCampos();
+                        frmMDIPrincipal.CarregaAcompanharChamado();
+                    }
+                    else
+                    {
+                        MessageBox.Show($"Não foi possível abrir o chamado",
+                                        "TechSolutions",
+                                        MessageBoxButtons.OK,
+                                        MessageBoxIcon.Error);
+                    }
                 }
                 catch (Exception ex) // Exceção lançada pelo Service
                 {

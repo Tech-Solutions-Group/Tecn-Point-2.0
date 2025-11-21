@@ -92,7 +92,7 @@
             tbxEmail.Name = "tbxEmail";
             tbxEmail.PlaceholderText = "Digite seu e-mail";
             tbxEmail.Size = new Size(270, 26);
-            tbxEmail.TabIndex = 4;
+            tbxEmail.TabIndex = 1;
             // 
             // tbxSenha
             // 
@@ -102,7 +102,7 @@
             tbxSenha.PasswordChar = '•';
             tbxSenha.PlaceholderText = "Digite sua senha";
             tbxSenha.Size = new Size(270, 26);
-            tbxSenha.TabIndex = 5;
+            tbxSenha.TabIndex = 2;
             // 
             // btnEntrar
             // 
@@ -113,7 +113,7 @@
             btnEntrar.Location = new Point(474, 409);
             btnEntrar.Name = "btnEntrar";
             btnEntrar.Size = new Size(171, 43);
-            btnEntrar.TabIndex = 6;
+            btnEntrar.TabIndex = 3;
             btnEntrar.Text = "Entrar";
             btnEntrar.UseVisualStyleBackColor = false;
             btnEntrar.Click += btnEntrar_Click;
@@ -150,7 +150,7 @@
             chcbModoDaltonico.Location = new Point(12, 610);
             chcbModoDaltonico.Name = "chcbModoDaltonico";
             chcbModoDaltonico.Size = new Size(127, 23);
-            chcbModoDaltonico.TabIndex = 9;
+            chcbModoDaltonico.TabIndex = 4;
             chcbModoDaltonico.Text = "Modo Daltônico";
             chcbModoDaltonico.UseVisualStyleBackColor = false;
             chcbModoDaltonico.CheckedChanged += chcbModoDaltonico_CheckedChanged;

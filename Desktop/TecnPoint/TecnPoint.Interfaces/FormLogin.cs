@@ -36,17 +36,9 @@ namespace TecnPoint.Interfaces
             {
                 ValidaLogin(tbxEmail.Text, tbxSenha.Text);
 
-                UsuarioLogadoDTO usuarioRetornado = await _usuarioService.RealizarLogin(new LoginUsuarioDTO(tbxEmail.Text.ToLower(), tbxSenha.Text));
+                UsuarioLogadoDTO usuarioLogado = await _usuarioService.RealizarLogin(new LoginUsuarioDTO(tbxEmail.Text.ToLower(), tbxSenha.Text));
 
-                Usuario usuarioLogado = new Usuario
-                {
-                    idUsuario = usuarioRetornado.idUsuario,
-                    Nome = usuarioRetornado.nome,
-                    Email = usuarioRetornado.email,
-                    TipoUsuario = usuarioRetornado.tipoUsuario,
-                };
-
-                MessageBox.Show($"Login efetuado com sucesso!\n{usuarioLogado}",
+                MessageBox.Show("Login efetuado com sucesso!",
                                 "TechSolutions",
                                 MessageBoxButtons.OK,
                                 MessageBoxIcon.Information);

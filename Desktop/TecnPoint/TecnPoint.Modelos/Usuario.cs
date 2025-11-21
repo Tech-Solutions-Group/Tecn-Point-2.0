@@ -5,14 +5,33 @@ namespace TecnPoint.Modelos
 {
     public class Usuario
     {
-        public long idUsuario { get; set; }
-        public string Nome { get; set; }
-        public string Email { get; set; }
-        public TipoUsuario TipoUsuario { get; set; }
+        private long _idUsuario { get; set; }
+        private string _nome { get; set; }
+        private string _email { get; set; }
+        private TipoUsuario _tipoUsuario { get; set; }
 
-        public override string ToString()
+        public long IdUsuario
         {
-            return $"Id: {idUsuario} \nNome: {Nome} \nEmail: {Email} \nTipo Usuário: {TipoUsuario}";
+            get { return _idUsuario; }
+            set { _idUsuario = value; }
+        }
+
+        public string Nome
+        {
+            get { return _nome; }
+            set { _nome = value; }
+        }
+
+        public string Email
+        {
+            get { return _email; }
+            set { _email = value; }
+        }
+
+        public TipoUsuario TipoUsuario
+        {
+            get { return _tipoUsuario; }
+            set { _tipoUsuario = value; }
         }
     }
 }
