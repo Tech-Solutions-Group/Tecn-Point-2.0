@@ -34,7 +34,7 @@ public class UsuarioService {
             throw new DadosLoginInvalidosException("A senha deve ser informada");
         }
 
-        Usuarios usuarioEncontrado = usuarioRepository.findByEmailAndSenha(loginUsuarioDTO.getEmail(), loginUsuarioDTO.getSenha())
+        Usuarios usuarioEncontrado = usuarioRepository.findByEmailAndSenha(loginUsuarioDTO.getEmail().toLowerCase(), loginUsuarioDTO.getSenha())
                 .orElseThrow(() -> new LoginInvalidoException("Login inválido"));
 
         return buildUsuarioLogado(usuarioEncontrado);
@@ -81,7 +81,7 @@ public class UsuarioService {
                     throw new EmailExistenteException("O e-mail informado já existe!");
                 }
             }
-            usuarioEncontrado.setEmail(atualizaUsuarioDTO.getEmail());
+            usuarioEncontrado.setEmail(atualizaUsuarioDTO.getEmail().toLowerCase());
         }
 
         return usuarioRepository.save(usuarioEncontrado);
