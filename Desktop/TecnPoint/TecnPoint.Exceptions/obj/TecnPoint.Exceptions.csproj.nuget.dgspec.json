@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\samuel\\OneDrive\\Desktop\\PIM4\\Tecn-Point-2.0\\Desktop\\TecnPoint\\TecnPoint.Exceptions\\TecnPoint.Exceptions.csproj": {}
+    "C:\\reposFacul\\Tecn-Point-2.0\\Desktop\\TecnPoint\\TecnPoint.Exceptions\\TecnPoint.Exceptions.csproj": {}
   },
   "projects": {
-    "C:\\Users\\samuel\\OneDrive\\Desktop\\PIM4\\Tecn-Point-2.0\\Desktop\\TecnPoint\\TecnPoint.Exceptions\\TecnPoint.Exceptions.csproj": {
+    "C:\\reposFacul\\Tecn-Point-2.0\\Desktop\\TecnPoint\\TecnPoint.Exceptions\\TecnPoint.Exceptions.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\samuel\\OneDrive\\Desktop\\PIM4\\Tecn-Point-2.0\\Desktop\\TecnPoint\\TecnPoint.Exceptions\\TecnPoint.Exceptions.csproj",
+        "projectUniqueName": "C:\\reposFacul\\Tecn-Point-2.0\\Desktop\\TecnPoint\\TecnPoint.Exceptions\\TecnPoint.Exceptions.csproj",
         "projectName": "TecnPoint.Exceptions",
-        "projectPath": "C:\\Users\\samuel\\OneDrive\\Desktop\\PIM4\\Tecn-Point-2.0\\Desktop\\TecnPoint\\TecnPoint.Exceptions\\TecnPoint.Exceptions.csproj",
+        "projectPath": "C:\\reposFacul\\Tecn-Point-2.0\\Desktop\\TecnPoint\\TecnPoint.Exceptions\\TecnPoint.Exceptions.csproj",
         "packagesPath": "C:\\Users\\samuel\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\samuel\\OneDrive\\Desktop\\PIM4\\Tecn-Point-2.0\\Desktop\\TecnPoint\\TecnPoint.Exceptions\\obj\\",
+        "outputPath": "C:\\reposFacul\\Tecn-Point-2.0\\Desktop\\TecnPoint\\TecnPoint.Exceptions\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

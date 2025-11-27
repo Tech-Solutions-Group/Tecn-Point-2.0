@@ -33,7 +33,6 @@
             lblTecnBot = new Label();
             flpConversaChatBot = new FlowLayoutPanel();
             txtMensagemUsuario = new TextBox();
-            lblAtalho = new Label();
             btnEnviar = new Button();
             pnlCabecalhoChatBot.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -93,16 +92,6 @@
             txtMensagemUsuario.Size = new Size(370, 47);
             txtMensagemUsuario.TabIndex = 0;
             // 
-            // lblAtalho
-            // 
-            lblAtalho.AutoSize = true;
-            lblAtalho.Location = new Point(628, 621);
-            lblAtalho.Name = "lblAtalho";
-            lblAtalho.Size = new Size(39, 15);
-            lblAtalho.TabIndex = 3;
-            lblAtalho.Text = "&Enviar";
-            lblAtalho.Click += lblAtalho_Click;
-            // 
             // btnEnviar
             // 
             btnEnviar.BackgroundImage = Properties.Resources.IconEnviar;
@@ -122,7 +111,6 @@
             Controls.Add(txtMensagemUsuario);
             Controls.Add(flpConversaChatBot);
             Controls.Add(pnlCabecalhoChatBot);
-            Controls.Add(lblAtalho);
             FormBorderStyle = FormBorderStyle.None;
             Name = "FormChatBot";
             Text = "FormChatBot";
@@ -142,7 +130,6 @@
         private Label lblTecnBot;
         private FlowLayoutPanel flpConversaChatBot;
         private TextBox txtMensagemUsuario;
-        private Label lblAtalho;
         private Button btnEnviar;
     }
 }

@@ -268,11 +268,6 @@ namespace TecnPoint.Interfaces
             CentralizarElementosChatBot();
         }
 
-        private void lblAtalho_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnEnviar_Click(object sender, EventArgs e)
         {
             AdicionaMensagem(txtMensagemUsuario.Text);
@@ -295,27 +290,22 @@ namespace TecnPoint.Interfaces
             // Calcula a posição inicial (esquerda) para centralizar tudo
             int posicaoInicial = centroHorizontal - (larguraTotal / 2);
 
-            // Centraliza os elementos na horizontal
+            // Define a margem inferior para os controles
+            int margemInferior = 20;
+
+            // Posiciona o txtMensagemUsuario e btnEnviar na parte inferior da tela
             txtMensagemUsuario.Left = posicaoInicial;
+            txtMensagemUsuario.Top = this.ClientSize.Height - txtMensagemUsuario.Height - margemInferior;
+
             btnEnviar.Left = txtMensagemUsuario.Right + espacoEntre;
+            btnEnviar.Top = txtMensagemUsuario.Top;
 
-            // Ajusta o label "Enviar" logo abaixo do botão
-            lblAtalho.Left = btnEnviar.Left + (btnEnviar.Width / 2) - (lblAtalho.Width / 2);
-            lblAtalho.Top = btnEnviar.Bottom + 5;
-
-            // Centraliza verticalmente o bloco inferior (textbox + botão) a uma distância do fundo
-            int margemInferior = 30;
-            int alturaTotal = btnEnviar.Height + lblAtalho.Height + margemInferior;
-            int posicaoTop = this.ClientSize.Height - alturaTotal;
-
-            txtMensagemUsuario.Top = posicaoTop;
-            btnEnviar.Top = posicaoTop;
-            lblAtalho.Top = btnEnviar.Bottom + 5;
-
-            // Ajusta o FlowLayoutPanel para ocupar o restante da tela acima dos controles
+            // Ajusta o FlowLayoutPanel para ocupar o espaço entre o cabeçalho e os controles inferiores
+            flpConversaChatBot.Left = 0;
             flpConversaChatBot.Top = pnlCabecalhoChatBot.Bottom;
-            flpConversaChatBot.Height = txtMensagemUsuario.Top - flpConversaChatBot.Top - 10;
             flpConversaChatBot.Width = this.ClientSize.Width;
+            // Altura: da base do cabeçalho até o topo do txtMensagem, com margem de 10px
+            flpConversaChatBot.Height = txtMensagemUsuario.Top - flpConversaChatBot.Top - 10;
         }
 
         private void AjustarLayoutDinamico()
@@ -325,14 +315,13 @@ namespace TecnPoint.Interfaces
             pnlCabecalhoChatBot.Height = 96;
 
             // Área de conversa ocupa o espaço entre o cabeçalho e a barra inferior
-            flpConversaChatBot.Dock = DockStyle.Fill;
+            flpConversaChatBot.Dock = DockStyle.None;
             flpConversaChatBot.WrapContents = false;
             flpConversaChatBot.AutoScroll = true;
 
             // O botão e o textbox ficam posicionados fixos na parte inferior
             txtMensagemUsuario.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             btnEnviar.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            lblAtalho.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
         }
 
         private void FormChatBot_Resize(object sender, EventArgs e)
