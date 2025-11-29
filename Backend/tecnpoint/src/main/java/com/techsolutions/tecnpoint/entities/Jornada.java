@@ -2,10 +2,15 @@ package com.techsolutions.tecnpoint.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.Getter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.util.List;
 
-@Getter
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "jornada")
 public class Jornada {
@@ -20,4 +25,9 @@ public class Jornada {
     @OneToMany(mappedBy = "jornada")
     @JsonIgnore
     private List<Chamados> chamados;
+
+    public Jornada(Long idJornada, String jornada) {
+        this.idJornada = idJornada;
+        this.jornada = jornada;
+    }
 }

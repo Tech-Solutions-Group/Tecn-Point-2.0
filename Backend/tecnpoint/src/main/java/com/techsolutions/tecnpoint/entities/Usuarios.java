@@ -3,12 +3,13 @@ package com.techsolutions.tecnpoint.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.techsolutions.tecnpoint.entities.enums.TipoUsuario;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+
 import java.util.List;
 
-@Getter
-@Setter
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "usuarios")
 public class Usuarios {
@@ -44,4 +45,12 @@ public class Usuarios {
     @OneToMany(mappedBy = "remetente")
     @JsonIgnore
     private List<Conversa> conversas;
+
+    public Usuarios(Long idUsuario, String email, String nome, String senha, TipoUsuario tipoUsuario) {
+        this.idUsuario = idUsuario;
+        this.email = email;
+        this.nome = nome;
+        this.senha = senha;
+        this.tipoUsuario = tipoUsuario;
+    }
 }
