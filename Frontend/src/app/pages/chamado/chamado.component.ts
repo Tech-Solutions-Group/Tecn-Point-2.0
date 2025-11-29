@@ -37,6 +37,7 @@ export class ChamadoComponent implements OnInit, OnDestroy, AfterViewChecked {
   usuarios: Usuario[] = [];
   funcionarios: number = 0;
   isClienteLogado: boolean = false;
+  showPermissionError: boolean = false;
 
   usuarioLogado = this.usuarioService.obterUsuarioLogado();
 
@@ -58,7 +59,7 @@ export class ChamadoComponent implements OnInit, OnDestroy, AfterViewChecked {
   });
 
   ngOnInit(): void {
-    if (this.usuarioLogado && this.usuarioLogado.tipoUsuario === 'CLIENTE') {
+    if (this.usuarioLogado?.tipoUsuario === 'CLIENTE') {
       this.isClienteLogado = true;
     }
     this.loadChamados();
@@ -208,8 +209,16 @@ export class ChamadoComponent implements OnInit, OnDestroy, AfterViewChecked {
       },
       error: (erro) => {
         console.error('Erro ao enviar a mensagem: ', erro);
+
+        if (erro.status === 400) {
+          this.showPermissionError = true; // 👈 abre o modal
+        }
       },
     });
+  }
+
+  closePermissionErrorModal() {
+    this.showPermissionError = false;
   }
 
   onPatch(campo: string, valor: any): void {

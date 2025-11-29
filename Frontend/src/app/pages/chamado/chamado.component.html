@@ -145,3 +145,32 @@
   </div>
   <button class="btn btn-danger voltar" (click)="goToHome()">Voltar</button>
 </form>
+<div
+  class="modal fade"
+  [class.show]="showPermissionError"
+  [style.display]="showPermissionError ? 'block' : 'none'"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Não foi possivel enviar a mensagem.</h5>
+        <button
+          type="button"
+          class="btn-close"
+          (click)="closePermissionErrorModal()"
+        ></button>
+      </div>
+
+      <div class="modal-body">
+        Realize a troca do responsável para o seu usuario, assim será enviar a
+        mensagem.
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-primary" (click)="closePermissionErrorModal()">
+          Fechar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
