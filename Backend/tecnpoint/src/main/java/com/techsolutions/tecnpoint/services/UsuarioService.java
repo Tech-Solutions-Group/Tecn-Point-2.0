@@ -13,6 +13,7 @@ import com.techsolutions.tecnpoint.repositories.UsuarioRepository;
 import com.techsolutions.tecnpoint.entities.DTO.AtualizaUsuarioDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,20 +23,31 @@ import org.springframework.data.domain.Sort;
 @Service
 public class UsuarioService {
 
-    @Autowired
-    private UsuarioRepository usuarioRepository;
+    private final UsuarioRepository usuarioRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public UsuarioLogadoDTO efetuarLogin(LoginUsuarioDTO loginUsuarioDTO){
-        if(loginUsuarioDTO.getEmail() == null || loginUsuarioDTO.getEmail().trim().isEmpty()){
+    public UsuarioService(UsuarioRepository usuarioRepository, PasswordEncoder passwordEncoder) {
+        this.usuarioRepository = usuarioRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
+
+
+    public UsuarioLogadoDTO efetuarLogin(LoginUsuarioDTO loginUsuarioDTO) {
+
+        if (loginUsuarioDTO.getEmail() == null || loginUsuarioDTO.getEmail().trim().isEmpty()) {
             throw new DadosLoginInvalidosException("O e-mail deve ser informado");
         }
 
-        if(loginUsuarioDTO.getSenha() == null || loginUsuarioDTO.getSenha().trim().isEmpty()){
+        if (loginUsuarioDTO.getSenha() == null || loginUsuarioDTO.getSenha().trim().isEmpty()) {
             throw new DadosLoginInvalidosException("A senha deve ser informada");
         }
 
-        Usuarios usuarioEncontrado = usuarioRepository.findByEmailAndSenha(loginUsuarioDTO.getEmail().toLowerCase(), loginUsuarioDTO.getSenha())
+        Usuarios usuarioEncontrado = usuarioRepository.findByEmail(loginUsuarioDTO.getEmail().toLowerCase())
                 .orElseThrow(() -> new LoginInvalidoException("Login inválido"));
+
+        if (!passwordEncoder.matches(loginUsuarioDTO.getSenha(), usuarioEncontrado.getSenha())) {
+            throw new LoginInvalidoException("Login inválido");
+        }
 
         return buildUsuarioLogado(usuarioEncontrado);
     }
@@ -51,11 +63,13 @@ public class UsuarioService {
     public Usuarios postUsuarios(Usuarios usuarios){
         try{
             usuarios.setEmail(usuarios.getEmail().toLowerCase());
+            usuarios.setSenha(passwordEncoder.encode(usuarios.getSenha())); // ← BCrypt
             return usuarioRepository.save(usuarios);
         }catch(DataIntegrityViolationException ex){
             throw new EmailExistenteException("O e-mail informado para cadastro já existe");
         }
     }
+
 
     public void delUsuarios(Long id){
         usuarioRepository.deleteById(id);
@@ -69,9 +83,11 @@ public class UsuarioService {
             usuarioEncontrado.setNome(atualizaUsuarioDTO.getNome());
         }
 
-        if(atualizaUsuarioDTO.getSenha() != null && !atualizaUsuarioDTO.getSenha().trim().isEmpty()){
-            usuarioEncontrado.setSenha(atualizaUsuarioDTO.getSenha());
+        if (atualizaUsuarioDTO.getSenha() != null && !atualizaUsuarioDTO.getSenha().trim().isEmpty()) {
+            String senhaCriptografada = passwordEncoder.encode(atualizaUsuarioDTO.getSenha());
+            usuarioEncontrado.setSenha(senhaCriptografada);
         }
+
 
         if(atualizaUsuarioDTO.getEmail() != null && !atualizaUsuarioDTO.getEmail().trim().isEmpty()){
 

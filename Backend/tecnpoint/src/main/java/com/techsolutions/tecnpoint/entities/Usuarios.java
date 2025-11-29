@@ -46,11 +46,12 @@ public class Usuarios {
     @JsonIgnore
     private List<Conversa> conversas;
 
-    public Usuarios(Long idUsuario, String email, String nome, String senha, TipoUsuario tipoUsuario) {
+    public Usuarios(Long idUsuario, String nome, String email, String senha, TipoUsuario tipoUsuario) {
         this.idUsuario = idUsuario;
-        this.email = email;
         this.nome = nome;
+        this.email = email;
         this.senha = senha;
         this.tipoUsuario = tipoUsuario;
     }
+
 }

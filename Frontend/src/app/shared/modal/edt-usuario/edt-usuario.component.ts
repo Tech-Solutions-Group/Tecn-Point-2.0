@@ -6,12 +6,18 @@ import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 
 export function senhaMatchValidator(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
-    const senha = control.get('senha');
-    const confirmSenha = control.get('confirmSenha');
+    const senha = control.get('senha')?.value;
+    const confirmSenha = control.get('confirmSenha')?.value;
 
-    if (!senha || !confirmSenha) return null;
+    if (senha && !confirmSenha) {
+      return { senhaRequiredToConfirm: true };
+    }
 
-    return senha.value === confirmSenha.value ? null : { confirmSenha: true };
+    if (senha && confirmSenha && senha !== confirmSenha) {
+      return { senhaMismatch: true };
+    }
+
+    return null;
   };
 }
 
@@ -40,8 +46,8 @@ export class EdtUsuarioComponent {
     {
       nome: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      senha: ['', Validators.required],
-      confirmSenha: ['', Validators.required],
+      senha: [''],
+      confirmSenha: [''],
     },
     { validators: senhaMatchValidator() }
   );
@@ -55,18 +61,23 @@ export class EdtUsuarioComponent {
 
     this.formInvalid = false;
 
-    this.usuarioService
-      .putUsuario(this.usuarioId, this.attUsuarioForm.value as Usuario)
-      .subscribe({
-        next: (res) => {
-          this.usuarioAtualizado.emit(res);
-          this.close();
-          this.successModalOpen = true;
-        },
-        error: (err) => {
-          console.error('Erro ao atualizar usuário:', err);
-        },
-      });
+    let form: any = { ...this.attUsuarioForm.value };
+
+    if (!form.senha) {
+      delete form.senha;
+    }
+    delete form.confirmSenha;
+
+    this.usuarioService.putUsuario(this.usuarioId, form as Usuario).subscribe({
+      next: (res) => {
+        this.usuarioAtualizado.emit(res);
+        this.close();
+        this.successModalOpen = true;
+      },
+      error: (err) => {
+        console.error('Erro ao atualizar usuário:', err);
+      },
+    });
   }
 
   open(usuario: Usuario) {
@@ -74,12 +85,15 @@ export class EdtUsuarioComponent {
 
     this.usuarioService.getUsuarioById(usuario.idUsuario).subscribe({
       next: (user) => {
+        this.attUsuarioForm.reset();
+
         this.attUsuarioForm.patchValue({
           nome: user.nome,
           email: user.email,
           senha: user.senha,
           confirmSenha: null,
         });
+
         this.isOpen = true;
       },
       error: (err) => {

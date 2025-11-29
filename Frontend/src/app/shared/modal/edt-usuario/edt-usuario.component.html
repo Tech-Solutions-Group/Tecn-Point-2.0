@@ -109,11 +109,22 @@
         />
         <small
           *ngIf="
-            attUsuarioForm.errors?.['confirmSenha'] &&
+            attUsuarioForm.hasError('senhaRequiredToConfirm') &&
             attUsuarioForm.get('confirmSenha')?.touched
           "
+          class="text-danger"
         >
-          Senhas não coincidem.
+          Confirme a senha para continuar.
+        </small>
+
+        <small
+          *ngIf="
+            attUsuarioForm.hasError('senhaMismatch') &&
+            attUsuarioForm.get('confirmSenha')?.touched
+          "
+          class="text-danger"
+        >
+          As senhas não coincidem.
         </small>
       </div>
 

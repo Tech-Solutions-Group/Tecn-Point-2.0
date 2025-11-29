@@ -9,6 +9,7 @@ import com.techsolutions.tecnpoint.repositories.ModuloRepository;
 import com.techsolutions.tecnpoint.repositories.UsuarioRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 
 @Configuration
@@ -17,11 +18,14 @@ public class DataInitializer implements CommandLineRunner {
     private final JornadaRepository jornadaRepository;
     private final ModuloRepository moduloRepository;
     private final UsuarioRepository usuarioRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public DataInitializer(JornadaRepository jornadaRepository, ModuloRepository moduloRepository, UsuarioRepository usuarioRepository) {
+
+    public DataInitializer(JornadaRepository jornadaRepository, ModuloRepository moduloRepository, UsuarioRepository usuarioRepository, PasswordEncoder passwordEncoder) {
         this.jornadaRepository = jornadaRepository;
         this.moduloRepository = moduloRepository;
         this.usuarioRepository = usuarioRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -43,8 +47,11 @@ public class DataInitializer implements CommandLineRunner {
         }
 
         if (usuarioRepository.count() == 0) {
-            usuarioRepository.save(new Usuarios(null,"bot@tecnpoint.com", "TecnPoint","tecn2025pim", TipoUsuario.FUNCIONARIO));
-            System.out.println("Usuariao padrão cadastrado com sucesso.");
+            String senhaCriptografada = passwordEncoder.encode("tecn2025pim");
+            usuarioRepository.save(
+                    new Usuarios(null, "TecnPoint", "bot@tecnpoint.com", senhaCriptografada, TipoUsuario.FUNCIONARIO)
+            );
+            System.out.println("Usuário padrão cadastrado com sucesso.");
         }
     }
 }
