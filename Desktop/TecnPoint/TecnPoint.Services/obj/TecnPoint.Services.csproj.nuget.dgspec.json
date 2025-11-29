@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\samuel\\OneDrive\\Desktop\\PIM4\\Tecn-Point-2.0\\Desktop\\TecnPoint\\TecnPoint.Services\\TecnPoint.Services.csproj": {}
+    "C:\\reposFacul\\Tecn-Point-2.0\\Desktop\\TecnPoint\\TecnPoint.Services\\TecnPoint.Services.csproj": {}
   },
   "projects": {
-    "C:\\Users\\samuel\\OneDrive\\Desktop\\PIM4\\Tecn-Point-2.0\\Desktop\\TecnPoint\\TecnPoint.Exceptions\\TecnPoint.Exceptions.csproj": {
+    "C:\\reposFacul\\Tecn-Point-2.0\\Desktop\\TecnPoint\\TecnPoint.Exceptions\\TecnPoint.Exceptions.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\samuel\\OneDrive\\Desktop\\PIM4\\Tecn-Point-2.0\\Desktop\\TecnPoint\\TecnPoint.Exceptions\\TecnPoint.Exceptions.csproj",
+        "projectUniqueName": "C:\\reposFacul\\Tecn-Point-2.0\\Desktop\\TecnPoint\\TecnPoint.Exceptions\\TecnPoint.Exceptions.csproj",
         "projectName": "TecnPoint.Exceptions",
-        "projectPath": "C:\\Users\\samuel\\OneDrive\\Desktop\\PIM4\\Tecn-Point-2.0\\Desktop\\TecnPoint\\TecnPoint.Exceptions\\TecnPoint.Exceptions.csproj",
+        "projectPath": "C:\\reposFacul\\Tecn-Point-2.0\\Desktop\\TecnPoint\\TecnPoint.Exceptions\\TecnPoint.Exceptions.csproj",
         "packagesPath": "C:\\Users\\samuel\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\samuel\\OneDrive\\Desktop\\PIM4\\Tecn-Point-2.0\\Desktop\\TecnPoint\\TecnPoint.Exceptions\\obj\\",
+        "outputPath": "C:\\reposFacul\\Tecn-Point-2.0\\Desktop\\TecnPoint\\TecnPoint.Exceptions\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -69,14 +69,14 @@
         }
       }
     },
-    "C:\\Users\\samuel\\OneDrive\\Desktop\\PIM4\\Tecn-Point-2.0\\Desktop\\TecnPoint\\TecnPoint.Modelos\\TecnPoint.Modelos.csproj": {
+    "C:\\reposFacul\\Tecn-Point-2.0\\Desktop\\TecnPoint\\TecnPoint.Modelos\\TecnPoint.Modelos.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\samuel\\OneDrive\\Desktop\\PIM4\\Tecn-Point-2.0\\Desktop\\TecnPoint\\TecnPoint.Modelos\\TecnPoint.Modelos.csproj",
+        "projectUniqueName": "C:\\reposFacul\\Tecn-Point-2.0\\Desktop\\TecnPoint\\TecnPoint.Modelos\\TecnPoint.Modelos.csproj",
         "projectName": "TecnPoint.Modelos",
-        "projectPath": "C:\\Users\\samuel\\OneDrive\\Desktop\\PIM4\\Tecn-Point-2.0\\Desktop\\TecnPoint\\TecnPoint.Modelos\\TecnPoint.Modelos.csproj",
+        "projectPath": "C:\\reposFacul\\Tecn-Point-2.0\\Desktop\\TecnPoint\\TecnPoint.Modelos\\TecnPoint.Modelos.csproj",
         "packagesPath": "C:\\Users\\samuel\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\samuel\\OneDrive\\Desktop\\PIM4\\Tecn-Point-2.0\\Desktop\\TecnPoint\\TecnPoint.Modelos\\obj\\",
+        "outputPath": "C:\\reposFacul\\Tecn-Point-2.0\\Desktop\\TecnPoint\\TecnPoint.Modelos\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -134,14 +134,14 @@
         }
       }
     },
-    "C:\\Users\\samuel\\OneDrive\\Desktop\\PIM4\\Tecn-Point-2.0\\Desktop\\TecnPoint\\TecnPoint.Services\\TecnPoint.Services.csproj": {
+    "C:\\reposFacul\\Tecn-Point-2.0\\Desktop\\TecnPoint\\TecnPoint.Services\\TecnPoint.Services.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\samuel\\OneDrive\\Desktop\\PIM4\\Tecn-Point-2.0\\Desktop\\TecnPoint\\TecnPoint.Services\\TecnPoint.Services.csproj",
+        "projectUniqueName": "C:\\reposFacul\\Tecn-Point-2.0\\Desktop\\TecnPoint\\TecnPoint.Services\\TecnPoint.Services.csproj",
         "projectName": "TecnPoint.Services",
-        "projectPath": "C:\\Users\\samuel\\OneDrive\\Desktop\\PIM4\\Tecn-Point-2.0\\Desktop\\TecnPoint\\TecnPoint.Services\\TecnPoint.Services.csproj",
+        "projectPath": "C:\\reposFacul\\Tecn-Point-2.0\\Desktop\\TecnPoint\\TecnPoint.Services\\TecnPoint.Services.csproj",
         "packagesPath": "C:\\Users\\samuel\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\samuel\\OneDrive\\Desktop\\PIM4\\Tecn-Point-2.0\\Desktop\\TecnPoint\\TecnPoint.Services\\obj\\",
+        "outputPath": "C:\\reposFacul\\Tecn-Point-2.0\\Desktop\\TecnPoint\\TecnPoint.Services\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -162,11 +162,11 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\samuel\\OneDrive\\Desktop\\PIM4\\Tecn-Point-2.0\\Desktop\\TecnPoint\\TecnPoint.Exceptions\\TecnPoint.Exceptions.csproj": {
-                "projectPath": "C:\\Users\\samuel\\OneDrive\\Desktop\\PIM4\\Tecn-Point-2.0\\Desktop\\TecnPoint\\TecnPoint.Exceptions\\TecnPoint.Exceptions.csproj"
+              "C:\\reposFacul\\Tecn-Point-2.0\\Desktop\\TecnPoint\\TecnPoint.Exceptions\\TecnPoint.Exceptions.csproj": {
+                "projectPath": "C:\\reposFacul\\Tecn-Point-2.0\\Desktop\\TecnPoint\\TecnPoint.Exceptions\\TecnPoint.Exceptions.csproj"
               },
-              "C:\\Users\\samuel\\OneDrive\\Desktop\\PIM4\\Tecn-Point-2.0\\Desktop\\TecnPoint\\TecnPoint.Modelos\\TecnPoint.Modelos.csproj": {
-                "projectPath": "C:\\Users\\samuel\\OneDrive\\Desktop\\PIM4\\Tecn-Point-2.0\\Desktop\\TecnPoint\\TecnPoint.Modelos\\TecnPoint.Modelos.csproj"
+              "C:\\reposFacul\\Tecn-Point-2.0\\Desktop\\TecnPoint\\TecnPoint.Modelos\\TecnPoint.Modelos.csproj": {
+                "projectPath": "C:\\reposFacul\\Tecn-Point-2.0\\Desktop\\TecnPoint\\TecnPoint.Modelos\\TecnPoint.Modelos.csproj"
               }
             }
           }
