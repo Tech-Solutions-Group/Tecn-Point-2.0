@@ -1,0 +1,128 @@
+package com.techsolutions.tecnpoint.services;
+
+import com.techsolutions.tecnpoint.entities.DTO.FuncionarioDTO;
+import com.techsolutions.tecnpoint.entities.DTO.LoginUsuarioDTO;
+import com.techsolutions.tecnpoint.entities.DTO.UsuarioLogadoDTO;
+import com.techsolutions.tecnpoint.entities.Usuarios;
+import com.techsolutions.tecnpoint.entities.enums.TipoUsuario;
+import com.techsolutions.tecnpoint.infrastructure.exceptions.DadosLoginInvalidosException;
+import com.techsolutions.tecnpoint.infrastructure.exceptions.EmailExistenteException;
+import com.techsolutions.tecnpoint.infrastructure.exceptions.LoginInvalidoException;
+import com.techsolutions.tecnpoint.infrastructure.exceptions.UsuarioNaoEncontradoException;
+import com.techsolutions.tecnpoint.repositories.UsuarioRepository;
+import com.techsolutions.tecnpoint.entities.DTO.AtualizaUsuarioDTO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import org.springframework.data.domain.Sort;
+
+@Service
+public class UsuarioService {
+
+    private final UsuarioRepository usuarioRepository;
+    private final PasswordEncoder passwordEncoder;
+
+    public UsuarioService(UsuarioRepository usuarioRepository, PasswordEncoder passwordEncoder) {
+        this.usuarioRepository = usuarioRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
+
+
+    public UsuarioLogadoDTO efetuarLogin(LoginUsuarioDTO loginUsuarioDTO) {
+
+        if (loginUsuarioDTO.getEmail() == null || loginUsuarioDTO.getEmail().trim().isEmpty()) {
+            throw new DadosLoginInvalidosException("O e-mail deve ser informado");
+        }
+
+        if (loginUsuarioDTO.getSenha() == null || loginUsuarioDTO.getSenha().trim().isEmpty()) {
+            throw new DadosLoginInvalidosException("A senha deve ser informada");
+        }
+
+        Usuarios usuarioEncontrado = usuarioRepository.findByEmail(loginUsuarioDTO.getEmail().toLowerCase())
+                .orElseThrow(() -> new LoginInvalidoException("Login inválido"));
+
+        if (!passwordEncoder.matches(loginUsuarioDTO.getSenha(), usuarioEncontrado.getSenha())) {
+            throw new LoginInvalidoException("Login inválido");
+        }
+
+        return buildUsuarioLogado(usuarioEncontrado);
+    }
+
+    public List<Usuarios> getUsuarios(){
+        return usuarioRepository.findAll(Sort.by(Sort.Direction.ASC, "idUsuario"));
+    }
+
+    public Optional<Usuarios> getUsuarioById(Long id){
+        return usuarioRepository.findById(id);
+    }
+
+    public Usuarios postUsuarios(Usuarios usuarios){
+        try{
+            usuarios.setEmail(usuarios.getEmail().toLowerCase());
+            usuarios.setSenha(passwordEncoder.encode(usuarios.getSenha())); // ← BCrypt
+            return usuarioRepository.save(usuarios);
+        }catch(DataIntegrityViolationException ex){
+            throw new EmailExistenteException("O e-mail informado para cadastro já existe");
+        }
+    }
+
+
+    public void delUsuarios(Long id){
+        usuarioRepository.deleteById(id);
+    }
+
+    public Usuarios editarUsuario(Long id, AtualizaUsuarioDTO atualizaUsuarioDTO){
+
+        Usuarios usuarioEncontrado = getUsuarioById(id).orElseThrow(() -> new UsuarioNaoEncontradoException("O usuário não foi encontrado."));
+
+        if(atualizaUsuarioDTO.getNome() != null && !atualizaUsuarioDTO.getNome().trim().isEmpty()){
+            usuarioEncontrado.setNome(atualizaUsuarioDTO.getNome());
+        }
+
+        if (atualizaUsuarioDTO.getSenha() != null && !atualizaUsuarioDTO.getSenha().trim().isEmpty()) {
+            String senhaCriptografada = passwordEncoder.encode(atualizaUsuarioDTO.getSenha());
+            usuarioEncontrado.setSenha(senhaCriptografada);
+        }
+
+
+        if(atualizaUsuarioDTO.getEmail() != null && !atualizaUsuarioDTO.getEmail().trim().isEmpty()){
+
+            if(!usuarioEncontrado.getEmail().equals(atualizaUsuarioDTO.getEmail())){
+
+                if(usuarioRepository.existsByEmail(atualizaUsuarioDTO.getEmail())){
+                    throw new EmailExistenteException("O e-mail informado já existe!");
+                }
+            }
+            usuarioEncontrado.setEmail(atualizaUsuarioDTO.getEmail().toLowerCase());
+        }
+
+        return usuarioRepository.save(usuarioEncontrado);
+    }
+
+    public List<FuncionarioDTO> listarFuncionarios(){
+        return buildFuncionarioListagemDTO(usuarioRepository.findByTipoUsuario(TipoUsuario.FUNCIONARIO));
+    }
+
+    private List<FuncionarioDTO> buildFuncionarioListagemDTO(List<Usuarios> listaFuncionarios){
+        List<FuncionarioDTO> listaFuncionariosDTO = new ArrayList<>();
+        for(Usuarios funcionario : listaFuncionarios){
+            listaFuncionariosDTO.add(FuncionarioDTO.builder()
+                                    .idUsuario(funcionario.getIdUsuario())
+                                    .nome(funcionario.getNome())
+                                    .build());
+        }
+        return listaFuncionariosDTO;
+    }
+
+    private UsuarioLogadoDTO buildUsuarioLogado(Usuarios usuario){
+        return UsuarioLogadoDTO.builder()
+                .idUsuario(usuario.getIdUsuario())
+                .nome(usuario.getNome())
+                .email(usuario.getEmail())
+                .tipoUsuario(usuario.getTipoUsuario()).build();
+    }
+}
