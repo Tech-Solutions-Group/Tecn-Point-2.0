@@ -45,7 +45,9 @@ namespace TecnPoint.Interfaces
                                             "Tech Solutions",
                                             MessageBoxButtons.OK,
                                             MessageBoxIcon.Information);
+                                            frmMDIPrincipal.CarregaListaUsuario();
                         return;
+
                     }
 
                     UsuarioAtualizadoDTO usuarioAtualizado = await _usuarioService.EditarDadosUsuario(_editarUsuarioDTO);
@@ -58,7 +60,7 @@ namespace TecnPoint.Interfaces
                                             MessageBoxIcon.Information);
                         // Voltar para a tabela de usuários
                         frmMDIPrincipal.CarregaListaUsuario();
-                    }
+                    } 
                 }
                 catch (Exception ex)
                 {
@@ -151,22 +153,35 @@ namespace TecnPoint.Interfaces
 
         private void txtConfirmaSenha_Leave(object sender, EventArgs e)
         {
-            if (!_validacaoDadosUsuario.ValidaConfirmacaoDeSenha(txtSenha.Text, txtConfirmaSenha.Text))
-            {
-                errorDadosAtualizarUsuario.SetError(txtConfirmaSenha, "As senhas não são iguais");
-            }
-            else
+            // Se a senha não foi alterada, não exigir confirmação
+            if (txtSenha.Text == _editarUsuarioDTO.senha)
             {
                 errorDadosAtualizarUsuario.SetError(txtConfirmaSenha, "");
+                return;
             }
+
+            if (!_validacaoDadosUsuario.ValidaConfirmacaoDeSenha(txtSenha.Text, txtConfirmaSenha.Text))
+                errorDadosAtualizarUsuario.SetError(txtConfirmaSenha, "As senhas não são iguais");
+            else
+                errorDadosAtualizarUsuario.SetError(txtConfirmaSenha, "");
         }
+
         private bool ValidaCadastroUsuario()
         {
-            return _validacaoDadosUsuario.ValidaNome(txtNome.Text) &&
-                _validacaoDadosUsuario.ValidaEmail(txtEmail.Text) &&
-                _validacaoDadosUsuario.ValidaSenha(txtSenha.Text) &&
-                _validacaoDadosUsuario.ValidaConfirmacaoDeSenha(txtSenha.Text, txtConfirmaSenha.Text);
+            bool nomeValido = _validacaoDadosUsuario.ValidaNome(txtNome.Text);
+            bool emailValido = _validacaoDadosUsuario.ValidaEmail(txtEmail.Text);
+
+            bool senhaAlterada = txtSenha.Text != _editarUsuarioDTO.senha;
+
+            if (!senhaAlterada)
+                return nomeValido && emailValido;
+
+            bool senhaValida = _validacaoDadosUsuario.ValidaSenha(txtSenha.Text);
+            bool confirmacaoValida = _validacaoDadosUsuario.ValidaConfirmacaoDeSenha(txtSenha.Text, txtConfirmaSenha.Text);
+
+            return nomeValido && emailValido && senhaValida && confirmacaoValida;
         }
+
 
         private void ModoDaltonico()
         {
