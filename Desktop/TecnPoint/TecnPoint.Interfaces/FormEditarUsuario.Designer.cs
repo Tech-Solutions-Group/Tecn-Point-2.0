@@ -116,6 +116,7 @@
             txtConfirmaSenha.Font = new Font("Segoe UI", 14F);
             txtConfirmaSenha.Location = new Point(290, 430);
             txtConfirmaSenha.Name = "txtConfirmaSenha";
+            txtConfirmaSenha.PasswordChar = '•';
             txtConfirmaSenha.Size = new Size(338, 32);
             txtConfirmaSenha.TabIndex = 3;
             txtConfirmaSenha.Leave += txtConfirmaSenha_Leave;
