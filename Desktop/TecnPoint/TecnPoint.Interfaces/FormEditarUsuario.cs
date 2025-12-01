@@ -112,7 +112,11 @@ namespace TecnPoint.Interfaces
                 _editarUsuarioDTO.senha = txtSenha.Text;
                 houveAlteracao = true;
             }
-            return houveAlteracao;
+            else
+            {
+                _editarUsuarioDTO.senha = null;
+            }
+                return houveAlteracao;
         }
 
         private void txtNome_Leave(object sender, EventArgs e)
